@@ -40,17 +40,11 @@ if [ -f ~/dev/dotfiles/git-completion.bash ] ; then
 fi
 
 alias 'ps?'='ps aux | grep '
-alias up="cd .."
-alias back="cd -"
 alias sudo="sudo "
-alias showhardware="lshw"
 alias df="df -h"
 alias du="du -c -h"
 alias mountiso="mount -o loop"
-alias mp="mousepad"
 alias py="ipython3"
-alias +='pushd .'
-alias _='popd'
 alias dusk='du -s -k -c * | sort -rn'  #Disk usage by directory
 alias trash="mv -t ~/.local/share/Trash/files --backup=t"
 alias nettop="sudo netstat -pant"
@@ -58,10 +52,8 @@ alias pysh="ipython -p sh"
 alias vp="vim -R -"
 alias iddqd="sudo -i"
 alias locate="locate -i"
-alias purge="sudo aptitude purge"
 alias installed?="dpkg -l | grep "
 alias hlinkto="find -type f -print0 | xargs -0 cp -l -t "
-alias links="elinks"
 alias fp="vlc /tmp/Flash*"
 alias hdlist="sudo blkid"
 alias offscreen='xvfb-run --server-args="-screen 0 1024x768x24"'
@@ -79,7 +71,6 @@ alias mkdir="mkdir -p -v"
 alias ping="ping -c 4"
 alias dul="du --max-depth=1"
 alias h?="history | grep $1"
-alias aux="amixer set 'Sigmatel 4-Speaker Stereo' toggle"
 alias lf="find . | grep -i "
 alias gr="git grep -i "
 
@@ -113,14 +104,12 @@ alias get="sudo apt-get install"
 alias xo="xdg-open"
 alias df="pydf"
 alias acs="apt-cache search "
-alias canhaz="sudo apt-get install"
 alias aka="sudo apt-key adv --recv-keys "
-alias as="aptitude search "
 alias rem="sudo apt-get autoremove --purge "
 alias show="apt-cache show"
 alias agu="sudo apt-get update"
+#usage: reencodeformediabox inputfile outputfile
 alias reencodeformediabox="ffmpeg -mbd rd -vtag xvid -flags +mv4+aic -trellis 2 -cmp 2 -subcmp 2 -g 300 -pass 2 -b 2000k -ab 192k -i "
-#usage: reencodeasmpeg4 inputfile outputfile
 alias updateipblock="sudo mv /var/cache/iplist/index.html\?list\=bt_level1 /var/cache/iplist/bt_level1 && sudo mv /var/cache/iplist/index.html\?list\=bt_level2 /var/cache/iplist/bt_level2"
 alias rot13="tr '[A-Za-z]' '[N-ZA-Mn-za-m]'"
 
@@ -129,8 +118,6 @@ alias rspec="rspec --color"
 alias tree="tree -C"
 alias rxpry="rvm use rbx-2.1.1 && pry"
 alias gs="git status "
-alias gpl="git pull "
-alias gps="git push "
 alias gc="git commit "
 alias gca="git commit -a "
 alias gcm="git commit -m "
@@ -169,9 +156,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias ctags="`brew --prefix`/bin/ctags"
  elif [[ "$OSTYPE" == "cygwin" ]]; then
   export DISPLAY=localhost:0
-# elif [[ "$OSTYPE" == "win32" ]]; then
-#         # ...
-# else# ...
 fi
 
 if [[ "$SESSION" == "xfce" ]]; then
