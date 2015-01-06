@@ -11,7 +11,7 @@ export RACK_ENV="development"
 # export HISTCONTROL=ignoredups
 # ... and ignore same sucessive entries.
 export HISTCONTROL=ignoreboth
-export HISTSIZE=10000
+export HISTSIZE=
 shopt -s histappend
 
 # check the window size after each command and, if necessary,
