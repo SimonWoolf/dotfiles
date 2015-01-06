@@ -21,24 +21,6 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-#if [[ $EUID -ne 0 ]]; then
-  #PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[0;32m\]\$\[\e[m\] \[\e[m\]'
-#else
-  #PS1='\[\e[1;31m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;31m\]\$\[\e[m\] \[\e[m\]' 
-#fi
-
-# Comment in the above and uncomment this below for a color prompt
-#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-
-# # If this is an xterm set the title to user@host:dir
-# case "$TERM" in
-# xterm*|rxvt*)
-# #    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-#     ;;
-# *)
-#     ;;
-# esac
-
 #Make less (man pages) be colourful
 export LESS_TERMCAP_mb=$(printf "\e[1;37m")
 export LESS_TERMCAP_md=$(printf "\e[1;37m")
@@ -48,14 +30,6 @@ export LESS_TERMCAP_so=$(printf "\e[1;47;30m")
 export LESS_TERMCAP_ue=$(printf "\e[0m")
 export LESS_TERMCAP_us=$(printf "\e[0;36m")
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
@@ -65,36 +39,6 @@ if [ -f ~/dev/dotfiles/git-completion.bash ] ; then
     source ~/dev/dotfiles/git-completion.bash
 fi
 
-
-# For moving a bunch of files, replacing one regex with another
-#sedmv()
-#{
-#    for i in *; do mv "$i" "`echo $i |sed -e s/$1/$2/`"; done
-#}
-## Same as above, but you can specify a prefix for the files
-#sedmvp()
-#{
-#    for i in $1*; do mv "$i" "`echo $i |sed -e s/$2/$3/`"; done
-#}
-## Check what sedmv would do
-#sedchk()
-#{
-#    for i in *; do echo "$i" |sed -e "s/$1/$2/"; done
-#}
-## Check what sedmvp would do
-#sedchkp()
-#{
-#    for i in $1*; do echo "$i" |sed -e "s/$2/$3/"; done
-#}
-
-#function netscan {
-#    echo "192.168.0.0-?" 
-#    read MAX
-#    for ((i=0;i<=$MAX;i+=1)); do
-#        ping -i 0.2 -c 1 192.168.0.$i | grep -B 1 "1 received"
-#    done
-#}
-
 alias 'ps?'='ps aux | grep '
 alias up="cd .."
 alias back="cd -"
@@ -102,10 +46,7 @@ alias sudo="sudo "
 alias showhardware="lshw"
 alias df="df -h"
 alias du="du -c -h"
-#alias kernelver="uname -sr"
 alias mountiso="mount -o loop"
-#alias pwdreal="/bin/pwd"
-#alias ewd='cd "`/bin/pwd`"' #Expand symlinks in working dir
 alias mp="mousepad"
 alias py="ipython3"
 alias +='pushd .'
@@ -113,9 +54,7 @@ alias _='popd'
 alias dusk='du -s -k -c * | sort -rn'  #Disk usage by directory
 alias trash="mv -t ~/.local/share/Trash/files --backup=t"
 alias nettop="sudo netstat -pant"
-#alias battery='watch -n 0 "cat /proc/acpi/battery/BAT0/state; cat /proc/acpi/battery/BAT0/info; uptime"'
 alias pysh="ipython -p sh"
-#alias toman="--subnodes -o - 2> /dev/null | less"
 alias vp="vim -R -"
 alias iddqd="sudo -i"
 alias locate="locate -i"
@@ -123,7 +62,6 @@ alias purge="sudo aptitude purge"
 alias installed?="dpkg -l | grep "
 alias hlinkto="find -type f -print0 | xargs -0 cp -l -t "
 alias links="elinks"
-#alias makemiddleclickwork="synclient TapButton2=2; synclient TapButton3=3"
 alias fp="vlc /tmp/Flash*"
 alias hdlist="sudo blkid"
 alias offscreen='xvfb-run --server-args="-screen 0 1024x768x24"'
@@ -137,7 +75,6 @@ alias extractaudio="mencoder -ovc raw -oac mp3lame -lameopts preset=extreme -of 
 alias lll="ls -hlS"
 export GREP_COLOR="1;33"
 alias grep="grep -i --color=auto"
-#alias diff="colordiff"
 alias mkdir="mkdir -p -v"
 alias ping="ping -c 4"
 alias dul="du --max-depth=1"
