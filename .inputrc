@@ -1,0 +1,56 @@
+# The first one will remove duplicates from the history (when a new item is added). 
+# For example if you switch between running make and ./a.out in a shell, you may
+# later find that the last 100 or so history items is a mix of these two commands. Not very useful.
+#export HISTCONTROL=erasedups
+#Simon: in .bashrc
+
+# The second one increase the history size. With duplicates erased, the history already holds a lot more
+# actual information, but I still like to increase the default size of only 1,000 items.
+#export HISTSIZE=10000
+#Simon: makes e stop working
+
+#The third line ensures that when you exit a shell, the history from that session is appended to
+# ~/.bash_history. Without this, you might very well lose the history of entire sessions (rather weird that this is not enabled by default).
+#shopt -s histappend
+#This makes the letter s stop working -- Simon
+
+# By default up/down are bound to previous-history
+# and next-history respectively. The following does the
+# same but gives the extra functionality where if you
+# type any text (or more accurately, if there is any text
+# between the start of the line and the cursor),
+# the subset of the history starting with that text
+# is searched (like 4dos for e.g.).
+# Note to get rid of a line just Ctrl-C
+"\e[B": history-search-forward
+"\e[A": history-search-backward
+
+#$if Bash
+  #set editing-mode vi
+#$endif
+
+# make history-search work in vi mode:
+#$if mode=vi
+  #set keymap vi-command
+  ## these are for vi-command mode
+  #"\e[A": history-search-backward
+  #"\e[B": history-search-forward
+  #set keymap vi-insert
+  ## these are for vi-insert mode
+  #"\e[A": history-search-backward
+  #"\e[B": history-search-forward
+#$endif
+
+#^L clears screen in input mode
+#$if Bash
+#"\C-l": "\e\C-la"
+#$endif
+
+set completion-ignore-case On
+set show-all-if-ambiguous on
+
+## enable Alt-arrows
+$if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  "\e[1;3D": backward-word
+  "\e[1;3C": forward-word
+$endif

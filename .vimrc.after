@@ -1,0 +1,103 @@
+if has("gui_running")
+  if has("gui_gtk2")
+    "set guifont=Consolas\ 11
+    set guifont=Meslo\ LG\ S\ for\ Powerline\ 12
+  elseif has("gui_macvim")
+    set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h16
+  elseif has("gui_win32")
+    set guifont=Consolas:h11:cANSI
+  endif
+endif
+
+if has('win32unix')
+  " windows terminals have 16 colours only, lucius doesn't work
+  colorscheme zenburn
+else
+  colorscheme lucius
+  set background=light
+endif
+
+
+"This unsets the "last search pattern" register by hitting return
+nnoremap <CR> :noh<CR><CR>
+
+let g:EasyMotion_leader_key = '<Leader>'
+
+set ssop-=options
+
+"http://usevim.com/2012/10/19/vim101-set-hidden/
+"set hidden
+
+" http://stackoverflow.com/questions/9511253/how-to-effectively-use-vim-wildmenu
+set wildmenu
+set wildmode=longest:full,full
+set history=2000
+
+nnoremap ; :
+vnoremap ; :
+
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+nmap <silent> ,/ :nohlsearch<CR>
+
+" makes j & k work properly with wrapped text
+nnoremap j gj
+nnoremap k gk
+
+map <leader>ef <C-p>
+
+"makes ,uc do upcase (it's in my muscle memory now, though
+",u does it after a second pause
+nmap <leader>uc mQviwU`Q
+
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
+" make vim-latexsuite work sensibly
+let g:Tex_DefaultTargetFormat="pdf"
+let g:Tex_ViewRule_pdf = 'evince'
+let g:Imap_FreezeImap=1
+autocmd Filetype tex setlocal nofoldenable
+
+set wrap
+
+" ripper-tags -- ruby indexer (gem) for ctags. lets you do ctrl-]
+" on an object to go to its definition, or :tag, or :CtrlPTag
+map <F6> :!ripper-tags -R --exclude='*.js' --exclude='*.sql' . 2> /dev/null && echo 'Ripper tags reloaded'<CR>
+let g:ctrlp_custom_ignore = {
+   \ 'dir':  '\v[\/]\.(git|hg|svn)|\v[\/](node_modules|bower_components)|tmp|spec/integration/vcr_cassettes|public/assets$',
+   \ 'file': '\v\.(exe|so|dll)$'
+   \ }
+map <C-t> :CtrlPTag<cr>
+
+set foldnestmax=2
+set foldmethod=syntax
+
+" Syntax method can be slooow on some files.
+" So do it once on initial buffer load,
+" then just switch to manual while editing.
+autocmd BufReadPost,FileReadPost * setlocal foldmethod=manual
+
+" vim clipbloard is system clipboard!
+if has('unnamedplus')
+  set clipboard=unnamedplus
+else
+  set clipboard=unnamed
+endif
+
+" set trailing whitespace to grey not red
+highlight ExtraWhitespace ctermbg=grey guibg=grey
+
+noremap <C-Left> gT
+noremap <C-Right> gt
+" D = command key works in MacVim only
+noremap <D-Left> gT
+noremap <D-Right> gt
+
+" Open quickfix window after using Ggrep
+autocmd QuickFixCmdPost *grep* cwindow
+
+let g:ctrlp_switch_buffer=0
