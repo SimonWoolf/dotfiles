@@ -13,7 +13,5 @@ set completion-ignore-case On
 set show-all-if-ambiguous on
 
 ## enable Alt-arrows
-$if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  "\e[1;3D": backward-word
-  "\e[1;3C": forward-word
-$endif
+"\e[1;3D": backward-word
+"\e[1;3C": forward-word
