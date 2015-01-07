@@ -1,5 +1,5 @@
 " Source local (non-pathogen-managed) plugins & vimscripts
-for plugin in split(glob('vim-local-plugins/*.vim'), '\n')
+for plugin in split(glob('~/dev/dotfiles/vim-local-plugins/*.vim'), '\n')
   exe 'source' plugin
 endfor
 
