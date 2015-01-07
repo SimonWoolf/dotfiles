@@ -1,0 +1,12 @@
+My dotfiles. Probably not useful to anyone else, on github for convenience of syncing between computers.
+
+Licences & credits for specific files
+=====================================
+
+.git-pairing-prompt used with modifications from https://github.com/glg/git-pairing under the MIT licence
+
+swap-lines.vim used with modifications from http://stackoverflow.com/a/741819/2831572 under CC by-sa 3.0
+
+lucius.vim taken from janus, used under the MIT licence
+
+git-completion.bash copyright Shawn Pearce <spearce@spearce.org>, used under the GPL 2.0
