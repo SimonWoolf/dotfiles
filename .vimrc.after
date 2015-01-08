@@ -106,6 +106,9 @@ let g:ctrlp_switch_buffer=0
 map <silent><A-Right> :tabnext<CR>
 map <silent><A-Left> :tabprevious<CR>
 
+" J now used for swap-lines, so use ,j for join
+noremap <leader>j J
+
 " vim-latexsuite tweaks
 " =====================
 
