@@ -27,6 +27,7 @@
   d = diff
   poh = push origin HEAD
   ps = push
+  pl = pull
   fo = fetch origin
   fco = "!f() { git fetch origin $1 && git checkout $1; }; f"
   a = add
