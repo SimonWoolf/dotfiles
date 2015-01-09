@@ -159,7 +159,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   export DISPLAY=localhost:0
 fi
 
-if [[ "$SESSION" == "xfce" ]]; then
+if [[ "$SESSION" == "xubuntu" ]]; then
   alias x="xmodmap ~/.Xmodmap"
 fi
 
