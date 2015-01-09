@@ -32,6 +32,7 @@
   fco = "!f() { git fetch origin $1 && git checkout $1; }; f"
   a = add
   c = commit
+  s = status
 [merge]
   tool = kdiff3
 	conflictstyle = diff3
