@@ -12,3 +12,9 @@ files.each do |file|
 end
 
 `cp ~/dev/dotfiles/com.googlecode.iterm2.plist ~/Library/Preferences/`
+
+`ln -s ~/dev/dotfiles/quicktile.cfg ~/.config/`
+
+`git clone git@github.com:ssokolow/quicktile.git ~/dev/vendor`
+
+`sudo ln -s ~/dev/vendor/quicktile/quicktile.py /usr/local/bin/`
