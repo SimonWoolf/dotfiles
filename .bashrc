@@ -39,6 +39,11 @@ if [ -f ~/dev/dotfiles/git-completion.bash ] ; then
     source ~/dev/dotfiles/git-completion.bash
 fi
 
+# fasd (hash will check if it exists)
+#if hash fasd 2>/dev/null; then
+  #eval "$(fasd --init auto)"
+#fi
+
 alias 'ps?'='ps aux | grep '
 alias sudo="sudo "
 alias df="df -h"
