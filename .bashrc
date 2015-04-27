@@ -167,7 +167,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 if [[ "$SESSION" == "xubuntu" ]]; then
-  alias x="xmodmap ~/.Xmodmap"
+  alias xl="xmodmap ~/.XmodmapForLaptopKeyboard"
+  alias xte="xmodmap ~/.XmodmapForTrulyErgonomic"
 fi
 
 source ~/.git-pairing-prompt.sh
