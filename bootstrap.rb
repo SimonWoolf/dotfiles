@@ -14,6 +14,7 @@ end
 
 `ln -s ~/dev/dotfiles/quicktile.cfg ~/.config/`
 
-`git clone git@github.com:ssokolow/quicktile.git ~/dev/vendor`
+`mkdir ~/dev/vendor/quicktile`
+`git clone git@github.com:ssokolow/quicktile.git ~/dev/vendor/quicktile/`
 
 `sudo ln -s ~/dev/vendor/quicktile/quicktile.py /usr/local/bin/`

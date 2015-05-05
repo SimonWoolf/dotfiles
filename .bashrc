@@ -177,7 +177,7 @@ PROMPT_COMMAND=__git_pairing_prompt
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # secret keys
-source ~/.apikeys
+[ -f ~/.apikeys ] && source ~/.apikeys
 
 ### Added by the Heroku Toolbelt
 # also usr/local/bin for brew
