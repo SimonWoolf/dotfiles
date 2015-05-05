@@ -1,6 +1,6 @@
 in .janus/ :
 
-git clone https://github.com/tomtom/tlib_vim.git && git clone https://github.com/MarcWeber/vim-addon-mw-utils.git && git clone https://github.com/garbas/vim-snipmate.git && git clone https://github.com/honza/vim-snippets.git && git clone https://github.com/bling/vim-airline && git clone https://github.com/ecomba/vim-ruby-refactoring.git && git clone https://github.com/tpope/vim-rails.git && git clone git://github.com/nelstrom/vim-textobj-rubyblock.git && git clone git://github.com/kana/vim-textobj-user && git clone git@github.com:tpope/vim-surround.git && git clonegit@github.com:Raimondi/delimitMate.git
+git clone https://github.com/bling/vim-airline && git clone https://github.com/tpope/vim-rails.git && git clone git://github.com/nelstrom/vim-textobj-rubyblock.git && git clone git://github.com/kana/vim-textobj-user && git clonegit@github.com:Raimondi/delimitMate.git
 
 font:
 https://github.com/Lokaltog/powerline-fonts/raw/master/Meslo/Meslo%20LG%20S%20Regular%20for%20Powerline.otf
