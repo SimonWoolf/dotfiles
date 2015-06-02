@@ -110,6 +110,31 @@ map <silent><A-Left> :tabprevious<CR>
 " J now used for swap-lines, so use ,j for join
 noremap <leader>j J
 
+" Show tabs
+set list listchars=tab:»\ ,trail:·,extends:>,precedes:<
+
+" relies on https://github.com/terryma/vim-expand-region
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+" search for things using /something
+" hit cs, replace first match, and hit <Esc>
+" hit n.n.n.n.n. reviewing and replacing all matches
+vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
+    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
+omap s :normal vs<CR>
+
+" vp doesn't replace paste buffer
+function! RestoreRegister()
+  let @" = s:restore_reg
+  return ''
+endfunction
+function! s:Repl()
+  let s:restore_reg = @"
+  return "p@=RestoreRegister()\<cr>"
+endfunction
+vmap <silent> <expr> p <sid>Repl()
+
 " vim-latexsuite tweaks
 " =====================
 
@@ -131,3 +156,8 @@ set grepprg=grep\ -nH\ $*
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
+
+" Per-project vimrc
+if filereadable("._vimrc")
+    source ._vimrc
+endif

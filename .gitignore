@@ -5,3 +5,5 @@ scratchpad
 dump.rdb
 do-not-track/
 .apikeys
+._vimrc
+session.vim

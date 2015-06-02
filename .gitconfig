@@ -1,7 +1,8 @@
 [user]
 	name = Simon Woolf
 	;email = simon@simonwoolf.net
-  email = simon.woolf@econsultancy.com
+  ;email = simon.woolf@econsultancy.com
+  email = simon@ably.io
 [core]
 	autocrlf = input
 	safecrlf = true
