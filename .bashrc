@@ -143,8 +143,8 @@ alias hackerdump="find /var/log -type f -exec grep -I1 . {} \; | pv -q -L 1k "
 
 #desktop-specific
 if [[ "$HOSTNAME" == "simon-linuxdesktop" ]]; then
-  alias tvoff="xrandr -s 0 && xmodmap ~/.Xmodmap && redshift -t 6500:4500 -l 51:0 &"
-  alias tvon="xrandr -s 1 && xmodmap ~/.Xmodmap && killall redshift"
+  alias tvoff="xrandr -s 0 && redshift -t 6500:4500 -l 51:0 &"
+  alias tvon="xrandr -s 1 && killall redshift"
   # switches between nvidia-settings metamodes. In xorg.conf Screen:
     #Option         "metamodes" "DVI-I-2: nvidia-auto-select +1280+0, DVI-I-3: nvidia-auto-select +0+0, HDMI-0: NULL; DVI-I-2: nvidia-auto-select +1360+0, HDMI-0: nvidia-auto-select +0+0, DVI-I-3: NULL"
   #xmodmap ~/.Xmodmap &
