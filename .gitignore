@@ -7,3 +7,4 @@ do-not-track/
 .apikeys
 ._vimrc
 session.vim
+.ctags

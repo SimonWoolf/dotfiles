@@ -68,7 +68,7 @@ set wrap
 " on an object to go to its definition, or :tag, or :CtrlPTag
 map <F6> :!ripper-tags -R --exclude='*.js' --exclude='*.sql' . 2> /dev/null && echo 'Ripper tags reloaded'<CR>
 let g:ctrlp_custom_ignore = {
-   \ 'dir':  '\v[\/]\.(git|hg|svn)|\v[\/](node_modules|bower_components)|tmp|spec/integration/vcr_cassettes|public/assets$',
+   \ 'dir':  '\v[\/]\.(git|hg|svn)|\v[\/](node_modules|bower_components)|tmp|spec/integration/vcr_cassettes|public/assets|ebin$',
    \ 'file': '\v\.(exe|so|dll)$'
    \ }
 map <C-t> :CtrlPTag<cr>
@@ -80,7 +80,7 @@ set nofoldenable
 " Syntax method can be slooow on some files.
 " So do it once on initial buffer load,
 " then just switch to manual while editing.
-autocmd BufReadPost,FileReadPost * setlocal foldmethod=manual
+"autocmd BufReadPost,FileReadPost * setlocal foldmethod=manual
 
 " vim clipbloard is system clipboard!
 if has('unnamedplus')
@@ -118,11 +118,8 @@ vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
 " search for things using /something
-" hit cs, replace first match, and hit <Esc>
+" hit caw, replace first match, and hit <Esc>
 " hit n.n.n.n.n. reviewing and replacing all matches
-vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
-    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
-omap s :normal vs<CR>
 
 " vp doesn't replace paste buffer
 function! RestoreRegister()
