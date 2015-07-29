@@ -78,6 +78,7 @@ alias dul="du --max-depth=1"
 alias h?="history | grep $1"
 alias lf="find . | grep -i "
 alias gr="git grep -i "
+# merge/uniqify nonadjacent
 alias stripduplines="perl -ne '$H{$_}++ or print'"
 
 function extract()      # Handy Extract Program.
@@ -120,6 +121,8 @@ alias updateipblock="sudo mv /var/cache/iplist/index.html\?list\=bt_level1 /var/
 alias rot13="tr '[A-Za-z]' '[N-ZA-Mn-za-m]'"
 
 # Programming aliases
+alias hpg="history | grep"
+alias iex="iex --sname dev "
 alias rspec="rspec --color"
 alias tree="tree -C"
 alias rxpry="rvm use rbx-2.1.1 && pry"
