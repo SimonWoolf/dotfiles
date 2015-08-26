@@ -79,8 +79,7 @@ let g:ctrlp_custom_ignore = {
    \ }
 map <C-t> :CtrlPTag<cr>
 
-set foldnestmax=2
-set foldmethod=syntax
+set foldmethod=manual
 set nofoldenable
 
 " Syntax method can be slooow on some files.
