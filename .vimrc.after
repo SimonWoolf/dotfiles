@@ -32,7 +32,7 @@ let g:EasyMotion_leader_key = '<Leader>'
 set ssop-=options
 
 "http://usevim.com/2012/10/19/vim101-set-hidden/
-"set hidden
+set hidden
 
 " http://stackoverflow.com/questions/9511253/how-to-effectively-use-vim-wildmenu
 set wildmenu
