@@ -3,6 +3,8 @@ for plugin in split(glob('~/dev/dotfiles/vim-local-plugins/*.vim'), '\n')
   exe 'source' plugin
 endfor
 
+let g:instant_markdown_autostart = 0
+
 if has("gui_running")
   if has("gui_gtk2")
     "set guifont=Consolas\ 11
