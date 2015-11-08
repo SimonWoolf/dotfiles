@@ -186,12 +186,16 @@ PROMPT_COMMAND=__git_pairing_prompt
 # secret keys
 [ -f ~/.apikeys ] && source ~/.apikeys
 
-### Added by the Heroku Toolbelt
-# also usr/local/bin for brew
-export PATH="/usr/local/heroku/bin:/usr/local/bin:$PATH"
+# heroku; CUDA paths
+# also usr/local/bin for random things
+# Also RVM for scripting (after system-wide things)
+export PATH="/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:/usr/local/bin:$PATH:$HOME/.rvm/bin"
+export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib:$LD_LIBRARY_PATH
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 export NVM_DIR="/home/simon/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Torch -- needed for waifu2x image resizer
+# . /mnt/terra/home/simon/programs/torch/install/bin/torch-activate
