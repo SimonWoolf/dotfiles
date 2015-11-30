@@ -8,3 +8,5 @@ do-not-track/
 ._vimrc
 session.vim
 .ctags
+*.swp
+*.swo
