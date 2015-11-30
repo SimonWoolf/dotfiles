@@ -126,7 +126,7 @@ alias rot13="tr '[A-Za-z]' '[N-ZA-Mn-za-m]'"
 
 # Programming aliases
 alias hpg="history | grep"
-alias iex="iex --sname dev "
+#alias iex="iex --sname dev "
 alias rspec="rspec --color"
 alias tree="tree -C"
 alias rxpry="rvm use rbx-2.1.1 && pry"
