@@ -80,6 +80,8 @@ alias lf="find . | grep -i "
 alias gr="git grep -i "
 # merge/uniqify nonadjacent
 alias stripduplines="perl -ne '$H{$_}++ or print'"
+# Stops it erroring on startup on laptop
+alias gpa="gpa --disable-x509"
 
 function extract()      # Handy Extract Program.
 {
