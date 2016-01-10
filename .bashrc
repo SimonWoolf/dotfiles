@@ -79,7 +79,7 @@ alias h?="history | grep $1"
 alias lf="find . | grep -i "
 alias gr="git grep -i "
 # merge/uniqify nonadjacent
-alias stripduplines="perl -ne '$H{$_}++ or print'"
+alias stripduplines="perl -ne 'print if ! $a{$_}++' "
 # Stops it erroring on startup on laptop
 alias gpa="gpa --disable-x509"
 
