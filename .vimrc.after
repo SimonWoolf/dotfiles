@@ -68,7 +68,7 @@ set wrap
 
 " ripper-tags -- ruby indexer (gem) for ctags. lets you do ctrl-]
 " on an object to go to its definition, or :tag, or :CtrlPTag
-map <F6> :!ripper-tags -R --exclude='*.js' --exclude='*.sql' . 2> /dev/null && echo 'Ripper tags reloaded'<CR>
+command! RippertagsReload execute  "!ripper-tags -R --exclude='*.js' --exclude='*.sql' . 2> /dev/null && echo 'Ripper tags reloaded'"
 
 "function! s:ctags_reload(
   "endfunction
