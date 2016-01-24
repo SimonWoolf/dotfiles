@@ -1,7 +1,7 @@
 #!/bin/bash
 . ~/.apikeys
 
-mplayer ~/dev/dotfiles/pomodoro-finish.wav
+mplayer ~/dev/dotfiles/pomodoro-finish.wav --speed=5
 
 zenity --question --text "Submit pomodoro to beeminder?"
 
