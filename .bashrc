@@ -147,6 +147,7 @@ alias z='zeus'
 alias cl="clear"
 alias be="bundle exec "
 alias killzeus="ps | grep zeus && ps | grep zeus | awk '{print $1}' | xargs kill -3"
+alias j=" jq '.'"
 
 alias hackerdump="find /var/log -type f -exec grep -I1 . {} \; | pv -q -L 1k "
 
