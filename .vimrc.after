@@ -139,6 +139,10 @@ function! s:Repl()
 endfunction
 vmap <silent> <expr> p <sid>Repl()
 
+" Persistent undo!
+set undofile
+set undodir=~/.vim/undodir
+
 " vim-latexsuite tweaks
 " =====================
 
