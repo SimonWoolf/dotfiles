@@ -189,10 +189,12 @@ PROMPT_COMMAND=__git_pairing_prompt
 # secret keys
 [ -f ~/.apikeys ] && source ~/.apikeys
 
-# heroku; CUDA paths
+export GOPATH=$HOME/go
+
+# heroku, CUDA, rvm, go paths
 # also usr/local/bin for random things
 # Also RVM for scripting (after system-wide things)
-export PATH="/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:/usr/local/bin:$PATH:$HOME/.rvm/bin"
+export PATH="/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:/usr/local/bin:$PATH:$HOME/.rvm/bin:$HOME/go/bin"
 export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib:$LD_LIBRARY_PATH
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

@@ -9,6 +9,7 @@ call janus#disable_plugin('vimwiki')
 call janus#disable_plugin('NERD_tree')
 call janus#disable_plugin('visualstar')
 call janus#disable_plugin('vim-gitgutter')
+call janus#disable_plugin('jshint')
 
 let g:airline_powerline_fonts = 1
 let g:airline_section_y = ''
