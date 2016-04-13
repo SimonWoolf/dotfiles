@@ -3,6 +3,7 @@
 # for examples
 export EDITOR=vim
 export RACK_ENV="development"
+export AWS_PROFILE=ably
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
