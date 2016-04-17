@@ -39,3 +39,12 @@
 	conflictstyle = diff3
 [git-up "rebase"]
 	auto = false
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
