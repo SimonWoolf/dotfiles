@@ -7,7 +7,7 @@
 	autocrlf = input
 	safecrlf = true
 	editor = vim -f
-  pager = less -FRX
+	pager = diff-so-fancy | less --tabs=4 -RFX
   excludesfile = ~/.gitignore
 [credential]
 	helper = cache --timeout=3600
@@ -48,3 +48,8 @@
     frag = magenta bold
     old = red bold
     new = green bold
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22

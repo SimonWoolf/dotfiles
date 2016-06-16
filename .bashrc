@@ -13,6 +13,7 @@ export AWS_PROFILE=ably
 # ... and ignore same sucessive entries.
 export HISTCONTROL=ignorespace:erasedups
 export HISTSIZE=
+export HISTFILESIZE=
 shopt -s histappend
 
 # check the window size after each command and, if necessary,
@@ -118,6 +119,7 @@ alias get="sudo apt-get install"
 alias xo="xdg-open"
 alias df="pydf"
 alias acs="apt-cache search "
+alias as="apt search "
 alias aka="sudo apt-key adv --recv-keys "
 alias rem="sudo apt-get autoremove --purge "
 alias show="apt-cache show"
