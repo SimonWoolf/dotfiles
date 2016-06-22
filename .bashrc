@@ -163,6 +163,10 @@ if [[ "$HOSTNAME" == "simon-linuxdesktop" ]]; then
   #xmodmap ~/.Xmodmap &
 fi
 
+function crtime() {
+  sudo debugfs -R "stat <`stat -c %i ${@}`>" `\df --output=source ${@} | tail -1` | grep crtime
+}
+
 
 # OS-specific commands
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
