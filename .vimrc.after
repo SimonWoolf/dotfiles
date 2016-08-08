@@ -143,6 +143,10 @@ vmap <silent> <expr> p <sid>Repl()
 set undofile
 set undodir=~/.vim/undodir
 
+" Stop windows scrolling together
+set nocursorbind
+set noscrollbind
+
 " vim-latexsuite tweaks
 " =====================
 
