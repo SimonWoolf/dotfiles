@@ -210,5 +210,8 @@ export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib:$LD_LIBRARY_PATH
 export NVM_DIR="/home/simon/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
+export QT_QPA_PLATFORMTHEME="qt5ct"
+unset QT_STYLE_OVERRIDE
+
 # Torch -- needed for waifu2x image resizer
 # . /mnt/terra/home/simon/programs/torch/install/bin/torch-activate
