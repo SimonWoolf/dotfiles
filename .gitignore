@@ -10,3 +10,4 @@ session.vim
 .ctags
 *.swp
 *.swo
+tmp.test.js
