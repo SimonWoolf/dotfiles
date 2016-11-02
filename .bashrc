@@ -202,16 +202,28 @@ export GOPATH=$HOME/go
 # heroku, CUDA, rvm, go paths
 # also usr/local/bin for random things
 # Also RVM for scripting (after system-wide things)
-export PATH="/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:/usr/local/bin:$PATH:$HOME/.rvm/bin:$HOME/go/bin"
+export PATH="/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:/usr/local/bin:$PATH:$HOME/.rvm/bin:$HOME/go/bin:$HOME/programs/bin"
 export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib:$LD_LIBRARY_PATH
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 export NVM_DIR="/home/simon/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export UV_THREADPOOL_SIZE=20 # bump up the default for node threads
+export LOG_HANDLER=raw # make realtime error messages sane
+export ALLOW_BASIC_AUTH_WITHOUT_TLS=true
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
 unset QT_STYLE_OVERRIDE
 
 # Torch -- needed for waifu2x image resizer
 # . /mnt/terra/home/simon/programs/torch/install/bin/torch-activate
+
+[[ -s "/home/simon/.gvm/scripts/gvm" ]] && source "/home/simon/.gvm/scripts/gvm"
+
+
+if [[ -z "$ORIG" ]]; then
+    ORIG=$PS1
+fi
+TITLE="\[\e]2;$@\a\]"
+PS1=${ORIG}${TITLE}
