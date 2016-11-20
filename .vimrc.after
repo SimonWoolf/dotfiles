@@ -147,6 +147,10 @@ set undodir=~/.vim/undodir
 set nocursorbind
 set noscrollbind
 
+" insert date with ,d time with ,t
+nnoremap <leader>d "=strftime("%a %d %b %Y")<CR>P
+nnoremap <leader>t "=strftime("%T")<CR>P
+
 " vim-latexsuite tweaks
 " =====================
 
