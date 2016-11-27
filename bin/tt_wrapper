@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# move window to top right
+WINDOW_WIDTH=`xdpyinfo | grep dimensions | grep -o '[0-9]*' | head -n 1`
+X_SIZE=1000
+X_POS=`expr $WINDOW_WIDTH - $X_SIZE`
+wmctrl -r :ACTIVE: -e 0,$X_POS,0,$X_SIZE,0
+
+# set always on top
+wmctrl -r :ACTIVE: -b toggle,above
+
+. ~/.apikeys
+~/dev/tt/tt

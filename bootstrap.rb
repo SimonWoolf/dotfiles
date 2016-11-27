@@ -18,3 +18,16 @@ end
 `git clone git@github.com:ssokolow/quicktile.git ~/dev/vendor/quicktile/`
 
 `sudo ln -s ~/dev/vendor/quicktile/quicktile.py /usr/local/bin/`
+
+`mkdir -p ~/programs/bin/`
+
+binfiles = `ls -a ~/dev/dotfiles/bin`
+  .split
+  .reject{|f| f[0] == '.'}
+
+puts "symlinking #{binfiles.join(', ')}"
+
+binfiles.each do |file|
+  `ln -s ~/dev/dotfiles/bin/#{file} ~/programs/bin/`
+  `chmod +x ~/programs/bin/#{file}`
+end
