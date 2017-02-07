@@ -84,6 +84,7 @@ alias gr="git grep -i "
 alias stripduplines="perl -ne 'print if ! $a{$_}++' "
 # Stops it erroring on startup on laptop
 alias gpa="gpa --disable-x509"
+alias hpg="history | grep -i "
 
 function extract()      # Handy Extract Program.
 {
@@ -134,7 +135,6 @@ alias hpg="history | grep"
 #alias iex="iex --sname dev "
 alias rspec="rspec --color"
 alias tree="tree -C"
-alias rxpry="rvm use rbx-2.1.1 && pry"
 alias gs="git status "
 alias gc="git commit "
 alias gca="git commit -a "
@@ -152,8 +152,16 @@ alias be="bundle exec "
 alias killzeus="ps | grep zeus && ps | grep zeus | awk '{print $1}' | xargs kill -3"
 alias j=" jq '.'"
 alias jsonfmt="python -m json.tool"
+alias arst="asdf"
 
 alias hackerdump="find /var/log -type f -exec grep -I1 . {} \; | pv -q -L 1k "
+
+# google drive aliases
+alias dpl="drive pull ."
+alias dps="drive push ."
+alias dmkdir="drive new -folder "
+alias drm="drive delete "
+alias d="drive "
 
 #desktop-specific
 if [[ "$HOSTNAME" == "simon-linuxdesktop" ]]; then
@@ -197,18 +205,14 @@ PROMPT_COMMAND=__git_pairing_prompt
 # secret keys
 [ -f ~/.apikeys ] && source ~/.apikeys
 
-export GOPATH=$HOME/go
-
-# heroku, CUDA, rvm, go paths
+# heroku, CUDA paths
 # also usr/local/bin for random things
-# Also RVM for scripting (after system-wide things)
-export PATH="/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:/usr/local/bin:$PATH:$HOME/.rvm/bin:$HOME/go/bin:$HOME/programs/bin"
+export PATH="/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:/usr/local/bin:$PATH:$HOME/programs/bin"
 export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib:$LD_LIBRARY_PATH
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
 
-export NVM_DIR="/home/simon/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 export UV_THREADPOOL_SIZE=20 # bump up the default for node threads
 export LOG_HANDLER=raw # make realtime error messages sane
 export ALLOW_BASIC_AUTH_WITHOUT_TLS=true
@@ -218,9 +222,6 @@ unset QT_STYLE_OVERRIDE
 
 # Torch -- needed for waifu2x image resizer
 # . /mnt/terra/home/simon/programs/torch/install/bin/torch-activate
-
-[[ -s "/home/simon/.gvm/scripts/gvm" ]] && source "/home/simon/.gvm/scripts/gvm"
-
 
 if [[ -z "$ORIG" ]]; then
     ORIG=$PS1

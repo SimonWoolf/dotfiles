@@ -23,3 +23,8 @@ let g:syntastic_ruby_exec = "$HOME/.rvm/rubies/ruby-2.1.0/bin/ruby"
 
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=30
+
+" stop vim-go hijacking shift-k
+let g:go_doc_keywordprg_enabled = 0
+" stop vim-go hijacking ctrl-] (can always use gd for godef)
+let g:go_def_mapping_enabled = 0

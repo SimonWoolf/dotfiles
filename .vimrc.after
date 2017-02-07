@@ -68,12 +68,12 @@ set wrap
 
 " ripper-tags -- ruby indexer (gem) for ctags. lets you do ctrl-]
 " on an object to go to its definition, or :tag, or :CtrlPTag
-command! RippertagsReload execute  "!ripper-tags -R --exclude='*.js' --exclude='*.sql' . 2> /dev/null && echo 'Ripper tags reloaded'"
+autocmd Filetype ruby command! RubyTagsReload execute  "!ripper-tags -R --exclude='*.js' --exclude='*.sql' . 2> /dev/null && echo 'Ripper tags reloaded'"
 
-"function! s:ctags_reload(
-  "endfunction
+" go equivalent
+autocmd Filetype go command! GoTagsReload execute  "find . | grep '.go$' | xargs gotags > tags && echo 'Gotags reloaded'"
 
-command! CtagsReload execute "!ctags -R . && echo 'ctags reloaded'"
+command! CTagsReload execute "!ctags -R . && echo 'ctags reloaded'"
 
 let g:ctrlp_custom_ignore = {
    \ 'dir':  '\v[\/]\.(git|hg|svn)|\v[\/](node_modules|bower_components)|tmp|spec/integration/vcr_cassettes|public/assets|ebin$',
