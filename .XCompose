@@ -1,0 +1,7 @@
+# Add
+# export GTK_IM_MODULE="xim"
+# to /etc/environment to make this work
+
+include "/usr/share/X11/locale/en_US.UTF-8/Compose"
+
+<Multi_key> <period> <backslash>           : "λ"   U03BB  # GREEK SMALL LETTER LAMBDA
