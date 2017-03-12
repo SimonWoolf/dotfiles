@@ -1,0 +1,45 @@
+
+a, a:link {
+  color:#8390CA !important;
+}
+
+a:hover {
+  color:#93A0DA !important;
+}
+
+a:visited {
+  color:#AA90CA !important;
+}
+
+a:visited:hover {
+  color:#BAA0DA !important;
+}
+
+img,object,embed,input[type="image"] {
+  filter: opacity(40%) !important;
+}
+
+img:hover,object:hover,embed:hover, input[type="image"]:hover {
+  filter: opacity(100%) !important;
+}
+
+input, select, textarea {
+  background: #444 !important;
+  border: 1px solid #333 !important;
+}
+
+*,* *,* * *,* * * *,* * * * *,* * * * * *,* * * * * * *,* * * * * * * *,* * * * * * * * *,* * * * * * * * * * ,* * * * * * * * * * *,* * * * * * * * * * * * {
+  background-color: #332 !important;
+  color: #fcc !important;
+  border-color: #999 !important;
+}
+
+::-moz-selection {
+  background-color: #aab !important;
+  color: #000 !important;
+}
+
+body {
+  border-left-style: groove !important;
+  border-left-width: 3px !important;
+}
