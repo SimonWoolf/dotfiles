@@ -179,7 +179,7 @@ function crtime() {
 
 # OS-specific commands
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  alias ll='ls -l --color=auto'
+  alias ll='ls -lh --color=auto'
   alias ls='ls --color=auto'
   export TERM="xterm-256color"
   # http://superuser.com/questions/52562/ssh-keychain-for-xfce
