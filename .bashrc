@@ -2,6 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 export EDITOR=vim
+export BROWSER=firefox
 export RACK_ENV="development"
 export AWS_PROFILE=ably
 
