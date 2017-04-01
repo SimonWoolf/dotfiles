@@ -1,2 +1,2 @@
 #!/bin/sh
-xfce4-terminal --hide-toolbar --hide-borders --hide-menubar -x /home/simon/programs/bin/tt_wrapper
+xfce4-terminal --hide-toolbar --hide-borders --hide-menubar -x /home/simon/bin/tt_wrapper

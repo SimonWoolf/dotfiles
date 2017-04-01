@@ -19,7 +19,7 @@ end
 
 `sudo ln -s ~/dev/vendor/quicktile/quicktile.py /usr/local/bin/`
 
-`mkdir -p ~/programs/bin/`
+`mkdir -p ~/bin`
 
 binfiles = `ls -a ~/dev/dotfiles/bin`
   .split
@@ -28,6 +28,6 @@ binfiles = `ls -a ~/dev/dotfiles/bin`
 puts "symlinking #{binfiles.join(', ')}"
 
 binfiles.each do |file|
-  `ln -s ~/dev/dotfiles/bin/#{file} ~/programs/bin/`
-  `chmod +x ~/programs/bin/#{file}`
+  `ln -s ~/dev/dotfiles/bin/#{file} ~/bin/`
+  `chmod +x ~/bin/#{file}`
 end
