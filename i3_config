@@ -214,4 +214,4 @@ for_window [title="Orage"] floating enable
 
 exec setxkbmap gb -variant colemak
 exec xmodmap ~/.XmodmapForLaptopKeyboard
-exec /home/simon/programs/keyboard.sh &
+exec keyboard.sh &
