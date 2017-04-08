@@ -19,8 +19,13 @@ def tt_status
   File.open("/tmp/tt_status", "r") do |f|
     result = f.readline
     f.close()
-    result
+    JSON.parse(result)
   end
+end
+
+def keyboard_layout
+  layout = `setxkbmap -query`.scan(/variant:\s+(.+)\n/)[0][0]
+  [{ full_text: " KB #{layout} "}]
 end
 
 # Skip the first line which contains the version header.
@@ -33,9 +38,11 @@ puts readline()
 puts "[]"
 
 loop do
-  i3status = readline()
-  i3status.gsub!(/^,/, '')
-  full_status = (JSON.parse(tt_status) + JSON.parse(i3status))
-  full_status = full_status.to_json
+  i3status = JSON.parse(readline().gsub(/^,/, ''))
+  full_status = [
+    tt_status,
+    keyboard_layout,
+    i3status
+  ].reduce(:+).to_json
   puts "," + full_status
 end
