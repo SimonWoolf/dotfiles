@@ -7,11 +7,12 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
+  output_format = "i3bar"
   colors = true
   color_good = "#FFFFFF"
   color_degraded = "#FFFF60"
   color_BAD = "#FFB060"
-  interval = 5
+  interval = 1
 }
 
 order += "wireless _first_"
