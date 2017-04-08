@@ -181,6 +181,7 @@ mode "powerman" {
     bindsym Escape mode "default"
 }
 bindsym $mod+Delete mode "powerman"
+bindsym F10 mode "powerman"
 
 mode "tt" {
     bindsym w exec --no-startup-id echo 'w' |  socat - UNIX-CONNECT:/tmp/tt.sock, mode "default"
