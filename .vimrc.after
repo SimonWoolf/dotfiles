@@ -142,6 +142,8 @@ vmap <silent> <expr> p <sid>Repl()
 " Persistent undo!
 set undofile
 set undodir=~/.vim/undodir
+set undolevels=1000 " How many undos
+set undoreload=10000 " number of lines to save for undo
 
 " Stop windows scrolling together
 set nocursorbind
