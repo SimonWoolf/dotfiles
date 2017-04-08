@@ -205,6 +205,13 @@ bindsym F7 exec setxkbmap gb -variant colemak && xmodmap ~/.XmodmapForLaptopKeyb
 bar {
     status_command i3status | custom_i3_status.rb
     tray_output primary
+    position top
+    tray_padding 2
+    font pango:Meslo LG S for Powerline 20
+    separator_symbol "╱"
+    colors {
+        separator #707070
+    }
 }
 
 for_window [title="^File Operation Progress$"] floating enable
