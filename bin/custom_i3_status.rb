@@ -17,9 +17,11 @@ end
 
 def tt_status
   File.open("/tmp/tt_status", "r") do |f|
-    result = f.readline
-    f.close()
-    JSON.parse(result)
+    begin
+      JSON.parse(f.readline)
+    rescue EOFError
+      []
+    end
   end
 end
 
