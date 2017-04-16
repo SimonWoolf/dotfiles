@@ -16,17 +16,17 @@ def readline
 end
 
 def tt_status
-  File.open("/tmp/tt_status", "r") do |f|
-    begin
+  begin
+    File.open("/tmp/tt_status", "r") do |f|
       JSON.parse(f.readline)
-    rescue EOFError
-      []
     end
+  rescue EOFError, Errno::ENOENT
+    []
   end
 end
 
 def keyboard_layout
-  layout = `setxkbmap -query`.scan(/variant:\s+(.+)\n/)[0][0]
+  layout = `setxkbmap -query`.scan(/variant:\s+,?([a-z]+),?\n/)[0][0]
   [{ full_text: " KB #{layout} "}]
 end
 
