@@ -23,11 +23,6 @@ order += "cpu_temperature 0"
 order += "volume master"
 order += "tztime local"
 
-ethernet _first_ {
-  format_up = "E %ip (%speed)"
-  format_down = "E down "
-}
-
 tztime local {
   format = " %a %Y-%m-%d %H:%M "
 }
