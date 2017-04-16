@@ -47,9 +47,9 @@ binfiles.each do |file|
 end
 
 if desktop?
-  `cat i3_config_base i3_config_desktop > i3_config`
-  `cat i3status_config_base i3status_config_desktop > i3status_config`
+  `cat noedit i3_config_base i3_config_desktop > i3_config`
+  `cat noedit i3status_config_base i3status_config_desktop > i3status_config`
 else
-  `cat i3_config_base i3_config_laptop > i3_config`
-  `cat i3status_config_base i3status_config_laptop > i3status_config`
+  `cat noedit i3_config_base i3_config_laptop > i3_config`
+  `cat noedit i3status_config_base i3status_config_laptop > i3status_config`
 end
