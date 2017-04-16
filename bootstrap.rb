@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
 
+require 'socket'
+def desktop?
+  Socket.gethostname == 'simon-linuxdesktop'
+end
+
 HOME = `echo ~`.chomp
 
 files = `ls -a ~/dev/dotfiles`
@@ -39,4 +44,12 @@ puts "symlinking #{binfiles.join(', ')}"
 binfiles.each do |file|
   `ln -fs ~/dev/dotfiles/bin/#{file} ~/bin/`
   `chmod +x ~/bin/#{file}`
+end
+
+if desktop?
+  `cat i3_config_base i3_config_desktop > i3_config`
+  `cat i3status_config_base i3status_config_desktop > i3status_config`
+else
+  `cat i3_config_base i3_config_laptop > i3_config`
+  `cat i3status_config_base i3status_config_laptop > i3status_config`
 end

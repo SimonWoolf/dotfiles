@@ -1,0 +1,13 @@
+cpu_temperature 0 {
+  format = " T %degrees°C "
+  path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
+}
+
+battery 0 {
+  format = " %status %percentage "
+}
+
+wireless _first_ {
+  format_up = " 🖧 (%quality at %essid) %ip "
+  format_down = " 🖧 down "
+}
