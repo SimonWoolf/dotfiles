@@ -1,0 +1,2 @@
+#!/bin/sh
+BROWSER=firefox /usr/bin/chromium-browser --profile-directory=Default --app-id=ldmnmnoaidepdpbdbjnmkmjbmbajopbg
