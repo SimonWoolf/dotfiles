@@ -1,10 +1,13 @@
 cpu_temperature 0 {
-  format = " T %degrees°C "
+  format = " 🌡 %degrees°C "
   path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
 }
 
 battery 0 {
   format = " %status %percentage "
+  status_chr = "⚡ (charging)"
+  status_bat = "⚡ "
+  status_full = "⚡ full"
 }
 
 wireless _first_ {
