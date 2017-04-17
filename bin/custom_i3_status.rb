@@ -26,8 +26,12 @@ def tt_status
 end
 
 def keyboard_layout
-  layout = `setxkbmap -query`.scan(/variant:\s+,?([a-z]+),?\n/)[0][0]
-  [{ full_text: " KB #{layout} "}]
+  res = `setxkbmap -query`.scan(/variant:\s+,?([a-z]+),?\n/)[0]
+  if layout = res && res[0]
+    [{ full_text: " #{layout} "}]
+  else
+    []
+  end
 end
 
 # Skip the first line which contains the version header.
