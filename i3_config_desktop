@@ -20,3 +20,12 @@ bar {
 bindsym Control+space exec rofi -show run -fuzzy -font 'Meslo LG S for Powerline 12' -bg '#ddd' -fg '#222'
 # Window switcher
 bindsym $mod+space exec rofi -show window -fuzzy -font 'Meslo LG S for Powerline 12' -bg '#222' -fg '#ddd'
+
+# set things to workspaces
+# viewsonic:
+workspace 1 output DVI-I-3
+# crossover:
+workspace 2 output DVI-I-2
+
+assign [class="^franz$"] 1
+assign [title="^Todoist$"] 10
