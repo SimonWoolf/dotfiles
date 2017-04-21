@@ -72,6 +72,9 @@ __git_pairing_prompt ()
     fi
     ;;
   "Darwin"*|"Linux"*|"GNU"*|"FreeBSD"*)
+    # Set terminal title
+    echo -ne "\033]0;${PWD}\007" | sed "s/\/mnt\/terra//;s/\/home\/simon/~/"
+
     local untracked="✶"
     local pull_arrow="▼ "
     local push_arrow="▲ "
