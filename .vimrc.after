@@ -44,10 +44,14 @@ set history=2000
 nnoremap ; :
 vnoremap ; :
 
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-Left> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-Down> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-Up> <C-w>k
+noremap <C-l> <C-w>l
+noremap <C-Right> <C-w>l
 
 nmap <silent> ,/ :nohlsearch<CR>
 
@@ -99,8 +103,6 @@ endif
 " set trailing whitespace to grey not red
 highlight ExtraWhitespace ctermbg=grey guibg=grey
 
-noremap <C-Left> gT
-noremap <C-Right> gt
 " D = command key works in MacVim only
 noremap <D-Left> gT
 noremap <D-Right> gt
