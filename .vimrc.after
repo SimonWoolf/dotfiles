@@ -6,6 +6,9 @@ endfor
 let g:instant_markdown_autostart = 0
 
 if has("gui_running")
+  " no themed tabs -- avoids issues when running mixed-dpi multi-monitors
+  set guioptions-=e
+
   if has("gui_gtk2")
     "set guifont=Consolas\ 11
     set guifont=Meslo\ LG\ S\ for\ Powerline\ 11
