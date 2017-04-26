@@ -1,3 +1,3 @@
 #!/bin/sh
-#BROWSER=firefox /usr/bin/chromium-browser --profile-directory=Default --app-id=ldmnmnoaidepdpbdbjnmkmjbmbajopbg
-BROWSER=firefox /home/simon/programs/todoist/64/Todoist
+export BROWSER=firefox 
+([ -f /home/simon/programs/todoist/64/Todoist ] && /home/simon/programs/todoist/64/Todoist) || /usr/bin/chromium-browser --profile-directory=Default --app-id=ldmnmnoaidepdpbdbjnmkmjbmbajopbg
