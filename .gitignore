@@ -11,6 +11,7 @@ session.vim
 *.swp
 *.swo
 tmp.test.js
+test/connection/tmp.js
 
 i3_config
 i3status_config
