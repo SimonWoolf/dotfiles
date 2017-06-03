@@ -24,8 +24,16 @@ bindsym $mod+space exec rofi -show window -fuzzy -font 'Meslo LG S for Powerline
 # set things to workspaces
 # viewsonic:
 workspace 1 output DVI-I-3
+workspace 2 output DVI-I-3
+workspace 3 output DVI-I-3
+workspace 4 output DVI-I-3
 # crossover:
-workspace 2 output DVI-I-2
+workspace 5 output DVI-I-2
+workspace 6 output DVI-I-2
+workspace 7 output DVI-I-2
+workspace 8 output DVI-I-2
+workspace 9 output DVI-I-2
+workspace 10 output DVI-I-2
 
 assign [class="^franz$"] 1
 assign [title="^Todoist$"] 10
