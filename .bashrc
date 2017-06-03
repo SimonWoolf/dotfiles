@@ -87,6 +87,11 @@ alias stripduplines="perl -ne 'print if ! $a{$_}++' "
 alias gpa="gpa --disable-x509"
 alias hpg="history | grep -i "
 
+# Point-free style! neat
+hist() {
+  sort | uniq -c | sort -n -r
+}
+
 function extract()      # Handy Extract Program.
 {
      if [ -f $1 ] ; then
