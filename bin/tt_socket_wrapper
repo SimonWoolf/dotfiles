@@ -1,10 +1,9 @@
 #!/bin/sh
 
-. ~/.apikeys
 export BUNDLE_GEMFILE="~/dev/tt/Gemfile"
 
 if [ -f ~/.asdf/shims/ruby ]; then
-  bundle exec ~/.asdf/shims/ruby ~/dev/tt/tt --socket 2> ~/tt.log
+  bundle exec ~/.asdf/shims/ruby ~/dev/tt/tt --socket 2>> ~/tt.log
 else
-  bundle exec ruby ~/dev/tt/tt --socket 2> ~/tt.log
+  bundle exec ruby ~/dev/tt/tt --socket 2>> ~/tt.log
 fi
