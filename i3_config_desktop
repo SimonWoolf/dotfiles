@@ -36,4 +36,4 @@ workspace 9 output DVI-I-2
 workspace 10 output DVI-I-2
 
 assign [class="^franz$"] 1
-assign [title="^Todoist$"] 1
+assign [title="^Todoist$"] 2
