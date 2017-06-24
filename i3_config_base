@@ -202,3 +202,7 @@ for_window [class="^blueman-manager$"] floating enable
 for_window [class="^galculator$"] floating enable
 for_window [class="^gnome-calculator$"] floating enable
 for_window [title="Orage"] floating enable
+
+# <colorclass> <border> <background> <text> <indicator> <child_border>
+client.focused_inactive #333333 #5f676a #ffffff #484e50 #5f676a
+client.unfocused        #333333 #222222 #ffffff #292d2e #222222

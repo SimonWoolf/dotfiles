@@ -12,6 +12,11 @@ bar {
     separator_symbol "╱"
     colors {
         separator #707070
+
+        # <colorclass> <border> <background> <text>
+        focused_workspace  #4c78ff #285577 #ffffff
+        active_workspace   #333333 #5f676a #ffffff
+        inactive_workspace #333333 #222222 #ffffff
     }
     font pango:Meslo LG S for Powerline 12
 }
