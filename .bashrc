@@ -159,8 +159,9 @@ alias killzeus="ps | grep zeus && ps | grep zeus | awk '{print $1}' | xargs kill
 alias j=" jq '.'"
 alias jsonfmt="python -m json.tool"
 alias arst="asdf"
-
 alias hackerdump="find /var/log -type f -exec grep -I1 . {} \; | pv -q -L 1k "
+# if not installed: npm install -g insect
+alias calc="insect"
 
 # google drive aliases
 alias dpl="drive pull ."
