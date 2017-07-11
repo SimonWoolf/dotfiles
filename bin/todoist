@@ -1,3 +1,2 @@
 #!/bin/sh
-export BROWSER=firefox 
-([ -f /home/simon/programs/todoist/64/Todoist ] && /home/simon/programs/todoist/64/Todoist) || /usr/bin/chromium-browser --profile-directory=Default --app-id=ldmnmnoaidepdpbdbjnmkmjbmbajopbg
+([[ $HOSTNAME == simon-linuxdesktop ]] && /usr/bin/chromium-browser --profile-directory=Default --app-id=bgjohebimpjdhhocbknplfelpmdhifhd) || /usr/bin/chromium-browser --profile-directory=Default --app-id=ldmnmnoaidepdpbdbjnmkmjbmbajopbg
