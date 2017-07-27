@@ -1,2 +1,2 @@
-#!/bin/sh
+#!/bin/bash
 ([[ $HOSTNAME == simon-linuxdesktop ]] && /usr/bin/chromium-browser --profile-directory=Default --app-id=bgjohebimpjdhhocbknplfelpmdhifhd) || /usr/bin/chromium-browser --profile-directory=Default --app-id=ldmnmnoaidepdpbdbjnmkmjbmbajopbg
