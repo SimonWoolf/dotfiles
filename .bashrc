@@ -222,6 +222,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib:$LD_LIBRARY_PATH
 export UV_THREADPOOL_SIZE=20 # bump up the default for node threads
 export LOG_HANDLER=raw # make realtime error messages sane
 export ALLOW_BASIC_AUTH_WITHOUT_TLS=true
+export PROGRESSIVE_HASH_ENABLED=false
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
 unset QT_STYLE_OVERRIDE
