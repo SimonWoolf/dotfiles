@@ -223,6 +223,7 @@ export UV_THREADPOOL_SIZE=20 # bump up the default for node threads
 export LOG_HANDLER=raw # make realtime error messages sane
 export ALLOW_BASIC_AUTH_WITHOUT_TLS=true
 export PROGRESSIVE_HASH_ENABLED=false
+export ENABLE_HANDLE_LOGGING=false
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
 unset QT_STYLE_OVERRIDE
