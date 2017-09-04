@@ -1,5 +1,6 @@
 bindsym F7 exec setxkbmap gb -variant colemak && xmodmap ~/.XmodmapForLaptopKeyboard
 exec keyboard.sh &
+exec --no-startup-id xrandr --output eDP1 --primary
 
 font pango:Meslo LG S for Powerline 22
 
