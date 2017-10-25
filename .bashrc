@@ -162,6 +162,7 @@ alias arst="asdf"
 alias hackerdump="find /var/log -type f -exec grep -I1 . {} \; | pv -q -L 1k "
 # if not installed: npm install -g insect
 alias calc="insect"
+alias clipcopy="xclip -selection clipboard "
 
 # google drive aliases
 alias dpl="drive pull ."
