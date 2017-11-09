@@ -25,6 +25,7 @@ end
 `mkdir -p ~/.config/i3status/`
 `ln -fs ~/dev/dotfiles/i3_config ~/.config/i3/config`
 `ln -fs ~/dev/dotfiles/i3status_config ~/.config/i3status/config`
+`ln -fs ~/dev/dotfiles/mimeapps.list ~/.config/mimeapps.list`
 
 if !Dir.exist? "#{HOME}/dev/vendor/quicktile"
   `mkdir ~/dev/vendor/quicktile`

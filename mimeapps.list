@@ -1,0 +1,13 @@
+[Added Associations]
+text/plain=mousepad.desktop;
+image/svg+xml=gimp.desktop;
+application/force-download=gvim.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;
+image/png=eog.desktop;
+
+[Default Applications]
+text/plain=gvim.desktop;
+application/pdf=mupdf.desktop
+audio/mpeg=vlc.desktop
+text/html=firefox.desktop
+inode/directory=Thunar.desktop
