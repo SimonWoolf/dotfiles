@@ -179,6 +179,9 @@ let g:Tex_ViewRule_pdf = 'evince'
 let g:Imap_FreezeImap=1
 autocmd Filetype tex setlocal nofoldenable
 
+" use xelatex
+let g:Tex_CompileRule_pdf = 'xelatex -aux-directory=/tmp/xelatex -interaction=nonstopmode $*'
+
 " makes you have to type `texa rather than `a for \alpha
 let g:Tex_Leader = '`tex'
 let g:Tex_Leader2 = ',tex'
