@@ -60,7 +60,9 @@ nmap <silent> ,/ :nohlsearch<CR>
 
 " makes j & k work properly with wrapped text
 nnoremap j gj
+vnoremap j gj
 nnoremap k gk
+vnoremap k gk
 
 map <leader>ef <C-p>
 
@@ -128,9 +130,11 @@ autocmd QuickFixCmdPost *grep* cwindow
 
 let g:ctrlp_switch_buffer=0
 
-" Use alt+left/right to switch tabs
-map <silent><A-Right> :tabnext<CR>
-map <silent><A-Left> :tabprevious<CR>
+" Use alt+left/right or h/l to switch tabs
+noremap <silent><A-Right> :tabnext<CR>
+noremap <silent><A-Left> :tabprevious<CR>
+noremap <silent><A-l> :tabnext<CR>
+noremap <silent><A-h> :tabprevious<CR>
 
 " J now used for swap-lines, so use ,j for join
 noremap <leader>j J
