@@ -1,4 +1,5 @@
 exec --no-startup-id xbindkeys &
+exec --no-startup-id xrandr --output DVI-I-2 --primary
 
 font pango:Meslo LG S for Powerline 12
 
