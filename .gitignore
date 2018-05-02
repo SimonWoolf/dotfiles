@@ -12,6 +12,7 @@ session.vim
 *.swo
 tmp.test.js
 test/connection/tmp.js
+node_modules*
 
 i3_config
 i3status_config
