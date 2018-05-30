@@ -214,7 +214,7 @@ PROMPT_COMMAND=__git_pairing_prompt
 [ -f ~/.apikeys ] && source ~/.apikeys
 
 # heroku, CUDA, my stuff paths
-export PATH="/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:/usr/local/bin:$PATH:$HOME/bin"
+export PATH="/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:/usr/local/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin"
 export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib:$LD_LIBRARY_PATH
 
 . $HOME/.asdf/asdf.sh
