@@ -12,8 +12,11 @@
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+      . "$HOME/.bashrc"
     fi
+else
+  # at least set the path so sh can find executables
+  export PATH="/usr/local/heroku/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin"
 fi
 
 export LANGUAGE="en_GB:en"
