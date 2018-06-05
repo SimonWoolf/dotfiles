@@ -29,26 +29,6 @@ end
 # xdg-utils deletes and recreates ~/.config/mimeapps.list when it writes to it, which will break symbolic links
 `cp ~/dev/dotfiles/mimeapps.list ~/.config/mimeapps.list`
 
-if !Dir.exist? "#{HOME}/dev/vendor/quicktile"
-  `mkdir ~/dev/vendor/quicktile`
-  `git clone git@github.com:SimonWoolf/quicktile.git ~/dev/vendor/quicktile/`
-  `sudo ln -fs ~/dev/vendor/quicktile/quicktile.py /usr/local/bin/`
-end
-
-
-`mkdir -p ~/bin`
-
-binfiles = `ls -a ~/dev/dotfiles/bin`
-  .split
-  .reject{|f| f[0] == '.'}
-
-puts "symlinking #{binfiles.join(', ')}"
-
-binfiles.each do |file|
-  `ln -fs ~/dev/dotfiles/bin/#{file} ~/bin/`
-  `chmod +x ~/bin/#{file}`
-end
-
 if desktop?
   `cat noedit i3_config_base i3_config_desktop > i3_config`
   `cat noedit i3status_config_base i3status_config_desktop > i3status_config`
