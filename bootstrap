@@ -19,8 +19,6 @@ files.each do |file|
   `ln -fs ~/dev/dotfiles/#{file} ~`
 end
 
-`ln -fs ~/dev/dotfiles/quicktile.cfg ~/.config/`
-
 `mkdir -p ~/.config/i3/`
 `mkdir -p ~/.config/i3status/`
 `ln -fs ~/dev/dotfiles/i3_config ~/.config/i3/config`
