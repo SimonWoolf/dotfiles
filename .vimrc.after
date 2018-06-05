@@ -204,3 +204,6 @@ let g:tex_flavor='latex'
 if filereadable("._vimrc")
     source ._vimrc
 endif
+
+" Let customised elm-vim override janus default
+source ~/.janus/elm-vim/autoload/elm.vim
