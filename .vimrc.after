@@ -121,10 +121,6 @@ endif
 " set trailing whitespace to grey not red
 highlight ExtraWhitespace ctermbg=grey guibg=grey
 
-" D = command key works in MacVim only
-noremap <D-Left> gT
-noremap <D-Right> gt
-
 " Open quickfix window after using Ggrep
 autocmd QuickFixCmdPost *grep* cwindow
 
