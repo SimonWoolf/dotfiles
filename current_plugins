@@ -8,6 +8,7 @@ git clone https://github.com/tomtom/tlib_vim.git
 git clone git@github.com:gerw/vim-latex-suite.git
 git clone https://github.com/bling/vim-airline.git
 git clone https://github.com/MarcWeber/vim-addon-mw-utils.git
+git clone https://github.com/editorconfig/editorconfig-vim.git
 
 # font:
 # https://github.com/Lokaltog/powerline-fonts/raw/master/Meslo/Meslo%20LG%20S%20Regular%20for%20Powerline.otf

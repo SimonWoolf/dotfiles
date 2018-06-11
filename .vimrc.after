@@ -207,3 +207,11 @@ endif
 
 " Let customised elm-vim override janus default
 source ~/.janus/elm-vim/autoload/elm.vim
+
+set textwidth=90
+
+" User EditorConfig
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" Turn off json concealing
+let g:vim_json_syntax_conceal=0
