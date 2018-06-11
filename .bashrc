@@ -222,10 +222,10 @@ export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib:$LD_LIBRARY_PATH
 
 export UV_THREADPOOL_SIZE=20 # bump up the default for node threads
 export LOG_HANDLER=raw # make realtime error messages sane
-export ALLOW_BASIC_AUTH_WITHOUT_TLS=true
-export PROGRESSIVE_HASH_ENABLED=false
-export ENABLE_HANDLE_LOGGING=false
-export NODE_TLS_REJECT_UNAUTHORIZED=0
+export ALLOW_BASIC_AUTH_WITHOUT_TLS=true # easier experimentation with wscat without tls
+export PROGRESSIVE_HASH_ENABLED=false # lets cores become ready much quicker
+export ENABLE_HANDLE_LOGGING=false # stops realtime printing hundreds of lines of handles to the console on exit
+export NODE_TLS_REJECT_UNAUTHORIZED=0 # make ably-js tests work with self-signed certs
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
 unset QT_STYLE_OVERRIDE
