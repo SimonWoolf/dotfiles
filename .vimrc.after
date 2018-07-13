@@ -208,7 +208,7 @@ endif
 " Let customised elm-vim override janus default
 source ~/.janus/elm-vim/autoload/elm.vim
 
-set textwidth=90
+set tabstop=2
 
 " User EditorConfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
