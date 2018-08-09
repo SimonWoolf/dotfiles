@@ -226,6 +226,7 @@ export ALLOW_BASIC_AUTH_WITHOUT_TLS=true # easier experimentation with wscat wit
 export PROGRESSIVE_HASH_ENABLED=false # lets cores become ready much quicker
 export ENABLE_HANDLE_LOGGING=false # stops realtime printing hundreds of lines of handles to the console on exit
 export NODE_TLS_REJECT_UNAUTHORIZED=0 # make ably-js tests work with self-signed certs
+export ADMIN_UPDATE_LOG_LEVEL=micro
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
 unset QT_STYLE_OVERRIDE
