@@ -39,17 +39,17 @@
 
 # Examples of commands:
 
-"xbindkeys_show" 
+"xbindkeys_show"
   control+shift + q
 
 # Simon: map mouse button tilt L+R to ctrl+pgup/down
-"xvkbd -text "\[Control_L]\[Prior]""
+"xvkbd -text "\{+Control_L}\{+Prior}\{-Prior}\{-Control_L}""
   b:6 # tilt left
 
-"xvkbd -text "\[Control_L]\[Next]""
+"xvkbd -text "\{+Control_L}\{+Next}\{-Next}\{-Control_L}""
   b:7 # tilt right
 
-"xvkbd -text "\[Control_L]w""
+"xvkbd -text "\{+Control_L}\{+w}\{-w}\{-Control_L}""
   b:9 # left upper side button
 
 # set directly keycode (here control + f with my keyboard)
