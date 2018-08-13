@@ -1,6 +1,41 @@
 # bash git pairing prompt support
 #     - based on git-prompt.sh @ https://github.com/git/git/tree/master/contrib/completion
 
+# Not bash or zsh?
+[ -n "$BASH_VERSION" -o -n "$ZSH_VERSION" ] || return 0
+
+# Not an interactive shell?
+[[ $- == *i* ]] || return 0
+
+########################################################
+# VTE functions to store the current directory to allow
+# ctrl-shift-t to open a new terminal at the current dir
+########################################################
+
+__vte_urlencode() (
+  # This is important to make sure string manipulation is handled
+  # byte-by-byte.
+  LC_ALL=C
+  str="$1"
+  while [ -n "$str" ]; do
+    safe="${str%%[!a-zA-Z0-9/:_\.\-\!\'\(\)~]*}"
+    printf "%s" "$safe"
+    str="${str#"$safe"}"
+    if [ -n "$str" ]; then
+      printf "%%%02X" "'$str"
+      str="${str#?}"
+    fi
+  done
+)
+
+__vte_osc7 () {
+  printf "\033]7;file://%s%s\a" "${HOSTNAME:-}" "$(__vte_urlencode "${PWD}")"
+}
+
+__vte_prompt_command() {
+  printf "\033]0;%s@%s:%s\007%s" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}" "$(__vte_osc7)"
+}
+
 __prompt ()
 {
   local os=`uname 2>/dev/null`
@@ -75,8 +110,7 @@ __prompt ()
     # Set terminal title
     echo -ne "\033]0;${PWD}\007" | sed "s/\/mnt\/terra//;s/\/home\/simon/~/"
 
-    if [[ $TERM == xterm-termite ]]; then
-      . /etc/profile.d/vte.sh
+    if [[ $TERM == xterm-termite && "${VTE_VERSION:-0}" -ge 3405 ]]; then
       __vte_prompt_command
     fi
 
@@ -113,3 +147,5 @@ __prompt ()
     ;;
   esac
 }
+
+PROMPT_COMMAND=__prompt

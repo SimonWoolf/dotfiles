@@ -206,7 +206,6 @@ if [[ "$SESSION" == "xubuntu" ]]; then
 fi
 
 source ~/.prompt.sh
-PROMPT_COMMAND=__prompt
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
