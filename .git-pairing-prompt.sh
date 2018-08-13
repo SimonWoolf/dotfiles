@@ -75,6 +75,11 @@ __git_pairing_prompt ()
     # Set terminal title
     echo -ne "\033]0;${PWD}\007" | sed "s/\/mnt\/terra//;s/\/home\/simon/~/"
 
+    if [[ $TERM == xterm-termite ]]; then
+      . /etc/profile.d/vte.sh
+      __vte_prompt_command
+    fi
+
     local untracked="✶"
     local pull_arrow="▼ "
     local push_arrow="▲ "

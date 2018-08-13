@@ -189,7 +189,7 @@ function crtime() {
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias ll='ls -lh --color=auto'
   alias ls='ls --color=auto'
-  export TERM="xterm-256color"
+  #export TERM="xterm-256color" -- useful for xfce4-terminal, but breaks things on termite
   # http://superuser.com/questions/52562/ssh-keychain-for-xfce
   export $(gnome-keyring-daemon --daemonize --start)
 elif [[ "$OSTYPE" == "darwin"* ]]; then
