@@ -1,7 +1,7 @@
 # bash git pairing prompt support
 #     - based on git-prompt.sh @ https://github.com/git/git/tree/master/contrib/completion
 
-__git_pairing_prompt ()
+__prompt ()
 {
   local os=`uname 2>/dev/null`
 

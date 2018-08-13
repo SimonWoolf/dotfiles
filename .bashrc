@@ -205,8 +205,8 @@ if [[ "$SESSION" == "xubuntu" ]]; then
   alias xte="xmodmap ~/.XmodmapForTrulyErgonomic"
 fi
 
-source ~/.git-pairing-prompt.sh
-PROMPT_COMMAND=__git_pairing_prompt
+source ~/.prompt.sh
+PROMPT_COMMAND=__prompt
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
