@@ -205,8 +205,35 @@ if filereadable("._vimrc")
     source ._vimrc
 endif
 
-" Let customised elm-vim override janus default
-source ~/.janus/elm-vim/autoload/elm.vim
+function! ElmFormat()
+  let l:curw = {}
+  try
+    mkview!
+  catch
+    let l:curw = winsaveview()
+  endtry
+
+  call elm#Format()
+  " custom formattings. 0777 makes it process the whole file at once, to allow
+  " replacements to span multiple lines
+  undojoin | silent %!perl -0777 -p -e "s/->\n\s+/-> /g,s/=\n\s+/= /g,s/\n\n\n/\n\n/g"
+
+  " restore our cursor/windows positions, folds, etc..
+  if empty(l:curw)
+    silent! loadview
+  else
+    call winrestview(l:curw)
+  endif
+endfunction
+
+
+" Disable default Elm code formatting on save, use custom
+let g:elm_format_autosave = 0
+augroup elmFormat
+  autocmd!
+  autocmd BufWritePre *.elm call ElmFormat()
+  autocmd BufWritePost *.elm call elm#util#EchoStored()
+augroup END
 
 set tabstop=2
 
