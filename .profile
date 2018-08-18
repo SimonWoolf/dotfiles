@@ -19,6 +19,11 @@ else
   export PATH="/usr/local/heroku/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin"
 fi
 
+# on 18.04, system would logout on resume due to
+# https://askubuntu.com/questions/1038649/automatic-logout-when-resuming-from-suspend-on-xubuntu-18-04
+# workaround was to remove at-spi2-core, this stops gnome apps complaining at that
+export NO_AT_BRIDGE=1
+
 export LANGUAGE="en_GB:en"
 export LC_MESSAGES="en_GB.UTF-8"
 export LC_CTYPE="en_GB.UTF-8"
