@@ -1,8 +1,8 @@
 #!/bin/sh
 echo "close firefox"
 xrandr --auto
-xrandr --output DP1 --above eDP1
-xfconf-query -c xsettings -p /Xft/DPI -s 96
+xrandr --output DP-1 --above eDP-1
+xfconf-query -c xsettings -p /Xft/DPI -s 120
 sed -i 's/user_pref("layout.css.devPixelsPerPx", "1.[0-9]");/user_pref("layout.css.devPixelsPerPx", "1.0");/' /home/simon/.mozilla/firefox/fuevxjfl.default/prefs.js
 firefox &
 sleep 5
