@@ -241,5 +241,5 @@ TITLE="\[\e]2;$@\a\]"
 PS1=${ORIG}${TITLE}
 
 function datemillis() {
-  date -d @`echo $1 | cut -c1-10`
+  date -u -d @`echo $1 | cut -c1-10`
 }
