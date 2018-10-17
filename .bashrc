@@ -231,6 +231,8 @@ export ABLY_SSH_POST_LOGIN_COMMAND="(curl --silent https://raw.githubusercontent
 export QT_QPA_PLATFORMTHEME="qt5ct"
 unset QT_STYLE_OVERRIDE
 
+export ERL_AFLAGS="-kernel shell_history enabled"
+
 # Torch -- needed for waifu2x image resizer
 # . /mnt/terra/home/simon/programs/torch/install/bin/torch-activate
 
