@@ -213,7 +213,8 @@ source ~/.prompt.sh
 [ -f ~/.apikeys ] && source ~/.apikeys
 
 # heroku, CUDA, my stuff paths
-export PATH="/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:$PATH:$HOME/bin:$HOME/.local/bin:$HOME/dev/dotfiles/bin"
+# note: .local/bin is prepended so that local stack & pip take precendence over systemwide one (which is used by wireshark for some reason)
+export PATH="$HOME/.local/bin:/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin"
 export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib:$LD_LIBRARY_PATH
 
 . $HOME/.asdf/asdf.sh
