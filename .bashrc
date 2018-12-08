@@ -248,3 +248,7 @@ PS1=${ORIG}${TITLE}
 function datemillis() {
   date -u -d @`echo $1 | cut -c1-10`
 }
+alias dateaccur="date +"%H:%M:%S.%3N""
+
+# added by travis gem
+[ -f /home/simon/.travis/travis.sh ] && source /home/simon/.travis/travis.sh
