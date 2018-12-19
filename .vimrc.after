@@ -216,7 +216,7 @@ function! ElmFormat()
   call elm#Format()
   " custom formattings. 0777 makes it process the whole file at once, to allow
   " replacements to span multiple lines
-  undojoin | silent %!perl -0777 -p -e "s/->\n\s+/-> /g,s/=\n\s+/= /g,s/\n\n\n/\n\n/g"
+  undojoin | silent %!perl -0777 -p -e "s/->\n\s+/-> /g,s/=\n\s+/= /g,s/ let\n/\n    let\n/g,s/\n\n\n/\n\n/g"
 
   " restore our cursor/windows positions, folds, etc..
   if empty(l:curw)
