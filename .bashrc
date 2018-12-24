@@ -131,6 +131,8 @@ alias aka="sudo apt-key adv --recv-keys "
 alias rem="sudo apt autoremove --purge "
 alias show="apt-cache show"
 alias agu="sudo apt update"
+alias au="sudo apt update"
+alias adu="sudo apt dist-upgrade"
 #usage: reencodeformediabox inputfile outputfile
 alias reencodeformediabox="ffmpeg -mbd rd -vtag xvid -flags +mv4+aic -trellis 2 -cmp 2 -subcmp 2 -g 300 -pass 2 -b 2000k -ab 192k -i "
 alias updateipblock="sudo mv /var/cache/iplist/index.html\?list\=bt_level1 /var/cache/iplist/bt_level1 && sudo mv /var/cache/iplist/index.html\?list\=bt_level2 /var/cache/iplist/bt_level2"
