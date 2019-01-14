@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+`. ~/.apikeys`
+
+scaling_factors = {
+  pullups: 1.0/3,
+  squats: 1.0/4,
+  pushups: 1.0/5,
+  yoga: 1,    # /min
+  running: 6, # /km
+  gym: 1,     # /min
+}
+
+exercise_type, number = ARGV
+number = number.to_f
+scaling_factor = scaling_factors[exercise_type.to_sym]
+
+if scaling_factor.nil?
+  puts "Unknown exercise type #{exercise_type}"
+  exit 1
+end
+
+units = number * scaling_factor
+
+result = `curl --silent -X POST "https://www.beeminder.com/api/v1/users/coiley/goals/exercise/datapoints.json?auth_token=#{ENV['BEEMINDER_TOKEN']}&value=#{units}&comment=#{exercise_type}"`
+
+if $?.exitstatus != 0
+  puts "Beeminder curl failed: #{$?.inspect}; #{result}"
+elsif !result.include? "created"
+  puts "Error submitting beeminder: #{result}"
+else
+  puts "Posted #{units} units of #{exercise_type}"
+end
