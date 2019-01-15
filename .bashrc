@@ -80,7 +80,7 @@ alias ping="ping -c 4"
 alias dul="du --max-depth=1"
 alias h?="history | grep $1"
 alias lf="find . | grep -i "
-alias gr="git grep -i "
+alias gr="git gr "
 # merge/uniqify nonadjacent
 alias stripduplines="perl -ne 'print if ! $a{$_}++' "
 # Stops it erroring on startup on laptop
