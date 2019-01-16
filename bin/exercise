@@ -19,7 +19,7 @@ if scaling_factor.nil?
   exit 1
 end
 
-units = number * scaling_factor
+units = (number * scaling_factor).round(2)
 
 result = `curl --silent -X POST "https://www.beeminder.com/api/v1/users/coiley/goals/exercise/datapoints.json?auth_token=#{ENV['BEEMINDER_TOKEN']}&value=#{units}&comment=#{exercise_type}"`
 
