@@ -25,15 +25,6 @@ def tt_status
   end
 end
 
-def keyboard_layout
-  res = `setxkbmap -query`.scan(/variant:\s+,?([a-z]+),?\n/)[0]
-  if layout = res && res[0]
-    [{ full_text: " #{layout} "}]
-  else
-    []
-  end
-end
-
 # Skip the first line which contains the version header.
 puts readline()
 
@@ -47,7 +38,6 @@ loop do
   i3status = JSON.parse(readline().gsub(/^,/, ''))
   full_status = [
     tt_status,
-    keyboard_layout,
     i3status
   ].reduce(:+).to_json
   puts "," + full_status
