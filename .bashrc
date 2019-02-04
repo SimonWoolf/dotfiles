@@ -167,6 +167,8 @@ alias calc="insect"
 alias clipcopy="xclip -selection clipboard "
 alias ae="bin/ably-env "
 alias ably-env="bin/ably-env "
+alias cd..="cd .."
+alias cd.="cd ."
 
 # google drive aliases
 alias dpl="drive pull ."
