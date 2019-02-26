@@ -6,6 +6,8 @@ export BROWSER=firefox
 export RACK_ENV="development"
 export AWS_PROFILE=ably
 
+export GOOGLE_APPLICATION_CREDENTIALS="/home/simon/google-credentials.json"
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
