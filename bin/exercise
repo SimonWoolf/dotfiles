@@ -8,6 +8,7 @@ scaling_factors = {
   yoga: 1,    # /min
   running: 6, # /km
   gym: 1,     # /min
+  walking: 1.0/3 # /min
 }
 
 exercise_type, number = ARGV
