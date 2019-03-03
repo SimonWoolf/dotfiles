@@ -4,6 +4,174 @@
 
 include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 
-<Multi_key> <period> <backslash>           : "λ"   U03BB  # GREEK SMALL LETTER LAMBDA
-<Multi_key> b x                            : "✖" # heavy multiplication x
+# arrows
+<Multi_key> <Left> <Left>                  : "←" leftarrow        # LEFTWARDS ARROW
+<Multi_key> <Up> <Up>                      : "↑" uparrow          # UPWARDS ARROW
+<Multi_key> <Right> <Right>                : "→" rightarrow       # RIGHTWARDS ARROW
+<Multi_key> <Down> <Down>                  : "↓" downarrow        # DOWNWARDS ARROW
+<Multi_key> <Left> <Right>                 : "↔" U2194           # LEFT RIGHT ARROW
+<Multi_key> <Right> <Left>                 : "↔" U2194           # LEFT RIGHT ARROW
+<Multi_key> <Up> <Down>                    : "↕" U2195           # UP DOWN ARROW
+<Multi_key> <Down> <Up>                    : "↕" U2195           # UP DOWN ARROW
+<Multi_key> <Down> <Left>                  : "↵" U21B5 # DOWNWARDS ARROW WITH CORNER LEFTWARDS
+<Multi_key> <equal> <greater>                : "⇒"        U21D2                # RIGHTWARDS DOUBLE ARROW
+<Multi_key> <equal> <less> : "⇐" U21D0 # LEFTWARDS DOUBLE ARROW
 
+# Ligatures
+<Multi_key> <f> <f>                : "ﬀ"           UFB00   # LATIN SMALL LIGATURE FF
+<Multi_key> <f> <i>                : "ﬁ"           UFB01   # LATIN SMALL LIGATURE FI
+<Multi_key> <F> <i>                : "ﬃ"           UFB03   # LATIN SMALL LIGATURE FFI
+<Multi_key> <f> <l>                : "ﬂ"           UFB02   # LATIN SMALL LIGATURE FL
+<Multi_key> <F> <l>                : "ﬄ"           UFB04   # LATIN SMALL LIGATURE FFL
+<Multi_key> <s> <t>                : "ﬆ"  UFB06           # LATIN SMALL LIGATURE ST
+<Multi_key> <f> <t>                : "ﬅ"  UFB05           # LATIN SMALL LIGATURE LONG S T
+<Multi_key> <S> <S> : "ẞ" U1E9E # LATIN CAPITAL LETTER SHARP S
+
+# Maths
+<Multi_key> <exclam> <equal>                : "≠"        U2260                # NOT EQUAL TO
+<Multi_key> <slash> <equal>                : "≠"        U2260                # NOT EQUAL TO
+<Multi_key> <less> <equal>                : "≤"        U2264                # LESS-THAN OR EQUAL TO
+<Multi_key> <greater> <equal> : "≥" U2265 # GREATER-THAN OR EQUAL TO
+<Multi_key> <i> <n>                        : "∈"        U2208                # ELEMENT OF
+<Multi_key> <exclam> <i> <n> : "∉" U2209 # NOT AN ELEMENT OF
+<Multi_key> <equal> <equal> : "≡" U2261 # IDENTICAL TO
+<Multi_key> <equal> <bar> <equal> : "≢" U2262 # NOT IDENTICAL TO
+<Multi_key> <slash> <backslash>         : "∧"  U2227           # LOGICAL AND
+<Multi_key> <backslash> <slash> : "∨" U2228 # LOGICAL OR
+<Multi_key> <0> <slash>                 : "∅"   U2205           # EMPTY SET (thanks jsled!)
+<Multi_key> <slash> <0> : "∅" U2205 # EMPTY SET
+<Multi_key> <braceleft> <U>                : "∪"        U222A                # UNION
+<Multi_key> <braceleft> <asciicircum>        : "∩"        U2229                # INTERSECTION
+<Multi_key> <braceleft> <parenleft>        : "⊂"        U2282                # SUBSET OF
+<Multi_key> <braceleft> <equal> <parenleft> : "⊆" U2286                # SUBSET OF OR EQUAL TO
+<Multi_key> <exclam> <braceleft> <parenleft> : "⊄" U2284        # NOT A SUBSET OF
+<Multi_key> <slash> <braceleft> <parenleft>  : "⊄" U2284        # NOT A SUBSET OF
+<Multi_key> <braceleft>        <parenright>        : "⊃"        U2283                # SUPERSET OF
+<Multi_key> <braceleft> <equal> <parenright> : "⊇" U2287        # SUPERSET OF OR EQUAL TO
+<Multi_key> <E> <E>                     : "∃"  U2203           # THERE EXISTS
+<Multi_key> <slash> <E> <E>             : "∄"   U2204           # THERE DOES NOT EXIST
+<Multi_key> <A> <A> : "∀" U2200 # FOR ALL
+<Multi_key> <Multi_key> <Q> <E> <D> : "∎" U220E # END OF PROOF
+<Multi_key> <parenleft> <plus> <parenright>     : "⊕"  U2295    # CIRCLED PLUS
+<Multi_key> <parenleft> <minus> <parenright>    : "⊖"  U2296    # CIRCLED MINUS
+<Multi_key> <parenleft> <x> <x> <parenright> : "⊗" U2297 # CIRCLED TIMES
+<Multi_key> <8> <8> : "∞" U221E # INFINITY
+<Multi_key> <Multi_key> <s> <u> <m> : "∑" U2211 # N-ARY SUMMATION
+<Multi_key> <Multi_key> <i> <n> <t> : "∫" U222B # INTEGRAL
+<Multi_key> <Multi_key> <d> <e> <l>        : "∇"        U2207                # NABLA
+<Multi_key> <Multi_key> <p> <a> <r> <t> : "∂" U2202 # PARTIAL DIFFERENTIAL
+<Multi_key> <bar> <C>                   : "ℂ"   U2102           # DOUBLE-STRUCK CAPITAL C (set of complex numbers)
+<Multi_key> <bar> <N>                   : "ℕ"   U2115           # DOUBLE-STRUCK CAPITAL N (natural number)
+<Multi_key> <bar> <P>                   : "ℙ"   U2119           # DOUBLE-STRUCK CAPITAL P
+<Multi_key> <bar> <Q>                   : "ℚ"   U211A           # DOUBLE-STRUCK CAPITAL Q (set of rational numbers)
+<Multi_key> <bar> <R>                   : "ℝ"   U211D           # DOUBLE-STRUCK CAPITAL R (set of real numbers)
+<Multi_key> <bar> <Z> : "ℤ" U2124 # DOUBLE-STRUCK CAPITAL Z (set of integers)
+<Multi_key> <Multi_key> <h> <b> <a> <r> : "ℏ" U210F # PLANCK CONSTANT OVER TWO PI
+<Multi_key> <underscore> <bar> <underscore>:        "⊥"         U22A5        # UP TACK (bottom) or should we use U27C2 PERPENDICULAR?
+<Multi_key> <underscore> <exclam> <underscore>:        "⊤"         U22A4        # DOWN TACK (opposite of False)
+<Multi_key> <underscore> <greater> <underscore>:        "⊢"         U22A2        # RIGHT TACK
+<Multi_key> <underscore> <less> <underscore>: "⊣" U22A3 # LEFT TACK
+<Multi_key> <slash> <slash> : "⁄" U2044 # FRACTION SLASH
+
+# subscripts
+<Multi_key> <underscore> <0>                 : "₀"  U2080             # SUBSCRIPT ZERO
+<Multi_key> <underscore> <1>                 : "₁"  U2081             # SUBSCRIPT ONE
+<Multi_key> <underscore> <2>                 : "₂"  U2082             # SUBSCRIPT TWO
+<Multi_key> <underscore> <3>                 : "₃"  U2083             # SUBSCRIPT THREE
+<Multi_key> <underscore> <4>                 : "₄"  U2084             # SUBSCRIPT FOUR
+<Multi_key> <underscore> <5>                 : "₅"  U2085             # SUBSCRIPT FIVE
+<Multi_key> <underscore> <6>                 : "₆"  U2086             # SUBSCRIPT SIX
+<Multi_key> <underscore> <7>                 : "₇"  U2087             # SUBSCRIPT SEVEN
+<Multi_key> <underscore> <8>                 : "₈"  U2088             # SUBSCRIPT EIGHT
+<Multi_key> <underscore> <9>                 : "₉"  U2089             # SUBSCRIPT NONE
+<Multi_key> <underscore> <plus>               : "₊"  U208A          # SUBSCRIPT PLUS
+<Multi_key> <underscore> <minus>       : "₋"  U208B          # SUBSCRIPT MINUS
+<Multi_key> <underscore> <equal>           : "₌"  U208C          # SUBSCRIPT EQUALS SIGN
+<Multi_key> <underscore> <parenleft>           : "₍"  U208D          # SUBSCRIPT LEFT PARENTHESIS
+<Multi_key> <underscore> <parenright> : "₎" U208E # SUBSCRIPT RIGHT PARENTHESIS
+<Multi_key> <underscore> <a>               : "ₐ"  U2090          # LATIN SUBSCRIPT SMALL LETTER A
+<Multi_key> <underscore> <e>               : "ₑ"  U2091          # LATIN SUBSCRIPT SMALL LETTER E
+<Multi_key> <underscore> <o>               : "ₒ"  U2092          # LATIN SUBSCRIPT SMALL LETTER O
+<Multi_key> <underscore> <x>               : "ₓ"  U2093          # LATIN SUBSCRIPT SMALL LETTER X
+<Multi_key> <underscore> <h>               : "ₕ"  U2095          # LATIN SUBSCRIPT SMALL LETTER H
+<Multi_key> <underscore> <k>           : "ₖ"  U2096          # LATIN SUBSCRIPT SMALL LETTER K
+<Multi_key> <underscore> <l>           : "ₗ"  U2097          # LATIN SUBSCRIPT SMALL LETTER L
+<Multi_key> <underscore> <m>               : "ₘ"  U2098          # LATIN SUBSCRIPT SMALL LETTER M
+<Multi_key> <underscore> <n>               : "ₙ"  U2099          # LATIN SUBSCRIPT SMALL LETTER N
+<Multi_key> <underscore> <p>               : "ₚ"  U209A          # LATIN SUBSCRIPT SMALL LETTER P
+<Multi_key> <underscore> <s>               : "ₛ"  U209B          # LATIN SUBSCRIPT SMALL LETTER S
+<Multi_key> <underscore> <t> : "ₜ" U209C # LATIN SUBSCRIPT SMALL LETTER T
+<Multi_key> <underscore> <i>                 : "ᵢ"  U1D62             # LATIN SUBSCRIPT SMALL LETTER I
+<Multi_key> <underscore> <j>           : "ⱼ"  U2C7C          # LATIN SUBSCRIPT SMALL LETTER J
+<Multi_key> <underscore> <r>           : "ᵣ"  U1D63       # LATIN SUBSCRIPT SMALL LETTER R
+<Multi_key> <underscore> <u>           : "ᵤ"  U1D64       # LATIN SUBSCRIPT SMALL LETTER U
+<Multi_key> <underscore> <v>           : "ᵥ"  U1D65       # LATIN SUBSCRIPT SMALL LETTER V
+<Multi_key> <underscore> <asterisk> <b> : "ᵦ"  U1D66     # GREEK SUBSCRIPT SMALL LETTER BETA
+<Multi_key> <underscore> <asterisk> <g> : "ᵧ"  U1D67     # GREEK SUBSCRIPT SMALL LETTER GAMMA
+<Multi_key> <underscore> <asterisk> <r> : "ᵨ"  U1D68     # GREEK SUBSCRIPT SMALL LETTER RHO
+<Multi_key> <underscore> <asterisk> <f> : "ᵩ"  U1D69     # GREEK SUBSCRIPT SMALL LETTER PHI
+<Multi_key> <underscore> <asterisk> <x> : "ᵪ" U1D6A # GREEK SUBSCRIPT SMALL LETTER CHI
+
+# Greek!
+<Multi_key> <asterisk> <a>                : "α"        U03B1                # GREEK SMALL LETTER ALPHA
+<Multi_key> <asterisk> <b>                : "β"        U03B2                # GREEK SMALL LETTER BETA
+<Multi_key> <asterisk> <c>                : "ψ"        U03C8                # GREEK SMALL LETTER PSI
+<Multi_key> <asterisk> <d>                : "δ"        U03B4                # GREEK SMALL LETTER DELTA
+<Multi_key> <asterisk> <e>                : "ε"        U03B5                # GREEK SMALL LETTER EPSILON
+<Multi_key> <asterisk> <f>                : "φ"        U03C6                # GREEK SMALL LETTER PHI
+<Multi_key> <asterisk> <g>                : "γ"        U03B3                # GREEK SMALL LETTER GAMMA
+<Multi_key> <asterisk> <h>                : "η"        U03B7                # GREEK SMALL LETTER ΕΤΑ
+<Multi_key> <asterisk> <i>                : "ι"        U03B9                # GREEK SMALL LETTER ΙΟΤΑ
+<Multi_key> <asterisk> <j>                : "ξ"        U03BE                # GREEK SMALL LETTER XI
+<Multi_key> <asterisk> <k>                : "κ"        U03BA                # GREEK SMALL LETTER KAPPA
+<Multi_key> <asterisk> <l>                : "λ"        U03BB                # GREEK SMALL LETTER LAMBDA
+# custom additional one for lambda
+<Multi_key> <period> <backslash>           : "λ"   U03BB  # GREEK SMALL LETTER LAMBDA
+<Multi_key> <asterisk> <m>                : "μ"        U03BC                # GREEK SMALL LETTER MU
+<Multi_key> <asterisk> <n>                : "ν"        U03BD                # GREEK SMALL LETTER NU
+<Multi_key> <asterisk> <o>                : "ο"        U03BF                # GREEK SMALL LETTER OMICRON
+<Multi_key> <asterisk> <p>                : "π"        U03C0                # GREEK SMALL LETTER PI
+<Multi_key> <asterisk> <r>                : "ρ"        U03C1                # GREEK SMALL LETTER RHO
+<Multi_key> <asterisk> <s>                : "σ"        U03C3                # GREEK SMALL LETTER SIGMA
+<Multi_key> <asterisk> <t>                : "τ"        U03C4                # GREEK SMALL LETTER TAU
+<Multi_key> <asterisk> <u>                : "θ"        U03B8                # GREEK SMALL LETTER THETA
+<Multi_key> <asterisk> <v>                : "ω"        U03C9                # GREEK SMALL LETTER OMEGA
+<Multi_key> <asterisk> <w>                : "ς"        U03C2                # GREEK SMALL LETTER FINAL SIGMA
+<Multi_key> <asterisk> <x>                : "χ"        U03C7                # GREEK SMALL LETTER CHI
+<Multi_key> <asterisk> <y>                : "υ"        U03C5                # GREEK SMALL LETTER UPSILON
+<Multi_key> <asterisk> <z> : "ζ" U03B6 # GREEK SMALL LETTER ZETA
+<Multi_key> <asterisk> <A>                : "Α"        U0391                # GREEK CAPITAL LETTER ALPHA
+
+<Multi_key> <asterisk> <B>                : "Β"        U0392                # GREEK CAPITAL LETTER BETA
+<Multi_key> <asterisk> <C>                : "Ψ"        U03A8                # GREEK CAPITAL LETTER PSI
+<Multi_key> <asterisk> <D>                : "Δ"        U0394                # GREEK CAPITAL LETTER DELTA
+<Multi_key> <asterisk> <E>                : "Ε"        U0395                # GREEK CAPITAL LETTER EPSILON
+<Multi_key> <asterisk> <F>                : "Φ"        U03A6                # GREEK CAPITAL LETTER PHI
+<Multi_key> <asterisk> <G>                : "Γ"        U0393                # GREEK CAPITAL LETTER GAMMA
+<Multi_key> <asterisk> <H>                : "Η"        U0397                # GREEK CAPITAL LETTER ΕΤΑ
+<Multi_key> <asterisk> <I>                : "Ι"        U0399                # GREEK CAPITAL LETTER ΙΟΤΑ
+<Multi_key> <asterisk> <J>                : "Ξ"        U039E                # GREEK CAPITAL LETTER XI
+<Multi_key> <asterisk> <K>                : "Κ"        U039A                # GREEK CAPITAL LETTER KAPPA
+<Multi_key> <asterisk> <L>                : "Λ"        U039B                # GREEK CAPITAL LETTER LAMBDA
+<Multi_key> <asterisk> <M>                : "Μ"        U039C                # GREEK CAPITAL LETTER MU
+<Multi_key> <asterisk> <N>                : "Ν"        U039D                # GREEK CAPITAL LETTER NU
+<Multi_key> <asterisk> <O>                : "Ο"        U039F                # GREEK CAPITAL LETTER OMICRON
+<Multi_key> <asterisk> <P>                : "Π"        U03A0                # GREEK CAPITAL LETTER PI
+<Multi_key> <asterisk> <R>                : "Ρ"        U03A1                # GREEK CAPITAL LETTER RHO
+<Multi_key> <asterisk> <S>                : "Σ"        U03A3                # GREEK CAPITAL LETTER SIGMA
+<Multi_key> <asterisk> <T>                : "Τ"        U03A4                # GREEK CAPITAL LETTER TAU
+<Multi_key> <asterisk> <U>                : "Θ"        U0398                # GREEK CAPITAL LETTER THETA
+<Multi_key> <asterisk> <V>                : "Ω"        U03A9                # GREEK CAPITAL LETTER OMEGA
+<Multi_key> <asterisk> <X>                : "Χ"        U03A7                # GREEK CAPITAL LETTER CHI
+<Multi_key> <asterisk> <Y>                : "Υ"        U03A5                # GREEK CAPITAL LETTER UPSILON
+<Multi_key> <asterisk> <Z> : "Ζ" U0396 # GREEK CAPITAL LETTER ZETA
+
+# emoji
+<Multi_key> <colon> <parenright> : "☺" U263A # WHITE SMILING FACE
+<Multi_key> <Multi_key> <t> <e> <a> : "☕" U2615 # HOT BEVERAGE
+
+#misc
+<Multi_key> <numbersign> <o> <o> : "♫" U266b # BEAMED EIGHTH NOTES
+<Multi_key> <b> <x>                            : "✖" # heavy multiplication x
+<Multi_key> <space> <minus>                : " — " # EM DASH surrounded by THIN SPACEs
+<Multi_key> <B> <bar> : "₿" U20BF # BITCOIN SIGN
