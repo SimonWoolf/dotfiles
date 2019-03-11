@@ -11,6 +11,6 @@ battery 0 {
 }
 
 wireless _first_ {
-  format_up = " 🖧 (%quality at %essid) %ip "
+  format_up = " 🖧 %essid %quality "
   format_down = " 🖧 down "
 }
