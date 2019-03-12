@@ -1,0 +1,4 @@
+#!/bin/sh
+setxkbmap gb
+setxkbmap -option "terminate:ctrl_alt_bksp"
+xmodmap ~/.XmodmapForExternalKb
