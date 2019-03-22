@@ -175,3 +175,5 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <b> <x>                            : "✖" # heavy multiplication x
 <Multi_key> <space> <minus>                : " — " # EM DASH surrounded by THIN SPACEs
 <Multi_key> <B> <bar> : "₿" U20BF # BITCOIN SIGN
+<Multi_key> <enter> <enter> : "⏎"
+
