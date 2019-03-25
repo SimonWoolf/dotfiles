@@ -64,6 +64,20 @@ vnoremap j gj
 nnoremap k gk
 vnoremap k gk
 
+" Use ,tab for omnicompletion in normal mode
+nnoremap <leader><tab> a<C-x><C-o>
+" show method signatures in the autocomplete menu
+let g:tsuquyomi_completion_detail = 1
+" integrate tsuquyomi (typescript) with syntastic
+autocmd Filetype typescript let g:tsuquyomi_disable_quickfix = 1
+autocmd Filetype typescript let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
+" get tooltip window under mouse cursor
+set ballooneval
+autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+autocmd FileType typescript nmap <buffer> <Leader>ts : <C-u>echo tsuquyomi#hint()<CR>
+" stop it opening new window with completion options
+autocmd FileType typescript setlocal completeopt=menu
+
 map <leader>ef <C-p>
 
 " http://vim.wikia.com/wiki/Search_for_visually_selected_text
@@ -173,7 +187,7 @@ set noscrollbind
 
 " insert date with ,d time with ,t
 nnoremap <leader>d "=strftime("%a %d %b %Y")<CR>P
-nnoremap <leader>t "=strftime("%T")<CR>P
+nnoremap <leader>time "=strftime("%T")<CR>P
 
 " vim-latexsuite tweaks
 " =====================
