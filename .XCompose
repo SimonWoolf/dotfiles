@@ -167,8 +167,11 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <asterisk> <Z> : "Ζ" U0396 # GREEK CAPITAL LETTER ZETA
 
 # emoji
-<Multi_key> <colon> <parenright> : "☺" U263A # WHITE SMILING FACE
+<Multi_key> <colon> <parenright> : "🙂" # slightly smiling face
 <Multi_key> <Multi_key> <t> <e> <a> : "☕" U2615 # HOT BEVERAGE
+<Multi_key> <plus> <1> : "👍" # thumbs up
+<Multi_key> <minus> <1> : "👎" # thumbs down
+
 
 #misc
 <Multi_key> <numbersign> <o> <o> : "♫" U266b # BEAMED EIGHTH NOTES
