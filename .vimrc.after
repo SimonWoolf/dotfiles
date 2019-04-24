@@ -10,8 +10,11 @@ if has("gui_running")
   set guioptions-=e
 
   if has("gui_gtk2")
-    "set guifont=Consolas\ 11
-    set guifont=Meslo\ LG\ S\ for\ Powerline\ 11
+    if !empty(system('xrandr | grep "HDMI-1 connected 3840x2160"'))
+      set guifont=Meslo\ LG\ S\ for\ Powerline\ 9
+    else
+      set guifont=Meslo\ LG\ S\ for\ Powerline\ 11
+    endif
   elseif has("gui_macvim")
     set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h16
   elseif has("gui_win32")
