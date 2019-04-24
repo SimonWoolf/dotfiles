@@ -46,6 +46,7 @@
   ghfork = "!f() { git remote rename origin upstream && git remote add origin git@github.com:SimonWoolf/$1.git; }; f"
 	gr = grep -i
 	# for excluding: gr = "!f() { git grep -i \"$1\" | grep -v 'browser/static'; }; f"
+	pst = push --tags
 [merge]
   tool = kdiff3
 	conflictstyle = diff3
