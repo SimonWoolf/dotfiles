@@ -16,7 +16,7 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 else
   # at least set the path so sh can find executables
-  export PATH="/usr/local/heroku/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin"
+  export PATH="/usr/local/heroku/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin:$HOME/.cargo/bin"
 fi
 
 # on 18.04, system would logout on resume due to
