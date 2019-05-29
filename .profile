@@ -16,6 +16,7 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 else
   # at least set the path so sh can find executables
+  export ARDUINO_PATH=/usr/local/arduino
   export PATH="/usr/local/heroku/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin:$HOME/.cargo/bin"
 fi
 
