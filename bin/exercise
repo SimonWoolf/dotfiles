@@ -6,6 +6,7 @@ scaling_factors = {
   squats: 1.0/4,
   pushups: 1.0/5,
   yoga: 1,    # /min
+  cycling: 1, # /min
   running: 6, # /km
   gym: 1,     # /min
   walking: 1.0/3 # /min
