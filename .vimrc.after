@@ -11,7 +11,7 @@ if has("gui_running")
 
   if has("gui_gtk2")
     if !empty(system('xrandr | grep "HDMI-1 connected" | grep "3840x2160"'))
-      set guifont=Meslo\ LG\ S\ for\ Powerline\ 9
+      set guifont=Meslo\ LG\ S\ for\ Powerline\ 8
     else
       set guifont=Meslo\ LG\ S\ for\ Powerline\ 11
     endif
