@@ -167,7 +167,6 @@ alias hackerdump="find /var/log -type f -exec grep -I1 . {} \; | pv -q -L 1k "
 # if not installed: npm install -g insect
 alias calc="insect"
 alias clipcopy="xclip -selection clipboard "
-alias ae="bin/ably-env "
 alias ably-env="bin/ably-env "
 alias cd..="cd .."
 alias cd.="cd ."
@@ -192,6 +191,10 @@ function crtime() {
   sudo debugfs -R "stat <`stat -c %i ${@}`>" `\df --output=source ${@} | tail -1` | grep crtime
 }
 
+
+function ae() {
+  (cd /home/simon/ably/infrastructure ; ./bin/ably-env ${@} )
+}
 
 # OS-specific commands
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
