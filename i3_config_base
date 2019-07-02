@@ -140,10 +140,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # night mode
 bindsym $mod+n exec "redshift -l 51:0 -r -o -v -g 1:1:1"
-bindsym $mod+e exec "redshift -l 51:0 -r -o -v -g 1:0.8:0.8"
-bindsym $mod+i exec "redshift -l 51:0 -r -o -v -g 1:0.6:0.6"
-bindsym $mod+o exec "redshift -l 51:0 -r -o -v -g 1:0.4:0.4"
-bindsym $mod+apostrophe exec "redshift -l 51:0 -r -o -v -g 1:0.2:0.2"
+bindsym $mod+e exec "redshift -l 51:0 -r -o -v -g 1:0.8:0.8 -b 0.9"
+bindsym $mod+i exec "redshift -l 51:0 -r -o -v -g 1:0.67:0.67 -b 0.8"
+bindsym $mod+o exec "redshift -l 51:0 -r -o -v -g 1:0.53:0.53 -b 0.7"
+bindsym $mod+apostrophe exec "redshift -l 51:0 -r -o -v -g 1:0.4:0.4 -b 0.5"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -185,7 +185,6 @@ mode "powerman" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+Delete mode "powerman"
 bindsym F10 mode "powerman"
 
 mode "tt" {

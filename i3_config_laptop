@@ -29,6 +29,10 @@ bindsym Control+space exec rofi -show run -fuzzy -font 'Meslo LG S for Powerline
 # Window switcher
 bindsym $mod+space exec rofi -show window -fuzzy -font 'Meslo LG S for Powerline 22' -bg '#222' -fg '#ddd'
 
+# move focus to other monitor
+bindsym $mod+Prior focus output up
+bindsym $mod+Next focus output down
+
 # set things to workspaces
 # laptop screen:
 workspace 1 output eDP-1
