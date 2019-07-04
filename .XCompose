@@ -175,7 +175,8 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 
 #misc
 <Multi_key> <numbersign> <o> <o> : "♫" U266b # BEAMED EIGHTH NOTES
-<Multi_key> <b> <x>                            : "✖" # heavy multiplication x
+<Multi_key> <b> <x>                            : "✖" # heavy cross
+<Multi_key> <b> <t>                            : "✔" # heavy tick
 <Multi_key> <space> <minus>                : " — " # EM DASH surrounded by THIN SPACEs
 <Multi_key> <B> <bar> : "₿" U20BF # BITCOIN SIGN
 <Multi_key> <enter> <enter> : "⏎"
