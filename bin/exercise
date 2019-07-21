@@ -5,11 +5,12 @@ scaling_factors = {
   pullups: 1.0/3,
   squats: 1.0/4,
   pushups: 1.0/5,
-  yoga: 1,    # /min
-  cycling: 1, # /min
-  running: 6, # /km
+  yoga: 0.75,   # /min
+  cycling: 0.5, # /min
+  running: 1, # /min
+  running_km: 6, # /km
   gym: 1,     # /min
-  walking: 1.0/3 # /min
+  walking: 1.0/4 # /min
 }
 
 exercise_type, number = ARGV
