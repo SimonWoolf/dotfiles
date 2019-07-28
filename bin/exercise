@@ -2,15 +2,15 @@
 `. ~/.apikeys`
 
 scaling_factors = {
-  pullups: 1.0/3,
-  squats: 1.0/4,
-  pushups: 1.0/5,
-  yoga: 0.75,   # /min
-  cycling: 0.5, # /min
-  running: 1, # /min
+  pushups: 0.2,  # each
+  squats: 0.25,  # each
+  walking: 0.25  # /min
+  pullups: 0.33, # each
+  cycling: 0.5,  # /min
+  yoga: 0.75,    # /min
+  running: 1,    # /min
+  gym: 1,        # /min
   running_km: 6, # /km
-  gym: 1,     # /min
-  walking: 1.0/4 # /min
 }
 
 exercise_type, number = ARGV
