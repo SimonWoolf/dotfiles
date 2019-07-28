@@ -259,3 +259,10 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " Turn off json concealing
 let g:vim_json_syntax_conceal=0
+
+" supertab
+let g:SuperTabDefaultCompletionType = 'context'
+autocmd FileType *
+			\ if &omnifunc != '' |
+			\   call SuperTabChain(&omnifunc, "<c-p>") |
+			\ endif
