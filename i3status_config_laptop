@@ -8,6 +8,8 @@ battery 0 {
   status_chr = "⚡ (charging)"
   status_bat = "⚡ "
   status_full = "⚡ full"
+  last_full_capacity = true
+  integer_battery_capacity = true
 }
 
 wireless _first_ {
