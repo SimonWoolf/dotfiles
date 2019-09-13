@@ -32,6 +32,8 @@ bindsym $mod+space exec rofi -show window -fuzzy -font 'Meslo LG S for Powerline
 # move focus to other monitor
 bindsym $mod+Prior focus output up
 bindsym $mod+Next focus output down
+bindsym $mod+k focus up
+bindsym $mod+j focus down
 
 # set things to workspaces
 # laptop screen:

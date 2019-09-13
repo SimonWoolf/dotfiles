@@ -29,6 +29,8 @@ bindsym $mod+space exec "rofi -show window -fuzzy -font 'Meslo LG S for Powerlin
 # move focus to other monitor
 bindsym $mod+Prior focus output left
 bindsym $mod+Next focus output right
+bindsym $mod+j focus output right
+bindsym $mod+k focus output left
 
 # set things to workspaces
 # BenQ
