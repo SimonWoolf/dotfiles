@@ -88,6 +88,8 @@ alias stripduplines="perl -ne 'print if ! $a{$_}++' "
 # Stops it erroring on startup on laptop
 alias gpa="gpa --disable-x509"
 alias hpg="history | grep -i "
+# pulp, purs, bower required for insect
+alias install-node-globals="npm install -g grunt nodeunit insect diff-so-fancy mqtt-cli"
 
 # Point-free style! neat
 hist() {
