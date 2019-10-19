@@ -1,0 +1,4 @@
+#!/bin/sh
+
+. ~/.apikeys
+BUNDLE_GEMFILE=~/dev/rescuemessage/Gemfile bundle exec ruby ~/dev/rescuemessage/rescuemessage.rb
