@@ -195,6 +195,8 @@ mode "tt" {
     bindsym q exec --no-startup-id echo 'q' |  socat - UNIX-CONNECT:/tmp/tt.sock, mode "default"
     bindsym d exec --no-startup-id echo 'd' |  socat - UNIX-CONNECT:/tmp/tt.sock, mode "default"
     bindsym o exec --no-startup-id echo 'o' |  socat - UNIX-CONNECT:/tmp/tt.sock, mode "default"
+    bindsym k exec --no-startup-id echo 'k' |  socat - UNIX-CONNECT:/tmp/tt.sock, mode "default"
+    bindsym m exec --no-startup-id echo 'm' |  socat - UNIX-CONNECT:/tmp/tt.sock, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
