@@ -7,7 +7,7 @@ scaling_factors = {
   walking: 0.25, # /min
   pullups: 0.33, # each
   cycling: 0.5,  # /min
-  yoga: 0.75,    # /min
+  yoga: 0.66,    # /min
   running: 1,    # /min
   gym: 1,        # /min
   running_km: 6, # /km
