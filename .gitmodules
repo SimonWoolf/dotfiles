@@ -1,0 +1,48 @@
+[submodule "vim_plugins/start/airline"]
+	path = vim_plugins/start/airline
+	url = https://github.com/vim-airline/vim-airline
+[submodule "vim_plugins/start/fugitive"]
+	path = vim_plugins/start/fugitive
+	url = git@github.com:tpope/vim-fugitive.git
+[submodule "vim_plugins/start/tlib"]
+	path = vim_plugins/start/tlib
+	url = git@github.com:tomtom/tlib_vim.git
+[submodule "vim_plugins/latex_suite"]
+	path = vim_plugins/start/latex_suite
+	url = git@github.com:gerw/vim-latex-suite.git
+[submodule "vim_plugins/tsuquyomi"]
+	path = vim_plugins/start/tsuquyomi
+	url = git@github.com:Quramy/tsuquyomi
+[submodule "vim_plugins/start/airline-themes"]
+	path = vim_plugins/start/airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes
+[submodule "vim_plugins/start/ctrlp"]
+	path = vim_plugins/start/ctrlp
+	url = git@github.com:ctrlpvim/ctrlp.vim.git
+[submodule "vim_plugins/start/nerdcommenter"]
+	path = vim_plugins/start/nerdcommenter
+	url = git@github.com:ddollar/nerdcommenter.git
+[submodule "vim_plugins/start/supertab"]
+	path = vim_plugins/start/supertab
+	url = git@github.com:ervandew/supertab.git
+[submodule "vim_plugins/start/vimproc"]
+	path = vim_plugins/start/vimproc
+	url = git@github.com:Shougo/vimproc.vim.git
+[submodule "vim_plugins/start/trailing-whitespace"]
+	path = vim_plugins/start/trailing-whitespace
+	url = git@github.com:bronson/vim-trailing-whitespace.git
+[submodule "vim_plugins/start/polyglot"]
+	path = vim_plugins/start/polyglot
+	url = git@github.com:sheerun/vim-polyglot.git
+[submodule "vim_plugins/start/node"]
+	path = vim_plugins/start/node
+	url = git@github.com:mmalecki/vim-node.js.git
+[submodule "vim_plugins/start/endwise"]
+	path = vim_plugins/start/endwise
+	url = git@github.com:tpope/vim-endwise.git
+[submodule "vim_plugins/start/tsuquyomi"]
+	path = vim_plugins/start/tsuquyomi
+	url = git@github.com:Quramy/tsuquyomi
+[submodule "vim_plugins/start/latex_suite"]
+	path = vim_plugins/start/latex_suite
+	url = git@github.com:gerw/vim-latex-suite.git

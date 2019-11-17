@@ -29,6 +29,14 @@ end
 # xdg-utils deletes and recreates ~/.config/mimeapps.list when it writes to it, which will break symbolic links
 `cp ~/dev/dotfiles/mimeapps.list ~/.config/mimeapps.list`
 
+# vim
+`mkdir -p ~/.vim/pack/`
+`rm ~/.vim/pack/synced`
+# -T stops ln treating synced/ as a directory rather than a target name
+`ln -fs -T ~/dev/dotfiles/vim_plugins/ ~/.vim/pack/synced`
+`rm ~/.vim/colors`
+`ln -fs -T ~/dev/dotfiles/vim_colors/ ~/.vim/colors`
+
 if desktop?
   `cat noedit i3_config_base i3_config_desktop > i3_config`
   `cat noedit i3status_config_base i3status_config_desktop > i3status_config`
