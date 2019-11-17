@@ -10,6 +10,7 @@ set history=2000
 set ignorecase
 set smartcase
 set number
+set hlsearch
 
 filetype on
 syntax enable
