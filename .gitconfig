@@ -68,4 +68,4 @@
 	newNormal = green bold
 	newHighlight = green bold 22
 [submodule]
-	recurse = true
+	;recurse = true
