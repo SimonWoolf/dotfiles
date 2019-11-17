@@ -7,9 +7,6 @@
 [submodule "vim_plugins/start/tlib"]
 	path = vim_plugins/start/tlib
 	url = git@github.com:tomtom/tlib_vim.git
-[submodule "vim_plugins/latex_suite"]
-	path = vim_plugins/start/latex_suite
-	url = git@github.com:gerw/vim-latex-suite.git
 [submodule "vim_plugins/tsuquyomi"]
 	path = vim_plugins/start/tsuquyomi
 	url = git@github.com:Quramy/tsuquyomi
@@ -43,6 +40,3 @@
 [submodule "vim_plugins/start/tsuquyomi"]
 	path = vim_plugins/start/tsuquyomi
 	url = git@github.com:Quramy/tsuquyomi
-[submodule "vim_plugins/start/latex_suite"]
-	path = vim_plugins/start/latex_suite
-	url = git@github.com:gerw/vim-latex-suite.git
