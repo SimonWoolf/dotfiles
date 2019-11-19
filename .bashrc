@@ -82,7 +82,6 @@ alias ping="ping -c 4"
 alias dul="du --max-depth=1"
 alias h?="history | grep $1"
 alias lf="find . | grep -i "
-alias gr="git gr "
 # merge/uniqify nonadjacent
 alias stripduplines="perl -ne 'print if ! $a{$_}++' "
 # Stops it erroring on startup on laptop
@@ -157,6 +156,9 @@ alias gd="git diff"
 alias ga="git add --all "
 alias gps="git push"
 alias gpl="git pull"
+alias gr="git gr "
+alias ga-p="git add -p"
+alias glg="git lg"
 alias g="git"
 alias z='zeus'
 alias cl="clear"
