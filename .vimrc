@@ -11,8 +11,12 @@ set ignorecase
 set smartcase
 set number
 set hlsearch
+set incsearch
+set cindent
 
 filetype on
+filetype plugin on
+filetype plugin indent on
 syntax enable
 
 let mapleader=","
@@ -93,7 +97,12 @@ autocmd FileType typescript nmap <buffer> <Leader>ts : <C-u>echo tsuquyomi#hint(
 " stop it opening new window with completion options
 autocmd FileType typescript setlocal completeopt=menu
 
-map <leader>ef <C-p>
+" Some helpers to open files
+" http://vimcasts.org/e/14
+nmap <leader>ew :e <C-R>=expand('%:h').'/'<cr>
+nmap <leader>es :sp <C-R>=expand('%:h').'/'<cr>
+nmap <leader>ev :vsp <C-R>=expand('%:h').'/'<cr>
+nmap <leader>et :tabe <C-R>=expand('%:h').'/'<cr>
 
 " http://vim.wikia.com/wiki/Search_for_visually_selected_text
 " Search for selected text, forwards or backwards.
@@ -273,7 +282,6 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 let g:vim_json_syntax_conceal=0
 
 " supertab
-filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 let g:SuperTabDefaultCompletionType = 'context'
 autocmd FileType *
@@ -284,6 +292,23 @@ autocmd FileType *
 "tsuquyomi
 set ballooneval
 autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+
+" fugitive
+nnoremap <leader>gb :Gblame<CR>
+
+" upper/lower word
+nmap <leader>u mQviwU`Q
+nmap <leader>l mQviwu`Q
+
+" upper/lower first char of word
+nmap <leader>U mQgewvU`Q
+nmap <leader>L mQgewvu`Q
+
+" Underline the current line with '='
+nmap <silent> <leader>ul :t.<CR>Vr=
+
+" find merge conflict markers
+nmap <silent> <leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<CR>
 
 """""""""""""""""""""""""""""""""""
 " specific plugin pre-configuration
