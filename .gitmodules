@@ -46,3 +46,6 @@
 [submodule "vim_plugins/start/surround"]
 	path = vim_plugins/start/surround
 	url = git@github.com:tpope/vim-surround.git
+[submodule "vim_plugins/vim_plugins/start/tla"]
+	path = vim_plugins/vim_plugins/start/tla
+	url = git@github.com:hwayne/tla.vim.git
