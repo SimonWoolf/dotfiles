@@ -205,6 +205,9 @@ set undodir=~/.vim/undodir
 set undolevels=1000 " How many undos
 set undoreload=10000 " number of lines to save for undo
 
+set backupdir=~/.vim/_backup
+set directory=~/.vim/_temp
+
 " Stop windows scrolling together
 set nocursorbind
 set noscrollbind
