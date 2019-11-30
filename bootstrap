@@ -31,6 +31,9 @@ end
 
 # vim
 `mkdir -p ~/.vim/pack/`
+`mkdir -p ~/.vim/_backup/`
+`mkdir -p ~/.vim/_temp/`
+`mkdir -p ~/.vim/undodir/`
 `rm ~/.vim/pack/synced`
 # -T stops ln treating synced/ as a directory rather than a target name
 `ln -fs -T ~/dev/dotfiles/vim_plugins/ ~/.vim/pack/synced`
