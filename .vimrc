@@ -286,11 +286,11 @@ let g:vim_json_syntax_conceal=0
 
 " supertab
 set omnifunc=syntaxcomplete#Complete
-let g:SuperTabDefaultCompletionType = 'context'
-autocmd FileType *
-			\ if &omnifunc != '' |
-			\   call SuperTabChain(&omnifunc, "<c-p>") |
-			\ endif
+" the problem with 'context' is it uses omnifunc for code completion, but
+" tsuquyomi does not work properly with omnifunc chaining as it uses
+" complete_add, so you then get no results when tsuquyomi can't find anything.
+" So just use ctrl-p and use omnicompletion explicitly when desired (c-x c-o)
+let g:SuperTabDefaultCompletionType = '<c-p>'
 
 "tsuquyomi
 set ballooneval
@@ -321,8 +321,9 @@ let g:airline_powerline_fonts = 1
 let g:airline_section_y = ''
 let g:airline_section_z = ''
 let g:airline_inactive_collapse = 0
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 "let g:syntastic_ruby_checkers=['mri']
 "let g:syntastic_ruby_exec = "$HOME/.rvm/rubies/ruby-2.1.0/bin/ruby"
