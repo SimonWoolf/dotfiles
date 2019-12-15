@@ -50,6 +50,10 @@ else
   set background=light
 endif
 
+"tabline colours
+:hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen
+:hi TabLine ctermfg=Blue ctermbg=Yellow
+:hi TabLineSel ctermfg=Red ctermbg=Yellow
 
 "This unsets the "last search pattern" register by hitting return
 nnoremap <CR> :noh<CR><CR>
@@ -144,6 +148,8 @@ let g:ctrlp_custom_ignore = {
    \ }
 map <C-t> :CtrlPTag<cr>
 
+map <C-b> :CtrlPBuffer<CR>
+
 set foldmethod=manual
 set nofoldenable
 
@@ -179,6 +185,8 @@ noremap <C-S-PageDown> :tabmove +1<CR>
 "switching between buffers
 noremap <A-PageUp> :bnext<CR>
 noremap <A-PageDown> :bprev<CR>
+" close current buffer
+noremap <C-w> :bd<CR>
 
 
 " J now used for swap-lines, so use ,j for join
@@ -332,7 +340,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
-" let g:lightline = { 'colorscheme': 'nord' }
+let g:lightline = { 'colorscheme': 'wombat' }
 
 "let g:syntastic_ruby_checkers=['mri']
 "let g:syntastic_ruby_exec = "$HOME/.rvm/rubies/ruby-2.1.0/bin/ruby"
