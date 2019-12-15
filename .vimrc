@@ -13,6 +13,9 @@ set number
 set hlsearch
 set incsearch
 set cindent
+" for vim-lightline
+set laststatus=2
+set noshowmode
 
 filetype on
 filetype plugin on
@@ -324,6 +327,8 @@ let g:airline_inactive_collapse = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" let g:lightline = { 'colorscheme': 'nord' }
 
 "let g:syntastic_ruby_checkers=['mri']
 "let g:syntastic_ruby_exec = "$HOME/.rvm/rubies/ruby-2.1.0/bin/ruby"

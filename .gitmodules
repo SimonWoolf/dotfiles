@@ -52,3 +52,6 @@
 [submodule "vim_plugins/start/tla"]
 	path = vim_plugins/start/tla
 	url = git@github.com:hwayne/tla.vim.git
+[submodule "vim_plugins/start/lightline"]
+	path = vim_plugins/start/lightline
+	url = git@github.com:/itchyny/lightline.vim
