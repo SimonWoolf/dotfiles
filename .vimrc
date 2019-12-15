@@ -24,6 +24,10 @@ syntax enable
 
 let mapleader=","
 
+"vim force redraw on switching tabs to fix buffer corruption issues
+set ttyfast
+au TabEnter * :redraw!
+
 if has("gui_running")
   " no themed tabs -- avoids issues when running mixed-dpi multi-monitors
   set guioptions-=e
