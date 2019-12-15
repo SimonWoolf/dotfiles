@@ -176,6 +176,10 @@ noremap <silent><A-h> :tabprevious<CR>
 noremap <C-S-PageUp> :tabmove -1<CR>
 noremap <C-S-PageDown> :tabmove +1<CR>
 
+"switching between buffers
+noremap <A-PageUp> :bnext<CR>
+noremap <A-PageDown> :bprev<CR>
+
 
 " J now used for swap-lines, so use ,j for join
 noremap <leader>j J
