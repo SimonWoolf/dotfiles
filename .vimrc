@@ -344,7 +344,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
-let g:lightline = { 'colorscheme': 'wombat' }
+let g:lightline = { 'colorscheme': 'wombat', 'enable': { 'tabline': 0 } }
 
 "let g:syntastic_ruby_checkers=['mri']
 "let g:syntastic_ruby_exec = "$HOME/.rvm/rubies/ruby-2.1.0/bin/ruby"
