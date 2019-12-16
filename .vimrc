@@ -190,7 +190,7 @@ noremap <C-S-PageDown> :tabmove +1<CR>
 noremap <A-PageUp> :bnext<CR>
 noremap <A-PageDown> :bprev<CR>
 " close current buffer
-noremap <C-w> :bd<CR>
+noremap <C-q> :bd<CR>
 
 
 " J now used for swap-lines, so use ,j for join
