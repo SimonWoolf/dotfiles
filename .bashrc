@@ -23,6 +23,12 @@ shopt -s histappend
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# interprets a plain directory as an instruction to cd into it
+shopt -s autocd
+# fix spelling errors
+shopt -s cdspell
+shopt -s dirspell
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
