@@ -179,6 +179,9 @@ mode "powerman" {
     bindsym t exec --no-startup-id i3powerman test, mode "default"
     bindsym Shift+s exec --no-startup-id i3powerman shutdown, mode "default"
 
+    bindsym f exec --no-startup-id sleep 300 && systemctl suspend &, mode "default"
+    bindsym q exec --no-startup-id sleep 900 && systemctl suspend &, mode "default"
+
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
