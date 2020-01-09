@@ -332,6 +332,10 @@ nmap <silent> <leader>ul :t.<CR>Vr=
 " find merge conflict markers
 nmap <silent> <leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<CR>
 
+" wrapping
+autocmd FileType typescript setlocal textwidth=90
+autocmd FileType javascript setlocal textwidth=90
+
 """""""""""""""""""""""""""""""""""
 " specific plugin pre-configuration
 """""""""""""""""""""""""""""""""""
