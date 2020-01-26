@@ -55,3 +55,6 @@
 [submodule "vim_plugins/start/lightline"]
 	path = vim_plugins/start/lightline
 	url = git@github.com:/itchyny/lightline.vim
+[submodule "vim_plugins/start/easymotion"]
+	path = vim_plugins/start/easymotion
+	url = git@github.com:easymotion/vim-easymotion.git
