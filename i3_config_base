@@ -138,7 +138,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # night mode
 bindsym $mod+n exec "redshift -x"
-bindsym $mod+e exec "redshift -r -O 3500"
+bindsym $mod+e exec "redshift -r -O 4000"
 bindsym $mod+i exec "redshift -r -O 3500 -g 1:0.85:0.85 -b 0.8"
 bindsym $mod+o exec "redshift -r -O 3500 -g 1:0.7:0.7 -b 0.7"
 bindsym $mod+apostrophe exec "redshift -r -O 3500 -g 1:0.7:0.7 -b 0.5"
