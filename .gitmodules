@@ -58,3 +58,6 @@
 [submodule "vim_plugins/start/easymotion"]
 	path = vim_plugins/start/easymotion
 	url = git@github.com:easymotion/vim-easymotion.git
+[submodule "vim_plugins/start/undotree"]
+	path = vim_plugins/start/undotree
+	url = git@github.com:mbbill/undotree.git

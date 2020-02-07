@@ -192,11 +192,6 @@ noremap <A-PageDown> :bprev<CR>
 " close current buffer
 noremap <C-q> :bd<CR>
 
-
-" J now used for swap-lines, so use ,j for join
-" noremap <leader>j J
-" NB: ,,j now used for easymotion-j, so just use gJ or <n>gJ to join lines
-
 " Show tabs
 set list listchars=tab:»\ ,trail:·,extends:>,precedes:<
 
