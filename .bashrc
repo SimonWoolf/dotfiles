@@ -271,5 +271,16 @@ function datemillis() {
 }
 alias dateaccur="date +"%H:%M:%S.%3N""
 
+# simple calculator. run as
+# = '5*5'
+=() {
+    local IFS=' '
+    local calc="$*"
+    # Uncomment the below for (p → +) and (x → *)
+    #calc="${calc//p/+}"
+    #calc="${calc//x/*}"
+    printf '%s\n quit' "$calc" | gcalccmd | sed 's:^> ::g'
+}
+
 # added by travis gem
 [ -f /home/simon/.travis/travis.sh ] && source /home/simon/.travis/travis.sh
