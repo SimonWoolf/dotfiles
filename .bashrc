@@ -180,6 +180,7 @@ alias clipcopy="xclip -selection clipboard "
 alias ably-env="bin/ably-env "
 alias cd..="cd .."
 alias cd.="cd ."
+alias ipa="ip -color -br a"
 
 # google drive aliases
 alias dpl="drive pull ."
