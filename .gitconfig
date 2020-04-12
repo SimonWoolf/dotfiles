@@ -1,18 +1,18 @@
 [user]
-	name = Simon Woolf
-	;email = simon@simonwoolf.net
+  name = Simon Woolf
+  ;email = simon@simonwoolf.net
   ;email = simon.woolf@gmail.com
   email = simon@ably.io
 [core]
-	autocrlf = input
-	safecrlf = warn
-	editor = vim -f
-	pager = diff-so-fancy | less --tabs=4 -RFX
+  autocrlf = input
+  safecrlf = warn
+  editor = vim -f
+  pager = diff-so-fancy | less --tabs=4 -RFX
   excludesfile = ~/.gitignore
 [credential]
-	helper = cache --timeout=3600
+  helper = cache --timeout=3600
 [push]
-	default = simple
+  default = simple
   followTags = true
   tags = true
 [rebase]
@@ -50,22 +50,22 @@
   su = submodule update --init
 [merge]
   tool = kdiff3
-	conflictstyle = diff3
+  conflictstyle = diff3
 [git-up "rebase"]
-	auto = false
+  auto = false
 [color "branch"]
-    current = yellow reverse
-    local = yellow
-    remote = green
+  current = yellow reverse
+  local = yellow
+  remote = green
 [color "diff"]
-    meta = yellow bold
-    frag = magenta bold
-    old = red bold
-    new = green bold
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
 [submodule]
-	;recurse = true
+  ;recurse = true
