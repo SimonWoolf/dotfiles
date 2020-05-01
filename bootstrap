@@ -30,6 +30,9 @@ end
 `ln -fs ~/dev/dotfiles/dunstrc ~/.config/dunst/dunstrc`
 # xdg-utils deletes and recreates ~/.config/mimeapps.list when it writes to it, which will break symbolic links
 `cp ~/dev/dotfiles/mimeapps.list ~/.config/mimeapps.list`
+if !File.exist?('/etc/apt/sources.list.d/custom.list')
+  `sudo ln -fs /home/simon/dev/dotfiles/apt-custom-sources.list /etc/apt/sources.list.d/custom.list`
+end
 
 # vim
 `mkdir -p ~/.vim/pack/`
