@@ -2,7 +2,7 @@
 `. ~/.apikeys`
 
 scaling_factors = {
-  pushups: 0.2,  # each
+  pushups: 1/7.5,# each
   squats: 0.25,  # each
   walking: 0.25, # /min
   pullups: 0.33, # each
