@@ -28,7 +28,7 @@ tztime local {
 }
 
 cpu_usage {
-  format = " CPU %usage% "
+  format = " CPU %usage "
 }
 
 volume master {
