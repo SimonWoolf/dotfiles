@@ -3,7 +3,6 @@
 # for examples
 export EDITOR=vim
 export BROWSER=firefox
-export RACK_ENV="development"
 export AWS_PROFILE=ably
 
 export GOOGLE_APPLICATION_CREDENTIALS="/home/simon/google-credentials.json"
