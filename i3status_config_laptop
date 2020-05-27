@@ -12,7 +12,12 @@ battery 0 {
   integer_battery_capacity = true
 }
 
+ethernet _first_ {
+  format_up = " 🖧 up "
+  format_down = ""
+}
+
 wireless _first_ {
-  format_up = " 🖧 %essid %quality "
-  format_down = " 🖧 down "
+  format_up = " 📶 %essid %quality "
+  format_down = ""
 }
