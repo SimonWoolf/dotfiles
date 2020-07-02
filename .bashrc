@@ -4,6 +4,7 @@
 export EDITOR=vim
 export BROWSER=firefox
 export AWS_PROFILE=ably
+export AWS_REGION=eu-west-2 # default to london when it doesn't matter
 
 export GOOGLE_APPLICATION_CREDENTIALS="/home/simon/google-credentials.json"
 
