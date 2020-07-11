@@ -162,7 +162,10 @@ alias gd="git diff"
 alias ga="git add --all "
 alias gps="git push"
 alias gpl="git pull"
-alias gr="git gr "
+# oddly aliasing to `git gr` does not work as expected when in a subdirectory
+# of the repo, it searches the whole repo - the git alias is messing with
+# however the cwd is passed to git-grep or something?
+alias gr="git grep -i -E "
 alias ga-p="git add -p"
 alias glg="git lg"
 alias g="git"
@@ -252,9 +255,6 @@ export NODE_TLS_REJECT_UNAUTHORIZED=0 # make ably-js tests work with self-signed
 export NODE_EXTRA_CA_CERTS=/home/simon/ably/realtime/frontend/conf/certificates/ably-wildcard-with-intermediaries.crt
 export ADMIN_UPDATE_LOG_LEVEL=micro
 export ABLY_SSH_POST_LOGIN_COMMAND="(curl --silent https://raw.githubusercontent.com/thestinger/termite/master/termite.terminfo -o /tmp/termite.terminfo && tic -x /tmp/termite.terminfo &) && cd /var/log/ably"
-
-export QT_QPA_PLATFORMTHEME="qt5ct"
-unset QT_STYLE_OVERRIDE
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 
