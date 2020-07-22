@@ -252,7 +252,8 @@ export ALLOW_BASIC_AUTH_WITHOUT_TLS=true # easier experimentation with wscat wit
 export PROGRESSIVE_HASH_ENABLED=false # lets cores become ready much quicker
 export ENABLE_HANDLE_LOGGING=false # stops realtime printing hundreds of lines of handles to the console on exit
 export NODE_TLS_REJECT_UNAUTHORIZED=0 # make ably-js tests work with self-signed certs
-export NODE_EXTRA_CA_CERTS=/home/simon/ably/realtime/frontend/conf/certificates/ably-wildcard-with-intermediaries.crt
+export NODE_EXTRA_CA_CERTS=/home/simon/ably/realtime/common/conf/certificates/dummy-rootCA.crt
+export CURL_CA_BUNDLE=/home/simon/ably/realtime/common/conf/certificates/dummy-rootCA.crt
 export ADMIN_UPDATE_LOG_LEVEL=micro
 export ABLY_SSH_POST_LOGIN_COMMAND="(curl --silent https://raw.githubusercontent.com/thestinger/termite/master/termite.terminfo -o /tmp/termite.terminfo && tic -x /tmp/termite.terminfo &) && cd /var/log/ably"
 
