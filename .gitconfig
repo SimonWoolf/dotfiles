@@ -2,7 +2,7 @@
   name = Simon Woolf
   ;email = simon@simonwoolf.net
   ;email = simon.woolf@gmail.com
-  email = simon@ably.io
+  email = simon.woolf@ably.com
 [core]
   autocrlf = input
   safecrlf = warn
