@@ -191,6 +191,7 @@ alias dps="drive push ."
 alias dmkdir="drive new -folder "
 alias drm="drive delete "
 alias d="drive "
+alias mostest="less"
 
 #desktop-specific
 if [[ "$HOSTNAME" == "simon-linuxdesktop" ]]; then
