@@ -6,8 +6,8 @@ class Object
 end
 
 # require 'what_methods'
-require 'awesome_print'
-AwesomePrint.pry!
+require 'amazing_print'
+AmazingPrint.pry!
 
 # Make app and helper helpers work in zeus console
 # (zeus doesn't load the pry-rails 'console do' block)
