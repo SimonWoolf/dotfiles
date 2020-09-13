@@ -256,6 +256,8 @@ export NODE_TLS_REJECT_UNAUTHORIZED=0 # make ably-js tests work with self-signed
 export NODE_EXTRA_CA_CERTS=/home/simon/ably/realtime/common/conf/certificates/dummy-rootCA.crt
 export CURL_CA_BUNDLE=/home/simon/ably/realtime/common/conf/certificates/dummy-rootCA.crt
 export ADMIN_UPDATE_LOG_LEVEL=micro
+export SIEGE_MODE_POLICY=off
+export ABLY_ENV_OPEN_SSO_URL=true
 export ABLY_SSH_POST_LOGIN_COMMAND="(curl --silent https://raw.githubusercontent.com/thestinger/termite/master/termite.terminfo -o /tmp/termite.terminfo && tic -x /tmp/termite.terminfo &) && cd /var/log/ably"
 
 export ERL_AFLAGS="-kernel shell_history enabled"
