@@ -5,7 +5,7 @@ require 'uri'
 `. ~/.apikeys`
 
 scaling_factors = {
-  pushups: 1/7.5,# each
+  pushups: 1/5.0,# each
   squats: 0.25,  # each
   walking: 0.25, # /min
   pullups: 0.33, # each
