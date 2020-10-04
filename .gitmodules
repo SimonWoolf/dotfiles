@@ -64,3 +64,6 @@
 [submodule "vim_plugins/start/rust"]
 	path = vim_plugins/start/rust
 	url = git@github.com:rust-lang/rust.vim.git
+[submodule "vim_plugins/start/elm-vim"]
+	path = vim_plugins/start/elm-vim
+	url = git@github.com:ElmCast/elm-vim.git
