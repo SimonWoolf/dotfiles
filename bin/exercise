@@ -7,10 +7,10 @@ require 'uri'
 scaling_factors = {
   pushups: 1/5.0,# each
   squats: 0.25,  # each
-  walking: 0.25, # /min
-  pullups: 0.33, # each
+  walking: 0.33, # /min
+  pullups: 0.5, # each
   cycling: 0.5,  # /min
-  yoga: 0.66,    # /min
+  yoga: 0.5,    # /min
   running: 1,    # /min
   gym: 1,        # /min
   running_km: 6, # /km
