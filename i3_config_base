@@ -139,10 +139,11 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # night mode
 bindsym $mod+n exec "redshift -x"
-bindsym $mod+e exec "redshift -P -r -O 4000"
-bindsym $mod+i exec "redshift -P -r -O 3500 -g 1:0.85:0.85 -b 0.8"
-bindsym $mod+o exec "redshift -P -r -O 3500 -g 1:0.7:0.7 -b 0.7"
-bindsym $mod+apostrophe exec "redshift -r -O 3500 -g 1:0.7:0.7 -b 0.5"
+bindsym $mod+e exec "redshift -P -r -O 5000"
+bindsym $mod+i exec "redshift -P -r -O 4000"
+bindsym $mod+o exec "redshift -P -r -O 3500 -g 1:0.85:0.85 -b 0.8"
+bindsym $mod+apostrophe exec "redshift -P -r -O 3500 -g 1:0.7:0.7 -b 0.7"
+# bindsym $mod+apostrophe exec "redshift -r -O 3500 -g 1:0.7:0.7 -b 0.5"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
