@@ -67,3 +67,6 @@
 [submodule "vim_plugins/start/elm-vim"]
 	path = vim_plugins/start/elm-vim
 	url = git@github.com:ElmCast/elm-vim.git
+[submodule "vim_plugins/start/typescript-vim"]
+	path = vim_plugins/start/typescript-vim
+	url = git@github.com:leafgarland/typescript-vim.git
