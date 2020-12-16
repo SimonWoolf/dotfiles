@@ -14,6 +14,7 @@ scaling_factors = {
   running: 1,    # /min
   gym: 1,        # /min
   running_km: 6, # /km
+  plank: 1/10.0, # /second
 }
 
 exercise_type, number = ARGV
