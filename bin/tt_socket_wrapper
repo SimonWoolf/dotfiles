@@ -1,9 +1,9 @@
 #!/bin/sh
 
-export BUNDLE_GEMFILE="~/dev/tt/Gemfile"
+# this is run outside of a login shell, so since tt needs to run under asdf for
+# dependencies, need to set up that manually by cding to the dir and using asdf
+# exec
+PATH=~/.asdf/bin/:$PATH
+export BUNDLE_GEMFILE="/home/simon/dev/tt/Gemfile"
 
-if [ -f ~/.asdf/shims/ruby ]; then
-  bundle exec ~/.asdf/shims/ruby ~/dev/tt/tt --socket 2>> ~/tt.log
-else
-  bundle exec ruby ~/dev/tt/tt --socket 2>> ~/tt.log
-fi
+(cd ~/dev/tt/; asdf exec bundle exec ruby ./tt --socket 2>> ~/tt.log)
