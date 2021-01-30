@@ -221,6 +221,8 @@ for_window [title="Orage"] floating enable
 for_window [title="^TagTime$"] floating enable
 for_window [title="^TagTime$"] resize set 640 300
 for_window [title="^TagTime$"] move position center
+for_window [title="^TagTime Preferences$"] floating enable
+for_window [title="^TagTime Preferences$"] move position center
 
 # <colorclass> <border> <background> <text> <indicator> <child_border>
 client.focused          #4c7899 #80acd0 #000000 #2e9ef4 #285577
