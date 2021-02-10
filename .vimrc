@@ -102,6 +102,11 @@ let g:tsuquyomi_completion_detail = 1
 autocmd Filetype typescript let g:tsuquyomi_disable_quickfix = 1
 autocmd Filetype typescript let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
 autocmd Filetype typescript syntax sync fromstart
+
+" disable typescript-vim's custom indenter which is glacially slow on large
+" files
+let g:typescript_indent_disable = 1
+
 " get tooltip window under mouse cursor
 set ballooneval
 autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
