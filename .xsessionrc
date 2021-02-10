@@ -1,0 +1,5 @@
+# make kensington trackpad more sensitive, and reduce acceleration
+xinput set-prop "Kensington Expert Wireless TB Mouse" "Coordinate Transformation Matrix" 2 0 0 0 2 0 0 0 1
+xinput set-prop "Kensington Expert Wireless TB Mouse" "libinput Accel Speed" -0.6
+xinput set-prop "ExpertBT3.0 Mouse" "Coordinate Transformation Matrix" 2 0 0 0 2 0 0 0 1
+xinput set-prop "ExpertBT3.0 Mouse" "libinput Accel Speed" -0.6
