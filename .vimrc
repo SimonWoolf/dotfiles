@@ -226,7 +226,12 @@ set undodir=~/.vim/undodir
 set undolevels=1000 " How many undos
 set undoreload=10000 " number of lines to save for undo
 
+set backup
 set backupdir=~/.vim/_backup
+set writebackup
+set backupcopy=yes
+au BufWritePre * let &bex = '@' . strftime("%F.%H:%M")
+
 set directory=~/.vim/_temp
 
 " Stop windows scrolling together
