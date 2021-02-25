@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# set the theme to adwaita-light on suspend/shutdown so that it's always light
+# when waking up the computer, then cron sets it to dark at 8pm
+
 case "$1" in
     lock)
         xflock4
@@ -8,6 +11,7 @@ case "$1" in
         i3-msg exit
         ;;
     suspend)
+        xfconf-query --channel xsettings --property /Net/ThemeName --set Adwaita
         systemctl suspend
         ;;
     hibernate)
@@ -17,6 +21,7 @@ case "$1" in
         systemctl reboot
         ;;
     shutdown)
+        xfconf-query --channel xsettings --property /Net/ThemeName --set Adwaita
         systemctl poweroff
         ;;
     test)
