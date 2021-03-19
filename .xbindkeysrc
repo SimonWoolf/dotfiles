@@ -52,6 +52,9 @@
 "xvkbd -text "\{-Control_L}\{+Control_L}\{+w}\{-w}\{-Control_L}\{-Control_L}""
   b:9 # left upper side button
 
+"xvkbd -text "\{+Control_L}\{+w}\{-w}\{-Control_L}""
+  b:8 # top right button of kensington trackpad
+
 # set directly keycode (here control + f with my keyboard)
 #"xterm"
 #  c:41 + m:0x4
