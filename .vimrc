@@ -99,8 +99,8 @@ nnoremap <leader><tab> a<C-x><C-o>
 " show method signatures in the autocomplete menu
 let g:tsuquyomi_completion_detail = 1
 " integrate tsuquyomi (typescript) with syntastic
-autocmd Filetype typescript let g:tsuquyomi_disable_quickfix = 1
-autocmd Filetype typescript let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
+" autocmd Filetype typescript let g:tsuquyomi_disable_quickfix = 1
+" autocmd Filetype typescript let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
 autocmd Filetype typescript syntax sync fromstart
 
 " disable typescript-vim's custom indenter which is glacially slow on large
