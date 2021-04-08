@@ -248,12 +248,8 @@ export ARDUINO_PATH=/usr/local/arduino
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
-export UV_THREADPOOL_SIZE=20 # bump up the default for node threads
-export LOG_HANDLER=raw # make realtime error messages sane
 export ALLOW_BASIC_AUTH_WITHOUT_TLS=true # easier experimentation with wscat without tls
-export PROGRESSIVE_HASH_ENABLED=false # lets cores become ready much quicker
-export ENABLE_HANDLE_LOGGING=false # stops realtime printing hundreds of lines of handles to the console on exit
-export NODE_TLS_REJECT_UNAUTHORIZED=0 # make ably-js tests work with self-signed certs
+# export NODE_TLS_REJECT_UNAUTHORIZED=0 # make ably-js tests work with self-signed certs
 export NODE_EXTRA_CA_CERTS=/home/simon/ably/realtime/common/conf/certificates/dummy-rootCA.crt
 export CURL_CA_BUNDLE=/home/simon/ably/realtime/common/conf/certificates/dummy-rootCA.crt
 export ADMIN_UPDATE_LOG_LEVEL=micro
