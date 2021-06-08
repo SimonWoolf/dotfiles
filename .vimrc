@@ -343,6 +343,12 @@ nmap <silent> <leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<CR>
 autocmd FileType typescript setlocal textwidth=90
 autocmd FileType javascript setlocal textwidth=90
 
+" ale linters
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'typescript': ['tsserver'],
+\}
+
 """""""""""""""""""""""""""""""""""
 " specific plugin pre-configuration
 """""""""""""""""""""""""""""""""""

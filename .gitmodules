@@ -73,3 +73,9 @@
 [submodule "vim_plugins/start/easy-align"]
 	path = vim_plugins/start/easy-align
 	url = git@github.com:junegunn/vim-easy-align.git
+[submodule "vim_plugins/start/ale"]
+	path = vim_plugins/start/ale
+	url = git@github.com:dense-analysis/ale.git
+[submodule "vim_plugins/start/go"]
+	path = vim_plugins/start/go
+	url = git@github.com:fatih/vim-go.git
