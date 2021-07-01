@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require 'uri'
+
+`. ~/.apikeys`
+
+input = ARGV[0]
+
+hours = if input.end_with? 'p'
+          input.delete_suffix('p').to_f / 2
+        elsif input.end_with? 'm'
+          input.delete_suffix('m').to_f / 60
+        else
+          # default to hours
+          input.to_f
+        end
+
+comment = URI.encode_www_form_component "#{`date`.strip} - #{hours}h"
+
+result = `curl --silent -X POST "https://www.beeminder.com/api/v1/users/coiley/goals/work/datapoints.json?auth_token=#{ENV['BEEMINDER_TOKEN']}&value=#{hours}&comment=#{comment}"`
+
+if $?.exitstatus != 0
+  puts "Beeminder curl failed: #{$?.inspect}; #{result}"
+elsif !result.include? "created"
+  puts "Error submitting beeminder: #{result}"
+else
+  puts "Posted #{hours} hours of work"
+end
