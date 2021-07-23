@@ -105,7 +105,8 @@ autocmd Filetype typescript syntax sync fromstart
 
 " disable typescript-vim's custom indenter which is glacially slow on large
 " files
-let g:typescript_indent_disable = 1
+" -- temp reenabled because the default enter is giving stupid results..?
+" let g:typescript_indent_disable = 1
 
 " get tooltip window under mouse cursor
 set ballooneval
