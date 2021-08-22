@@ -1,0 +1,15 @@
+#!/bin/bash
+
+filename=$1
+
+deep="$(grep -c work-deep $filename)"
+shallow="$(grep -c work-shallow $filename)"
+worktotal=$(bc <<< $deep+$shallow)
+workpct=$(bc -l <<< "$deep / ($deep+$shallow)")
+echo "Proportion deep work of work: ${workpct:1:2}% ($deep/$worktotal)"
+
+endorsed="$(grep -c leisure-endorsed $filename)"
+nonendorsed="$(grep -c leisure-nonendorsed $filename)"
+leisuretotal=$(bc <<< $endorsed+$nonendorsed)
+leisurepct=$(bc -l <<< "$endorsed / ($endorsed+$nonendorsed)")
+echo "Proportion of leisure that's endorsed: ${leisurepct:1:2}% ($endorsed/$leisuretotal)"
