@@ -23,6 +23,10 @@
 #55 22 * * * DISPLAY=:0 zenity --info --title "10:55pm" --text "5 minutes to Beeminder nolatereddit threshold"
 #00 23 * * * DISPLAY=:0 zenity --warning --title "11pm" --text "Beeminder nolatereddit threshold"
 #0 0 * * * /home/simon/dev/dotfiles/pocket-beeminder-update.sh
-0,30 23,0-6 * * * DISPLAY=:0 zenity --info --text="SUMMON SAPIENCE\n- Consider if what I'm doing is what I actually want to be doing, and stop if the answer is no (or consider sleep/suspend if the answer is yes but not much longer)\n- Check phone for tagtime alerts\n- Press clicker.\n\nTRIGGERS SUMMON SAPIENCE GOAL DATAPOINT IF IGNORED" --width=600 --title="tagtime"
-0 20 * * * xfconf-query --channel xsettings --property /Net/ThemeName --set Adwaita-dark
-0 8,9,10 * * * xfconf-query --channel xsettings --property /Net/ThemeName --set Adwaita
+# 0,30 23,0-6 * * * DISPLAY=:0 zenity --info --text="SUMMON SAPIENCE\n- Consider if what I'm doing is what I actually want to be doing, and stop if the answer is no (or consider sleep/suspend if the answer is yes but not much longer)\n- Check phone for tagtime alerts\n- Press clicker.\n\nTRIGGERS SUMMON SAPIENCE GOAL DATAPOINT IF IGNORED" --width=600 --title="tagtime"
+# 0,30 0-6 * * * DISPLAY=:0 notify-send "Locking screen in 5s"; sleep 5; DISPLAY=:0 i3lock -c 000000
+# 0 20 * * * xfconf-query --channel xsettings --property /Net/ThemeName --set Adwaita-dark > /tmp/crontab-out
+# 0 8,9,10 * * * xfconf-query --channel xsettings --property /Net/ThemeName --set Adwaita > /tmp/crontab-out
+*/15 * * * * DISPLAY=:0 notify-send "Decide what class of activity to do for the next 15 minutes"; XDG_RUNTIME_DIR="/run/user/1000" mplayer /home/simon/dev/dotfiles/pomodoro-finish.wav -speed 3 -volume 50
+
+
