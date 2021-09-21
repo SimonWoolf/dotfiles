@@ -186,6 +186,9 @@ alias cd..="cd .."
 alias cd.="cd ."
 alias ipa="ip -color -br a"
 
+alias playding="mplayer /home/simon/dev/dotfiles/pomodoro-finish.wav -speed 5 -volume 50"
+alias playgong="mplayer /home/simon/dev/dotfiles/pomodoro-finish.wav -volume 50"
+
 # google drive aliases
 alias dpl="drive pull ."
 alias dps="drive push ."
