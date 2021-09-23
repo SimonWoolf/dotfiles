@@ -48,3 +48,12 @@ workspace 7 output HDMI-1
 workspace 8 output HDMI-1
 workspace 9 output HDMI-1
 workspace 10 output HDMI-1
+
+# night mode
+# on laptop, no point adjusting the brightness in xrandr, inefficient use of
+# battery - just adjust colour temp and do brightness with backlight adjustment
+bindsym $mod+n exec "redshift -x"
+bindsym $mod+e exec "redshift -P -r -O 5000"
+bindsym $mod+i exec "redshift -P -r -O 4000"
+bindsym $mod+o exec "redshift -P -r -O 3500"
+bindsym $mod+apostrophe exec "redshift -P -r -O 3000"

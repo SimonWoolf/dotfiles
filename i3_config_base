@@ -137,14 +137,6 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# night mode
-bindsym $mod+n exec "redshift -x"
-bindsym $mod+e exec "redshift -P -r -O 5000"
-bindsym $mod+i exec "redshift -P -r -O 4000"
-bindsym $mod+o exec "redshift -P -r -O 3500 -g 1:0.9:0.9 -b 0.9"
-bindsym $mod+apostrophe exec "redshift -P -r -O 3500 -g 1:0.7:0.7 -b 0.7"
-# bindsym $mod+apostrophe exec "redshift -r -O 3500 -g 1:0.7:0.7 -b 0.5"
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
     # These bindings trigger as soon as you enter the resize mode

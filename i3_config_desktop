@@ -45,3 +45,10 @@ workspace 2 output DVI-D-0
 workspace 3 output DVI-D-0
 workspace 4 output DVI-D-0
 workspace 5 output DVI-D-0
+
+# night mode
+bindsym $mod+n exec "redshift -x"
+bindsym $mod+e exec "redshift -P -r -O 5000"
+bindsym $mod+i exec "redshift -P -r -O 4000"
+bindsym $mod+o exec "redshift -P -r -O 3500 -g 1:0.9:0.9 -b 0.9"
+bindsym $mod+apostrophe exec "redshift -P -r -O 3500 -g 1:0.7:0.7 -b 0.7"
