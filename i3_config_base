@@ -205,6 +205,8 @@ bindsym F8 mode "tt"
 
 for_window [title="^File Operation Progress$"] floating enable
 for_window [title="^Current Media Information$"] floating enable
+# "zoom" is dialogue boxes, the full thing is "Zoom Meeting"
+for_window [title="^zoom$"] floating enable
 no_focus   [class="^Xfce4-notifyd$" ]
 for_window [class="^blueman-manager$"] floating enable
 for_window [class="^galculator$"] floating enable
