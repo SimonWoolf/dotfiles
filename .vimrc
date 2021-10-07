@@ -108,10 +108,18 @@ autocmd Filetype typescript syntax sync fromstart
 " -- temp reenabled because the default enter is giving stupid results..?
 " let g:typescript_indent_disable = 1
 
+
 " get tooltip window under mouse cursor
 set ballooneval
+
+"tsuquyomi
 autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
 autocmd FileType typescript nmap <buffer> <Leader>ts : <C-u>echo tsuquyomi#hint()<CR>
+",, to show type definition of thing under cursor in status bar
+autocmd FileType typescript nnoremap <buffer> <Leader><Leader> : <C-u>echo tsuquyomi#hint()<CR>
+"ctrl-[ to go to where the type of a thing under cursor is defined, ctrl-] to
+"go to where the thing is defined (exists by default)
+autocmd FileType typescript nmap <buffer> <C-[> : <C-u>TsuquyomiTypeDefinition<CR>
 " stop it opening new window with completion options
 autocmd FileType typescript setlocal completeopt=menu
 
@@ -319,9 +327,7 @@ set omnifunc=syntaxcomplete#Complete
 " So just use ctrl-p and use omnicompletion explicitly when desired (c-x c-o)
 let g:SuperTabDefaultCompletionType = '<c-p>'
 
-"tsuquyomi
-set ballooneval
-autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+noremap <silent><A-Left> :tabprevious<CR>
 
 " fugitive
 nnoremap <leader>gb :Gblame<CR>
