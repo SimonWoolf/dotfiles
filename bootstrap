@@ -53,4 +53,5 @@ if desktop?
 else
   `cat noedit i3_config_base i3_config_laptop > i3_config`
   `cat noedit i3status_config_base i3status_config_laptop > i3status_config`
+  `ln -fs ~/.XmodmapForLaptopKeyboard ~/.Xmodmap`
 end
