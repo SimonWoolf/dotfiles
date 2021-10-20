@@ -45,3 +45,6 @@ deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main
 # blockchains
 # deb http://ppa.launchpad.net/cwayne18/doge/ubuntu bionic main
 # deb http://ppa.launchpad.net/bitcoin/bitcoin/ubuntu bionic main
+
+# alacritty
+deb http://ppa.launchpad.net/mmstick76/alacritty/ubuntu bionic main
