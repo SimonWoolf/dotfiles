@@ -251,6 +251,11 @@ export ARDUINO_PATH=/usr/local/arduino
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
+
+if [ -f $HOME/programs/alacritty/extra/completions/alacritty.bash ] ; then
+    source $HOME/programs/alacritty/extra/completions/alacritty.bash
+fi
+
 export ALLOW_BASIC_AUTH_WITHOUT_TLS=true # easier experimentation with wscat without tls
 # export NODE_TLS_REJECT_UNAUTHORIZED=0 # make ably-js tests work with self-signed certs
 export NODE_EXTRA_CA_CERTS=/home/simon/ably/realtime/common/conf/certificates/dummy-rootCA.crt

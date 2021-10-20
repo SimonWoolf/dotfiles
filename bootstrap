@@ -21,12 +21,12 @@ end
 
 `mkdir -p ~/.config/i3/`
 `mkdir -p ~/.config/i3status/`
-`mkdir -p ~/.config/termite/`
+`mkdir -p ~/.config/alacritty/`
 `mkdir -p ~/.config/dunst/`
 `ln -fs ~/dev/dotfiles/i3_config ~/.config/i3/config`
 `ln -fs ~/dev/dotfiles/i3status_config ~/.config/i3status/config`
 `ln -fs ~/dev/dotfiles/mimeapps.list ~/.local/share/applications/mimeapps.list`
-`ln -fs ~/dev/dotfiles/termite_config ~/.config/termite/config`
+`ln -fs ~/dev/dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml`
 `ln -fs ~/dev/dotfiles/dunstrc ~/.config/dunst/dunstrc`
 # xdg-utils deletes and recreates ~/.config/mimeapps.list when it writes to it, which will break symbolic links
 `cp ~/dev/dotfiles/mimeapps.list ~/.config/mimeapps.list`
