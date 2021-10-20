@@ -3,3 +3,9 @@ xinput set-prop "Kensington Expert Wireless TB Mouse" "Coordinate Transformation
 xinput set-prop "Kensington Expert Wireless TB Mouse" "libinput Accel Speed" -0.6
 xinput set-prop "ExpertBT3.0 Mouse" "Coordinate Transformation Matrix" 2 0 0 0 2 0 0 0 1
 xinput set-prop "ExpertBT3.0 Mouse" "libinput Accel Speed" -0.6
+
+# want bottom button to be right-click, top button to be middle-click
+if [ -f "/usr/bin/xsetwacom" ]; then
+  xsetwacom --set "Wacom Intuos Pro M Pen stylus" Button 2 "button +3"
+  xsetwacom --set "Wacom Intuos Pro M Pen stylus" Button 3 "button +2"
+fi
