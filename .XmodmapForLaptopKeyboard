@@ -11,6 +11,9 @@ keycode 37 = Alt_L Meta_L Alt_L Meta_L Alt_L Meta_L
 keycode 64 = Escape NoSymbol Escape
 keycode 9 = Caps_Lock
 
+! 118 = Insert, use it for something more useful
+keycode 118 = Multi_key
+
 clear Lock
 clear Control
 clear Mod1
