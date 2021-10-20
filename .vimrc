@@ -32,18 +32,23 @@ if has("gui_running")
   " no themed tabs -- avoids issues when running mixed-dpi multi-monitors
   set guioptions-=e
 
-  if has("gui_gtk2")
-    if !empty(system('xrandr | grep "HDMI-1 connected" | grep "3840x2160"'))
-      set guifont=Meslo\ LG\ S\ for\ Powerline\ 7
-    else
+  if has("gui_gtk")
+    " if !empty(system('xrandr | grep "HDMI-1 connected" | grep "3840x2160"'))
+    "   set guifont=Meslo\ LG\ S\ for\ Powerline\ 7
+    " else
       set guifont=Meslo\ LG\ S\ for\ Powerline\ 10
-    endif
+    " endif
   elseif has("gui_macvim")
     set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h16
   elseif has("gui_win32")
     set guifont=Consolas:h11:cANSI
   endif
 endif
+
+" let hostname = substitute(system('hostname'), '\n', '', '')
+" if hostname == "simon-thinkpad"
+"   set guifont=Meslo\ LG\ S\ for\ Powerline\ 20
+" endif
 
 " Alternatives: pyte
 if has('win32unix')

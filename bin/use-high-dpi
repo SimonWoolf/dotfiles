@@ -2,7 +2,7 @@
 echo "close firefox"
 read
 if [[ $HOSTNAME == 'simon-thinkpad' ]]; then
-  xfconf-query -c xsettings -p /Xft/DPI -s 210
+  xfconf-query -c xsettings -p /Xft/DPI -s 215
   sed -i 's/user_pref("layout.css.devPixelsPerPx", "1.[0-9]");/user_pref("layout.css.devPixelsPerPx", "1.8");/' /home/simon/snap/firefox/common/.mozilla/firefox/pp3jovsh.default/prefs.js
 else
   xfconf-query -c xsettings -p /Xft/DPI -s 192
