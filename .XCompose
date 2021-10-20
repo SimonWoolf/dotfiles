@@ -114,6 +114,11 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <underscore> <asterisk> <f> : "ᵩ"  U1D69     # GREEK SUBSCRIPT SMALL LETTER PHI
 <Multi_key> <underscore> <asterisk> <x> : "ᵪ" U1D6A # GREEK SUBSCRIPT SMALL LETTER CHI
 
+#superscripts
+<Multi_key> <caret> <s> <t> : "ˢᵗ" # superscript st
+<Multi_key> <caret> <n> <d> : "ⁿᵈ" # superscript nd
+<Multi_key> <caret> <t> <h> : "ᵗʰ" # superscript th
+
 # Greek!
 <Multi_key> <asterisk> <a>                : "α"        U03B1                # GREEK SMALL LETTER ALPHA
 <Multi_key> <asterisk> <b>                : "β"        U03B2                # GREEK SMALL LETTER BETA
