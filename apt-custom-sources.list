@@ -20,15 +20,9 @@ deb [arch=amd64] https://repo.skype.com/deb stable main
 # slack
 deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main
 
-# google cloud sdk
-deb http://packages.cloud.google.com/apt cloud-sdk-bionic main
-
 # heroku cli
 # install signing key with curl https://cli-assets.heroku.com/apt/release.key | sudo apt-key add -
 deb https://cli-assets.heroku.com/apt ./
-
-# rabbitmq
-deb https://dl.bintray.com/rabbitmq-erlang/debian bionic erlang
 
 # teamviewer (do I need this?)
 deb http://linux.teamviewer.com/deb stable main
@@ -47,4 +41,4 @@ deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main
 # deb http://ppa.launchpad.net/bitcoin/bitcoin/ubuntu bionic main
 
 # alacritty
-deb http://ppa.launchpad.net/mmstick76/alacritty/ubuntu bionic main
+deb http://ppa.launchpad.net/mmstick76/alacritty/ubuntu focal main
