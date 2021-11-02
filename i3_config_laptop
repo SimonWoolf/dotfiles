@@ -43,11 +43,11 @@ workspace 3 output eDP-1
 workspace 4 output eDP-1
 workspace 5 output eDP-1
 # external
-workspace 6 output HDMI-1
-workspace 7 output HDMI-1
-workspace 8 output HDMI-1
-workspace 9 output HDMI-1
-workspace 10 output HDMI-1
+workspace 6 output DP-3
+workspace 7 output DP-3
+workspace 8 output DP-3
+workspace 9 output DP-3
+workspace 10 output DP-3
 
 # night mode
 # on laptop, no point adjusting the brightness in xrandr, inefficient use of
