@@ -118,7 +118,7 @@
     startup_notification = true
 
     # dmenu path
-    dmenu = /usr/bin/dmenu -p dunst:
+    dmenu = "rofi -dmenu -p :dunst -font 'Meslo LG S for Powerline 22' -color-normal '#222222,#dddddd,#333333,#687e85,#eee8d5' -color-window '#222222,#000000,#222222'"
 
     # browser for opening urls in context menu
     browser = /usr/bin/firefox -new-tab
