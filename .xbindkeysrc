@@ -55,6 +55,10 @@
 "xvkbd -text "\{+Control_L}\{+w}\{-w}\{-Control_L}""
   b:8 # top right button of kensington trackpad
 
+# super + home. not sure why mod2 needs to be in here as well but it doesn't work without it. from xbindkeys --ke
+"xsetwacom --set 'Wacom Intuos Pro M Pen stylus' MapToOutput next"
+  Mod2+Mod4 + Home
+
 # set directly keycode (here control + f with my keyboard)
 #"xterm"
 #  c:41 + m:0x4
