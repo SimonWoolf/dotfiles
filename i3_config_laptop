@@ -2,6 +2,7 @@ bindsym F7 exec setxkbmap gb -variant colemak && xmodmap ~/.XmodmapForLaptopKeyb
 bindsym F9 exec /home/simon/dev/dotfiles/laptop-primary.sh
 exec keyboard.sh &
 exec --no-startup-id /home/simon/dev/dotfiles/laptop-primary-noi3.sh &
+exec --no-startup-id picom -c -o 0.25 -b
 
 font pango:Meslo LG S for Powerline 12
 

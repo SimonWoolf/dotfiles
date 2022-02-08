@@ -181,7 +181,7 @@ alias hackerdump="find /var/log -type f -exec grep -I1 . {} \; | pv -q -L 1k "
 # if not installed: npm install -g insect
 alias calc="insect"
 alias clipcopy="xclip -selection clipboard "
-alias ably-env="bin/ably-env "
+alias ae="ably-env "
 alias cd..="cd .."
 alias cd.="cd ."
 alias ipa="ip -color -br a"
@@ -210,8 +210,7 @@ function crtime() {
   sudo debugfs -R "stat <`stat -c %i ${@}`>" `\df --output=source ${@} | tail -1` | grep crtime
 }
 
-
-function ae() {
+function ably-env() {
   (cd /home/simon/ably/infrastructure ; ./bin/ably-env ${@} )
 }
 
@@ -291,6 +290,10 @@ alias dateaccur="date +"%H:%M:%S.%3N""
     #calc="${calc//p/+}"
     #calc="${calc//x/*}"
     printf '%s\n quit' "$calc" | gcalccmd | sed 's:^> ::g'
+}
+
+function mdrender() {
+    pandoc "$1"  > /tmp/pandoc.html; firefox /tmp/pandoc.html
 }
 
 # added by travis gem
