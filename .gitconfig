@@ -69,3 +69,5 @@
   newHighlight = green bold 22
 [submodule]
   ;recurse = true
+[init]
+  defaultBranch = main
