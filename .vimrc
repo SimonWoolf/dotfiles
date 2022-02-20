@@ -359,6 +359,7 @@ autocmd FileType javascript setlocal textwidth=90
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'typescript': ['tsserver'],
+\   'go': ['govet'],
 \}
 
 let g:ale_linters_explicit = 1
@@ -388,10 +389,15 @@ let g:lightline = { 'colorscheme': 'wombat', 'enable': { 'tabline': 0 } }
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=30
 
+" vim-go
 " stop vim-go hijacking shift-k
 let g:go_doc_keywordprg_enabled = 0
 " stop vim-go hijacking ctrl-] (can always use gd for godef)
 let g:go_def_mapping_enabled = 0
+nnoremap <leader>gob :GoBuild<CR>
+nnoremap <leader>god :GoDef<CR>
+nnoremap <leader>got :GoDefType<CR>
+
 
 let g:instant_markdown_autostart = 0
 
