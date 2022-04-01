@@ -289,7 +289,7 @@ alias dateaccur="date +"%H:%M:%S.%3N""
     # Uncomment the below for (p → +) and (x → *)
     #calc="${calc//p/+}"
     #calc="${calc//x/*}"
-    printf '%s\n quit' "$calc" | gcalccmd | sed 's:^> ::g'
+    printf '%s\n quit' "$calc" | gcalccmd 2>/dev/null | sed 's:^> ::g'
 }
 
 function mdrender() {
