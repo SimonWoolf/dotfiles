@@ -74,6 +74,7 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <underscore> <greater> <underscore>:        "⊢"         U22A2        # RIGHT TACK
 <Multi_key> <underscore> <less> <underscore>: "⊣" U22A3 # LEFT TACK
 <Multi_key> <slash> <slash> : "⁄" U2044 # FRACTION SLASH
+<Multi_key> <bar> <minus> : "⊢"
 
 # subscripts
 <Multi_key> <underscore> <0>                 : "₀"  U2080             # SUBSCRIPT ZERO
