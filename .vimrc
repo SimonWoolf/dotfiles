@@ -420,6 +420,8 @@ let g:go_def_mapping_enabled = 0
 nnoremap <leader>gob :GoBuild<CR>
 nnoremap <leader>god :GoDef<CR>
 nnoremap <leader>got :GoDefType<CR>
+" type of current var in status bar
+let g:go_auto_type_info = 1
 
 
 let g:instant_markdown_autostart = 0
