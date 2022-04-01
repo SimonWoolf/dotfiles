@@ -114,11 +114,21 @@ autocmd Filetype typescript syntax sync fromstart
 " let g:typescript_indent_disable = 1
 
 
+if has('nvim')
+  set title titlestring=%t
+  let g:instant_log=1
+  set mouse=nv
+endif
+
 " get tooltip window under mouse cursor
-set ballooneval
+if !has('nvim')
+  set ballooneval
+endif
 
 "tsuquyomi
-autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+if !has('nvim')
+  autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+endif
 autocmd FileType typescript nmap <buffer> <Leader>ts : <C-u>echo tsuquyomi#hint()<CR>
 ",, to show type definition of thing under cursor in status bar
 autocmd FileType typescript nnoremap <buffer> <Leader><Leader> : <C-u>echo tsuquyomi#hint()<CR>
@@ -236,17 +246,23 @@ vmap <silent> <expr> p <sid>Repl()
 
 " Persistent undo!
 set undofile
-set undodir=~/.vim/undodir
+set backup
+" neovim undofiles are incompatible with normal vim
+if has('nvim')
+  set undodir=~/.vim/nundodir
+  set backupdir=~/.vim/_nbackup
+  set directory=~/.vim/_ntemp
+else
+  set undodir=~/.vim/undodir
+  set backupdir=~/.vim/_backup
+  set directory=~/.vim/_temp
+endif
 set undolevels=1000 " How many undos
 set undoreload=10000 " number of lines to save for undo
 
-set backup
-set backupdir=~/.vim/_backup
 set writebackup
 set backupcopy=yes
 au BufWritePre * let &bex = '@' . strftime("%F.%H:%M")
-
-set directory=~/.vim/_temp
 
 " Stop windows scrolling together
 set nocursorbind
@@ -335,7 +351,7 @@ let g:SuperTabDefaultCompletionType = '<c-p>'
 noremap <silent><A-Left> :tabprevious<CR>
 
 " fugitive
-nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gb :Git blame<CR>
 
 " upper/lower word
 nmap <leader>u mQviwU`Q
