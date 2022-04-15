@@ -298,3 +298,6 @@ function mdrender() {
 
 # added by travis gem
 [ -f /home/simon/.travis/travis.sh ] && source /home/simon/.travis/travis.sh
+
+# Allow firefox to use wayland if it's running under that, or it takes like 30s to start
+MOZ_ENABLE_WAYLAND=1
