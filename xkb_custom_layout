@@ -1,0 +1,12 @@
+partial alphanumeric_keys modifier_keys
+xkb_symbols "custom" {
+    include "gb(colemak)"
+
+    name[Group1]="Custom (colemak, UK, Simon)";
+
+    replace key <LCTL> { [ Alt_L, Meta_L ]};
+    replace key <CAPS> { [ Control_L, Control_L ]};
+    replace key <LALT> { [ Escape, Escape ]};
+    replace key <ESC> { [ Caps_Lock ]};
+    replace key <INS> { [ Multi_key ]};
+};

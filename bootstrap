@@ -28,14 +28,18 @@ files.each do |file|
 end
 
 `mkdir -p ~/.config/i3/`
+`mkdir -p ~/.config/sway/`
 `mkdir -p ~/.config/i3status/`
 `mkdir -p ~/.config/alacritty/`
 `mkdir -p ~/.config/dunst/`
+`mkdir -p ~/.config/xkb/symbols/`
 `ln -fs ~/dev/dotfiles/i3_config ~/.config/i3/config`
+`ln -fs ~/dev/dotfiles/sway_config ~/.config/sway/config`
 `ln -fs ~/dev/dotfiles/i3status_config ~/.config/i3status/config`
 `ln -fs ~/dev/dotfiles/mimeapps.list ~/.local/share/applications/mimeapps.list`
 `ln -fs ~/dev/dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml`
 `ln -fs ~/dev/dotfiles/dunstrc ~/.config/dunst/dunstrc`
+`ln -fs ~/dev/dotfiles/xkb_custom_layout ~/.config/xkb/symbols/gb`
 # xdg-utils deletes and recreates ~/.config/mimeapps.list when it writes to it, which will break symbolic links
 `cp ~/dev/dotfiles/mimeapps.list ~/.config/mimeapps.list`
 if !File.exist?('/etc/apt/sources.list.d/custom.list')
@@ -58,8 +62,10 @@ end
 if desktop?
   `cat noedit i3_config_base i3_config_desktop > i3_config`
   `cat noedit i3status_config_base i3status_config_desktop > i3status_config`
+  `cat noedit i3_config_base i3_config_desktop sway_specific_config > sway_config`
 else
   `cat noedit i3_config_base i3_config_laptop > i3_config`
+  `cat noedit i3_config_base i3_config_laptop sway_specific_config > sway_config`
   `ln -fs ~/.XmodmapForLaptopKeyboard ~/.Xmodmap`
   if thinkpad?
     `cat noedit i3status_config_base i3status_config_thinkpad i3status_config_laptop > i3status_config`

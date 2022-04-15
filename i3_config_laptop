@@ -53,8 +53,8 @@ workspace 10 output DP-3
 # night mode
 # on laptop, no point adjusting the brightness in xrandr, inefficient use of
 # battery - just adjust colour temp and do brightness with backlight adjustment
-bindsym $mod+n exec "redshift -x"
-bindsym $mod+e exec "redshift -P -r -O 5000"
-bindsym $mod+i exec "redshift -P -r -O 4000"
-bindsym $mod+o exec "redshift -P -r -O 3500"
-bindsym $mod+apostrophe exec "redshift -P -r -O 3000"
+bindsym $mod+n exec "killall redshift; redshift -x"
+bindsym $mod+e exec "killall redshift; redshift -P -r -O 5000"
+bindsym $mod+i exec "killall redshift; redshift -P -r -O 4000"
+bindsym $mod+o exec "killall redshift; redshift -P -r -O 3500"
+bindsym $mod+apostrophe exec "killall redshift; redshift -P -r -O 3000"
