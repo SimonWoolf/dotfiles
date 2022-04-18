@@ -1,5 +1,0 @@
-
-input type:keyboard {
-  xkb_layout "gb"
-  xkb_variant "custom"
-}
