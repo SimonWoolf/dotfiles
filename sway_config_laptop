@@ -31,3 +31,10 @@ bindsym F12 exec alacritty
 bindsym Control+space exec "rofi -show run -fuzzy -font 'Meslo LG S for Powerline 12' -color-normal '#dddddd,#222222,#eeeeee,#586e75,#eee8d5' -color-window '#dddddd,#000000,#dddddd'"
 # Window switcher
 bindsym $mod+space exec "rofi -show window -fuzzy -font 'Meslo LG S for Powerline 12' -color-normal '#222222,#dddddd,#333333,#687e85,#eee8d5' -color-window '#222222,#000000,#222222'"
+
+# dunst
+bindsym $mod+minus exec "dunstctl close-all"
+bindsym $mod+slash exec "dunstctl history-pop"
+bindsym $mod+shift+i exec "dunstctl context"
+
+exec waybar
