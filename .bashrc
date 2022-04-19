@@ -221,7 +221,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias ls='ls --color=auto'
   #export TERM="xterm-256color" -- useful for xfce4-terminal, but breaks things on termite
   # http://superuser.com/questions/52562/ssh-keychain-for-xfce
-  export $(gnome-keyring-daemon --daemonize --start)
+  # export $(gnome-keyring-daemon --daemonize --start)
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias ll='ls -lG'
   alias ls='ls -G'
