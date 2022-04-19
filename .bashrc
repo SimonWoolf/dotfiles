@@ -1,7 +1,7 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-export EDITOR=vim
+export EDITOR=nvim
 export BROWSER=firefox
 export AWS_PROFILE=ably
 export AWS_REGION=eu-west-2 # default to london when it doesn't matter
@@ -65,7 +65,7 @@ alias dusk='du -s -k -c * | sort -rn'  #Disk usage by directory
 alias trash="mv -t ~/.local/share/Trash/files --backup=t"
 alias nettop="sudo netstat -pant"
 alias pysh="ipython -p sh"
-alias vp="vim -R -"
+alias vp="nvim -R -"
 alias iddqd="sudo -i"
 alias locate="locate -i"
 alias installed?="dpkg -l | grep "
@@ -185,6 +185,7 @@ alias ae="ably-env "
 alias cd..="cd .."
 alias cd.="cd ."
 alias ipa="ip -color -br a"
+alias nv="nvim-qt"
 
 alias playding="mplayer /home/simon/dev/dotfiles/pomodoro-finish.wav -speed 5 -volume 50"
 alias playgong="mplayer /home/simon/dev/dotfiles/pomodoro-finish.wav -volume 50"
