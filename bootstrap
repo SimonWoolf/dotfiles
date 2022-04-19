@@ -37,6 +37,7 @@ end
 `ln -fs ~/dev/dotfiles/i3_config ~/.config/i3/config`
 `ln -fs ~/dev/dotfiles/sway_config ~/.config/sway/config`
 `ln -fs ~/dev/dotfiles/waybar_config ~/.config/waybar/config`
+`ln -fs ~/dev/dotfiles/waybar_style.css ~/.config/waybar/style.css`
 `ln -fs ~/dev/dotfiles/i3status_config ~/.config/i3status/config`
 `ln -fs ~/dev/dotfiles/mimeapps.list ~/.local/share/applications/mimeapps.list`
 `ln -fs ~/dev/dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml`

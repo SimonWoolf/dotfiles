@@ -6,8 +6,8 @@
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["custom/tt_status", "sway/window"],
-    "modules-right": ["network", "battery", "cpu", "memory", "temperature", "pulseaudio", "sway/language", "clock", "tray"],
+    "modules-center": ["custom/tt_status"],
+    "modules-right": ["network", "battery", "cpu", "memory", "temperature", "pulseaudio", "clock", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -36,7 +36,7 @@
     "custom/tt_status": {
         "exec": "cat /tmp/tt_waybar_status",
         "return-type": "json",
-        "restart-interval": 1,
+        "restart-interval": 1
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
@@ -152,18 +152,6 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
-    },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     }
 }
 
