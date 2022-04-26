@@ -37,7 +37,21 @@ bindsym $mod+space exec "rofi -show window -fuzzy -font 'Meslo LG S for Powerlin
 # cursor theme
 seat seat0 xcursor_theme Adwaita 48
 
+set $gnome-schema org.gnome.desktop.interface
+exec_always {
+    gsettings set $gnome-schema cursor-theme Adwaita
+    gsettings set $gnome-schema cursor-size 48
+}
+
 # dunst
 bindsym $mod+minus exec "dunstctl close-all"
 bindsym $mod+slash exec "dunstctl history-pop"
 bindsym $mod+shift+i exec "dunstctl context"
+
+# lockscreen
+# set $lock_bg ~/Pictures/lockscreen.jpg
+
+exec swayidle -w \
+         timeout 600 'swaylock -f -c 3f3f3f' \
+         before-sleep 'swaylock -f -c 3f3f3f' \
+         after-resume '' # could be useful

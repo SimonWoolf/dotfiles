@@ -272,3 +272,8 @@ label:focus {
     background-color: #ffff00;
     color: #000000;
 }
+
+#custom-tt_status.light_blue {
+    background-color: #55bbee;
+    color: #000000;
+}

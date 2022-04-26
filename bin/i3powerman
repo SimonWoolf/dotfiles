@@ -5,7 +5,7 @@
 
 case "$1" in
     lock)
-        xflock4
+        pgrep sway && swaylock -c 3f3f3f || xflock4
         ;;
     logout)
         i3-msg exit
