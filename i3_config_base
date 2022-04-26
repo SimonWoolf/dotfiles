@@ -207,13 +207,13 @@ for_window [title="^File Operation Progress$"] floating enable
 for_window [title="^Current Media Information$"] floating enable
 # "zoom" is dialogue boxes, the full thing is "Zoom Meeting"
 for_window [title="^zoom$"] border none, floating enable
-for_window [app_id="zoom" title="^join$"] border none, floating enable
+for_window [app_id="zoom" title="^join"] border none, floating enable
 # we shouldn't need this too. but if we don't the main window goes floating. I
 # guess it starts out as "zoom" and then changes its net_wm_name to "Zoom -
 # Licensed Account"?
 for_window [title="^Zoom - Licensed Account$"] floating disable
 no_focus   [title="^zoom$"]
-no_focus   [app_id="zoom" title="^join$"]
+no_focus   [app_id="zoom" title="^join"]
 for_window [app_id="zoom" title="^(Zoom|About)$"] border pixel, floating enable
 for_window [app_id="zoom" title="Settings"] floating enable, floating_minimum_size 960 x 700
 
