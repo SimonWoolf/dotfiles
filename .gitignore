@@ -15,4 +15,5 @@ test/connection/tmp.js
 .fuse_hidden*
 
 i3_config
+sway_config
 i3status_config
