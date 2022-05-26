@@ -198,6 +198,15 @@ alias drm="drive delete "
 alias d="drive "
 alias mostest="less"
 
+alias sony-connect="bluetoothctl connect 94:DB:56:A3:35:9D"
+alias sony-disconnect="bluetoothctl disconnect 94:DB:56:A3:35:9D"
+alias sony-hqaudio="pactl set-card-profile bluez_card.94_DB_56_A3_35_9D a2dp_sink"
+alias sony-headset="pactl set-card-profile bluez_card.94_DB_56_A3_35_9D handsfree_head_unit"
+alias aftershoks-connect="bluetoothctl connect 20:74:cf:3f:73:25"
+alias aftershoks-disconnect="bluetoothctl disconnect 20:74:cf:3f:73:25"
+alias aftershoks-hqaudio="pactl set-card-profile bluez_card.20_74_CF_3F_73_25 a2dp_sink"
+alias aftershoks-headset="pactl set-card-profile bluez_card.20_74_CF_3F_73_25 handsfree_head_unit"
+
 #desktop-specific
 if [[ "$HOSTNAME" == "simon-linuxdesktop" ]]; then
   alias tvoff="xrandr -s 0 && redshift -t 6500:4500 -l 51:0 &"
