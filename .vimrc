@@ -387,10 +387,20 @@ let g:ale_lint_on_insert_leave = 0
 
 "go to next or previous error in quickfix list
 "or open and close it
-nnoremap <c-a> :cprev<CR>
-nnoremap <c-s> :cnext<CR>
-nnoremap <c-w> :copen<CR>
-nnoremap <c-f> :cclose<CR>
+command -bang -nargs=? QFix call QFixToggle(<bang>0)
+function! QFixToggle(forced)
+  if exists("g:qfix_win") && a:forced == 0
+    cclose
+    unlet g:qfix_win
+  else
+    copen 10
+    let g:qfix_win = bufnr("$")
+  endif
+endfunction
+nnoremap <C-a> :cprev<CR>
+nnoremap <C-s> :cnext<CR>
+nnoremap <C-f> :QFix<CR>
+
 
 """""""""""""""""""""""""""""""""""
 " specific plugin pre-configuration
