@@ -311,3 +311,10 @@ function mdrender() {
 
 # Allow firefox to use wayland if it's running under that, or it takes like 30s to start
 MOZ_ENABLE_WAYLAND=1
+
+# export CC="ccache clang"
+# export CXX="ccache clang++"
+# export CC="ccache gcc"
+# export CXX="ccache g++"
+export CC="gcc"
+export CXX="g++"
