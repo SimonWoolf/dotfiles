@@ -251,14 +251,14 @@ source ~/.prompt.sh
 # secret keys
 [ -f ~/.apikeys ] && source ~/.apikeys
 
-# heroku, CUDA, my stuff paths
-# note: .local/bin is prepended so that local stack & pip take precendence over systemwide one (which is used by wireshark for some reason)
-export PATH="$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin:$HOME/.poetry/bin"
-export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib:$LD_LIBRARY_PATH
-export ARDUINO_PATH=/usr/local/arduino
-
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
+
+# heroku, CUDA, my stuff paths
+# note: .local/bin is prepended so that local stack & pip take precendence over systemwide one (which is used by wireshark for some reason)
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin:$HOME/.poetry/bin:$(go env GOPATH)/bin"
+export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib:$LD_LIBRARY_PATH
+export ARDUINO_PATH=/usr/local/arduino
 
 
 if [ -f $HOME/programs/alacritty/extra/completions/alacritty.bash ] ; then
