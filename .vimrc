@@ -33,31 +33,12 @@ if has("gui_running")
   set guioptions-=e
 
   if has("gui_gtk")
-    " if !empty(system('xrandr | grep "HDMI-1 connected" | grep "3840x2160"'))
-    "   set guifont=Meslo\ LG\ S\ for\ Powerline\ 7
-    " else
-      set guifont=Meslo\ LG\ S\ for\ Powerline\ 10
-    " endif
-  elseif has("gui_macvim")
-    set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h16
-  elseif has("gui_win32")
-    set guifont=Consolas:h11:cANSI
+    set guifont=Meslo\ LG\ S\ for\ Powerline\ 10
   endif
 endif
 
-" let hostname = substitute(system('hostname'), '\n', '', '')
-" if hostname == "simon-thinkpad"
-"   set guifont=Meslo\ LG\ S\ for\ Powerline\ 20
-" endif
-
-" Alternatives: pyte
-if has('win32unix')
-  " windows terminals have 16 colours only, lucius doesn't work
-  colorscheme zenburn
-else
-  colorscheme lucius
-  set background=light
-endif
+colorscheme lucius
+set background=light
 
 "tabline colours
 :hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen
@@ -442,3 +423,5 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+let g:go_gopls_enabled = 0
