@@ -318,3 +318,5 @@ MOZ_ENABLE_WAYLAND=1
 # export CXX="ccache g++"
 export CC="gcc"
 export CXX="g++"
+
+eval $(keychain --eval --dir $HOME/.config/keychain --quiet --noask --agents gpg,ssh id_rsa id_ed)
