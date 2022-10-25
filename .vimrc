@@ -168,6 +168,20 @@ map <C-b> :CtrlPBuffer<CR>
 set foldmethod=manual
 set nofoldenable
 
+
+autocmd Filetype typescript,javascript call FoldLoggerCalls()
+function FoldLoggerCalls()
+  setlocal foldmethod=marker
+  setlocal foldmarker=Logger.log,);
+  setlocal foldenable
+  setlocal foldminlines=2
+  highlight Folded guibg=background guifg=DarkGrey
+  function! LoggerFoldText()
+    return '    Logger (folded)'
+  endfunction
+  set foldtext=LoggerFoldText()
+endfunction
+
 " Syntax method can be slooow on some files.
 " So do it once on initial buffer load,
 " then just switch to manual while editing.
