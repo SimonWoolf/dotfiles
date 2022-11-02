@@ -216,6 +216,14 @@ if [[ "$HOSTNAME" == "simon-linuxdesktop" ]]; then
   #xmodmap ~/.Xmodmap &
 fi
 
+# laptop-specific
+if [[ "$HOSTNAME" == "simon-thinkpad" ]]; then
+  alias gvim="nvim-qt"
+  alias v="nvim-qt"
+else
+  alias v="gvim"
+fi
+
 function crtime() {
   sudo debugfs -R "stat <`stat -c %i ${@}`>" `\df --output=source ${@} | tail -1` | grep crtime
 }
