@@ -134,7 +134,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 alias get="sudo apt install"
 alias xo="xdg-open"
-alias df="pydf"
+alias df="pydf |grep -v snap"
 alias acs="apt-cache search "
 alias as="apt search "
 alias aka="sudo apt-key adv --keyserver hkps://keyserver.ubuntu.com --recv-keys "
