@@ -328,3 +328,4 @@ export CC="gcc"
 export CXX="g++"
 
 eval $(keychain --eval --dir $HOME/.config/keychain --quiet --noask --agents gpg,ssh id_rsa id_ed)
+ssh-add ~/.ssh/id_ed 2>/dev/null
