@@ -6,8 +6,8 @@
 [core]
   autocrlf = input
   safecrlf = warn
-  editor = nvim
-  pager = diff-so-fancy | less --tabs=4 -RFX
+  editor = vim
+  ; pager = diff-so-fancy | less --tabs=4 -RFX
   excludesfile = ~/.gitignore
 [credential]
   helper = cache --timeout=3600
