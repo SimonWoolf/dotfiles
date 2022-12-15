@@ -12,7 +12,7 @@ deb http://ppa.launchpad.net/phoerious/keepassxc/ubuntu jammy main
 deb-src http://ppa.launchpad.net/phoerious/keepassxc/ubuntu jammy main
 
 # signal-desktop
-deb [arch=amd64] https://updates.signal.org/desktop/apt jammy main
+deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
 
 # skype
 deb [arch=amd64] https://repo.skype.com/deb stable main
