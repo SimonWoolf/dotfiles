@@ -186,6 +186,7 @@ alias cd..="cd .."
 alias cd.="cd ."
 alias ipa="ip -color -br a"
 alias nv="nvim-qt"
+alias v="nvim-qt"
 
 alias playding="mplayer /home/simon/dev/dotfiles/pomodoro-finish.wav -speed 5 -volume 50"
 alias playgong="mplayer /home/simon/dev/dotfiles/pomodoro-finish.wav -volume 50"
@@ -214,14 +215,6 @@ if [[ "$HOSTNAME" == "simon-linuxdesktop" ]]; then
   # switches between nvidia-settings metamodes. In xorg.conf Screen:
     #Option         "metamodes" "DVI-I-2: nvidia-auto-select +1280+0, DVI-I-3: nvidia-auto-select +0+0, HDMI-0: NULL; DVI-I-2: nvidia-auto-select +1360+0, HDMI-0: nvidia-auto-select +0+0, DVI-I-3: NULL"
   #xmodmap ~/.Xmodmap &
-fi
-
-# laptop-specific
-if [[ "$HOSTNAME" == "simon-thinkpad" ]]; then
-  alias gvim="nvim-qt"
-  alias v="nvim-qt"
-else
-  alias v="gvim"
 fi
 
 function crtime() {
