@@ -424,7 +424,9 @@ let g:go_doc_keywordprg_enabled = 0
 let g:go_def_mapping_enabled = 0
 nnoremap <leader>gob :GoBuild<CR>
 nnoremap <leader>god :GoDef<CR>
-nnoremap <leader>got :GoDefType<CR>
+" nnoremap <leader>got :GoDefType<CR>
+nnoremap <leader>gor :GoRun<CR>
+nnoremap <leader>got :GoTest<CR>
 " type of current var in status bar
 let g:go_auto_type_info = 1
 
@@ -437,5 +439,3 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-let g:go_gopls_enabled = 0
