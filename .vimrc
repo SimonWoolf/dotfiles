@@ -424,6 +424,7 @@ let g:go_doc_keywordprg_enabled = 0
 let g:go_def_mapping_enabled = 0
 nnoremap <leader>gob :GoBuild<CR>
 nnoremap <leader>god :GoDef<CR>
+nnoremap <leader>goh :GoDoc<CR><CR>
 " nnoremap <leader>got :GoDefType<CR>
 nnoremap <leader>gor :GoRun<CR>
 nnoremap <leader>got :GoTest<CR>
