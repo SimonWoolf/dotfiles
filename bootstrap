@@ -34,6 +34,7 @@ end
 `mkdir -p ~/.config/alacritty/`
 `mkdir -p ~/.config/dunst/`
 `mkdir -p ~/.config/xkb/symbols/`
+`mkdir -p ~/.config/nvim/`
 `ln -fs ~/dev/dotfiles/i3_config ~/.config/i3/config`
 `ln -fs ~/dev/dotfiles/sway_config ~/.config/sway/config`
 `ln -fs ~/dev/dotfiles/waybar_config ~/.config/waybar/config`
@@ -56,6 +57,7 @@ end
 `mkdir -p ~/.vim/undodir/`
 `mkdir -p ~/.vim/after/plugin/`
 `ln -fs ~/dev/dotfiles/vimrc_after.vim ~/.vim/after/plugin/vimrc_after.vim`
+`ln -fs ~/dev/dotfiles/ginit.vim ~/.config/nvim/ginit.vim`
 `rm ~/.vim/pack/synced`
 # -T stops ln treating synced/ as a directory rather than a target name
 `ln -fs -T ~/dev/dotfiles/vim_plugins/ ~/.vim/pack/synced`

@@ -37,11 +37,6 @@ if has("gui_running")
   endif
 endif
 
-" neovim-qt equivalent:
-if exists("g:GuiLoaded")
-  GuiFont Meslo\ LG\ S\ for\ Powerline:h10
-endif
-
 colorscheme lucius
 set background=light
 
