@@ -133,11 +133,6 @@ vnoremap <silent> * :<C-U>
   \gvy/<C-R><C-R>=substitute(
   \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
-vnoremap <silent> # :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy?<C-R><C-R>=substitute(
-  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 "makes ,uc do upcase (it's in my muscle memory now, though
 ",u does it after a second pause
@@ -392,9 +387,28 @@ function! QFixToggle(forced)
     let g:qfix_win = bufnr("$")
   endif
 endfunction
+command -bang -nargs=? LFix call LFixToggle(<bang>0)
+function! LFixToggle(forced)
+  if exists("g:loc_win") && a:forced == 0
+    lclose
+    unlet g:loc_win
+  else
+    lopen 10
+    let g:loc_win = bufnr("$")
+  endif
+endfunction
 nnoremap <C-a> :cprev<CR>
 nnoremap <C-s> :cnext<CR>
 nnoremap <C-f> :QFix<CR>
+
+autocmd Filetype go nnoremap <C-a> :lprev<CR>
+autocmd Filetype go nnoremap <C-s> :lnext<CR>
+autocmd Filetype go nnoremap <C-f> :LFix<CR>
+
+nnoremap <C-x> :ALENextWrap<CR>
+nnoremap <C-z> :ALEPrevWrap<CR>
+
+nnoremap # :w<CR>
 
 
 """""""""""""""""""""""""""""""""""

@@ -273,7 +273,7 @@ export CURL_CA_BUNDLE=/home/simon/ably/realtime/common/conf/certificates/dummy-r
 export ADMIN_UPDATE_LOG_LEVEL=micro
 export SIEGE_MODE_POLICY=off
 export ABLY_ENV_OPEN_SSO_URL=true
-export ABLY_SSH_POST_LOGIN_COMMAND="(curl --silent https://raw.githubusercontent.com/thestinger/termite/master/termite.terminfo -o /tmp/termite.terminfo && tic -x /tmp/termite.terminfo &) && cd /var/log/ably"
+export ABLY_SSH_POST_LOGIN_COMMAND="cd /var/log/ably"
 export NO_REGISTRY_CACHE=true
 
 export ERL_AFLAGS="-kernel shell_history enabled"
