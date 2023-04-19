@@ -156,6 +156,10 @@ let g:ctrlp_custom_ignore = {
    \ 'dir':  '\v[\/]\.(git|hg|svn)|\v[\/](node_modules|bower_components)|tmp|dist|spec/integration/vcr_cassettes|public/assets|ebin$',
    \ 'file': '\v\.(exe|so|dll)$'
    \ }
+
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_root_markers = ['.git', 'Makefile', 'package.json']
+
 map <C-t> :CtrlPTag<cr>
 
 map <C-b> :CtrlPBuffer<CR>

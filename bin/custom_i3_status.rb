@@ -16,11 +16,16 @@ def readline
 end
 
 def tt_status
+  raw = ""
   begin
     File.open("/tmp/tt_status", "r") do |f|
-      JSON.parse(f.readline)
+      raw = f.readline
+      JSON.parse(raw)
     end
   rescue EOFError, Errno::ENOENT
+    []
+  rescue JSON::ParserError
+    STDERR.puts "Unparseable: '#{raw}'"
     []
   end
 end
