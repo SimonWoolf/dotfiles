@@ -6,7 +6,7 @@ set et "expand tabs
 set tabstop=2
 set shiftwidth=2
 set nocompatible " Use gVim defaults
-set history=2000
+set history=10000
 set ignorecase
 set smartcase
 set number
