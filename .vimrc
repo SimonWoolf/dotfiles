@@ -440,13 +440,13 @@ let g:ctrlp_max_depth=30
 let g:go_doc_keywordprg_enabled = 0
 " stop vim-go hijacking ctrl-] (can always use gd for godef)
 let g:go_def_mapping_enabled = 0
-nnoremap <leader>gob :GoBuild<CR>
-nnoremap <leader>god :GoDef<CR>
-nnoremap <leader>goh :GoDoc<CR><CR>
-nnoremap <leader>gotd :GoDefType<CR>
-nnoremap <leader>gor :GoRun<CR>
-nnoremap <leader>got :GoTest<CR>
-autocmd FileType typescript nnoremap <buffer> <C-[> :GoDef<CR>
+autocmd Filetype go nnoremap <leader>gob :GoBuild<CR>
+autocmd Filetype go nnoremap <leader>god :GoDef<CR>
+autocmd Filetype go nnoremap <leader>goh :GoDoc<CR><CR>
+autocmd Filetype go nnoremap <leader>gotd :GoDefType<CR>
+autocmd Filetype go nnoremap <leader>gor :GoRun<CR>
+autocmd Filetype go nnoremap <leader>got :GoTest<CR>
+autocmd FileType go nnoremap <buffer> <C-[> :GoDef<CR>
 " type of current var in status bar
 let g:go_auto_type_info = 1
 
