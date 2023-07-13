@@ -224,6 +224,8 @@ for_window [title="^TagTime$"] resize set 640 300
 for_window [title="^TagTime$"] move position center
 for_window [title="^TagTime Preferences$"] floating enable
 for_window [title="^TagTime Preferences$"] move position center
+for_window [title="Firefox — Sharing Indicator"] floating enable
+for_window [title="Firefox — Sharing Indicator"] move position 0 0
 
 # <colorclass> <border> <background> <text> <indicator> <child_border>
 client.focused          #4c7899 #80acd0 #000000 #2e9ef4 #285577
