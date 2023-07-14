@@ -254,6 +254,7 @@ source ~/.prompt.sh
 
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 
 # heroku, CUDA, my stuff paths
 # note: .local/bin is prepended so that local stack & pip take precendence over systemwide one (which is used by wireshark for some reason)
