@@ -48,6 +48,7 @@
   # for excluding: gr = "!f() { git grep -i \"$1\" | grep -v 'browser/static'; }; f"
   pst = push --tags
   su = submodule update --init
+  um = !git fetch origin main && git branch -f main origin/main
 [merge]
   tool = kdiff3
   conflictstyle = diff3
