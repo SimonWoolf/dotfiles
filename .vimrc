@@ -449,6 +449,8 @@ autocmd Filetype go nnoremap <leader>got :GoTest<CR>
 autocmd FileType go nnoremap <buffer> <C-[> :GoDef<CR>
 " type of current var in status bar
 let g:go_auto_type_info = 1
+" imports go where chris wants them to
+let g:go_gopls_local = "ably"
 
 
 let g:instant_markdown_autostart = 0
