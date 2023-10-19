@@ -42,3 +42,6 @@ deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main
 
 # alacritty
 # deb http://ppa.launchpad.net/mmstick76/alacritty/ubuntu jammy main
+
+# docker
+deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu   jammy stable
