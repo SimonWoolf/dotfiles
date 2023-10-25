@@ -207,6 +207,11 @@ alias aftershoks-connect="bluetoothctl connect 20:74:cf:3f:73:25"
 alias aftershoks-disconnect="bluetoothctl disconnect 20:74:cf:3f:73:25"
 alias aftershoks-hqaudio="pactl set-card-profile bluez_card.20_74_CF_3F_73_25 a2dp_sink"
 alias aftershoks-headset="pactl set-card-profile bluez_card.20_74_CF_3F_73_25 handsfree_head_unit"
+alias anker-connect="bluetoothctl connect 9C:0C:35:99:4E:36"
+alias anker-disconnect="bluetoothctl disconnect 9C:0C:35:99:4E:36"
+alias anker-hqaudio="pactl set-card-profile bluez_card.9C_0C_35_99_4E_36 a2dp_sink"
+alias anker-headset="pactl set-card-profile bluez_card.9C_0C_35_99_4E_36 handsfree_head_unit"
+
 
 #desktop-specific
 if [[ "$HOSTNAME" == "simon-linuxdesktop" ]]; then
