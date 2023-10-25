@@ -28,7 +28,7 @@ bindsym F12 exec alacritty
 
 
 # Program runner
-bindsym Control+space exec "rofi -show run -fuzzy -font 'Meslo LG S for Powerline 12' -color-normal '#dddddd,#222222,#eeeeee,#586e75,#eee8d5' -color-window '#dddddd,#000000,#dddddd'"
+bindsym Control+space exec "rofi -modi combi -show combi -combi-modi run,drun -fuzzy -font 'Meslo LG S for Powerline 12' -color-normal '#dddddd,#222222,#eeeeee,#586e75,#eee8d5' -color-window '#dddddd,#000000,#dddddd'"
 #  bindsym Control+space exec alacritty --title=launcher -e bash -c 'compgen -c | grep -v fzf | sort -u | fzf --layout=reverse | xargs -r swaymsg -t command exec'
 for_window [title="^launcher$"] floating enable, border none
 # Window switcher
