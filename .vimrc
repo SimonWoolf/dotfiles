@@ -463,3 +463,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 nnoremap <C-;> :update<CR>
+
+" copilot
+let g:copilot_node_command = "~/.asdf/installs/nodejs/20.10.0/bin/node"
+highlight CopilotSuggestion guifg=LightGrey ctermfg=LightGrey
