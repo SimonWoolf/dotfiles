@@ -19,9 +19,6 @@
 [submodule "vim_plugins/start/nerdcommenter"]
 	path = vim_plugins/start/nerdcommenter
 	url = git@github.com:ddollar/nerdcommenter.git
-[submodule "vim_plugins/start/supertab"]
-	path = vim_plugins/start/supertab
-	url = git@github.com:ervandew/supertab.git
 [submodule "vim_plugins/start/vimproc"]
 	path = vim_plugins/start/vimproc
 	url = git@github.com:Shougo/vimproc.vim.git

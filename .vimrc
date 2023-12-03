@@ -340,7 +340,7 @@ set omnifunc=syntaxcomplete#Complete
 " tsuquyomi does not work properly with omnifunc chaining as it uses
 " complete_add, so you then get no results when tsuquyomi can't find anything.
 " So just use ctrl-p and use omnicompletion explicitly when desired (c-x c-o)
-let g:SuperTabDefaultCompletionType = '<c-p>'
+inoremap <C-o> <C-x><C-o>
 
 noremap <silent><A-Left> :tabprevious<CR>
 
