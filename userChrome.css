@@ -1,18 +1,18 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
 /* nb this worked before firefor 69 */
-@-moz-document url("chrome://browser/content/browser.xul") {
-  #TabsToolbar {
-    visibility: collapse !important;
-  }
+/* @-moz-document url("chrome://browser/content/browser.xul") {*/
+#TabsToolbar {
+  visibility: collapse !important;
 }
+/* }*/
 /* from https://github.com/eoger/tabcenter-redux/wiki/Custom-CSS-tweaks#hide-the-horizontal-tab-strip-15 */
-#main-window:not([customizing]):not([tabsintitlebar="true"]) #TabsToolbar {
-  visibility: collapse !important;
-}
-#tabbrowser-tabs {
-  visibility: collapse !important;
-}
+/* #main-window:not([customizing]):not([tabsintitlebar="true"]) #TabsToolbar {*/
+/*   visibility: collapse !important;*/
+/* }*/
+/* #tabbrowser-tabs {*/
+/*   visibility: collapse !important;*/
+/* }*/
 /* #navigator-toolbox {*/
 /*   margin-top: 1px;*/
 /* }*/
