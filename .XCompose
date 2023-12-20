@@ -30,6 +30,10 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <S> <S> : "ẞ" U1E9E # LATIN CAPITAL LETTER SHARP S
 
 # Maths
+<Multi_key> <less> <greater>                : "◊"        U25CA                # EVENTUALLY
+<Multi_key> <bracketleft> <bracketright>    : "◻"        U25FB                # ALWAYS
+<Multi_key> <exclam> <equal>                : "≠"        U2260                # NOT EQUAL TO
+<Multi_key> <exclam> <equal>                : "≠"        U2260                # NOT EQUAL TO
 <Multi_key> <exclam> <equal>                : "≠"        U2260                # NOT EQUAL TO
 <Multi_key> <slash> <equal>                : "≠"        U2260                # NOT EQUAL TO
 <Multi_key> <less> <equal>                : "≤"        U2264                # LESS-THAN OR EQUAL TO
