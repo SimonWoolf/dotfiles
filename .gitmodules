@@ -81,4 +81,4 @@
 	url = git@github.com:SirVer/ultisnips.git
 [submodule "vim_plugins/start/copilot"]
 	path = vim_plugins/start/copilot
-	url = https://github.com/github/copilot.vim
+	url = git@github.com/github/copilot.git
