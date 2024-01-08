@@ -153,7 +153,7 @@ autocmd Filetype go command! GoTagsReload execute  "find . | grep '.go$' | xargs
 command! CTagsReload execute "!ctags -R . && echo 'ctags reloaded'"
 
 let g:ctrlp_custom_ignore = {
-   \ 'dir':  '\v[\/]\.(git|hg|svn)|\v[\/](node_modules|bower_components)|tmp|dist|spec/integration/vcr_cassettes|public/assets|ebin$',
+   \ 'dir':  '\v\/(\.git|\.hg|\.svn|node_modules|bower_components|tmp|dist|spec\/fixtures\/vcr_cassettes|public\/assets|ebin|toolchain)$',
    \ 'file': '\v\.(exe|so|dll)$'
    \ }
 
