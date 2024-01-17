@@ -401,13 +401,13 @@ function! LFixToggle(forced)
     let g:loc_win = bufnr("$")
   endif
 endfunction
-nnoremap <C-a> :cprev<CR>
-nnoremap <C-s> :cnext<CR>
-nnoremap <C-f> :QFix<CR>
+" nnoremap <C-a> :cprev<CR>
+" nnoremap <C-s> :cnext<CR>
+" nnoremap <C-f> :QFix<CR>
 
-autocmd Filetype go nnoremap <C-a> :lprev<CR>
-autocmd Filetype go nnoremap <C-s> :lnext<CR>
-autocmd Filetype go nnoremap <C-f> :LFix<CR>
+nnoremap <C-a> :lprev<CR>
+nnoremap <C-s> :lnext<CR>
+nnoremap <C-f> :LFix<CR>
 
 nnoremap <C-x> :ALENextWrap<CR>
 nnoremap <C-z> :ALEPrevWrap<CR>
@@ -467,3 +467,12 @@ nnoremap <C-;> :update<CR>
 " copilot
 let g:copilot_node_command = "~/.asdf/installs/nodejs/20.10.0/bin/node"
 highlight CopilotSuggestion guifg=LightGrey ctermfg=LightGrey
+" inoremap <C-Tab> <Plug>(copilot-next)
+" inoremap <S-Tab> <Plug>(copilot-accept-word)
+imap <C-Tab> <M-]>
+imap <S-Tab> <M-Right>
+
+highlight ALEErrorSign guifg=LightGrey ctermfg=LightGrey
+highlight ALEWarningSign guifg=LightGrey ctermfg=LightGrey
+highlight ALEError guifg=LightGrey ctermfg=LightGrey
+highlight ALEWarning guifg=LightGrey ctermfg=LightGrey
