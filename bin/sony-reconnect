@@ -1,0 +1,31 @@
+#!/usr/bin/ruby
+
+# connect
+def connect
+  loop do
+    break if `bluetoothctl connect 94:DB:56:A3:35:9D`.include?("successful")
+    sleep 0.2
+  end
+end
+
+def disconnect
+  `bluetoothctl disconnect 94:DB:56:A3:35:9D`
+end
+
+def wait_until_bt_ready
+  loop do
+    break if `pactl list cards |grep handsfree_head_unit`.include?("available")
+    sleep 0.2
+  end
+end
+
+def check_headset_available
+  `pactl list cards |grep handsfree_head_unit`.include?("available: yes")
+end
+
+while !check_headset_available()
+  puts 'trying...'
+  disconnect()
+  connect()
+  wait_until_bt_ready()
+end
