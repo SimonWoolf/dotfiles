@@ -80,3 +80,5 @@
 
 [includeIf "gitdir:~/dev/furc/"]
   path = ~/dev/furc/.gitconfig
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
