@@ -46,4 +46,4 @@ deb [arch=amd64] http://packages.microsoft.com/repos/vscode stable main
 # docker
 deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu   jammy stable
 
-deb http://download.opensuse.org/repositories/network:/messaging:/zeromq:/git-stable/xUbuntu_22.04/ /
+deb http://download.opensuse.org/repositories/network:/messaging:/zeromq:/release-draft/xUbuntu_22.04/ /
