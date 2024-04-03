@@ -1,6 +1,26 @@
-profile office {
-	output DP-3 enable scale 1.4 position 0,1520
-	output eDP-1 enable position 480,3065
+# profile office {
+#   output DP-3 enable scale 1.4 position 0,1520
+#   output eDP-1 enable position 480,3065
+#   exec swaymsg workspace 1, move workspace to DP-3
+#   exec swaymsg workspace 2, move workspace to DP-3
+#   exec swaymsg workspace 3, move workspace to DP-3
+#   exec swaymsg workspace 4, move workspace to DP-3
+#   exec swaymsg workspace 5, move workspace to DP-3
+# }
+
+profile officewide {
+	output DP-3 enable position 1810,0
+	output eDP-1 enable position 3570,1440
+	exec swaymsg workspace 1, move workspace to DP-3
+	exec swaymsg workspace 2, move workspace to DP-3
+	exec swaymsg workspace 3, move workspace to DP-3
+	exec swaymsg workspace 4, move workspace to DP-3
+	exec swaymsg workspace 5, move workspace to DP-3
+}
+
+profile officewide2 {
+	output DP-2 enable position 1810,0
+	output eDP-1 enable position 3570,1440
 	exec swaymsg workspace 1, move workspace to DP-3
 	exec swaymsg workspace 2, move workspace to DP-3
 	exec swaymsg workspace 3, move workspace to DP-3
