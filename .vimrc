@@ -150,7 +150,7 @@ autocmd Filetype ruby command! RubyTagsReload execute  "!ripper-tags -R --exclud
 " go equivalent
 autocmd Filetype go command! GoTagsReload execute  "find . | grep '.go$' | xargs gotags > tags && echo 'Gotags reloaded'"
 
-command! CTagsReload execute "!ctags -R . && echo 'ctags reloaded'"
+command! CTagsReload execute "!ctags -R --exclude=.git --exclude=node_modules . && echo 'ctags reloaded'"
 
 let g:ctrlp_custom_ignore = {
    \ 'dir':  '\v\/(\.git|\.hg|\.svn|node_modules|bower_components|tmp|dist|spec\/fixtures\/vcr_cassettes|public\/assets|ebin|toolchain)$',
@@ -171,7 +171,7 @@ set nofoldenable
 autocmd Filetype typescript,javascript call FoldLoggerCalls()
 function FoldLoggerCalls()
   setlocal foldmethod=marker
-  setlocal foldmarker=Logger.log,);
+  setlocal foldmarker=Logger.,);
   setlocal foldenable
   setlocal foldminlines=2
   highlight Folded guibg=background guifg=DarkGrey
@@ -446,6 +446,8 @@ autocmd Filetype go nnoremap <leader>goh :GoDoc<CR><CR>
 autocmd Filetype go nnoremap <leader>gotd :GoDefType<CR>
 autocmd Filetype go nnoremap <leader>gor :GoRun<CR>
 autocmd Filetype go nnoremap <leader>got :GoTest<CR>
+autocmd FileType go nnoremap <buffer>goi :GoImplements<CR>
+autocmd FileType go nnoremap <buffer>goc :GoCallers<CR>
 autocmd FileType go nnoremap <buffer> <C-[> :GoDef<CR>
 " type of current var in status bar
 let g:go_auto_type_info = 1

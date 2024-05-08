@@ -3,13 +3,14 @@ text/plain=mousepad.desktop;
 image/svg+xml=gimp.desktop;
 application/force-download=gvim.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;
-image/png=ristretto.desktop;
+image/png=org.xfce.ristretto.desktop;
+image/jpg=org.xfce.ristretto.desktop;
 
 [Default Applications]
 text/plain=gvim.desktop;
 application/pdf=mupdf.desktop
 audio/mpeg=vlc.desktop
-inode/directory=Thunar.desktop
+inode/directory=thunar.desktop
 text/html=firefox.desktop
 x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
