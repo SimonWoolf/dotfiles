@@ -8,6 +8,7 @@ scaling_factors = {
   pushups: 1/5.0,# each
   squats: 0.25,  # each
   walking: 0.2, # /min
+  beatsaber: 0.4, # /min
   hiking: 0.33, # /min
   pullups: 0.5, # each
   cycling: 0.5,  # /min

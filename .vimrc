@@ -444,7 +444,7 @@ autocmd Filetype go nnoremap <leader>gob :GoBuild<CR>
 autocmd Filetype go nnoremap <leader>god :GoDef<CR>
 autocmd Filetype go nnoremap <leader>goh :GoDoc<CR><CR>
 autocmd Filetype go nnoremap <leader>gotd :GoDefType<CR>
-autocmd Filetype go nnoremap <leader>gor :GoRun<CR>
+autocmd Filetype go nnoremap <leader>gor :GoReferrers<CR>
 autocmd Filetype go nnoremap <leader>got :GoTest<CR>
 autocmd FileType go nnoremap <buffer>goi :GoImplements<CR>
 autocmd FileType go nnoremap <buffer>goc :GoCallers<CR>
