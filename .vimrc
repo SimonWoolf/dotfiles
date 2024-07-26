@@ -453,6 +453,8 @@ autocmd FileType go nnoremap <buffer> <C-[> :GoDef<CR>
 let g:go_auto_type_info = 1
 " imports go where chris wants them to
 let g:go_gopls_local = "ably"
+" restart gopls when I switch branches (why tf doesn't it do this automatically?)
+autocmd FileType go autocmd BufWritePost .git/HEAD call go#lsp#Restart()
 
 
 let g:instant_markdown_autostart = 0
