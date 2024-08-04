@@ -471,7 +471,7 @@ nnoremap <C-;> :update<CR>
 " copilot
 let g:copilot_node_command = "~/.asdf/installs/nodejs/20.10.0/bin/node"
 highlight CopilotSuggestion guifg=LightGrey ctermfg=LightGrey
-" inoremap <C-Tab> <Plug>(copilot-next)
+inoremap <C-Tab> <Plug>(copilot-next)
 " inoremap <S-Tab> <Plug>(copilot-accept-word)
 imap <C-Tab> <M-]>
 imap <S-Tab> <M-Right>
