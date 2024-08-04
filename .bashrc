@@ -211,6 +211,11 @@ alias anker-connect="bluetoothctl connect 9C:0C:35:AE:C6:B0"
 alias anker-disconnect="bluetoothctl disconnect 9C:0C:35:AE:C6:B0"
 alias anker-hqaudio="pactl set-card-profile bluez_card.9C_0C_35_AE_C6_B0 a2dp_sink"
 alias anker-headset="pactl set-card-profile bluez_card.9C_0C_35_AE_C6_B0 handsfree_head_unit"
+alias bose-connect="bluetoothctl connect 78:2B:64:CD:11:EE"
+alias bose-disconnect="bluetoothctl disconnect 78:2B:64:CD:11:EE"
+alias bose-hqaudio="pactl set-card-profile bluez_card.78_2B_64_CD_11_EE a2dp_sink"
+alias bose-headset="pactl set-card-profile bluez_card.78_2B_64_CD_11_EE handsfree_head_unit"
+
 
 source /home/simon/dev/dotfiles/.bash_ghaliases
 
