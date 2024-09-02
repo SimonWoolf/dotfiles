@@ -158,7 +158,7 @@ let g:ctrlp_custom_ignore = {
    \ }
 
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_root_markers = ['.git', 'Makefile', 'package.json']
+let g:ctrlp_root_markers = ['.git', 'Makefile', 'package.json', 'REVISION']
 
 map <C-t> :CtrlPTag<cr>
 
