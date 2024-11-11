@@ -39,6 +39,22 @@ __vte_prompt_command() {
 __prompt ()
 {
   local os=`uname 2>/dev/null`
+  local device_symbol=""
+
+  # if we're ssh'd into somewhere, remind ourselves
+  if [ -n "$SSH_CLIENT" ]; then
+    case "$HOSTNAME" in
+      "simon-linuxdesktop")
+        device_symbol="🖥️ "
+        ;;
+      "simon-thinkpad")
+        device_symbol="💻 "
+        ;;
+      *)
+        device_symbol="⚡ "
+        ;;
+    esac
+  fi
 
   local d="$(pwd  2>/dev/null)"; # d = current working directory
   local tb="$(git symbolic-ref HEAD 2>/dev/null)";
@@ -140,9 +156,9 @@ __prompt ()
       b_prompt="[${b}${ahead_r}${behind_r}${u_prompt}]"
     fi
     if [ -n "$s" ]; then
-      PS1="\[${bold}\]\[${c_blue}\]\w \[${c_red}\]${b_prompt}\[${c_yellow}\]${p_prompt} \[${c_green}\]\$ \[${c_clear}\]\[${normal}\]"
+      PS1="\[${bold}\]\[${c_blue}\]${device_symbol}\w \[${c_red}\]${b_prompt}\[${c_yellow}\]${p_prompt} \[${c_green}\]\$ \[${c_clear}\]\[${normal}\]"
     else
-      PS1="\[${bold}\]\[${c_blue}\]\w \[${c_green}\]${b_prompt}\[${c_yellow}\]${p_prompt} \[${c_green}\]\$ \[${c_clear}\]\[${normal}\]"
+      PS1="\[${bold}\]\[${c_blue}\]${device_symbol}\w \[${c_green}\]${b_prompt}\[${c_yellow}\]${p_prompt} \[${c_green}\]\$ \[${c_clear}\]\[${normal}\]"
     fi
     ;;
   esac
