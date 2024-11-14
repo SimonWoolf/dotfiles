@@ -73,7 +73,7 @@ for_window [title="^launcher$"] floating enable, border none
 bindsym $mod+space exec "rofi -show window -fuzzy -font 'Meslo LG S for Powerline 12' -color-normal '#222222,#dddddd,#333333,#687e85,#eee8d5' -color-window '#222222,#000000,#222222'"
 
 # cursor theme
-seat seat0 xcursor_theme Adwaita 48
+seat seat0 xcursor_theme Adwaita 28
 
 set $gnome-schema org.gnome.desktop.interface
 exec_always {

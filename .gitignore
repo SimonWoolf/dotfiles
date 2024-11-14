@@ -11,6 +11,7 @@ session.vim
 *.swp
 *.swo
 tmp.test.js
+tmp.ts
 test/connection/tmp.js
 .fuse_hidden*
 tmp.js
