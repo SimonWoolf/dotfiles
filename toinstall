@@ -38,6 +38,7 @@ youtube-dl
 htop
 xfce4-volumed
 docker-compose
+wl-clipboard
 
 # zoom deps:
 libgl1-mesa-glx
