@@ -1,29 +1,26 @@
-bindsym F7 exec setxkbmap gb -variant colemak && xmodmap ~/.XmodmapForLaptopKeyboard
-bindsym F9 exec /home/simon/dev/dotfiles/laptop-primary.sh
-exec keyboard.sh &
-exec --no-startup-id /home/simon/dev/dotfiles/laptop-primary-noi3.sh &
-
 font pango:Meslo LG S for Powerline 12
 
 # move focus to other monitor
-bindsym $mod+Prior focus output up
-bindsym $mod+Next focus output down
-bindsym $mod+k focus up
-bindsym $mod+j focus down
+bindsym $mod+Prior focus output left
+bindsym $mod+Next focus output right
+bindsym $mod+j focus output right
+bindsym $mod+k focus output left
 
 # set things to workspaces
 # external
-workspace 1 output DP-3
-workspace 2 output DP-3
-workspace 3 output DP-3
-workspace 4 output DP-3
-workspace 5 output DP-3
+workspace 1 output DP-1
+workspace 2 output DP-1
+workspace 3 output DP-1
+workspace 4 output DP-1
+workspace 5 output DP-1
 # laptop screen:
-workspace 6 output eDP-1
-workspace 7 output eDP-1
-workspace 8 output eDP-1
-workspace 9 output eDP-1
-workspace 10 output eDP-1
+workspace 6 output DP-2
+workspace 7 output DP-2
+workspace 8 output DP-2
+workspace 9 output DP-2
+workspace 10 output DP-2
+
+bindsym $mod+m exec "audioswitch"
 
 # night mode
 # on laptop, no point adjusting the brightness in xrandr, inefficient use of
@@ -31,23 +28,18 @@ workspace 10 output eDP-1
 bindsym $mod+n exec "killall redshift; redshift -x"
 bindsym $mod+e exec "killall redshift; redshift -P -r -O 5000"
 bindsym $mod+i exec "killall redshift; redshift -P -r -O 4000"
-bindsym $mod+o exec "killall redshift; redshift -P -r -O 3500"
-bindsym $mod+apostrophe exec "killall redshift; redshift -P -r -O 3000"
+bindsym $mod+o exec "killall redshift; redshift -P -r -O 3500 -g 1:0.9:0.9 -b 0.9"
+bindsym $mod+apostrophe exec "killall redshift; redshift -P -r -O 3000 -g 1:0.8:0.8 -b 0.8"
 
 bar {
     swaybar_command waybar
 }
 
-input type:keyboard {
+input * {
   xkb_layout "gb"
-  xkb_variant "custom"
+  # xkb_variant "custom"
 }
 
-input type:touchpad {
-  tap_button_map "lrm"
-  click_method "clickfinger"
-  # tap "enabled"
-}
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
@@ -71,15 +63,45 @@ for_window [title="^launcher$"] floating enable, border none
 bindsym $mod+space exec "rofi -show window -fuzzy -font 'Meslo LG S for Powerline 12' -color-normal '#222222,#dddddd,#333333,#687e85,#eee8d5' -color-window '#222222,#000000,#222222'"
 
 # cursor theme
-seat seat0 xcursor_theme Adwaita 48
+# seat seat0 xcursor_theme Adwaita 48
 
-set $gnome-schema org.gnome.desktop.interface
-exec_always {
-    gsettings set $gnome-schema cursor-theme Adwaita
-    gsettings set $gnome-schema cursor-size 48
-}
+# set $gnome-schema org.gnome.desktop.interface
+# exec_always {
+#     gsettings set $gnome-schema cursor-theme Adwaita
+#     gsettings set $gnome-schema cursor-size 48
+# }
+
+# lockscreen
+# set $lock_bg ~/Pictures/lockscreen.jpg
 
 exec swayidle -w \
          timeout 600 'swaylock -f -c 888888' \
          before-sleep 'swaylock -f -c 888888' \
          after-resume '' # could be useful
+
+output DP-1 scale 1.1
+
+input "1386:789:Wacom_Intuos_Pro_M_Pen" {
+  tap_button_map lmr
+}
+
+input "1386:789:Wacom_Intuos_Pro_M_Finger" {
+    click_method clickfinger
+    drag enabled
+    scroll_method two_finger
+    natural_scroll enabled
+    tap enabled
+    accel_profile adaptive
+}
+input "1386:789:Wacom_Intuos_Pro_M_Pad" {
+    click_method clickfinger
+    scroll_method two_finger
+    # natural_scroll enabled
+    tap enabled
+    # drag enabled
+    dwt enable
+}
+
+
+bindsym --input-device=1386:789:Wacom_Intuos_Pro_M_Pen BTN_STYLUS2 "click button3"
+bindsym --input-device=1386:789:Wacom_Intuos_Pro_M_Pen BTN_STYLUS "click button2"

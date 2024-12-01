@@ -232,3 +232,7 @@ for_window [title="Firefox — Sharing Indicator"] move position 0 0
 client.focused          #4c7899 #80acd0 #000000 #2e9ef4 #285577
 client.focused_inactive #333333 #5f676a #ffffff #484e50 #5f676a
 client.unfocused        #333333 #222222 #ffffff #292d2e #222222
+
+bindsym $mod+minus exec "dunstctl close-all"
+bindsym $mod+slash exec "dunstctl history-pop"
+bindsym $mod+shift+i exec "dunstctl context"

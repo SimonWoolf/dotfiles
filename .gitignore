@@ -13,6 +13,7 @@ session.vim
 tmp.test.js
 test/connection/tmp.js
 .fuse_hidden*
+tmp.js
 
 i3_config
 sway_config
