@@ -43,7 +43,6 @@ end
 `ln -fs ~/dev/dotfiles/mimeapps.list ~/.local/share/applications/mimeapps.list`
 `ln -fs ~/dev/dotfiles/alacritty.toml ~/.config/alacritty/alacritty.toml`
 `ln -fs ~/dev/dotfiles/dunstrc ~/.config/dunst/dunstrc`
-`ln -fs ~/dev/dotfiles/kanshi_config ~/.config/kanshi/config`
 `ln -fs ~/dev/dotfiles/default-golang-pkgs ~/.default-golang-pkgs`
 # xdg-utils deletes and recreates ~/.config/mimeapps.list when it writes to it, which will break symbolic links
 `cp ~/dev/dotfiles/mimeapps.list ~/.config/mimeapps.list`
@@ -58,7 +57,6 @@ end
 `mkdir -p ~/.vim/undodir/`
 `mkdir -p ~/.vim/after/plugin/`
 `ln -fs ~/dev/dotfiles/vimrc_after.vim ~/.vim/after/plugin/vimrc_after.vim`
-`ln -fs ~/dev/dotfiles/ginit.vim ~/.config/nvim/ginit.vim`
 `rm ~/.vim/pack/synced`
 # -T stops ln treating synced/ as a directory rather than a target name
 `ln -fs -T ~/dev/dotfiles/vim_plugins/ ~/.vim/pack/synced`
@@ -69,10 +67,13 @@ if desktop?
   `cat noedit i3_config_base i3_config_desktop > i3_config`
   `cat noedit i3status_config_base i3status_config_desktop > i3status_config`
   `cat noedit i3_config_base sway_config_desktop > sway_config`
+  `ln -fs ~/dev/dotfiles/ginit-desktop.vim ~/.config/nvim/ginit.vim`
 else
   `cat noedit i3_config_base i3_config_laptop > i3_config`
   `cat noedit i3_config_base sway_config_laptop > sway_config`
   `ln -fs ~/dev/dotfiles/xkb_custom_layout ~/.config/xkb/symbols/gb`
+  `ln -fs ~/dev/dotfiles/ginit-laptop.vim ~/.config/nvim/ginit.vim`
+`ln -fs ~/dev/dotfiles/kanshi_config ~/.config/kanshi/config`
   # `ln -fs ~/.XmodmapForLaptopKeyboard ~/.Xmodmap`
   if thinkpad?
     `cat noedit i3status_config_base i3status_config_thinkpad i3status_config_laptop > i3status_config`

@@ -25,6 +25,8 @@ workspace 8 output eDP-1
 workspace 9 output eDP-1
 workspace 10 output eDP-1
 
+bindsym $mod+Shift+r reload
+
 # night mode
 # on laptop, no point adjusting the brightness in xrandr, inefficient use of
 # battery - just adjust colour temp and do brightness with backlight adjustment

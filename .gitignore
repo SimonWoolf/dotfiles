@@ -20,3 +20,4 @@ sway_config
 i3status_config
 
 .env
+.aider*
