@@ -12,6 +12,7 @@ session.vim
 *.swo
 tmp.test.js
 tmp.ts
+tmp_test.go
 test/connection/tmp.js
 .fuse_hidden*
 tmp.js
