@@ -39,6 +39,7 @@ bar {
 
 input * {
   xkb_layout "gb"
+  xkb_options "compose:paus"
   # xkb_variant "custom"
 }
 
@@ -80,8 +81,6 @@ exec swayidle -w \
          timeout 600 'swaylock -f -c 888888' \
          before-sleep 'swaylock -f -c 888888' \
          after-resume '' # could be useful
-
-output DP-1 scale 1.1
 
 input "1386:789:Wacom_Intuos_Pro_M_Pen" {
   tap_button_map lmr
