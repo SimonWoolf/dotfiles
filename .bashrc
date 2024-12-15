@@ -187,6 +187,7 @@ alias cd.="cd ."
 alias ipa="ip -color -br a"
 alias nv="nvim-qt"
 alias v="nvim-qt"
+alias sv="sudo -E nvim-qt "
 
 alias playding="mplayer /home/simon/dev/dotfiles/pomodoro-finish.wav -speed 5 -volume 50"
 alias playgong="mplayer /home/simon/dev/dotfiles/pomodoro-finish.wav -volume 50"
@@ -317,8 +318,16 @@ function mdrender() {
 # added by travis gem
 [ -f /home/simon/.travis/travis.sh ] && source /home/simon/.travis/travis.sh
 
-# Allow firefox to use wayland if it's running under that, or it takes like 30s to start
-MOZ_ENABLE_WAYLAND=1
+if [[ "$XDG_SESSION_TYPE" = "wayland" ]]; then
+  # Allow firefox to use wayland if it's running under that, or it takes like
+  # 30s to start
+  export MOZ_ENABLE_WAYLAND=1
+  # on desktop, alacritty is launched under xwayland, using WAYLAND_DISPLAY= ,
+  # else it doesn't handle tablet pen inputs correctly. But we don't want
+  # everything launched through the terminal to use xwayland, so re-set
+  # WAYLAND_DISPLAY here.
+  export WAYLAND_DISPLAY=wayland-1
+fi
 
 # export CC="ccache clang"
 # export CXX="ccache clang++"
