@@ -1,3 +1,5 @@
+exec --no-startup-id pactl set-default-sink alsa_output.usb-ACTIONS_Pebble_V3-00.analog-stereo
+
 font pango:Meslo LG S for Powerline 12
 
 # move focus to other monitor
