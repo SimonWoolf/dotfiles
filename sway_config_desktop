@@ -37,6 +37,19 @@ bindsym $mod+apostrophe exec "killall redshift; redshift -P -r -O 3000 -g 1:0.8:
 
 bar {
     swaybar_command waybar
+    # status_command i3status | ~/dev/dotfiles/bin/custom_i3_status.rb 2> i3status.log
+    # tray_output primary
+    # position top
+    # tray_padding 2
+    # separator_symbol "╱"
+    # colors {
+    #     separator #707070
+    #     # <colorclass> <border> <background> <text>
+    #     focused_workspace  #4c78ff #285577 #ffffff
+    #     active_workspace   #333333 #5f676a #ffffff
+    #     inactive_workspace #333333 #222222 #ffffff
+    # }
+    # font pango:Meslo LG S for Powerline 12
 }
 
 input * {
@@ -85,21 +98,19 @@ exec swayidle -w \
          after-resume '' # could be useful
 
 input "1386:789:Wacom_Intuos_Pro_M_Pen" {
-  tap_button_map lmr
+  # tap_button_map lmr
 }
 
 input "1386:789:Wacom_Intuos_Pro_M_Finger" {
     click_method clickfinger
     drag enabled
     scroll_method two_finger
-    natural_scroll enabled
     tap enabled
     accel_profile adaptive
 }
 input "1386:789:Wacom_Intuos_Pro_M_Pad" {
     click_method clickfinger
     scroll_method two_finger
-    # natural_scroll enabled
     tap enabled
     # drag enabled
     dwt enable

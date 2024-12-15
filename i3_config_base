@@ -1,7 +1,7 @@
 # start xfce daemons
-exec --no-startup-id xfsettingsd --sm-client-disable &
-exec --no-startup-id xfce4-volumed &
-exec --no-startup-id xfce4-power-manager &
+# exec --no-startup-id xfsettingsd --sm-client-disable &
+# exec --no-startup-id xfce4-volumed &
+# exec --no-startup-id xfce4-power-manager &
 exec --no-startup-id nm-applet &
 #exec xfce4-panel --disable-wm-check &
 exec --no-startup-id tt_socket_wrapper &
