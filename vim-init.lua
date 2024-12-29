@@ -331,3 +331,171 @@ vim.api.nvim_create_autocmd('QuickFixCmdPost', {
 
 -- fugitive
 vim.keymap.set('n', '<leader>gb', ':Git blame<CR>')
+
+local function swap_lines(n1, n2)
+ local line1 = vim.fn.getline(n1)
+ local line2 = vim.fn.getline(n2)
+ vim.fn.setline(n1, line2)
+ vim.fn.setline(n2, line1)
+end
+
+local function swap_up()
+ local n = vim.fn.line('.')
+ if n == 1 then return end
+ swap_lines(n, n - 1)
+ vim.cmd(tostring(n - 1))
+end
+
+local function swap_down()
+ local n = vim.fn.line('.')
+ if n == vim.fn.line('$') then return end
+ swap_lines(n, n + 1)
+ vim.cmd(tostring(n + 1))
+end
+
+vim.keymap.set('n', '<a-k>', swap_up, {silent = true})
+vim.keymap.set('n', '<a-j>', swap_down, {silent = true})
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- Setup lazy.nvim
+require("lazy").setup({
+  defaults = {
+    lazy = false,
+  },
+  spec = {
+    { 'tpope/vim-fugitive' },
+    { 'tpope/vim-surround' },
+    { 'tpope/vim-endwise' },
+    { 'editorconfig/editorconfig-vim' },
+    { 'junegunn/vim-easy-align' },
+    { 'ddollar/nerdcommenter' },
+    { 'easymotion/vim-easymotion' },
+    { 'bronson/vim-trailing-whitespace' },
+    { 'mbbill/undotree' },
+    { 'itchyny/lightline.vim' },
+    { 'ctrlpvim/ctrlp.vim' },
+    { 'dense-analysis/ale' },
+    { 'mmalecki/vim-node.js' },
+    { 'hwayne/tla.vim' },
+    { 'github/copilot.vim' },
+    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+    {
+      'neovim/nvim-lspconfig',
+      config = function()
+        lspconfig = require('lspconfig');
+        local capabilities = require('cmp_nvim_lsp').default_capabilities()
+        lspconfig.ts_ls.setup{
+          capabilities = capabilities,
+        }
+        lspconfig.gopls.setup({
+          capabilities = capabilities,
+          settings = {
+            gopls = {
+              analyses = { unusedparams = true },
+              staticcheck = true,
+            },
+          },
+        })
+        vim.keymap.set('n', '<C-[>', vim.lsp.buf.type_definition)
+        vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition) -- alternative to C-]
+        vim.keymap.set('n', '<leader>gtd', vim.lsp.buf.type_definition) -- alternative to C-[
+        vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references)
+        vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation)
+        vim.keymap.set('n', '<leader>gc', vim.lsp.buf.incoming_calls)
+        vim.keymap.set('n', '<leader><leader>', vim.lsp.buf.hover)
+      end
+    },
+    {
+      'hrsh7th/nvim-cmp',
+      dependencies = {
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-buffer',
+      },
+      lazy = false,
+      config = function()
+        local cmp = require('cmp')
+        cmp.setup({
+          mapping = cmp.mapping.preset.insert({
+            ['<C-S-n>'] = cmp.mapping.scroll_docs(-1),
+            ['<C-o>'] = cmp.mapping.complete(),
+          }),
+          completion = {
+            autocomplete = false
+          },
+          sources = {
+            { name = 'nvim_lsp' },
+            { name = 'buffer' },
+          }
+        })
+      end
+    },
+    {
+      "yetone/avante.nvim",
+      event = "VeryLazy",
+      lazy = false,
+      version = false, -- set this if you want to always pull the latest change
+      opts = {
+        -- add any opts here
+      },
+      -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+      build = "make",
+      dependencies = {
+        "stevearc/dressing.nvim",
+        "nvim-lua/plenary.nvim",
+        "MunifTanjim/nui.nvim",
+        --- The below dependencies are optional,
+        "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+        "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+        "zbirenbaum/copilot.lua", -- for providers='copilot'
+        {
+          -- support for image pasting
+          "HakonHarnes/img-clip.nvim",
+          event = "VeryLazy",
+          opts = {
+            default = {
+              embed_image_as_base64 = false,
+              prompt_for_file_name = false,
+              drag_and_drop = {
+                insert_mode = true,
+              },
+            },
+          },
+        },
+        {
+          -- Make sure to set this up properly if you have lazy=true
+          'MeanderingProgrammer/render-markdown.nvim',
+          opts = {
+            file_types = { "markdown", "Avante" },
+          },
+          ft = { "markdown", "Avante" },
+        },
+      },
+    }
+
+  },
+  -- Configure any other settings here. See the documentation for more details.
+  -- colorscheme that will be used when installing plugins.
+  install = { colorscheme = { "lucius" } },
+  -- automatically check for plugin updates
+  checker = { enabled = true },
+})
+
+vim.cmd [[
+  hi NormalFloat guibg=#555555 guifg=#eeeeee
+  hi FloatBorder guibg=#000000 guifg=#000000
+]]

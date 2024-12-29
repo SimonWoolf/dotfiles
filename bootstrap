@@ -35,7 +35,8 @@ end
 `mkdir -p ~/.config/dunst/`
 `mkdir -p ~/.config/xkb/symbols/`
 `mkdir -p ~/.config/nvim/`
-`ln -fs ~/dev/dotfiles/init.lua ~/.config/nvim/init.lua`
+`ln -fs ~/dev/dotfiles/vim-init.lua ~/.config/nvim/init.lua`
+`ln -fs ~/dev/dotfiles/lazy-lock.json ~/.config/nvim/lazy-lock.json`
 `ln -fs ~/dev/dotfiles/i3_config ~/.config/i3/config`
 `ln -fs ~/dev/dotfiles/sway_config ~/.config/sway/config`
 `ln -fs ~/dev/dotfiles/waybar_config ~/.config/waybar/config`
