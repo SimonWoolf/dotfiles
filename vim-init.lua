@@ -64,7 +64,7 @@ if vim.fn.has('gui_running') == 1 then
   end
 end
 
-vim.cmd('colorscheme lucius')
+vim.opt.termguicolors = true
 vim.opt.background = 'light'
 
 -- core movement/editing maps
@@ -237,7 +237,7 @@ vim.keymap.set('i', '<C-Tab>', '<M-]>')
 vim.keymap.set('i', '<S-Tab>', '<M-Right>')
 
 -- lightline
-vim.g.lightline = { colorscheme = 'wombat', enable = { tabline = false } }
+vim.g.lightline = { colorscheme = 'dayfox', enable = { tabline = false } }
 
 -- misc plugin settings
 vim.g.EditorConfig_exclude_patterns = {'fugitive://.*'}
@@ -485,17 +485,16 @@ require("lazy").setup({
           ft = { "markdown", "Avante" },
         },
       },
-    }
-
+    },
+    {
+      "EdenEast/nightfox.nvim",
+      config = function() vim.cmd('colorscheme dayfox') end,
+      priority = 1000  -- load before everything else
+    },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "lucius" } },
+  install = { colorscheme = { "dayfox" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
-
-vim.cmd [[
-  hi NormalFloat guibg=#555555 guifg=#eeeeee
-  hi FloatBorder guibg=#000000 guifg=#000000
-]]
