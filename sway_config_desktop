@@ -93,7 +93,7 @@ bindsym $mod+space exec "rofi -show window -fuzzy -font 'Meslo LG S for Powerlin
 # set $lock_bg ~/Pictures/lockscreen.jpg
 
 exec swayidle -w \
-         timeout 600 'swaylock -f -c 888888' \
+         timeout 1800 'swaylock -f -c 888888' \
          before-sleep 'swaylock -f -c 888888' \
          after-resume '' # could be useful
 
@@ -115,7 +115,3 @@ input "1386:789:Wacom_Intuos_Pro_M_Pad" {
     # drag enabled
     dwt enable
 }
-
-
-bindsym --input-device=1386:789:Wacom_Intuos_Pro_M_Pen BTN_STYLUS2 "click button3"
-bindsym --input-device=1386:789:Wacom_Intuos_Pro_M_Pen BTN_STYLUS "click button2"
