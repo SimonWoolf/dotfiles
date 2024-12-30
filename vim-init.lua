@@ -496,5 +496,5 @@ require("lazy").setup({
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "dayfox" } },
   -- automatically check for plugin updates
-  checker = { enabled = true },
+  checker = { enabled = false, notify = false },
 })
