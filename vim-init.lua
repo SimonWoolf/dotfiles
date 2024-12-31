@@ -237,7 +237,8 @@ vim.keymap.set('i', '<C-Tab>', '<M-]>')
 vim.keymap.set('i', '<S-Tab>', '<M-Right>')
 
 -- lightline
-vim.g.lightline = { colorscheme = 'dayfox', enable = { tabline = false } }
+-- nb: deliberately not using wildcharm, whose lightline colorscheme isn't good
+vim.g.lightline = { colorscheme = 'edge', enable = { tabline = false } }
 
 -- misc plugin settings
 vim.g.EditorConfig_exclude_patterns = {'fugitive://.*'}
@@ -309,8 +310,8 @@ vim.keymap.set('n', '<leader>ul', ':t.<CR>Vr=', {silent = true})
 vim.keymap.set('n', '<leader>fc', '/\\v^[<=>]{7}( .*\\|$)<CR>', {silent = true})
 
 -- easy-align binds
-vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)')
-vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)')
+-- vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)')
+-- vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)')
 
 -- save on ctrl-;
 vim.keymap.set('n', '<C-;>', ':update<CR>')
@@ -332,6 +333,15 @@ vim.api.nvim_create_autocmd('QuickFixCmdPost', {
 -- fugitive
 vim.keymap.set('n', '<leader>gb', ':Git blame<CR>')
 
+-- view current highlight group
+function syn_group()
+    local s = vim.fn.synID(vim.fn.line('.'), vim.fn.col('.'), 1)
+    print(vim.fn.synIDattr(s, 'name') .. ' -> ' .. vim.fn.synIDattr(vim.fn.synIDtrans(s), 'name'))
+end
+vim.api.nvim_create_user_command('SynGroup', function() syn_group() end, {})
+vim.keymap.set('n', '<leader>h', ':SynGroup<CR>')
+
+-- swap-lines
 local function swap_lines(n1, n2)
  local line1 = vim.fn.getline(n1)
  local line2 = vim.fn.getline(n2)
@@ -488,13 +498,18 @@ require("lazy").setup({
     },
     {
       "EdenEast/nightfox.nvim",
-      config = function() vim.cmd('colorscheme dayfox') end,
+      -- config = function() vim.cmd('colorscheme wildcharm') end,
+      -- priority = 1000  -- load before everything else
+    },
+    {
+      "sainnhe/edge",
+      config = function() vim.cmd('colorscheme edge') end,
       priority = 1000  -- load before everything else
     },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "dayfox" } },
+  install = { colorscheme = { "edge" } },
   -- automatically check for plugin updates
   checker = { enabled = false, notify = false },
 })
