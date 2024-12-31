@@ -50,13 +50,6 @@ vim.opt.wildmode = 'longest:full,full'
 vim.opt.shortmess:remove('options')
 vim.g.instant_log = 1
 
-vim.keymap.set('n', '<C-a>', ':lprev<CR>')
-vim.keymap.set('n', '<C-s>', ':lnext<CR>')
-vim.keymap.set('n', '<C-f>', ':LFix<CR>')
-
-vim.keymap.set('n', '<C-x>', ':ALENextWrap<CR>')
-vim.keymap.set('n', '<C-z>', ':ALEPrevWrap<CR>')
-
 if vim.fn.has('gui_running') == 1 then
   vim.opt.guioptions:remove('e')
   if vim.fn.has('gui_gtk') == 1 then
@@ -123,30 +116,6 @@ function Repl()
 end
 vim.keymap.set('v', 'p', Repl, {silent = true, expr = true})
 
--- quickfix toggle
-function QFixToggle()
-  if vim.g.qfix_win ~= nil then
-    vim.cmd('cclose')
-    vim.g.qfix_win = nil
-  else
-    vim.cmd('copen 10')
-    vim.g.qfix_win = vim.fn.bufnr('$')
-  end
-end
-vim.api.nvim_create_user_command('QFix', function(opts) QFixToggle() end, {})
-
--- location list toggle
-function LFixToggle()
-  if vim.g.loc_win ~= nil then
-    vim.cmd('lclose')
-    vim.g.loc_win = nil
-  else
-    vim.cmd('lopen 10')
-    vim.g.loc_win = vim.fn.bufnr('$')
-  end
-end
-vim.api.nvim_create_user_command('LFix', function(opts) LFixToggle() end, {})
-
 -- elm formatting
 function ElmFormat()
   local curw = {}
@@ -168,19 +137,6 @@ end
 
 -- easymotion
 vim.g.EasyMotion_leader_key = '<Leader>'
-
--- ctrlp
-vim.g.ctrlp_custom_ignore = {
-  dir = [[\v/(\.git|\.hg|\.svn|node_modules|bower_components|tmp|dist|spec/fixtures/vcr_cassettes|public/assets|ebin|toolchain)$]],
-  file = [[\v\.(exe|so|dll)$]]
-}
-vim.g.ctrlp_working_path_mode = 'ra'
-vim.g.ctrlp_root_markers = {'.git', 'Makefile', 'package.json', 'REVISION'}
-vim.g.ctrlp_switch_buffer = 0
-vim.g.ctrlp_max_files = 0
-vim.g.ctrlp_max_depth = 30
-vim.keymap.set('n', '<C-t>', ':CtrlPTag<CR>')
-vim.keymap.set('n', '<C-b>', ':CtrlPBuffer<CR>')
 
 -- logger folding for ts/js
 vim.api.nvim_create_autocmd('FileType', {
@@ -237,7 +193,6 @@ vim.keymap.set('i', '<C-Tab>', '<M-]>')
 vim.keymap.set('i', '<S-Tab>', '<M-Right>')
 
 -- lightline
--- nb: deliberately not using wildcharm, whose lightline colorscheme isn't good
 vim.g.lightline = { colorscheme = 'edge', enable = { tabline = false } }
 
 -- misc plugin settings
@@ -249,14 +204,6 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = {'typescript', 'javascript'},
   callback = function() vim.opt_local.textwidth = 90 end
 })
-
--- ale highlights
-vim.cmd([[
-  highlight ALEErrorSign guifg=LightGrey ctermfg=LightGrey
-  highlight ALEWarningSign guifg=LightGrey ctermfg=LightGrey
-  highlight ALEError guifg=LightGrey ctermfg=LightGrey
-  highlight ALEWarning guifg=LightGrey ctermfg=LightGrey
-]])
 
 -- tab styling
 vim.cmd([[
@@ -334,12 +281,12 @@ vim.api.nvim_create_autocmd('QuickFixCmdPost', {
 vim.keymap.set('n', '<leader>gb', ':Git blame<CR>')
 
 -- view current highlight group
-function syn_group()
-    local s = vim.fn.synID(vim.fn.line('.'), vim.fn.col('.'), 1)
-    print(vim.fn.synIDattr(s, 'name') .. ' -> ' .. vim.fn.synIDattr(vim.fn.synIDtrans(s), 'name'))
-end
-vim.api.nvim_create_user_command('SynGroup', function() syn_group() end, {})
-vim.keymap.set('n', '<leader>h', ':SynGroup<CR>')
+-- function syn_group()
+--     local s = vim.fn.synID(vim.fn.line('.'), vim.fn.col('.'), 1)
+--     print(vim.fn.synIDattr(s, 'name') .. ' -> ' .. vim.fn.synIDattr(vim.fn.synIDtrans(s), 'name'))
+-- end
+-- vim.api.nvim_create_user_command('SynGroup', function() syn_group() end, {})
+-- vim.keymap.set('n', '<leader>h', ':SynGroup<CR>')
 
 -- swap-lines
 local function swap_lines(n1, n2)
@@ -398,8 +345,6 @@ require("lazy").setup({
     { 'bronson/vim-trailing-whitespace' },
     { 'mbbill/undotree' },
     { 'itchyny/lightline.vim' },
-    { 'ctrlpvim/ctrlp.vim' },
-    { 'dense-analysis/ale' },
     { 'mmalecki/vim-node.js' },
     { 'hwayne/tla.vim' },
     { 'github/copilot.vim' },
@@ -495,6 +440,43 @@ require("lazy").setup({
           ft = { "markdown", "Avante" },
         },
       },
+    },
+    {
+    'nvim-telescope/telescope.nvim', branch = '0.1.x',
+      dependencies = {
+        'nvim-lua/plenary.nvim',
+        'nvim-tree/nvim-web-devicons',
+        'BurntSushi/ripgrep',
+        'nvim-telescope/telescope-fzf-native.nvim',
+      },
+      config = function()
+        local builtin = require('telescope.builtin')
+
+        -- make ctrl-p fall back to find_files if git_files can't find a .git directory
+        -- cache the results of "git rev-parse"
+        local is_inside_work_tree = {}
+        local project_files = function()
+          local opts = {} -- define here if you want to define something
+
+          local cwd = vim.fn.getcwd()
+          if is_inside_work_tree[cwd] == nil then
+            vim.fn.system("git rev-parse --is-inside-work-tree")
+            is_inside_work_tree[cwd] = vim.v.shell_error == 0
+          end
+
+          if is_inside_work_tree[cwd] then
+            require("telescope.builtin").git_files(opts)
+          else
+            require("telescope.builtin").find_files(opts)
+          end
+        end
+
+        vim.keymap.set('n', '<C-p>', project_files, { desc = 'Telescope find files' })
+        vim.keymap.set('n', '<C-b>', builtin.buffers, { desc = 'Telescope buffers' })
+        vim.keymap.set('n', '<C-g>', builtin.live_grep, { desc = 'Telescope live grep' })
+        vim.keymap.set('n', '<C-f>', builtin.diagnostics, { desc = 'Telescope diagnostics' })
+        vim.keymap.set('n', '<leader>h', builtin.help_tags, { desc = 'Telescope help tags' })
+      end,
     },
     {
       "EdenEast/nightfox.nvim",
