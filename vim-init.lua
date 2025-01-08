@@ -373,6 +373,8 @@ require("lazy").setup({
         vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation)
         vim.keymap.set('n', '<leader>gc', vim.lsp.buf.incoming_calls)
         vim.keymap.set('n', '<leader><leader>', vim.lsp.buf.hover)
+        vim.keymap.set('n', '<C-c>', vim.diagnostic.goto_next)
+        vim.keymap.set('n', '<C-x>', vim.diagnostic.goto_prev)
       end
     },
     {
@@ -442,7 +444,7 @@ require("lazy").setup({
       },
     },
     {
-    'nvim-telescope/telescope.nvim', branch = '0.1.x',
+    'nvim-telescope/telescope.nvim', branch = 'master',
       dependencies = {
         'nvim-lua/plenary.nvim',
         'nvim-tree/nvim-web-devicons',
@@ -451,6 +453,17 @@ require("lazy").setup({
       },
       config = function()
         local builtin = require('telescope.builtin')
+        require('telescope').setup({
+          defaults = {
+            wrap_results = true,
+            layout_strategy = 'vertical',
+            path_display = { 'smart' },
+            layout_config = {
+              width = 0.9,
+              height = 0.9,
+            },
+          },
+        })
 
         -- make ctrl-p fall back to find_files if git_files can't find a .git directory
         -- cache the results of "git rev-parse"
@@ -476,6 +489,7 @@ require("lazy").setup({
         vim.keymap.set('n', '<C-g>', builtin.live_grep, { desc = 'Telescope live grep' })
         vim.keymap.set('n', '<C-f>', builtin.diagnostics, { desc = 'Telescope diagnostics' })
         vim.keymap.set('n', '<leader>h', builtin.help_tags, { desc = 'Telescope help tags' })
+
       end,
     },
     {
