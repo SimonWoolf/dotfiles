@@ -43,7 +43,6 @@ end
 `ln -fs ~/dev/dotfiles/waybar_style.css ~/.config/waybar/style.css`
 `ln -fs ~/dev/dotfiles/i3status_config ~/.config/i3status/config`
 `ln -fs ~/dev/dotfiles/mimeapps.list ~/.local/share/applications/mimeapps.list`
-`ln -fs ~/dev/dotfiles/alacritty.toml ~/.config/alacritty/alacritty.toml`
 `ln -fs ~/dev/dotfiles/dunstrc ~/.config/dunst/dunstrc`
 `ln -fs ~/dev/dotfiles/default-golang-pkgs ~/.default-golang-pkgs`
 # xdg-utils deletes and recreates ~/.config/mimeapps.list when it writes to it, which will break symbolic links
@@ -70,13 +69,14 @@ if desktop?
   `cat noedit i3status_config_base i3status_config_desktop > i3status_config`
   `cat noedit i3_config_base sway_config_desktop > sway_config`
   `ln -fs ~/dev/dotfiles/ginit-desktop.vim ~/.config/nvim/ginit.vim`
+  `ln -fs ~/dev/dotfiles/alacritty-desktop.toml ~/.config/alacritty/alacritty.toml`
 else
   `cat noedit i3_config_base i3_config_laptop > i3_config`
   `cat noedit i3_config_base sway_config_laptop > sway_config`
   `ln -fs ~/dev/dotfiles/xkb_custom_layout ~/.config/xkb/symbols/gb`
   `ln -fs ~/dev/dotfiles/ginit-laptop.vim ~/.config/nvim/ginit.vim`
-`ln -fs ~/dev/dotfiles/kanshi_config ~/.config/kanshi/config`
-  # `ln -fs ~/.XmodmapForLaptopKeyboard ~/.Xmodmap`
+  `ln -fs ~/dev/dotfiles/kanshi_config ~/.config/kanshi/config`
+  `ln -fs ~/dev/dotfiles/alacritty-laptop.toml ~/.config/alacritty/alacritty.toml`
   if thinkpad?
     `cat noedit i3status_config_base i3status_config_thinkpad i3status_config_laptop > i3status_config`
   else
