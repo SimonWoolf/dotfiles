@@ -168,22 +168,17 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- ale
-vim.g.ale_linters = {
-  -- javascript = {'eslint'},
-  typescript = {'ts_ls'},
-  go = {'govet'},
-}
-vim.g.ale_linters_explicit = 1
-vim.g.ale_lint_on_text_changed = 0
-vim.g.ale_lint_on_filetype_changed = 0
-vim.g.ale_lint_on_enter = 0
-vim.g.ale_lint_on_save = 1
-vim.g.ale_lint_on_insert_leave = 0
-
 vim.g.go_doc_keywordprg_enabled = 0
 vim.g.go_def_mapping_enabled = 0
 vim.g.go_auto_type_info = 1
 vim.g.go_gopls_local = "ably"
+
+vim.api.nvim_create_augroup('AutoFormatting', {})
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*.go',
+  group = 'AutoFormatting',
+  callback = function() vim.lsp.buf.format({ async = false}) end,
+})
 
 -- copilot
 vim.g.copilot_node_command = "~/.asdf/installs/nodejs/20.10.0/bin/node"
@@ -367,6 +362,7 @@ require("lazy").setup({
           },
         })
         vim.keymap.set('n', '<C-[>', vim.lsp.buf.type_definition)
+        vim.keymap.set('n', '<C-]>', vim.lsp.buf.definition)
         vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition) -- alternative to C-]
         vim.keymap.set('n', '<leader>gtd', vim.lsp.buf.type_definition) -- alternative to C-[
         vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references)
