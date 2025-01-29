@@ -208,8 +208,9 @@ for_window [title="^zoom$"] border none, floating enable
 # Licensed Account"?
 for_window [title="^Zoom - Licensed Account$"] floating disable
 for_window [title="^Zoom - Free Account$"] floating disable
-for_window [title="^Zoom Workplace.*"] floating disable
+for_window [title="^Zoom Workplace - Free account$"] floating disable
 no_focus   [title="^zoom$"]
+no_focus   [title="^Zoom Workplace$"]
 
 no_focus   [class="^Xfce4-notifyd$" ]
 for_window [class="^blueman-manager$"] floating enable
