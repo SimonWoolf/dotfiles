@@ -201,17 +201,6 @@ bindsym F8 mode "tt"
 
 for_window [title="^File Operation Progress$"] floating enable
 for_window [title="^Current Media Information$"] floating enable
-# "zoom" is dialogue boxes, the full thing is "Zoom Meeting"
-for_window [title="^zoom$"] border none, floating enable
-# we shouldn't need this too. but if we don't the main window goes floating. I
-# guess it starts out as "zoom" and then changes its net_wm_name to "Zoom -
-# Licensed Account"?
-for_window [title="^Zoom - Licensed Account$"] floating disable
-for_window [title="^Zoom - Free Account$"] floating disable
-for_window [title="^Zoom Workplace - Free account$"] floating disable
-no_focus   [title="^zoom$"]
-no_focus   [title="^Zoom Workplace$"]
-
 no_focus   [class="^Xfce4-notifyd$" ]
 for_window [class="^blueman-manager$"] floating enable
 for_window [class="^galculator$"] floating enable
@@ -224,6 +213,23 @@ for_window [title="^TagTime Preferences$"] floating enable
 for_window [title="^TagTime Preferences$"] move position center
 for_window [title="Firefox — Sharing Indicator"] floating enable
 for_window [title="Firefox — Sharing Indicator"] move position 0 0
+
+# fuck zoom
+# "zoom" is dialogue boxes, the full thing is "Zoom Meeting"
+for_window [class="^zoom$"] move workspace 4
+for_window [title="^zoom$"] border none, floating enable
+for_window [class="^zoom$"] border none, floating enable
+# we shouldn't need this too. but if we don't the main window goes floating. I
+# guess it starts out as "zoom" and then changes its net_wm_name to "Zoom -
+# Licensed Account"?
+for_window [title="^Zoom - Licensed Account$"] floating disable
+for_window [title="^Zoom - Free Account$"] floating disable
+for_window [title="^Zoom Workplace - Free account$"] floating disable
+for_window [title="^Meeting$"] floating disable
+no_focus   [title="^zoom$"]
+no_focus   [class="^zoom$" ]
+no_focus   [title="^Meeting$" ]
+no_focus   [title="^Zoom Workplace$"]
 
 # <colorclass> <border> <background> <text> <indicator> <child_border>
 client.focused          #4c7899 #80acd0 #000000 #2e9ef4 #285577

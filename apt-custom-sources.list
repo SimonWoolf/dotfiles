@@ -12,7 +12,7 @@ deb http://ppa.launchpad.net/phoerious/keepassxc/ubuntu noble main
 deb-src http://ppa.launchpad.net/phoerious/keepassxc/ubuntu noble main
 
 # signal-desktop
-# deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main # disabled on upgrade to noble
+deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main
 
 # skype
 # deb [arch=amd64] https://repo.skype.com/deb stable main

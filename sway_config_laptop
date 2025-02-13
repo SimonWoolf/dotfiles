@@ -3,6 +3,8 @@ bindsym F9 exec /home/simon/dev/dotfiles/laptop-primary.sh
 exec keyboard.sh &
 exec --no-startup-id /home/simon/dev/dotfiles/laptop-primary-noi3.sh &
 
+exec systemctl --user import-environment WAYLAND_DISPLAY
+
 font pango:Meslo LG S for Powerline 12
 
 # move focus to other monitor

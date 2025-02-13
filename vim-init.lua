@@ -453,7 +453,7 @@ require("lazy").setup({
           defaults = {
             wrap_results = true,
             layout_strategy = 'vertical',
-            path_display = { 'smart' },
+            path_display = { 'shorten' },
             layout_config = {
               width = 0.9,
               height = 0.9,
