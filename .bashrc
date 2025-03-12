@@ -81,7 +81,7 @@ alias flv2aac="ffmpeg -acodec copy -i "
 #Usage: extractaudio INPUT -o OUTPUT
 alias extractaudio="mencoder -ovc raw -oac mp3lame -lameopts preset=extreme -of rawaudio "
 alias lll="ls -hlS"
-export GREP_COLOR="1;33"
+export GREP_COLOR="mt=1;33"
 alias grep="grep -i --color=auto"
 alias mkdir="mkdir -p -v"
 alias ping="ping -c 4"
