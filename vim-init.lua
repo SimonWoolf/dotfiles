@@ -53,7 +53,8 @@ vim.g.instant_log = 1
 if vim.fn.has('gui_running') == 1 then
   vim.opt.guioptions:remove('e')
   if vim.fn.has('gui_gtk') == 1 then
-    vim.opt.guifont = 'Meslo LG S for Powerline 10'
+    vim.opt.guifont = 'Meslo LG S for Powerline 10,Noto Color Emoji:h10'
+
   end
 end
 
@@ -369,6 +370,8 @@ require("lazy").setup({
         vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation)
         vim.keymap.set('n', '<leader>gc', vim.lsp.buf.incoming_calls)
         vim.keymap.set('n', '<leader><leader>', vim.lsp.buf.hover)
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
+        vim.keymap.set('n', '<leader>f', vim.diagnostic.open_float)
         vim.keymap.set('n', '<C-c>', vim.diagnostic.goto_next)
         vim.keymap.set('n', '<C-x>', vim.diagnostic.goto_prev)
       end
