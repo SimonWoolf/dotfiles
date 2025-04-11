@@ -1,3 +1,5 @@
 golang.org/x/tools/gopls@latest
 github.com/x-motemen/gore/cmd/gore@latest
+golang.org/x/tools/gopls@latest
 honnef.co/go/tools/cmd/staticcheck@latest
+github.com/ankitpokhrel/jira-cli/cmd/jira@latest
