@@ -1,11 +1,11 @@
 profile office {
-	output DP-2 enable scale 1.4 position 0,1520
+	output HDMI-A-1 enable scale 1.4 position 0,1520
 	output eDP-1 enable position 480,3065
-	exec swaymsg workspace 1, move workspace to DP-2
-	exec swaymsg workspace 2, move workspace to DP-2
-	exec swaymsg workspace 3, move workspace to DP-2
-	exec swaymsg workspace 4, move workspace to DP-2
-	exec swaymsg workspace 5, move workspace to DP-2
+	exec swaymsg workspace 1, move workspace to HDMI-A-1
+	exec swaymsg workspace 2, move workspace to HDMI-A-1
+	exec swaymsg workspace 3, move workspace to HDMI-A-1
+	exec swaymsg workspace 4, move workspace to HDMI-A-1
+	exec swaymsg workspace 5, move workspace to HDMI-A-1
 }
 
 # profile officewide {

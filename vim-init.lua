@@ -343,8 +343,41 @@ require("lazy").setup({
     { 'itchyny/lightline.vim' },
     { 'mmalecki/vim-node.js' },
     { 'hwayne/tla.vim' },
-    { 'github/copilot.vim' },
-    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+    { 'github/copilot.vim', tag = "v1.46.0" }, -- 1.47 and later seem to give weird errors
+    -- {
+    --   'zbirenbaum/copilot.lua',
+    --   config = function()
+    --     require("copilot").setup({
+    --       copilot_node_command = '/home/simon/.asdf/installs/nodejs/20.10.0/bin/node',
+    --     })
+    --   end
+    -- },
+    {
+      'nvim-treesitter/nvim-treesitter',
+      build = ':TSUpdate',
+      config = function()
+        require('nvim-treesitter.configs').setup({
+          ensure_installed = { 'go', 'javascript', 'typescript', 'elixir', 'markdown' },
+          highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = false,
+          },
+          -- indent = {
+          --   enable = true,
+          --   disable = { 'yaml' },
+          -- },
+          -- incremental_selection = {
+          --   enable = true,
+          --   keymaps = {
+          --     init_selection = '<C-n>',
+          --     node_incremental = '<C-n>',
+          --     scope_incremental = '<C-s>',
+          --     node_decremental = '<C-p>',
+          --   },
+          -- },
+        })
+      end
+    },
     {
       'neovim/nvim-lspconfig',
       config = function()
@@ -417,7 +450,7 @@ require("lazy").setup({
         --- The below dependencies are optional,
         "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
         "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-        "zbirenbaum/copilot.lua", -- for providers='copilot'
+        -- "zbirenbaum/copilot.lua", -- for providers='copilot'
         {
           -- support for image pasting
           "HakonHarnes/img-clip.nvim",
@@ -486,7 +519,11 @@ require("lazy").setup({
         vim.keymap.set('n', '<C-p>', project_files, { desc = 'Telescope find files' })
         vim.keymap.set('n', '<C-b>', builtin.buffers, { desc = 'Telescope buffers' })
         vim.keymap.set('n', '<C-g>', builtin.live_grep, { desc = 'Telescope live grep' })
-        vim.keymap.set('n', '<C-f>', builtin.diagnostics, { desc = 'Telescope diagnostics' })
+        vim.keymap.set('n', '<C-f>', function()
+          builtin.diagnostics({
+            severity = { min = vim.diagnostic.severity.WARN }
+          })
+        end, { desc = 'Telescope diagnostics' })
         vim.keymap.set('n', '<leader>h', builtin.help_tags, { desc = 'Telescope help tags' })
 
       end,

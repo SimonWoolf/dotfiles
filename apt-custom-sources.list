@@ -47,3 +47,5 @@ deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https:
 # deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu jammy stable
 
 # deb http://download.opensuse.org/repositories/network:/messaging:/zeromq:/release-draft/xUbuntu_22.04/ / # disabled on upgrade to noble
+
+deb [signed-by=/usr/share/keyrings/mullvad-keyring.asc arch=amd64] https://repository.mullvad.net/deb/stable stable main
