@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require 'uri'
+
+`. ~/.apikeys`
+
+weight = ARGV[0].to_f
+comment = URI.encode_www_form_component "#{`date`.strip}"
+
+result = `curl --silent -X POST "https://www.beeminder.com/api/v1/users/coiley/goals/weight/datapoints.json?auth_token=#{ENV['BEEMINDER_TOKEN']}&value=#{weight}&comment=#{comment}"`
+
+if $?.exitstatus != 0
+  puts "Beeminder curl failed: #{$?.inspect}; #{result}"
+elsif !result.include? "created"
+  puts "Error submitting beeminder: #{result}"
+else
+  puts "Posted #{weight} kg"
+end
