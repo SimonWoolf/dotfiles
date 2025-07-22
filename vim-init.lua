@@ -362,19 +362,9 @@ require("lazy").setup({
             enable = true,
             additional_vim_regex_highlighting = false,
           },
-          -- indent = {
-          --   enable = true,
-          --   disable = { 'yaml' },
-          -- },
-          -- incremental_selection = {
-          --   enable = true,
-          --   keymaps = {
-          --     init_selection = '<C-n>',
-          --     node_incremental = '<C-n>',
-          --     scope_incremental = '<C-s>',
-          --     node_decremental = '<C-p>',
-          --   },
-          -- },
+          indent = {
+            enable = true,
+          },
         })
       end
     },
