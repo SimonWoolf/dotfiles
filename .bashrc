@@ -221,6 +221,8 @@ alias bose-disconnect="bluetoothctl disconnect 78:2B:64:CD:11:EE"
 alias bose-hqaudio="pactl set-card-profile bluez_card.78_2B_64_CD_11_EE a2dp-sink"
 alias bose-headset="pactl set-card-profile bluez_card.78_2B_64_CD_11_EE headset-head-unit-msbc"
 
+alias heahphone-battery="upower -i $(upower -e | grep headphones) |grep percentage"
+
 
 source /home/simon/dev/dotfiles/.bash_ghaliases
 
