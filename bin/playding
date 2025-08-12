@@ -1,0 +1,2 @@
+#!/bin/sh
+mplayer /home/simon/dev/dotfiles/pomodoro-finish.wav -speed 3 -volume 60

@@ -45,6 +45,8 @@ end
 `ln -fs ~/dev/dotfiles/mimeapps.list ~/.local/share/applications/mimeapps.list`
 `ln -fs ~/dev/dotfiles/dunstrc ~/.config/dunst/dunstrc`
 `ln -fs ~/dev/dotfiles/default-golang-pkgs ~/.default-golang-pkgs`
+`mkdir -p ~/.claude/`
+`ln -fs ~/dev/dotfiles/CLAUDE.md ~/.claude/CLAUDE.md`
 # xdg-utils deletes and recreates ~/.config/mimeapps.list when it writes to it, which will break symbolic links
 `cp ~/dev/dotfiles/mimeapps.list ~/.config/mimeapps.list`
 if !File.exist?('/etc/apt/sources.list.d/custom.list')

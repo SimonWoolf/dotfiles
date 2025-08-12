@@ -189,9 +189,6 @@ alias nv="nvim-qt"
 alias v="nvim-qt"
 alias sv="sudo -E nvim-qt "
 
-alias playding="mplayer /home/simon/dev/dotfiles/pomodoro-finish.wav -speed 5 -volume 50"
-alias playgong="mplayer /home/simon/dev/dotfiles/pomodoro-finish.wav -volume 50"
-
 # google drive aliases
 alias dpl="drive pull ."
 alias dps="drive push ."
