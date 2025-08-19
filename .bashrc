@@ -332,6 +332,29 @@ if [[ "$XDG_SESSION_TYPE" = "wayland" ]]; then
   export WAYLAND_DISPLAY=wayland-1
 fi
 
+latex_compile() {
+    local basename=$(basename "$1" .tex)
+
+    # Check if filename was provided
+    if [ -z "$basename" ]; then
+        echo "Usage: latex_compile <filename>"
+        echo "Note: Do not include the .tex extension"
+        return 1
+    fi
+
+    # Run xelatex
+    echo "Compiling ${basename}.tex..."
+    xelatex "./${basename}.tex"
+
+    # Remove log and aux files
+    echo "Cleaning up temporary files..."
+    rm -f *.log *.aux
+
+    # Open PDF with mupdf
+    echo "Opening ${basename}.pdf..."
+    mupdf "./${basename}.pdf"
+}
+
 # export CC="ccache clang"
 # export CXX="ccache clang++"
 # export CC="ccache gcc"
