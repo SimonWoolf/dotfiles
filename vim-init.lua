@@ -176,7 +176,7 @@ vim.g.go_gopls_local = "ably"
 
 vim.api.nvim_create_augroup('AutoFormatting', {})
 vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*.go',
+  pattern = {'*.go', '*.gleam'},
   group = 'AutoFormatting',
   callback = function() vim.lsp.buf.format({ async = false}) end,
 })
@@ -357,7 +357,7 @@ require("lazy").setup({
       build = ':TSUpdate',
       config = function()
         require('nvim-treesitter.configs').setup({
-          ensure_installed = { 'go', 'javascript', 'typescript', 'elixir', 'markdown' },
+          ensure_installed = { 'go', 'javascript', 'typescript', 'elixir', 'markdown', 'gleam' },
           highlight = {
             enable = true,
             additional_vim_regex_highlighting = false,
@@ -374,6 +374,9 @@ require("lazy").setup({
         lspconfig = require('lspconfig');
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
         lspconfig.ts_ls.setup{
+          capabilities = capabilities,
+        }
+        lspconfig.gleam.setup{
           capabilities = capabilities,
         }
         lspconfig.gopls.setup({
@@ -511,7 +514,7 @@ require("lazy").setup({
         vim.keymap.set('n', '<C-g>', builtin.live_grep, { desc = 'Telescope live grep' })
         vim.keymap.set('n', '<C-f>', function()
           builtin.diagnostics({
-            severity = { min = vim.diagnostic.severity.WARN }
+            severity = { min = vim.diagnostic.severity.ERROR }
           })
         end, { desc = 'Telescope diagnostics' })
         vim.keymap.set('n', '<leader>h', builtin.help_tags, { desc = 'Telescope help tags' })
