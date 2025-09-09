@@ -49,3 +49,7 @@ deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https:
 # deb http://download.opensuse.org/repositories/network:/messaging:/zeromq:/release-draft/xUbuntu_22.04/ / # disabled on upgrade to noble
 
 deb [signed-by=/usr/share/keyrings/mullvad-keyring.asc arch=amd64] https://repository.mullvad.net/deb/stable stable main
+
+# commented out as the stable ppa is way out of date, unstable is daily builds so don't want to upgrade every time, grumble
+# deb https://ppa.launchpadcontent.net/neovim-ppa/unstable/ubuntu noble main
+# deb-src https://ppa.launchpadcontent.net/neovim-ppa/unstable/ubuntu noble main
