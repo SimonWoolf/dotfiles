@@ -3,3 +3,5 @@ github.com/x-motemen/gore/cmd/gore@latest
 golang.org/x/tools/gopls@latest
 honnef.co/go/tools/cmd/staticcheck@latest
 github.com/ankitpokhrel/jira-cli/cmd/jira@latest
+google.golang.org/protobuf/cmd/protoc-gen-go@latest
+google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
