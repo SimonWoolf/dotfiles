@@ -274,7 +274,8 @@ export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 
 # heroku, CUDA, my stuff paths
 # note: .local/bin is prepended so that local stack & pip take precendence over systemwide one (which is used by wireshark for some reason)
-export PATH="$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin:$HOME/.poetry/bin:$(go env GOPATH)/bin:$HOME/.cache/rebar3/bin"
+export FLYCTL_INSTALL="/home/simon/.fly"
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin:$HOME/.poetry/bin:$(go env GOPATH)/bin:$HOME/.cache/rebar3/bin:$FLYCTL_INSTALL/bin"
 export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib:$LD_LIBRARY_PATH
 export ARDUINO_PATH=/usr/local/arduino
 
@@ -361,6 +362,9 @@ latex_compile() {
 # export CXX="ccache g++"
 # export CC="gcc"
 # export CXX="g++"
+
+# why does psql not use the system CA bundle by default? shrug
+export PGSSLROOTCERT="/etc/ssl/certs/ca-certificates.crt"
 
 eval $(keychain --eval --dir $HOME/.config/keychain --quiet --noask --agents gpg,ssh id_rsa id_ed)
 ssh-add ~/.ssh/id_ed 2>/dev/null
