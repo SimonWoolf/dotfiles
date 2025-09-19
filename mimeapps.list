@@ -1,13 +1,12 @@
 [Added Associations]
-text/plain=mousepad.desktop;
 image/svg+xml=gimp.desktop;
-application/force-download=gvim.desktop;
+application/force-download=nvim-qt.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;
 image/png=org.xfce.ristretto.desktop;
 image/jpg=org.xfce.ristretto.desktop;
 
 [Default Applications]
-text/plain=gvim.desktop;
+text/plain=nvim-qt.desktop;
 application/pdf=mupdf.desktop
 audio/mpeg=vlc.desktop
 inode/directory=thunar.desktop
