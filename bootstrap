@@ -47,6 +47,7 @@ end
 `ln -fs ~/dev/dotfiles/default-golang-pkgs ~/.default-golang-pkgs`
 `ln -fs ~/dev/dotfiles/ssh-config ~/.ssh/config`
 `mkdir -p ~/.claude/`
+`mkdir -p ~/.claude-personal/`
 `ln -fs ~/dev/dotfiles/CLAUDE.md ~/.claude/CLAUDE.md`
 `ln -fs ~/dev/dotfiles/CLAUDE.md ~/.claude-personal/CLAUDE.md`
 # xdg-utils deletes and recreates ~/.config/mimeapps.list when it writes to it, which will break symbolic links
@@ -79,6 +80,7 @@ else
   `cat noedit i3_config_base sway_config_laptop > sway_config`
   `ln -fs ~/dev/dotfiles/xkb_custom_layout ~/.config/xkb/symbols/gb`
   `ln -fs ~/dev/dotfiles/ginit-laptop.vim ~/.config/nvim/ginit.vim`
+  `mkdir -p ~/.config/kanshi/`
   `ln -fs ~/dev/dotfiles/kanshi_config ~/.config/kanshi/config`
   `ln -fs ~/dev/dotfiles/alacritty-laptop.toml ~/.config/alacritty/alacritty.toml`
   if thinkpad?
