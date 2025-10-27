@@ -27,6 +27,10 @@ files.each do |file|
   `ln -fs ~/dev/dotfiles/#{file} ~`
 end
 
+`ls ~/dev/dotfiles/dotdesktops/`.split.each do |file|
+  `ln -fs ~/dev/dotfiles/dotdesktops/#{file} ~/.local/share/applications/`
+end
+
 `mkdir -p ~/.config/i3/`
 `mkdir -p ~/.config/sway/`
 `mkdir -p ~/.config/waybar/`
@@ -42,7 +46,6 @@ end
 `ln -fs ~/dev/dotfiles/waybar_config ~/.config/waybar/config`
 `ln -fs ~/dev/dotfiles/waybar_style.css ~/.config/waybar/style.css`
 `ln -fs ~/dev/dotfiles/i3status_config ~/.config/i3status/config`
-`ln -fs ~/dev/dotfiles/mimeapps.list ~/.local/share/applications/mimeapps.list`
 `ln -fs ~/dev/dotfiles/dunstrc ~/.config/dunst/dunstrc`
 `ln -fs ~/dev/dotfiles/default-golang-pkgs ~/.default-golang-pkgs`
 `ln -fs ~/dev/dotfiles/ssh-config ~/.ssh/config`
@@ -52,7 +55,7 @@ end
 `ln -fs ~/dev/dotfiles/CLAUDE.md ~/.claude/CLAUDE.md`
 `ln -fs ~/dev/dotfiles/CLAUDE.md ~/.claude-personal/CLAUDE.md`
 # xdg-utils deletes and recreates ~/.config/mimeapps.list when it writes to it, which will break symbolic links
-`cp ~/dev/dotfiles/mimeapps.list ~/.config/mimeapps.list`
+`cp ~/dev/dotfiles/dotdesktops/mimeapps.list ~/.config/mimeapps.list`
 if !File.exist?('/etc/apt/sources.list.d/custom.list')
   `sudo ln -fs /home/simon/dev/dotfiles/apt-custom-sources.list /etc/apt/sources.list.d/custom.list`
 end

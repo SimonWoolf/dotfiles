@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=screenshot
+Exec="/home/simon/dev/dotfiles/bin/screenshot"
+Terminal=false
+Type=Application
