@@ -187,7 +187,11 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 })
 
 -- copilot
-vim.g.copilot_node_command = "~/.asdf/installs/nodejs/20.10.0/bin/node"
+if vim.fn.isdirectory(vim.fn.expand("~/.asdf")) == 1 then
+  vim.g.copilot_node_command = "~/.asdf/installs/nodejs/20.10.0/bin/node"
+else
+  vim.g.copilot_node_command = "~/.local/share/mise/installs/node/22/bin/node"
+end
 vim.cmd('highlight CopilotSuggestion guifg=LightGrey ctermfg=LightGrey')
 vim.keymap.set('i', '<C-Tab>', '<Plug>(copilot-next)')
 vim.keymap.set('i', '<C-Tab>', '<M-]>')
@@ -362,7 +366,7 @@ require("lazy").setup({
       build = ':TSUpdate',
       config = function()
         require('nvim-treesitter.configs').setup({
-          ensure_installed = { 'go', 'javascript', 'typescript', 'elixir', 'markdown', 'gleam' },
+          ensure_installed = { 'go', 'javascript', 'typescript', 'elixir', 'markdown', 'gleam', 'lua' },
           highlight = {
             enable = true,
             additional_vim_regex_highlighting = false,
@@ -378,9 +382,6 @@ require("lazy").setup({
       config = function()
         lspconfig = require('lspconfig');
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
-        lspconfig.ts_ls.setup{
-          capabilities = capabilities,
-        }
         lspconfig.gleam.setup{
           capabilities = capabilities,
         }
@@ -406,6 +407,11 @@ require("lazy").setup({
         vim.keymap.set('n', '<C-c>', vim.diagnostic.goto_next)
         vim.keymap.set('n', '<C-x>', vim.diagnostic.goto_prev)
       end
+    },
+    {
+      "pmizio/typescript-tools.nvim",
+      dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+      opts = {},
     },
     {
       'hrsh7th/nvim-cmp',
