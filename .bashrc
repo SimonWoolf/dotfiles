@@ -268,9 +268,13 @@ source ~/.prompt.sh
 # secret keys
 [ -f ~/.apikeys ] && source ~/.apikeys
 
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
-export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+if [ -d "$HOME/.asdf" ]; then
+  . $HOME/.asdf/asdf.sh
+  . $HOME/.asdf/completions/asdf.bash
+  export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+else
+  eval "$(mise activate bash)"
+fi
 
 # heroku, CUDA, my stuff paths
 # note: .local/bin is prepended so that local stack & pip take precendence over systemwide one (which is used by wireshark for some reason)
@@ -369,4 +373,4 @@ export PGSSLROOTCERT="/etc/ssl/certs/ca-certificates.crt"
 eval $(keychain --eval --dir $HOME/.config/keychain --quiet --noask --agents gpg,ssh id_rsa id_ed)
 ssh-add ~/.ssh/id_ed 2>/dev/null
 
- eval "$(direnv hook bash)"
+eval "$(direnv hook bash)"
