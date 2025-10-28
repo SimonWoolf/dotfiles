@@ -34,7 +34,7 @@
         }
     },
     "custom/tt_status": {
-        "exec": "cat /tmp/tt_waybar_status",
+        "exec": "[ -f /tmp/tt_waybar_status ] && cat /tmp/tt_waybar_status || echo '{\"text\":\"\"}'",
         "return-type": "json",
         "restart-interval": 1
     },

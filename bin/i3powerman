@@ -8,7 +8,7 @@ case "$1" in
         pgrep sway && swaylock -c 3f3f3f || xflock4
         ;;
     logout)
-        i3-msg exit
+        swaymsg exit
         ;;
     suspend)
         xfconf-query --channel xsettings --property /Net/ThemeName --set Adwaita
