@@ -187,7 +187,7 @@ alias cd.="cd ."
 alias ipa="ip -color -br a"
 alias nv="nvim-qt"
 alias v="nvim-qt"
-alias sv="sudo -E nvim-qt "
+alias sv=sudoedit
 
 # google drive aliases
 alias dpl="drive pull ."
