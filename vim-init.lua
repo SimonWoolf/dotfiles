@@ -98,6 +98,11 @@ vim.keymap.set('n', '<leader>/', ':nohlsearch<CR>', {silent = true})
 vim.keymap.set('n', '<leader><tab>', 'a<C-x><C-o>')
 vim.keymap.set('n', '<leader>d', '"=strftime("%a %d %b %Y")<CR>P')
 vim.keymap.set('n', '<leader>time', '"=strftime("%T")<CR>P')
+vim.keymap.set('n', '<leader>cp', function()
+  local path = vim.fn.expand('%')
+  vim.fn.setreg('+', path)
+  print('Copied: ' .. path)
+end, { desc = 'Copy file path' })
 
 -- file opening helpers
 vim.keymap.set('n', '<leader>ew', ':e <C-R>=expand("%:h")."/"<CR>')

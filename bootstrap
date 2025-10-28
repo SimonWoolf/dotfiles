@@ -50,6 +50,9 @@ end
 `ln -fs ~/dev/dotfiles/default-golang-pkgs ~/.default-golang-pkgs`
 `ln -fs ~/dev/dotfiles/ssh-config ~/.ssh/config`
 `ln -fs ~/Dropbox/bash_history ~/.bash_history`
+`mkdir -p ~/.config/nvim-qt/`
+`rm ~/.config/nvim-qt/nvim-qt.conf 2> /dev/null`
+`ln -fs ~/dev/dotfiles/nvim-qt.conf ~/.config/nvim-qt/nvim-qt.conf`
 `mkdir -p ~/.claude/`
 `mkdir -p ~/.claude-personal/`
 `ln -fs ~/dev/dotfiles/CLAUDE.md ~/.claude/CLAUDE.md`
