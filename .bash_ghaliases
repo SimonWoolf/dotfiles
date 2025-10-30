@@ -1,16 +1,14 @@
 cos() {
 	TARGET="shell"
-	local GH_DEBUG="$GH_DEBUG"
 
 	read -r -d '' __USAGE <<-EOF
-	Wrapper around \`gh copilot suggest\` to suggest a command based on a natural language description of the desired output effort.
+	Uses Claude 4.5 via \`llm\` to suggest a command based on a natural language description of the desired output effort.
 	Supports executing suggested commands if applicable.
 
 	USAGE
 	  $FUNCNAME [flags] <prompt>
 
 	FLAGS
-	  -d, --debug              Enable debugging
 	  -h, --help               Display help usage
 	  -t, --target target      Target for suggestion; must be shell, gh, git
 	                           default: "$TARGET"
@@ -38,7 +36,7 @@ cos() {
 	EOF
 
 	local OPT OPTARG OPTIND
-	while getopts "dht:-:" OPT; do
+	while getopts "ht:-:" OPT; do
 		if [ "$OPT" = "-" ]; then     # long option: reformulate OPT and OPTARG
 			OPT="${OPTARG%%=*}"       # extract long option name
 			OPTARG="${OPTARG#"$OPT"}" # extract long option argument (may be empty)
@@ -46,10 +44,6 @@ cos() {
 		fi
 
 		case "$OPT" in
-			debug | d)
-				GH_DEBUG=api
-				;;
-
 			help | h)
 				echo "$__USAGE"
 				return 0
@@ -66,29 +60,52 @@ cos() {
 
 	TMPFILE="$(mktemp -t gh-copilotXXX)"
 	trap 'rm -f "$TMPFILE"' EXIT
-	if GH_DEBUG="$GH_DEBUG" gh copilot suggest -t "$TARGET" "$@" --shell-out "$TMPFILE"; then
-		if [ -s "$TMPFILE" ]; then
-			FIXED_CMD="$(cat $TMPFILE)"
-			history -s $(history 1 | cut -d' ' -f4-); history -s "$FIXED_CMD"
-			echo
-			eval "$FIXED_CMD"
-		fi
-	else
+
+	# Build the prompt for llm
+	local PROMPT="You are a command-line expert. The user wants a $TARGET command to accomplish the following task.
+
+Target context: $TARGET
+Task: $@
+
+Respond with ONLY the command itself, with no explanation, no markdown formatting, no code blocks, and no additional text. Output exactly what should be executed in the terminal."
+
+	FIXED_CMD=$(llm "$PROMPT")
+	local EXIT_CODE=$?
+
+	if [ $EXIT_CODE -ne 0 ]; then
+		echo "Error: Failed to get command suggestion from llm" >&2
 		return 1
+	fi
+
+	# Remove any potential markdown code blocks or extra whitespace
+	FIXED_CMD=$(echo "$FIXED_CMD" | sed -e 's/^```[a-z]*$//' -e 's/^```$//' -e 's/^`//' -e 's/`$//' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
+	if [ -z "$FIXED_CMD" ]; then
+		echo "Error: No command suggestion received" >&2
+		return 1
+	fi
+
+	echo "Suggested command:"
+	echo "  $FIXED_CMD"
+	echo
+	read -p "Execute this command? (y/N) " -n 1 -r
+	echo
+
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		echo "$FIXED_CMD" > "$TMPFILE"
+		history -s $(history 1 | cut -d' ' -f4-); history -s "$FIXED_CMD"
+		eval "$FIXED_CMD"
 	fi
 }
 
 coe() {
-	local GH_DEBUG="$GH_DEBUG"
-
 	read -r -d '' __USAGE <<-EOF
-	Wrapper around \`gh copilot explain\` to explain a given input command in natural language.
+	Uses Claude 4.5 via \`llm\` to explain a given input command in natural language.
 
 	USAGE
 	  $FUNCNAME [flags] <command>
 
 	FLAGS
-	  -d, --debug   Enable debugging
 	  -h, --help    Display help usage
 
 	EXAMPLES
@@ -104,7 +121,7 @@ coe() {
 	EOF
 
 	local OPT OPTARG OPTIND
-	while getopts "dh-:" OPT; do
+	while getopts "h-:" OPT; do
 		if [ "$OPT" = "-" ]; then     # long option: reformulate OPT and OPTARG
 			OPT="${OPTARG%%=*}"       # extract long option name
 			OPTARG="${OPTARG#"$OPT"}" # extract long option argument (may be empty)
@@ -112,10 +129,6 @@ coe() {
 		fi
 
 		case "$OPT" in
-			debug | d)
-				GH_DEBUG=api
-				;;
-
 			help | h)
 				echo "$__USAGE"
 				return 0
@@ -126,5 +139,18 @@ coe() {
 	# shift so that $@, $1, etc. refer to the non-option arguments
 	shift "$((OPTIND-1))"
 
-	GH_DEBUG="$GH_DEBUG" gh copilot explain "$@"
+	if [ -z "$*" ]; then
+		echo "Error: No command provided to explain" >&2
+		echo "$__USAGE"
+		return 1
+	fi
+
+	# Build the prompt for llm
+	local PROMPT="You are a command-line expert. Please explain the following command in clear, natural language. Describe what it does, what each part means, and any important notes about its usage.
+
+Command: $*
+
+Provide a helpful explanation suitable for someone learning about this command."
+
+	llm "$PROMPT"
 }
