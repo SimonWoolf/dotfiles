@@ -5,7 +5,7 @@ exec --no-startup-id /home/simon/dev/dotfiles/laptop-primary-noi3.sh &
 
 exec systemctl --user import-environment WAYLAND_DISPLAY
 
-font pango:Meslo LG S for Powerline 12
+font pango:Meslo LG S for Powerline 13
 
 # move focus to other monitor
 bindsym $mod+Prior focus output up
