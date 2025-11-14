@@ -1,0 +1,56 @@
+#!/bin/bash
+
+read -r -d '' __USAGE <<-EOF
+Uses Claude 4.5 via \`llm\` to explain a given input command in natural language.
+
+USAGE
+  $(basename "$0") [flags] <command>
+
+FLAGS
+  -h, --help    Display help usage
+
+EXAMPLES
+
+# View disk usage, sorted by size
+$ $(basename "$0") 'du -sh | sort -h'
+
+# View git repository history as text graphical representation
+$ $(basename "$0") 'git log --oneline --graph --decorate --all'
+
+# Remove binary objects larger than 50 megabytes from git history
+$ $(basename "$0") 'bfg --strip-blobs-bigger-than 50M'
+EOF
+
+OPT=""
+OPTARG=""
+OPTIND=1
+while getopts "h-:" OPT; do
+	if [ "$OPT" = "-" ]; then
+		OPT="${OPTARG%%=*}"
+		OPTARG="${OPTARG#"$OPT"}"
+		OPTARG="${OPTARG#=}"
+	fi
+
+	case "$OPT" in
+		help | h)
+			echo "$__USAGE"
+			exit 0
+			;;
+	esac
+done
+
+shift "$((OPTIND-1))"
+
+if [ -z "$*" ]; then
+	echo "Error: No command provided to explain" >&2
+	echo "$__USAGE"
+	exit 1
+fi
+
+PROMPT="You are a command-line expert. Please explain the following command in clear, natural language. Describe what it does, what each part means, and any important notes about its usage.
+
+Command: $*
+
+Provide a helpful explanation suitable for someone learning about this command."
+
+llm "$PROMPT"

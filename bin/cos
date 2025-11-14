@@ -1,0 +1,68 @@
+#!/bin/bash
+
+read -r -d '' __USAGE <<-EOF
+Uses Claude 4.5 via \`llm\` to suggest a command based on a natural language description of the desired output effort.
+Supports executing suggested commands if applicable.
+
+USAGE
+  $(basename "$0") [flags] <prompt>
+
+FLAGS
+  -h, --help               Display help usage
+EOF
+
+OPT=""
+OPTARG=""
+OPTIND=1
+while getopts "ht:-:" OPT; do
+	if [ "$OPT" = "-" ]; then
+		OPT="${OPTARG%%=*}"
+		OPTARG="${OPTARG#"$OPT"}"
+		OPTARG="${OPTARG#=}"
+	fi
+
+	case "$OPT" in
+		help | h)
+			echo "$__USAGE"
+			exit 0
+			;;
+	esac
+done
+
+shift "$((OPTIND-1))"
+
+TMPFILE="$(mktemp -t gh-copilotXXX)"
+trap 'rm -f "$TMPFILE"' EXIT
+
+PROMPT="The user wants a CLI command to accomplish the following task. They are running on Ubuntu (so with GNU coreutils, plus git etc) in the bash shell.
+
+Task: $@
+
+Respond with only the command itself, with no explanation, no markdown formatting, no code blocks, and no additional text. Output exactly what should be executed in the terminal."
+
+FIXED_CMD=$(llm "$PROMPT")
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+	echo "Error: Failed to get command suggestion from llm" >&2
+	exit 1
+fi
+
+FIXED_CMD=$(echo "$FIXED_CMD" | sed -e 's/^```[a-z]*$//' -e 's/^```$//' -e 's/^`//' -e 's/`$//' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
+if [ -z "$FIXED_CMD" ]; then
+	echo "Error: No command suggestion received" >&2
+	exit 1
+fi
+
+echo "Suggested command:"
+echo "  $FIXED_CMD"
+echo
+read -p "Execute this command? (y/N) " -n 1 -r
+echo
+
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	echo "$FIXED_CMD" > "$TMPFILE"
+	echo "$FIXED_CMD" >> ~/.bash_history
+	eval "$FIXED_CMD"
+fi

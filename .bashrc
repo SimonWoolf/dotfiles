@@ -221,10 +221,6 @@ alias bose-headset="pactl set-card-profile bluez_card.78_2B_64_CD_11_EE headset-
 alias heahphone-battery="upower -i $(upower -e | grep headphones) |grep percentage"
 alias free="free -h"
 
-
-source /home/simon/dev/dotfiles/.bash_ghaliases
-
-
 #desktop-specific
 if [[ "$HOSTNAME" == "simon-linuxdesktop" ]]; then
   alias tvoff="xrandr -s 0 && redshift -t 6500:4500 -l 51:0 &"
