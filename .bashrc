@@ -3,7 +3,7 @@
 # for examples
 export EDITOR=nvim
 export BROWSER=firefox
-export AWS_PROFILE=ably
+# export AWS_PROFILE=ably
 export AWS_REGION=eu-west-2 # default to london when it doesn't matter
 
 export GOOGLE_APPLICATION_CREDENTIALS="/home/simon/google-credentials.json"
@@ -216,9 +216,10 @@ alias anker-headset="pactl set-card-profile bluez_card.9C_0C_35_AE_C6_B0 handsfr
 alias bose-connect="bluetoothctl connect 78:2B:64:CD:11:EE"
 alias bose-disconnect="bluetoothctl disconnect 78:2B:64:CD:11:EE"
 alias bose-hqaudio="pactl set-card-profile bluez_card.78_2B_64_CD_11_EE a2dp-sink"
-alias bose-headset="pactl set-card-profile bluez_card.78_2B_64_CD_11_EE headset-head-unit-msbc"
+alias bose-headset="pactl set-card-profile bluez_card.78_2B_64_CD_11_EE headset-head-unit"
 
 alias heahphone-battery="upower -i $(upower -e | grep headphones) |grep percentage"
+alias free="free -h"
 
 
 source /home/simon/dev/dotfiles/.bash_ghaliases
