@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    echo "Usage: emo <description>"
+    echo "Example: emo \"plane landing\""
+    exit 1
+fi
+
+description="$*"
+
+emoji=$(llm prompt --model claude-haiku-4.5 "Return only the single most appropriate emoji for: $description. Output only the emoji character itself, nothing else.")
+
+echo "$emoji" | wl-copy
+
+echo "$emoji"
