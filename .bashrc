@@ -265,21 +265,21 @@ source ~/.prompt.sh
 # secret keys
 [ -f ~/.apikeys ] && source ~/.apikeys
 
-if [ -d "$HOME/.asdf" ]; then
-  . $HOME/.asdf/asdf.sh
-  . $HOME/.asdf/completions/asdf.bash
-  export ASDF_GOLANG_MOD_VERSION_ENABLED=true
-else
-  eval "$(mise activate bash)"
-fi
+# if [ -d "$HOME/.asdf" ]; then
+#   . $HOME/.asdf/asdf.sh
+#   . $HOME/.asdf/completions/asdf.bash
+#   export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+# fi
+
 
 # heroku, CUDA, my stuff paths
 # note: .local/bin is prepended so that local stack & pip take precendence over systemwide one (which is used by wireshark for some reason)
 export FLYCTL_INSTALL="/home/simon/.fly"
-export PATH="$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin:$HOME/.poetry/bin:$(go env GOPATH)/bin:$HOME/.cache/rebar3/bin:$FLYCTL_INSTALL/bin"
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin:$HOME/.poetry/bin:$HOME/go/bin:$HOME/.cache/rebar3/bin:$FLYCTL_INSTALL/bin"
 export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib:$LD_LIBRARY_PATH
 export ARDUINO_PATH=/usr/local/arduino
 
+eval "$(mise activate bash)"
 
 if [ -f $HOME/programs/alacritty/extra/completions/alacritty.bash ] ; then
     source $HOME/programs/alacritty/extra/completions/alacritty.bash
@@ -332,6 +332,12 @@ if [[ "$XDG_SESSION_TYPE" = "wayland" ]]; then
   # everything launched through the terminal to use xwayland, so re-set
   # WAYLAND_DISPLAY here.
   export WAYLAND_DISPLAY=wayland-1
+fi
+
+# Unset display variables when connected via SSH to prevent remote commands
+# from trying to open windows on the local graphical session
+if [ -n "$SSH_CONNECTION" ]; then
+    unset DISPLAY WAYLAND_DISPLAY
 fi
 
 latex_compile() {

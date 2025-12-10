@@ -186,6 +186,32 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   callback = function() vim.lsp.buf.format({ async = false}) end,
 })
 
+-- Filter gopls diagnostics to only show errors
+local function filter_gopls_diagnostics(diagnostics)
+  local filtered = {}
+  for _, diagnostic in ipairs(diagnostics) do
+    if diagnostic.severity == vim.diagnostic.severity.ERROR then
+      table.insert(filtered, diagnostic)
+    end
+  end
+  return filtered
+end
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.name == 'gopls' then
+      vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+        function(err, result, ctx, config)
+          result.diagnostics = filter_gopls_diagnostics(result.diagnostics)
+          vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+        end,
+        {}
+      )
+    end
+  end
+})
+
 -- copilot
 if vim.fn.isdirectory(vim.fn.expand("~/.asdf")) == 1 then
   vim.g.copilot_node_command = "~/.asdf/installs/nodejs/20.10.0/bin/node"

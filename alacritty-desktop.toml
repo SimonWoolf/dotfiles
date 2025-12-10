@@ -1,20 +1,16 @@
 [font]
-size = 9.0
+size = 12.0
 
 [font.bold]
-family = "Meslo LG S"
 style = "Bold"
 
 [font.bold_italic]
-family = "Meslo LG S"
 style = "Bold Italic"
 
 [font.italic]
-family = "Meslo LG S"
 style = "Italic"
 
 [font.normal]
-family = "Meslo LG S"
 style = "Regular"
 
 [font.offset]
