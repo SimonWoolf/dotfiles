@@ -1,0 +1,187 @@
+#!/usr/bin/env python3
+"""
+Extract music segments from a video file, removing speech/talking portions.
+Uses inaSpeechSegmenter for classification and ffmpeg for cutting.
+
+Usage:
+    python extract_music.py input_video.mp4 [output.mp4]
+"""
+
+import subprocess
+import sys
+import tempfile
+import os
+from pathlib import Path
+
+
+def extract_audio(video_path: str, audio_path: str) -> None:
+    """Extract audio from video as WAV for analysis."""
+    print(f"Extracting audio from {video_path}...")
+    subprocess.run([
+        "ffmpeg", "-y", "-i", video_path,
+        "-vn", "-acodec", "pcm_s16le", "-ar", "16000", "-ac", "1",
+        audio_path
+    ], check=True, capture_output=True)
+
+
+def get_music_segments(audio_path: str, min_duration: float = 5.0, merge_gap: float = 2.0) -> list[tuple[float, float]]:
+    """
+    Analyse audio and return list of (start, end) tuples for music segments.
+    
+    Args:
+        audio_path: Path to WAV file
+        min_duration: Minimum segment duration to keep (seconds)
+        merge_gap: Merge segments separated by less than this (seconds)
+    """
+    print("Analysing audio segments (this may take a while)...")
+    
+    from inaSpeechSegmenter import Segmenter
+    seg = Segmenter()
+    segmentation = seg(audio_path)
+    
+    # segmentation is list of (label, start, end)
+    # labels: 'music', 'speech', 'male', 'female', 'noise', 'noEnergy'
+    
+    # Extract music segments
+    music_segments = []
+    for label, start, end in segmentation:
+        if label == "music":
+            music_segments.append((start, end))
+    
+    if not music_segments:
+        print("Warning: No music segments found!")
+        return []
+    
+    print(f"Found {len(music_segments)} raw music segments")
+    
+    # Merge segments that are close together (likely brief speech over music)
+    merged = []
+    current_start, current_end = music_segments[0]
+    
+    for start, end in music_segments[1:]:
+        if start - current_end <= merge_gap:
+            # Merge with current segment
+            current_end = end
+        else:
+            # Save current and start new
+            merged.append((current_start, current_end))
+            current_start, current_end = start, end
+    merged.append((current_start, current_end))
+    
+    print(f"After merging (gap <= {merge_gap}s): {len(merged)} segments")
+    
+    # Filter out short segments
+    filtered = [(s, e) for s, e in merged if e - s >= min_duration]
+    print(f"After filtering (duration >= {min_duration}s): {len(filtered)} segments")
+    
+    return filtered
+
+
+def create_concat_file(segments: list[tuple[float, float]], video_path: str, concat_path: str) -> list[str]:
+    """
+    Create segment files and a concat list for ffmpeg.
+    Returns list of temp segment files created.
+    """
+    segment_files = []
+    
+    with open(concat_path, "w") as f:
+        for i, (start, end) in enumerate(segments):
+            duration = end - start
+            segment_file = f"/tmp/music_segment_{i:04d}.mp4"
+            segment_files.append(segment_file)
+            
+            print(f"Extracting segment {i+1}/{len(segments)}: {start:.1f}s - {end:.1f}s ({duration:.1f}s)")
+            
+            # Extract segment with re-encoding to ensure clean cuts
+            subprocess.run([
+                "ffmpeg", "-y",
+                "-ss", str(start),
+                "-i", video_path,
+                "-t", str(duration),
+                "-c:v", "libx264", "-preset", "fast", "-crf", "18",
+                "-c:a", "aac", "-b:a", "192k",
+                "-avoid_negative_ts", "make_zero",
+                segment_file
+            ], check=True, capture_output=True)
+            
+            f.write(f"file '{segment_file}'\n")
+    
+    return segment_files
+
+
+def concatenate_segments(concat_path: str, output_path: str) -> None:
+    """Concatenate all segments into final output."""
+    print(f"Concatenating segments into {output_path}...")
+    subprocess.run([
+        "ffmpeg", "-y",
+        "-f", "concat", "-safe", "0",
+        "-i", concat_path,
+        "-c", "copy",
+        output_path
+    ], check=True, capture_output=True)
+
+
+def format_duration(seconds: float) -> str:
+    """Format seconds as HH:MM:SS."""
+    h = int(seconds // 3600)
+    m = int((seconds % 3600) // 60)
+    s = int(seconds % 60)
+    return f"{h:02d}:{m:02d}:{s:02d}"
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: python extract_music.py input_video.mp4 [output.mp4]")
+        print("\nOptions (edit in script):")
+        print("  min_duration: Minimum music segment length to keep (default: 5s)")
+        print("  merge_gap: Merge segments closer than this (default: 2s)")
+        sys.exit(1)
+    
+    input_path = sys.argv[1]
+    output_path = sys.argv[2] if len(sys.argv) > 2 else Path(input_path).stem + "_music_only.mp4"
+    
+    if not os.path.exists(input_path):
+        print(f"Error: Input file not found: {input_path}")
+        sys.exit(1)
+    
+    # Configuration - adjust these as needed
+    MIN_DURATION = 5.0   # Ignore music segments shorter than this
+    MERGE_GAP = 2.0      # Merge segments separated by less than this
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        audio_path = os.path.join(tmpdir, "audio.wav")
+        concat_path = os.path.join(tmpdir, "concat.txt")
+        
+        # Step 1: Extract audio
+        extract_audio(input_path, audio_path)
+        
+        # Step 2: Analyse and get music segments
+        segments = get_music_segments(audio_path, MIN_DURATION, MERGE_GAP)
+        
+        if not segments:
+            print("No music segments found to extract!")
+            sys.exit(1)
+        
+        # Print summary
+        total_duration = sum(e - s for s, e in segments)
+        print(f"\nTotal music duration: {format_duration(total_duration)}")
+        print("\nSegments to extract:")
+        for i, (start, end) in enumerate(segments):
+            print(f"  {i+1}. {format_duration(start)} - {format_duration(end)} ({end-start:.1f}s)")
+        
+        # Step 3: Extract and concatenate
+        print()
+        segment_files = create_concat_file(segments, input_path, concat_path)
+        
+        try:
+            concatenate_segments(concat_path, output_path)
+            print(f"\nDone! Output saved to: {output_path}")
+        finally:
+            # Clean up segment files
+            for f in segment_files:
+                if os.path.exists(f):
+                    os.remove(f)
+
+
+if __name__ == "__main__":
+    main()
