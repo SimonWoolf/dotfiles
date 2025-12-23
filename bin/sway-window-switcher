@@ -1,0 +1,16 @@
+#!/bin/bash
+# Window switcher using fuzzel (rofi -show window replacement)
+
+swaymsg -t get_tree | \
+  jq -r '.. | select(.type?) | select(.type=="con") | select(.pid != null) | "\(.id)\t\(.app_id // .class // "?"):\t\(.name // "untitled")"' | \
+  fuzzel --dmenu \
+    --font="Meslo LG S for Powerline:size=9" \
+    --width=80 \
+    --background=222222ff \
+    --text-color=ddddddff \
+    --selection-color=687e85ff \
+    --selection-text-color=eee8d5ff \
+    --border-color=000000ff \
+    --match-color=eee8d5ff | \
+  cut -f1 | \
+  xargs -I{} swaymsg '[con_id={}] focus'

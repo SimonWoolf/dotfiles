@@ -15,11 +15,11 @@ bindsym $mod+j focus down
 
 # set things to workspaces
 # external
-workspace 1 output HDMI-A-1
-workspace 2 output HDMI-A-1
-workspace 3 output HDMI-A-1
-workspace 4 output HDMI-A-1
-workspace 5 output HDMI-A-1
+workspace 1 output HDMI-A-2
+workspace 2 output HDMI-A-2
+workspace 3 output HDMI-A-2
+workspace 4 output HDMI-A-2
+workspace 5 output HDMI-A-2
 # laptop screen:
 workspace 6 output eDP-1
 workspace 7 output eDP-1
