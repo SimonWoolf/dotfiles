@@ -37,6 +37,7 @@ end
 `mkdir -p ~/.config/i3status/`
 `mkdir -p ~/.config/alacritty/`
 `mkdir -p ~/.config/dunst/`
+`mkdir -p ~/.config/fuzzel/`
 `mkdir -p ~/.config/xkb/symbols/`
 `mkdir -p ~/.config/nvim/`
 `ln -fs ~/dev/dotfiles/vim-init.lua ~/.config/nvim/init.lua`
@@ -47,6 +48,7 @@ end
 `ln -fs ~/dev/dotfiles/waybar_style.css ~/.config/waybar/style.css`
 `ln -fs ~/dev/dotfiles/i3status_config ~/.config/i3status/config`
 `ln -fs ~/dev/dotfiles/dunstrc ~/.config/dunst/dunstrc`
+`ln -fs ~/dev/dotfiles/fuzzel.ini ~/.config/fuzzel/fuzzel.ini`
 `ln -fs ~/dev/dotfiles/default-golang-pkgs ~/.default-golang-pkgs`
 `ln -fs ~/dev/dotfiles/ssh-config ~/.ssh/config`
 `ln -fs ~/Dropbox/bash_history ~/.bash_history`
