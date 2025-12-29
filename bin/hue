@@ -5,18 +5,28 @@ source ~/.apikeys
 
 HUE_BASE="https://${HUE_BRIDGE_IP}/api/${HUE_API_KEY}"
 
-# Light groups
+# Light groups and individual lights
 declare -A HUE_ROOMS=(
     [lr]="1 3 4 7"  # Living room: Windowsill, Main Ceiling, Desk Go, Desk Lamp
     [sr]="2"        # Simon's room: Fairy Lights
+    [window]="1"    # Windowsill lightstrip
+    [ceil]="3"      # Main Ceiling
+    [go]="4"        # Desk Go
+    [desk]="7"      # Desk Lamp
 )
 
 usage() {
     echo "Usage: hue <room> <command> [brightness]"
     echo ""
     echo "Rooms:"
-    echo "  lr  - Living room (Windowsill, Main Ceiling, Desk Go, Desk Lamp)"
-    echo "  sr  - Simon's room (Fairy Lights)"
+    echo "  lr      - Living room (all four)"
+    echo "  sr      - Simon's room (Fairy Lights)"
+    echo ""
+    echo "Individual lights:"
+    echo "  window  - Windowsill lightstrip"
+    echo "  ceil    - Main Ceiling"
+    echo "  go      - Desk Go"
+    echo "  desk    - Desk Lamp"
     echo ""
     echo "Commands:"
     echo "  on            - Turn on"
