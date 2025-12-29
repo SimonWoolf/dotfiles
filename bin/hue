@@ -1,0 +1,103 @@
+#!/bin/bash
+set -e
+
+source ~/.apikeys
+
+HUE_BASE="https://${HUE_BRIDGE_IP}/api/${HUE_API_KEY}"
+
+# Light groups
+declare -A HUE_ROOMS=(
+    [lr]="1 3 4 7"  # Living room: Windowsill, Main Ceiling, Desk Go, Desk Lamp
+    [sr]="2"        # Simon's room: Fairy Lights
+)
+
+usage() {
+    echo "Usage: hue <room> <command> [brightness]"
+    echo ""
+    echo "Rooms:"
+    echo "  lr  - Living room (Windowsill, Main Ceiling, Desk Go, Desk Lamp)"
+    echo "  sr  - Simon's room (Fairy Lights)"
+    echo ""
+    echo "Commands:"
+    echo "  on            - Turn on"
+    echo "  off           - Turn off"
+    echo "  warmwhite     - Warm white (2700K)"
+    echo "  coolwhite     - Cool white (4000K)"
+    echo "  daylight      - Daylight (6500K)"
+    echo "  red/green/blue/purple/orange/pink - Colors"
+    echo ""
+    echo "Brightness: 0-100 (optional, default 100)"
+    echo ""
+    echo "Examples:"
+    echo "  hue lr warmwhite 100"
+    echo "  hue lr off"
+    echo "  hue sr red 50"
+    exit 1
+}
+
+hue_cmd() {
+    local light_id="$1"
+    local payload="$2"
+    curl -sk -X PUT "${HUE_BASE}/lights/${light_id}/state" -d "$payload" >/dev/null
+}
+
+[[ $# -lt 2 ]] && usage
+
+ROOM="$1"
+CMD="$2"
+BRI="${3:-100}"
+
+# Convert brightness 0-100 to 1-254
+BRI_VAL=$(( (BRI * 253 / 100) + 1 ))
+[[ $BRI_VAL -gt 254 ]] && BRI_VAL=254
+[[ $BRI_VAL -lt 1 ]] && BRI_VAL=1
+
+LIGHTS="${HUE_ROOMS[$ROOM]}"
+[[ -z "$LIGHTS" ]] && echo "Unknown room: $ROOM" && usage
+
+case "$CMD" in
+    on)
+        PAYLOAD="{\"on\":true,\"bri\":${BRI_VAL}}"
+        ;;
+    off)
+        PAYLOAD='{"on":false}'
+        ;;
+    warmwhite)
+        PAYLOAD="{\"on\":true,\"bri\":${BRI_VAL},\"ct\":454}"  # 2700K
+        ;;
+    coolwhite)
+        PAYLOAD="{\"on\":true,\"bri\":${BRI_VAL},\"ct\":250}"  # 4000K
+        ;;
+    daylight)
+        PAYLOAD="{\"on\":true,\"bri\":${BRI_VAL},\"ct\":153}"  # 6500K
+        ;;
+    red)
+        PAYLOAD="{\"on\":true,\"bri\":${BRI_VAL},\"hue\":0,\"sat\":254}"
+        ;;
+    green)
+        PAYLOAD="{\"on\":true,\"bri\":${BRI_VAL},\"hue\":25500,\"sat\":254}"
+        ;;
+    blue)
+        PAYLOAD="{\"on\":true,\"bri\":${BRI_VAL},\"hue\":46920,\"sat\":254}"
+        ;;
+    purple)
+        PAYLOAD="{\"on\":true,\"bri\":${BRI_VAL},\"hue\":56100,\"sat\":254}"
+        ;;
+    orange)
+        PAYLOAD="{\"on\":true,\"bri\":${BRI_VAL},\"hue\":6000,\"sat\":254}"
+        ;;
+    pink)
+        PAYLOAD="{\"on\":true,\"bri\":${BRI_VAL},\"hue\":56000,\"sat\":200}"
+        ;;
+    *)
+        echo "Unknown command: $CMD"
+        usage
+        ;;
+esac
+
+for light in $LIGHTS; do
+    hue_cmd "$light" "$PAYLOAD" &
+done
+wait
+
+echo "Done"
