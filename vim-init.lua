@@ -218,6 +218,10 @@ if vim.fn.isdirectory(vim.fn.expand("~/.asdf")) == 1 then
 else
   vim.g.copilot_node_command = "~/.local/share/mise/installs/node/22/bin/node"
 end
+vim.g.copilot_filetypes = {
+  markdown = false,
+  txt = false
+}
 vim.cmd('highlight CopilotSuggestion guifg=LightGrey ctermfg=LightGrey')
 vim.keymap.set('i', '<C-Tab>', '<Plug>(copilot-next)')
 vim.keymap.set('i', '<C-Tab>', '<M-]>')
