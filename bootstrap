@@ -18,7 +18,7 @@ HOME = `echo ~`.chomp
 files = `ls -a ~/dev/dotfiles`
           .split
           .reject {|f| f.length < 3}
-          .reject {|f| f == '.git'}
+          .reject {|f| f == '.git' || f == '.claude'}
           .select {|f| f[0] == '.'}
 
 puts "symlinking #{files.join(', ')}"
@@ -31,10 +31,8 @@ end
   `ln -fs ~/dev/dotfiles/dotdesktops/#{file} ~/.local/share/applications/`
 end
 
-`mkdir -p ~/.config/i3/`
 `mkdir -p ~/.config/sway/`
 `mkdir -p ~/.config/waybar/`
-`mkdir -p ~/.config/i3status/`
 `mkdir -p ~/.config/alacritty/`
 `mkdir -p ~/.config/dunst/`
 `mkdir -p ~/.config/fuzzel/`
@@ -42,11 +40,9 @@ end
 `mkdir -p ~/.config/nvim/`
 `ln -fs ~/dev/dotfiles/vim-init.lua ~/.config/nvim/init.lua`
 `ln -fs ~/dev/dotfiles/lazy-lock.json ~/.config/nvim/lazy-lock.json`
-`ln -fs ~/dev/dotfiles/i3_config ~/.config/i3/config`
 `ln -fs ~/dev/dotfiles/sway_config ~/.config/sway/config`
 `ln -fs ~/dev/dotfiles/waybar_config ~/.config/waybar/config`
 `ln -fs ~/dev/dotfiles/waybar_style.css ~/.config/waybar/style.css`
-`ln -fs ~/dev/dotfiles/i3status_config ~/.config/i3status/config`
 `ln -fs ~/dev/dotfiles/dunstrc ~/.config/dunst/dunstrc`
 `ln -fs ~/dev/dotfiles/fuzzel.ini ~/.config/fuzzel/fuzzel.ini`
 `ln -fs ~/dev/dotfiles/default-golang-pkgs ~/.default-golang-pkgs`
@@ -77,22 +73,14 @@ end
 `ln -fs -T ~/dev/dotfiles/vim_colors/ ~/.vim/colors`
 
 if desktop?
-  `cat noedit i3_config_base i3_config_desktop > i3_config`
-  `cat noedit i3status_config_base i3status_config_desktop > i3status_config`
-  `cat noedit i3_config_base sway_config_desktop > sway_config`
+  `cat noedit sway_config_base sway_config_desktop > sway_config`
   `ln -fs ~/dev/dotfiles/ginit-desktop.vim ~/.config/nvim/ginit.vim`
   `ln -fs ~/dev/dotfiles/alacritty-desktop.toml ~/.config/alacritty/alacritty.toml`
 else
-  `cat noedit i3_config_base i3_config_laptop > i3_config`
-  `cat noedit i3_config_base sway_config_laptop > sway_config`
+  `cat noedit sway_config_base sway_config_laptop > sway_config`
   `ln -fs ~/dev/dotfiles/xkb_custom_layout ~/.config/xkb/symbols/gb`
   `ln -fs ~/dev/dotfiles/ginit-laptop.vim ~/.config/nvim/ginit.vim`
   `mkdir -p ~/.config/kanshi/`
   `ln -fs ~/dev/dotfiles/kanshi_config ~/.config/kanshi/config`
   `ln -fs ~/dev/dotfiles/alacritty-laptop.toml ~/.config/alacritty/alacritty.toml`
-  if thinkpad?
-    `cat noedit i3status_config_base i3status_config_thinkpad i3status_config_laptop > i3status_config`
-  else
-    `cat noedit i3status_config_base i3status_config_xps i3status_config_laptop > i3status_config`
-  end
 end
