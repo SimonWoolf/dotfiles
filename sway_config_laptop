@@ -2,12 +2,6 @@ exec systemctl --user import-environment WAYLAND_DISPLAY
 
 font pango:Meslo LG S for Powerline 13
 
-# move focus to other monitor
-bindsym $mod+Prior focus output up
-bindsym $mod+Next focus output down
-bindsym $mod+k focus up
-bindsym $mod+j focus down
-
 # set things to workspaces
 # external
 workspace 1 output HDMI-A-2
@@ -22,8 +16,6 @@ workspace 8 output eDP-1
 workspace 9 output eDP-1
 workspace 10 output eDP-1
 
-bindsym $mod+Shift+r reload
-
 # night mode
 # on laptop, no point adjusting the brightness in xrandr, inefficient use of
 # battery - just adjust colour temp and do brightness with backlight adjustment
@@ -32,10 +24,6 @@ bindsym $mod+e exec "killall gammastep; gammastep -P -r -O 5000"
 bindsym $mod+i exec "killall gammastep; gammastep -P -r -O 4000"
 bindsym $mod+o exec "killall gammastep; gammastep -P -r -O 3500"
 bindsym $mod+apostrophe exec "killall gammastep; gammastep -P -r -O 3000"
-
-bar {
-    swaybar_command waybar
-}
 
 input type:keyboard {
   xkb_layout "gb"
@@ -47,20 +35,6 @@ input type:touchpad {
   click_method "clickfinger"
   # tap "enabled"
 }
-
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-bindsym XF86MonBrightnessDown exec brightnessctl set -e 10%-
-bindsym XF86MonBrightnessUp exec brightnessctl set -e 10%+
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86Search exec bemenu-run
-
-bindsym F12 exec alacritty
-
 
 # Program runner (fuzzel - native wayland, no xwayland needed)
 bindsym Control+space exec fuzzel

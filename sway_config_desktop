@@ -2,12 +2,6 @@ exec --no-startup-id pactl set-default-sink alsa_output.usb-ACTIONS_Pebble_V3-00
 
 font pango:Meslo LG S for Powerline 12
 
-# move focus to other monitor
-bindsym $mod+Prior focus output left
-bindsym $mod+Next focus output right
-bindsym $mod+j focus output right
-bindsym $mod+k focus output left
-
 # set things to workspaces
 # external
 workspace 1 output DP-1
@@ -24,8 +18,6 @@ workspace 10 output DP-2
 
 bindsym $mod+m exec "audioswitch"
 
-bindsym $mod+Shift+r reload
-
 # night mode
 # on laptop, no point adjusting the brightness in xrandr, inefficient use of
 # battery - just adjust colour temp and do brightness with backlight adjustment
@@ -35,58 +27,17 @@ bindsym $mod+i exec "killall redshift; redshift -P -r -O 4000"
 bindsym $mod+o exec "killall redshift; redshift -P -r -O 3500 -g 1:0.9:0.9 -b 0.9"
 bindsym $mod+apostrophe exec "killall redshift; redshift -P -r -O 3000 -g 1:0.8:0.8 -b 0.8"
 
-bar {
-    swaybar_command waybar
-    # status_command i3status | ~/dev/dotfiles/bin/custom_i3_status.rb 2> i3status.log
-    # tray_output primary
-    # position top
-    # tray_padding 2
-    # separator_symbol "╱"
-    # colors {
-    #     separator #707070
-    #     # <colorclass> <border> <background> <text>
-    #     focused_workspace  #4c78ff #285577 #ffffff
-    #     active_workspace   #333333 #5f676a #ffffff
-    #     inactive_workspace #333333 #222222 #ffffff
-    # }
-    # font pango:Meslo LG S for Powerline 12
-}
-
 input * {
   xkb_layout "gb"
   xkb_options "compose:paus"
   # xkb_variant "custom"
 }
 
-
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-bindsym XF86MonBrightnessDown exec brightnessctl set -e 10%-
-bindsym XF86MonBrightnessUp exec brightnessctl set -e 10%+
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86Search exec bemenu-run
-
-bindsym F12 exec alacritty
-
 # Program runner
 bindsym Control+space exec fuzzel
 # Window switcher
 bindsym $mod+space exec /home/simon/dev/dotfiles/bin/sway-window-switcher
 
-# cursor theme
-# seat seat0 xcursor_theme Adwaita 48
-
-# set $gnome-schema org.gnome.desktop.interface
-# exec_always {
-#     gsettings set $gnome-schema cursor-theme Adwaita
-#     gsettings set $gnome-schema cursor-size 48
-# }
-
-# lockscreen
 # set $lock_bg ~/Pictures/lockscreen.jpg
 
 exec swayidle -w \
