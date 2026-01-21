@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+	cat <<-EOF
+	Suggests a CLI command based on a natural language description.
+	Used by the cos() shell function.
+
+	USAGE
+	  _cos_suggest <prompt>
+	EOF
+	exit 0
+fi
+
+PROMPT="The user wants a CLI command to accomplish the following task. They are running on Ubuntu (so with GNU coreutils, plus git etc) in the bash shell.
+
+Task: $@
+
+Respond with only the command itself, with no explanation, no markdown formatting, no code blocks, and no additional text. Output exactly what should be executed in the terminal."
+
+FIXED_CMD=$(llm "$PROMPT")
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+	echo "Error: Failed to get command suggestion from llm" >&2
+	exit 1
+fi
+
+FIXED_CMD=$(echo "$FIXED_CMD" | sed -e 's/^```[a-z]*$//' -e 's/^```$//' -e 's/^`//' -e 's/`$//' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
+if [ -z "$FIXED_CMD" ]; then
+	echo "Error: No command suggestion received" >&2
+	exit 1
+fi
+
+echo "$FIXED_CMD"

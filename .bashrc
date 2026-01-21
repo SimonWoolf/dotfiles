@@ -320,6 +320,17 @@ function mdrender() {
     pandoc "$1"  > /tmp/pandoc.html; firefox /tmp/pandoc.html
 }
 
+cos() {
+    local cmd
+    cmd=$(_cos_suggest "$@") || return $?
+    [ -z "$cmd" ] && return 1
+    read -e -i "$cmd" -p "> " edited
+    if [ -n "$edited" ]; then
+        history -s "$edited"
+        eval "$edited"
+    fi
+}
+
 # added by travis gem
 [ -f /home/simon/.travis/travis.sh ] && source /home/simon/.travis/travis.sh
 
