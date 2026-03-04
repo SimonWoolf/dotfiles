@@ -24,3 +24,4 @@ i3status_config
 .env
 .aider*
 .envrc
+.claude/settings.local.json
