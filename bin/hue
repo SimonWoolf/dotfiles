@@ -32,6 +32,7 @@ usage() {
     echo "  on            - Turn on"
     echo "  off           - Turn off"
     echo "  candlewhite   - Candle white (2700K)"
+    echo "  vwarmwhite    - Very warm white (2850K)"
     echo "  warmwhite     - Warm white (3000K)"
     echo "  coolwhite     - Cool white (4000K)"
     echo "  daylight      - Daylight (6500K)"
@@ -75,6 +76,9 @@ case "$CMD" in
         ;;
     candlewhite)
         PAYLOAD="{\"on\":true,\"bri\":${BRI_VAL},\"ct\":454}"  # 2700K
+        ;;
+    vwarmwhite)
+        PAYLOAD="{\"on\":true,\"bri\":${BRI_VAL},\"ct\":393}"  # 2850K
         ;;
     warmwhite)
         PAYLOAD="{\"on\":true,\"bri\":${BRI_VAL},\"ct\":333}"  # 3000K
