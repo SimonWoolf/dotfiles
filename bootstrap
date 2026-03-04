@@ -45,7 +45,7 @@ end
 `ln -fs ~/dev/dotfiles/waybar_style.css ~/.config/waybar/style.css`
 `ln -fs ~/dev/dotfiles/dunstrc ~/.config/dunst/dunstrc`
 `ln -fs ~/dev/dotfiles/fuzzel.ini ~/.config/fuzzel/fuzzel.ini`
-`ln -fs ~/dev/dotfiles/default-golang-pkgs ~/.default-golang-pkgs`
+`ln -fs ~/dev/dotfiles/default-golang-pkgs ~/.default-go-pkgs`
 `ln -fs ~/dev/dotfiles/ssh-config ~/.ssh/config`
 `ln -fs ~/Dropbox/bash_history ~/.bash_history`
 `mkdir -p ~/.config/nvim-qt/`
