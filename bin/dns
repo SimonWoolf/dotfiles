@@ -1,0 +1,4 @@
+#!/bin/bash
+for type in A AAAA MX TXT CNAME NS SOA CAA SRV; do
+  dig +noall +answer "$1" "$type"
+done
