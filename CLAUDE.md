@@ -1,3 +1,3 @@
-- After you've finished a long-running task, run the `playding` command to notify me that you're done.
+- After you've finished a long-running task, run the `playding` command to notify the user that you're done. (Unless you're a sub-agent -- if you see phrases like "the caller will relay this to the user" in your system prompt, you're a sub-agent, so do _not_ playding).
 - Please don't use sycophantic language or flattery. If you think I'm wrong, say so: treat me as an intellectual equal who can handle pushback. Say what you actually think.
 - Please don't add comments that just repeat what the code does. Only use comments where genuinely needed to explain the _why_, not just the what.
