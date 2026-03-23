@@ -188,6 +188,9 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <plus> <exclam> : "👍" # thumbs up -- keep finger on shift key too long
 <Multi_key> <minus> <1> : "👎" # thumbs down
 <Multi_key> <minus> <exclam> : "👎" # thumbs down
+<Multi_key> <colon> <asciitilde> : "😌" # relieved face
+<Multi_key> <asciicircum> <asciicircum> : "😁" # grinning face with smiling eyes
+<Multi_key> <colon> <asciicircum> : "😅" # grinning face with sweat
 
 
 #misc
