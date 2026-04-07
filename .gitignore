@@ -25,3 +25,4 @@ i3status_config
 .aider*
 .envrc
 .claude/settings.local.json
+.claude/napkin.md

@@ -96,6 +96,7 @@ alias hpg="history | grep -i "
 # pulp, purs, bower required for insect
 alias install-node-globals="npm install -g grunt nodeunit insect diff-so-fancy mqtt-cli"
 alias cal="ncal -bM"
+alias claude="claude --enable-auto-mode --allow-dangerously-skip-permissions"
 
 # Point-free style! neat
 hist() {
@@ -187,7 +188,7 @@ alias cd.="cd ."
 alias ipa="ip -color -br a"
 alias nv="nvim-qt"
 alias v="nvim-qt"
-alias sv=sudoedit
+alias sv="sudoedit"
 
 # google drive aliases
 alias dpl="drive pull ."
