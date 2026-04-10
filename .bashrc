@@ -385,6 +385,9 @@ latex_compile() {
 # why does psql not use the system CA bundle by default? shrug
 export PGSSLROOTCERT="/etc/ssl/certs/ca-certificates.crt"
 
+# stop go from trying to use all my CPU cores for build/vetting
+export GOMAXPROCS=4
+
 eval $(keychain --eval --dir $HOME/.config/keychain --quiet --noask --agents gpg,ssh id_rsa id_ed)
 ssh-add ~/.ssh/id_ed 2>/dev/null
 
