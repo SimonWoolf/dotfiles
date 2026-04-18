@@ -191,6 +191,7 @@ include "/usr/share/X11/locale/en_US.UTF-8/Compose"
 <Multi_key> <colon> <asciitilde> : "😌" # relieved face
 <Multi_key> <asciicircum> <asciicircum> : "😁" # grinning face with smiling eyes
 <Multi_key> <colon> <asciicircum> : "😅" # grinning face with sweat
+<Multi_key> <o> <7> : "🫡" # saluting face
 
 
 #misc
