@@ -1,0 +1,14 @@
+#!/bin/sh
+# Unload everything combinedmic-setup created.
+
+set -e
+
+pactl list short modules | awk '
+  $2 == "module-loopback"    && $0 ~ /sink=combined_mic/        { print $1 }
+  $2 == "module-remap-source" && $0 ~ /master=combined_mic\.monitor/ { print $1 }
+  $2 == "module-null-sink"   && $0 ~ /sink_name=combined_mic/   { print $1 }
+' | while read id; do
+  pactl unload-module "$id"
+done
+
+echo "CombinedMic unloaded"

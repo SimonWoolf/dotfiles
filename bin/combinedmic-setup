@@ -1,0 +1,35 @@
+#!/bin/sh
+# Create a virtual mic that mixes the Majority RS1 USB mic with the monitor of
+# the onboard analog sink. Point WebRTC apps (Signal etc) at "CombinedMic" to
+# share system audio alongside your voice.
+
+set -e
+
+MIC_SOURCE="alsa_input.usb-Majority_RS1_Majority_RS1_202005020-00.mono-fallback"
+MONITOR_SOURCE="alsa_output.pci-0000_00_1f.3.analog-stereo.monitor"
+
+if pactl list short sinks | grep -q '^[0-9]*[[:space:]]combined_mic[[:space:]]'; then
+  echo "combined_mic already loaded"
+  exit 0
+fi
+
+pactl load-module module-null-sink \
+  sink_name=combined_mic \
+  sink_properties=device.description=CombinedMicSink >/dev/null
+
+pactl load-module module-remap-source \
+  source_name=combined_mic_source \
+  master=combined_mic.monitor \
+  source_properties=device.description=CombinedMic >/dev/null
+
+pactl load-module module-loopback \
+  source="$MIC_SOURCE" \
+  sink=combined_mic \
+  latency_msec=20 >/dev/null
+
+pactl load-module module-loopback \
+  source="$MONITOR_SOURCE" \
+  sink=combined_mic \
+  latency_msec=20 >/dev/null
+
+echo "CombinedMic loaded"
