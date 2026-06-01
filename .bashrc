@@ -239,6 +239,10 @@ function ably-env() {
   (cd /home/simon/ably/infrastructure ; ./bin/ably-env ${@} )
 }
 
+function ablyctl() {
+  (cd /home/simon/ably/infrastructure ; ./bin/ablyctl-dev ${@} )
+}
+
 # OS-specific commands
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias ll='ls -lh --color=auto'
