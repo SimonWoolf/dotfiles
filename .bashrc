@@ -96,7 +96,9 @@ alias hpg="history | grep -i "
 # pulp, purs, bower required for insect
 alias install-node-globals="npm install -g grunt nodeunit insect diff-so-fancy mqtt-cli"
 alias cal="ncal -bM"
-alias claude="claude --enable-auto-mode --allow-dangerously-skip-permissions"
+alias cl="claude --enable-auto-mode --allow-dangerously-skip-permissions"
+alias clp="CLAUDE_CONFIG_DIR="/home/simon/.claude-personal" claude --enable-auto-mode --allow-dangerously-skip-permissions"
+alias clpbare="CLAUDE_CONFIG_DIR="/home/simon/.claude-personal" claude --system-prompt "." --tools "" --strict-mcp-config"
 
 # Point-free style! neat
 hist() {
@@ -183,6 +185,7 @@ alias hackerdump="find /var/log -type f -exec grep -I1 . {} \; | pv -q -L 1k "
 alias calc="insect"
 alias clipcopy="xclip -selection clipboard "
 alias ae="ably-env "
+alias ac="ablyctl "
 alias cd..="cd .."
 alias cd.="cd ."
 alias ipa="ip -color -br a"
@@ -218,6 +221,8 @@ alias bose-connect="bluetoothctl connect 78:2B:64:CD:11:EE"
 alias bose-disconnect="bluetoothctl disconnect 78:2B:64:CD:11:EE"
 alias bose-hqaudio="pactl set-card-profile bluez_card.78_2B_64_CD_11_EE a2dp-sink"
 alias bose-headset="pactl set-card-profile bluez_card.78_2B_64_CD_11_EE headset-head-unit"
+alias ugreen-connect="bluetoothctl connect 00:02:5B:02:52:BE"
+alias ugreen-disconnect="bluetoothctl disconnect 00:02:5B:02:52:BE"
 
 alias heahphone-battery="upower -i $(upower -e | grep headphones) |grep percentage"
 alias free="free -h"
