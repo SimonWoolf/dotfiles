@@ -236,12 +236,16 @@ function crtime() {
 }
 
 function ably-env() {
-  (cd /home/simon/ably/infrastructure ; ./bin/ably-env ${@} )
+  (cd /home/simon/ably/infrastructure ; ./bin/ably-env "$@" )
 }
 
 function ablyctl() {
-  (cd /home/simon/ably/infrastructure ; ./bin/ablyctl-dev ${@} )
+  (cd /home/simon/ably/infrastructure ; ./bin/ablyctl-dev "$@" )
 }
+
+_ablyctl_comp="$HOME/.cache/ablyctl-completion.bash"
+[[ -s $_ablyctl_comp ]] || ablyctl completion bash > "$_ablyctl_comp" 2>/dev/null
+source "$_ablyctl_comp"
 
 # OS-specific commands
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
