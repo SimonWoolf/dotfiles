@@ -415,6 +415,16 @@ require("lazy").setup({
         lspconfig.gleam.setup{
           capabilities = capabilities,
         }
+        -- Expert: the official unified Elixir language server (successor to
+        -- ElixirLS/Lexical/Next-LS). Binary lives at ~/.local/bin/expert.
+        -- lspconfig ships lsp/expert.lua which sets cmd + umbrella-aware root_dir.
+        -- lspconfig's bundled cmd omits the required transport flag, so
+        -- override it; expert >=0.1.4 refuses to start without --stdio.
+        vim.lsp.config('expert', {
+          cmd = { 'expert', '--stdio' },
+          capabilities = capabilities,
+        })
+        vim.lsp.enable('expert')
         lspconfig.gopls.setup({
           capabilities = capabilities,
           settings = {
