@@ -240,14 +240,6 @@ function crtime() {
   sudo debugfs -R "stat <`stat -c %i ${@}`>" `\df --output=source ${@} | tail -1` | grep crtime
 }
 
-function ably-env() {
-  (cd /home/simon/ably/infrastructure ; ./bin/ably-env "$@" )
-}
-
-function ablyctl() {
-  (cd /home/simon/ably/infrastructure ; ./bin/ablyctl-dev "$@" )
-}
-
 _ablyctl_comp="$HOME/.cache/ablyctl-completion.bash"
 [[ -s $_ablyctl_comp ]] || ablyctl completion bash > "$_ablyctl_comp" 2>/dev/null
 source "$_ablyctl_comp"
