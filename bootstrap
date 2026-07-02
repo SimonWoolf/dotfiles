@@ -61,16 +61,10 @@ if !File.exist?('/etc/apt/sources.list.d/custom.list')
   `sudo ln -fs /home/simon/dev/dotfiles/apt-custom-sources.list /etc/apt/sources.list.d/custom.list`
 end
 
-# vim
-`mkdir -p ~/.vim/pack/`
-`mkdir -p ~/.vim/_backup/`
-`mkdir -p ~/.vim/_temp/`
-`mkdir -p ~/.vim/undodir/`
-`mkdir -p ~/.vim/after/plugin/`
-`ln -fs ~/dev/dotfiles/vimrc_after.vim ~/.vim/after/plugin/vimrc_after.vim`
-# -T stops ln treating synced/ as a directory rather than a target name
-`ln -fs -T ~/dev/dotfiles/vim_plugins/ ~/.vim/pack/synced`
-`ln -fs -T ~/dev/dotfiles/vim_colors/ ~/.vim/colors`
+# nvim backup/undo/swap dirs (paths set in vim-init.lua)
+`mkdir -p ~/.vim/nundodir/`
+`mkdir -p ~/.vim/_nbackup/`
+`mkdir -p ~/.vim/_ntemp/`
 
 if desktop?
   `cat noedit sway_config_base sway_config_desktop > sway_config`
