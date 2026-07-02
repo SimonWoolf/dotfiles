@@ -17,7 +17,7 @@ if [ -n "$BASH_VERSION" ]; then
 else
   # at least set the path so sh can find executables
   export ARDUINO_PATH=/usr/local/arduino
-  export PATH="/usr/local/heroku/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin:$HOME/.cargo/bin"
+  export PATH="$PATH:$HOME/bin:$HOME/dev/dotfiles/bin:$HOME/.cargo/bin"
 fi
 
 # on 18.04, system would logout on resume due to

@@ -50,11 +50,6 @@ if [ -f ~/dev/dotfiles/git-completion.bash ] ; then
     source ~/dev/dotfiles/git-completion.bash
 fi
 
-# fasd (hash will check if it exists)
-#if hash fasd 2>/dev/null; then
-  #eval "$(fasd --init auto)"
-#fi
-
 alias 'ps?'='ps aux | grep '
 alias sudo="sudo "
 alias df="df -h"
@@ -74,8 +69,6 @@ alias fp="vlc /tmp/Flash*"
 alias hdlist="sudo blkid"
 alias offscreen='xvfb-run --server-args="-screen 0 1024x768x24"'
 alias cmpd="ncmpc"
-alias iplayer-dl-video="get_iplayer --flvstreamer /usr/bin/rtmpdump --modes=flashhd,flashvhigh1,flashvhigh,flashhigh --pid "
-alias iplayer-dl-audio="get_iplayer --flvstreamer /usr/bin/rtmpdump --modes=flashaachigh,flashaac,flashaacstd, flashaacstd1,flashaudio,flashhigh,flashstd,flashnormal --pid "
 #usage: flv2aac input output
 alias flv2aac="ffmpeg -acodec copy -i "
 #Usage: extractaudio INPUT -o OUTPUT
@@ -93,8 +86,6 @@ alias stripduplines="perl -ne 'print if ! $a{$_}++' "
 # Stops it erroring on startup on laptop
 alias gpa="gpa --disable-x509"
 alias hpg="history | grep -i "
-# pulp, purs, bower required for insect
-alias install-node-globals="npm install -g grunt nodeunit insect diff-so-fancy mqtt-cli"
 alias cal="ncal -bM"
 alias cl="claude --enable-auto-mode --allow-dangerously-skip-permissions"
 alias clp="CLAUDE_CONFIG_DIR="/home/simon/.claude-personal" claude --enable-auto-mode --allow-dangerously-skip-permissions"
@@ -148,7 +139,6 @@ alias au="sudo apt update"
 alias adu="sudo apt dist-upgrade"
 #usage: reencodeformediabox inputfile outputfile
 alias reencodeformediabox="ffmpeg -mbd rd -vtag xvid -flags +mv4+aic -trellis 2 -cmp 2 -subcmp 2 -g 300 -pass 2 -b 2000k -ab 192k -i "
-alias updateipblock="sudo mv /var/cache/iplist/index.html\?list\=bt_level1 /var/cache/iplist/bt_level1 && sudo mv /var/cache/iplist/index.html\?list\=bt_level2 /var/cache/iplist/bt_level2"
 alias rot13="tr '[A-Za-z]' '[N-ZA-Mn-za-m]'"
 
 # Programming aliases
@@ -173,10 +163,8 @@ alias gr="git grep -i -E "
 alias ga-p="git add -p"
 alias glg="git lg"
 alias g="git"
-alias z='zeus'
 alias cl="clear"
 alias be="bundle exec "
-alias killzeus="ps | grep zeus && ps | grep zeus | awk '{print $1}' | xargs kill -3"
 alias j=" jq '.'"
 alias jsonfmt="python -m json.tool"
 alias hackerdump="find /var/log -type f -exec grep -I1 . {} \; | pv -q -L 1k "
@@ -192,12 +180,6 @@ alias nv="nvim-qt"
 alias v="nvim-qt"
 alias sv="sudoedit"
 
-# google drive aliases
-alias dpl="drive pull ."
-alias dps="drive push ."
-alias dmkdir="drive new -folder "
-alias drm="drive delete "
-alias d="drive "
 alias mostest="less"
 
 alias sony-connect="bluetoothctl connect 94:DB:56:A3:35:9D"
@@ -265,11 +247,10 @@ source ~/.prompt.sh
 # secret keys
 [ -f ~/.apikeys ] && source ~/.apikeys
 
-# heroku, CUDA, my stuff paths
+# my stuff paths
 # note: .local/bin is prepended so that local stack & pip take precendence over systemwide one (which is used by wireshark for some reason)
 export FLYCTL_INSTALL="/home/simon/.fly"
-export PATH="$HOME/.local/bin:$HOME/.cargo/bin:/usr/local/cuda-7.0/bin:/usr/local/heroku/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin:$HOME/.poetry/bin:$HOME/go/bin:$HOME/.cache/rebar3/bin:$FLYCTL_INSTALL/bin"
-export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib:$LD_LIBRARY_PATH
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH:$HOME/bin:$HOME/dev/dotfiles/bin:$HOME/go/bin:$HOME/.cache/rebar3/bin:$FLYCTL_INSTALL/bin"
 export ARDUINO_PATH=/usr/local/arduino
 
 eval "$(mise activate bash)"
@@ -324,8 +305,6 @@ cos() {
     fi
 }
 
-# added by travis gem
-[ -f /home/simon/.travis/travis.sh ] && source /home/simon/.travis/travis.sh
 
 if [[ "$XDG_SESSION_TYPE" = "wayland" ]]; then
   # Allow firefox to use wayland if it's running under that, or it takes like
