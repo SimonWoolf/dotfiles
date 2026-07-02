@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# Forget and re-pair the Bose NC 700 from scratch.
+#
+# Use this when a normal `bose-connect` fails with
+# "org.bluez.Error.Failed br-connection-key-missing" — that means BlueZ and the
+# headphones disagree about the stored link key, and the only fix is to drop the
+# bond and pair fresh. Day-to-day switching between phone/laptop should NOT need
+# this; reach for `bose-connect` first.
+
+set -euo pipefail
+
+MAC="78:2B:64:CD:11:EE"
+NAME="Bose NC 700"
+
+echo ">> Removing stale pairing for $NAME ($MAC)..."
+bluetoothctl remove "$MAC" >/dev/null 2>&1 || true
+
+cat <<EOF
+
+>> Put the headphones in PAIRING MODE now:
+   slide the power switch up to the Bluetooth icon and hold ~2s until you hear
+   "Ready to connect" and the light blinks blue.
+   (If they're connected to your phone, turn its Bluetooth off first.)
+
+EOF
+read -rp "Press Enter once they're blinking blue... " _
+
+echo ">> Scanning for $NAME..."
+# Run a scan in the background and poll the device list until the MAC shows up.
+bluetoothctl scan on >/dev/null 2>&1 &
+scan_pid=$!
+trap 'kill "$scan_pid" 2>/dev/null || true' EXIT
+
+found=false
+for _ in $(seq 1 30); do
+  if bluetoothctl devices 2>/dev/null | grep -qi "$MAC"; then
+    found=true
+    break
+  fi
+  sleep 1
+done
+
+kill "$scan_pid" 2>/dev/null || true
+trap - EXIT
+bluetoothctl scan off >/dev/null 2>&1 || true
+
+if ! $found; then
+  echo "!! Couldn't find $NAME. Are they in pairing mode (blinking blue) and not" >&2
+  echo "   connected to another device? Re-run when ready." >&2
+  exit 1
+fi
+
+echo ">> Found. Pairing, trusting, connecting..."
+bluetoothctl pair "$MAC"
+bluetoothctl trust "$MAC"
+bluetoothctl connect "$MAC"
+
+if bluetoothctl info "$MAC" 2>/dev/null | grep -q "Connected: yes"; then
+  echo ">> Connected. (Set audio quality with bose-hqaudio if needed.)"
+else
+  echo "!! Pairing finished but not connected — try: bose-connect" >&2
+  exit 1
+fi
