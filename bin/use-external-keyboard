@@ -1,4 +1,0 @@
-#!/bin/sh
-setxkbmap gb
-setxkbmap -option "terminate:ctrl_alt_bksp" -option "compose:paus"
-xmodmap ~/.XmodmapForExternalKb

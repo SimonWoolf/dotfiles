@@ -1,3 +1,0 @@
-#!/bin/sh
-setxkbmap gb -variant colemak -option "terminate:ctrl_alt_bksp" -option "compose:paus"
-xmodmap ~/.XmodmapForLaptopKeyboard

@@ -258,11 +258,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   export DISPLAY=localhost:0
 fi
 
-if [[ "$SESSION" == "xubuntu" ]]; then
-  alias xl="xmodmap ~/.XmodmapForLaptopKeyboard"
-  alias xte="xmodmap ~/.XmodmapForTrulyErgonomic"
-fi
-
 source ~/.prompt.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
