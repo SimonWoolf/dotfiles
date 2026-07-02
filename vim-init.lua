@@ -410,11 +410,14 @@ require("lazy").setup({
     {
       'neovim/nvim-lspconfig',
       config = function()
-        lspconfig = require('lspconfig');
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
-        lspconfig.gleam.setup{
+        -- Apply cmp capabilities to every server. nvim-lspconfig ships the
+        -- per-server lsp/<name>.lua defaults; vim.lsp.config merges our
+        -- overrides on top, and vim.lsp.enable activates the server.
+        vim.lsp.config('*', {
           capabilities = capabilities,
-        }
+        })
+        vim.lsp.enable('gleam')
         -- Expert: the official unified Elixir language server (successor to
         -- ElixirLS/Lexical/Next-LS). Binary lives at ~/.local/bin/expert.
         -- lspconfig ships lsp/expert.lua which sets cmd + umbrella-aware root_dir.
@@ -422,11 +425,9 @@ require("lazy").setup({
         -- override it; expert >=0.1.4 refuses to start without --stdio.
         vim.lsp.config('expert', {
           cmd = { 'expert', '--stdio' },
-          capabilities = capabilities,
         })
         vim.lsp.enable('expert')
-        lspconfig.gopls.setup({
-          capabilities = capabilities,
+        vim.lsp.config('gopls', {
           settings = {
             gopls = {
               analyses = { unusedparams = true },
@@ -434,6 +435,7 @@ require("lazy").setup({
             },
           },
         })
+        vim.lsp.enable('gopls')
         vim.keymap.set('n', '<C-[>', vim.lsp.buf.type_definition)
         vim.keymap.set('n', '<C-]>', vim.lsp.buf.definition)
         vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition) -- alternative to C-]
