@@ -1,2 +1,0 @@
-#!/bin/sh
-mplayer /home/simon/dev/dotfiles/pomodoro-finish.wav -volume 60
