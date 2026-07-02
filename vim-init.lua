@@ -213,11 +213,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 -- copilot
-if vim.fn.isdirectory(vim.fn.expand("~/.asdf")) == 1 then
-  vim.g.copilot_node_command = "~/.asdf/installs/nodejs/20.10.0/bin/node"
-else
-  vim.g.copilot_node_command = "~/.local/share/mise/installs/node/22/bin/node"
-end
+vim.g.copilot_node_command = "~/.local/share/mise/installs/node/22/bin/node"
 vim.g.copilot_filetypes = {
   markdown = false,
   txt = false

@@ -1,13 +1,5 @@
 #!/bin/sh
 
-# this is run outside of a login shell, so since tt needs to run under asdf for
-# dependencies, need to set up that manually by cding to the dir and using asdf
-# exec
-if [ -d "$HOME/.asdf" ]; then
-  PATH=~/.asdf/bin/:$PATH
-  export BUNDLE_GEMFILE="/home/simon/dev/tt/Gemfile"
-
-  (cd ~/dev/tt/; asdf exec bundle exec ruby ./tt --socket 2>> ~/tt.log)
-else
-  mise exec --cd ~/dev/tt -- bundle exec ruby ./tt --socket 2>> ~/tt.log
-fi
+# this is run outside of a login shell, so since tt needs its own tool versions
+# for dependencies, run it via mise from the project dir
+mise exec --cd ~/dev/tt -- bundle exec ruby ./tt --socket 2>> ~/tt.log

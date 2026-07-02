@@ -179,7 +179,6 @@ alias be="bundle exec "
 alias killzeus="ps | grep zeus && ps | grep zeus | awk '{print $1}' | xargs kill -3"
 alias j=" jq '.'"
 alias jsonfmt="python -m json.tool"
-alias arst="asdf"
 alias hackerdump="find /var/log -type f -exec grep -I1 . {} \; | pv -q -L 1k "
 # if not installed: npm install -g insect
 alias calc="insect"
@@ -270,13 +269,6 @@ source ~/.prompt.sh
 
 # secret keys
 [ -f ~/.apikeys ] && source ~/.apikeys
-
-# if [ -d "$HOME/.asdf" ]; then
-#   . $HOME/.asdf/asdf.sh
-#   . $HOME/.asdf/completions/asdf.bash
-#   export ASDF_GOLANG_MOD_VERSION_ENABLED=true
-# fi
-
 
 # heroku, CUDA, my stuff paths
 # note: .local/bin is prepended so that local stack & pip take precendence over systemwide one (which is used by wireshark for some reason)
