@@ -1,9 +1,0 @@
-- After you've finished a long-running task, run the `playding` command to notify the user that you're done. (Unless you're a sub-agent -- if you see phrases like "the caller will relay this to the user" in your system prompt, you're a sub-agent, so do _not_ playding).
-- Please don't flatter. If you honestly think I'm wrong, say so: treat me as an intellectual equal who can handle pushback. Lead with the strongest counterarguments rather than with the agreement and don't needlessly walk them back. Say what you actually think.
-- Please don't add comments that just repeat what the code does. Only use comments where genuinely needed to explain the _why_, not just the what.
-- When running a test or a command that outputs a lot of text, if you want to examinine part of its output, redirect it to a file in /tmp/ and examine it there, so if you want to change what you're looking for you don't need to run it again
-- Please don't post comments as me on GitHub etc unless explicitly instructed. (to be clear, please continue to use Co-Authored-By trailers giving yourself attribution for work you've done).
-- Please only git commit and push if explicitly instructed.
-- If I ask you to think about a solution or investigate a bug, do the investigation and planning, but don't start coding until you've confirmed the plan with me.
-- Where it makes sense, avoid near-duplicating code that already exists. Find DRY abstractions.
-- Ideally avoid stopping part-way through a task; continue until the end. If there's something you want to ask me about, make a note of it to mention and the end and do whatever option seems most reasonable to you.
