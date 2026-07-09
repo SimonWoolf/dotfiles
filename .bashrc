@@ -225,6 +225,25 @@ _ablyctl_comp="$HOME/.cache/ablyctl-completion.bash"
 [[ -s $_ablyctl_comp ]] || ablyctl completion bash > "$_ablyctl_comp" 2>/dev/null
 source "$_ablyctl_comp"
 
+# Force ablyctl completions into a single vertical column rather than readline's
+# default side-by-side grid. Readline lays entries out in a grid based on their
+# width, so we pad each candidate to the full terminal width, leaving room for
+# exactly one per row.
+_ablyctl_comp_vertical() {
+    __start_ablyctl "$@"
+    (( ${#COMPREPLY[@]} > 1 )) || return
+    local i pad width=${COLUMNS:-80}
+    for i in "${!COMPREPLY[@]}"; do
+        pad=$(( width - ${#COMPREPLY[i]} - 1 ))
+        (( pad > 0 )) && printf -v COMPREPLY[i] '%s%*s' "${COMPREPLY[i]}" "$pad" ''
+    done
+}
+if [[ $(type -t compopt) = "builtin" ]]; then
+    complete -o default -F _ablyctl_comp_vertical ablyctl
+else
+    complete -o default -o nospace -F _ablyctl_comp_vertical ablyctl
+fi
+
 # OS-specific commands
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias ll='ls -lh --color=auto'
