@@ -96,7 +96,7 @@ alias clpo="CLAUDE_CONFIG_DIR="/home/simon/.claude-personal" claude --enable-aut
 alias clpf="CLAUDE_CONFIG_DIR="/home/simon/.claude-personal" claude --enable-auto-mode --allow-dangerously-skip-permissions --model fable "
 alias clps="CLAUDE_CONFIG_DIR="/home/simon/.claude-personal" claude --enable-auto-mode --allow-dangerously-skip-permissions --model sonnet "
 alias clph="CLAUDE_CONFIG_DIR="/home/simon/.claude-personal" claude --enable-auto-mode --allow-dangerously-skip-permissions --model haiku "
-alias clpbare="CLAUDE_CONFIG_DIR="/home/simon/.claude-personal" claude --system-prompt "." --tools "" --strict-mcp-config"
+alias clpbare='CLAUDE_CONFIG_DIR=/home/simon/.claude-personal claude --system-prompt "." --tools "" --strict-mcp-config'
 
 # Point-free style! neat
 hist() {
