@@ -50,7 +50,9 @@ exec_always {
     gsettings set $gnome-schema cursor-size 48
 }
 
+# swaylock's stderr goes to a file because a wedged locker otherwise leaves no
+# trace at all; the pgrep guard stops a second instance stacking on a live one.
 exec swayidle -w \
-         timeout 600 'swaylock -f -c 888888' \
-         before-sleep 'swaylock -f -c 888888' \
+         timeout 600 'pgrep -x swaylock >/dev/null || swaylock -f -c 888888 2>>/tmp/swaylock.log' \
+         before-sleep 'pgrep -x swaylock >/dev/null || swaylock -f -c 888888 2>>/tmp/swaylock.log' \
          after-resume '' # could be useful

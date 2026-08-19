@@ -40,9 +40,11 @@ bindsym $mod+space exec /home/simon/dev/dotfiles/bin/sway-window-switcher
 
 # set $lock_bg ~/Pictures/lockscreen.jpg
 
+# swaylock's stderr goes to a file because a wedged locker otherwise leaves no
+# trace at all; the pgrep guard stops a second instance stacking on a live one.
 exec swayidle -w \
-         timeout 1800 'swaylock -f -c 888888' \
-         before-sleep 'swaylock -f -c 888888' \
+         timeout 1800 'pgrep -x swaylock >/dev/null || swaylock -f -c 888888 2>>/tmp/swaylock.log' \
+         before-sleep 'pgrep -x swaylock >/dev/null || swaylock -f -c 888888 2>>/tmp/swaylock.log' \
          after-resume '' # could be useful
 
 input "1386:789:Wacom_Intuos_Pro_M_Pen" {
