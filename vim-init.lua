@@ -1,5 +1,12 @@
 vim.opt.runtimepath:prepend("~/.vim")
 
+-- GUI launches (nvim-qt from the desktop) don't source .bashrc, so mise never
+-- activates and node/npm are missing from PATH. The shims resolve without it.
+local mise_shims = vim.fn.expand("~/.local/share/mise/shims")
+if vim.fn.isdirectory(mise_shims) == 1 and not (":" .. vim.env.PATH .. ":"):find(":" .. mise_shims .. ":", 1, true) then
+  vim.env.PATH = mise_shims .. ":" .. vim.env.PATH
+end
+
 vim.opt.packpath = '/home/simon/dev/dotfiles/vim_plugins/'
 
 -- core vim settings
