@@ -1,0 +1,630 @@
+#!/usr/bin/env python3
+"""Render a Claude Code JSONL transcript as Markdown or standalone HTML.
+
+Usage:
+  cc-transcript [options] [SESSION]
+
+SESSION may be a path to a .jsonl file, a session id, or omitted to pick the
+most recently modified transcript for the current directory's project. Use
+"--" before a path that starts with a dash.
+
+Options:
+  -f, --format md|html   output format (default: md)
+  -o, --out FILE         write to FILE (default: stdout)
+  -l, --list             list transcripts for this project and exit
+  --project DIR          use DIR's project instead of the cwd
+  --all-projects         with --list, list every project's transcripts
+  --tool-output N        max chars of each tool result to keep (default 2000,
+                         0 = drop results, -1 = keep in full)
+  --no-thinking          omit thinking blocks
+  --no-tools             omit tool calls and results entirely
+  --no-sidechains        omit subagent (sidechain) messages
+  --no-system            omit system-injected records (subagent completion
+                         notifications, command output, meta messages)
+  --fold-lines N         fold Claude responses longer than N lines (default 5)
+  --fold-chars N         also fold responses longer than N chars (default 600)
+  --no-fold              never fold responses
+  --start TEXT           begin output at the first message containing TEXT
+  --end TEXT             stop after the last message containing TEXT
+                         (both match user and Claude messages, case- and
+                         whitespace-insensitively; the range is inclusive)
+  --meta                 include injected/meta messages
+"""
+import argparse
+import html
+import json
+import os
+import re
+import sys
+from datetime import datetime
+from pathlib import Path
+
+PROJECTS = Path.home() / ".claude" / "projects"
+
+
+def project_dir(path: Path) -> Path:
+    """Claude Code encodes the cwd by replacing non-alphanumerics with dashes."""
+    return PROJECTS / re.sub(r"[^a-zA-Z0-9]", "-", str(path.resolve()))
+
+
+def transcripts(d: Path):
+    if not d.is_dir():
+        return []
+    return sorted(d.glob("*.jsonl"), key=lambda p: p.stat().st_mtime, reverse=True)
+
+
+def load(path: Path):
+    records = []
+    with path.open() as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                records.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+    return records
+
+
+def title_of(records):
+    for r in records:
+        if r.get("type") == "ai-title" and r.get("title"):
+            return r["title"]
+    for r in records:
+        if r.get("type") == "user" and not r.get("isMeta"):
+            t = text_of(r.get("message", {}))
+            if t:
+                return t.strip().splitlines()[0][:80]
+    return "Claude Code transcript"
+
+
+def text_of(message):
+    content = message.get("content")
+    if isinstance(content, str):
+        return content
+    parts = []
+    for block in content or []:
+        if isinstance(block, dict) and block.get("type") == "text":
+            parts.append(block.get("text", ""))
+    return "\n".join(parts)
+
+
+def result_text(block):
+    content = block.get("content")
+    if isinstance(content, str):
+        return content
+    parts = []
+    for sub in content or []:
+        if not isinstance(sub, dict):
+            continue
+        if sub.get("type") == "text":
+            parts.append(sub.get("text", ""))
+        elif sub.get("type") == "image":
+            parts.append("[image]")
+    return "\n".join(parts)
+
+
+def strip_reminders(s):
+    return re.sub(r"<system-reminder>.*?</system-reminder>", "", s, flags=re.S).strip()
+
+
+def clip(s, limit):
+    """limit 0 drops the text entirely; negative means unlimited."""
+    if limit == 0:
+        return ""
+    if limit > 0 and len(s) > limit:
+        return s[:limit] + f"\n… [{len(s) - limit} more chars]"
+    return s
+
+
+def fmt_time(ts):
+    if not ts:
+        return ""
+    try:
+        return datetime.fromisoformat(ts.replace("Z", "+00:00")).strftime("%Y-%m-%d %H:%M")
+    except ValueError:
+        return ts
+
+
+def tool_summary(name, inp):
+    """One-line gist of a tool call, for the collapsed header."""
+    if not isinstance(inp, dict):
+        return name
+    for key in ("command", "file_path", "pattern", "path", "url", "description", "prompt", "skill"):
+        v = inp.get(key)
+        if isinstance(v, str) and v.strip():
+            v = " ".join(v.split())
+            return f"{name}: {v[:120]}"
+    return name
+
+
+SLASH_RE = re.compile(r"<command-name>(.*?)</command-name>", re.S)
+SLASH_ARGS_RE = re.compile(r"<command-args>(.*?)</command-args>", re.S)
+TAG_RE = re.compile(r"^<([a-z-]+)>")
+
+
+def tag_of(text):
+    m = TAG_RE.match(text)
+    return m.group(1) if m else None
+
+
+def inner(text, tag):
+    m = re.search(rf"<{tag}>(.*?)</{tag}>", text, re.S)
+    return (m.group(1) if m else text).strip()
+
+
+def classify_user(rec, text):
+    """Real human turn, or a system-injected record wearing a user role?
+
+    origin.kind is authoritative where present, but it is a newer field absent
+    from older transcripts, so fall back to the wrapper tag.
+    """
+    tag = tag_of(text)
+    origin = rec.get("origin")
+    kind = origin.get("kind") if isinstance(origin, dict) else None
+
+    if tag == "task-notification" or kind == "task-notification":
+        return "notification", text
+    if tag == "bash-notification":
+        return "notification", text
+    if tag in ("command-name", "command-message"):
+        name = SLASH_RE.search(text)
+        args = SLASH_ARGS_RE.search(text)
+        label = (name.group(1) if name else inner(text, tag)).strip()
+        arg = (args.group(1).strip() if args else "")
+        return "slash", (label + (" " + arg if arg else "")).strip()
+    if tag == "bash-input":
+        return "bash_in", inner(text, tag)
+    if tag in ("bash-stdout", "local-command-stdout"):
+        return "cmd_out", inner(text, tag)
+    if tag == "local-command-stderr":
+        return "cmd_err", inner(text, tag)
+    if tag in ("local-command-caveat", "interrupted-output"):
+        return "drop", text
+    if kind == "human":
+        return "human", text
+    if rec.get("promptSource") in ("typed", "queued"):
+        return "human", text
+    if rec.get("isMeta") or rec.get("promptSource") == "system":
+        return "system", text
+    return "human", text
+
+
+def summarize_notification(text):
+    """Pull the agent summary and result out of a task/bash notification."""
+    def grab(t):
+        m = re.search(rf"<{t}>(.*?)</{t}>", text, re.S)
+        return m.group(1).strip() if m else ""
+    return grab("summary") or "background task", grab("result") or grab("status")
+
+
+def fold_info(text, max_lines, max_chars):
+    """Should this response fold, and what are the preview / remainder halves?
+
+    Long text wraps, so a response can dominate the page without having many
+    newlines; length is checked alongside the line count.
+    """
+    body = text.strip()
+    lines = body.splitlines()
+    if len(lines) <= max_lines and len(body) <= max_chars:
+        return False, body, ""
+    cut = max_lines
+    # Don't split inside a fenced code block: an unbalanced ``` would leak a bare
+    # fence marker into the preview and swallow the formatting of the rest.
+    if sum(1 for ln in lines[:cut] if ln.lstrip().startswith("```")) % 2:
+        while cut > 0 and not lines[cut - 1].lstrip().startswith("```"):
+            cut -= 1
+        cut = max(cut - 1, 0)
+        if cut == 0:
+            cut = max_lines
+            while cut < len(lines) and not lines[cut].lstrip().startswith("```"):
+                cut += 1
+            cut = min(cut + 1, len(lines))
+    preview = "\n".join(lines[:cut])
+    rest = "\n".join(lines[cut:])
+    # A single long paragraph has no newline to split on; break it on length so
+    # the preview is a real excerpt rather than the whole wall of text.
+    if not rest and len(preview) > max_chars:
+        cut = preview.rfind(" ", 0, max_chars)
+        cut = cut if cut > max_chars // 2 else max_chars
+        preview, rest = preview[:cut].rstrip(), preview[cut:].lstrip()
+    return True, preview, rest
+
+
+def events(records, opts):
+    """Flatten records into (kind, payload) events in transcript order."""
+    results = {}
+    for r in records:
+        if r.get("type") == "user":
+            for b in r.get("message", {}).get("content") or []:
+                if isinstance(b, dict) and b.get("type") == "tool_result":
+                    results[b.get("tool_use_id")] = b
+
+    for r in records:
+        kind = r.get("type")
+        if kind not in ("user", "assistant"):
+            continue
+        if r.get("isSidechain") and opts.no_sidechains:
+            continue
+        if r.get("isMeta") and not opts.meta:
+            continue
+        msg = r.get("message") or {}
+        side = bool(r.get("isSidechain"))
+        ts = fmt_time(r.get("timestamp"))
+
+        if kind == "user":
+            body = strip_reminders(text_of(msg))
+            if not body:
+                continue
+            what, payload = classify_user(r, body)
+            if what == "drop":
+                continue
+            if what == "human":
+                yield ("user", {"text": payload, "time": ts, "side": side})
+            elif what == "notification":
+                if not opts.no_system:
+                    label, result = summarize_notification(payload)
+                    yield ("notification", {"label": label, "text": clip(result, opts.tool_output),
+                                            "time": ts, "side": side})
+            elif what == "slash":
+                yield ("slash", {"text": payload, "time": ts, "side": side})
+            elif what in ("bash_in", "cmd_out", "cmd_err"):
+                if not opts.no_system:
+                    yield (what, {"text": clip(payload, opts.tool_output), "time": ts, "side": side})
+            elif not opts.no_system:
+                yield ("system", {"text": payload, "time": ts, "side": side})
+            continue
+
+        content = msg.get("content")
+        if isinstance(content, str):
+            content = [{"type": "text", "text": content}]
+        for b in content or []:
+            if not isinstance(b, dict):
+                continue
+            bt = b.get("type")
+            if bt == "text" and b.get("text", "").strip():
+                yield ("assistant", {"text": b["text"], "time": ts, "side": side})
+            elif bt == "thinking" and not opts.no_thinking:
+                thought = b.get("thinking", "").strip()
+                if thought:
+                    yield ("thinking", {"text": thought, "time": ts, "side": side})
+            elif bt == "tool_use" and not opts.no_tools:
+                res = results.get(b.get("id"))
+                out = clip(result_text(res), opts.tool_output) if res else ""
+                yield ("tool", {
+                    "name": b.get("name", "tool"),
+                    "input": b.get("input"),
+                    "summary": tool_summary(b.get("name", "tool"), b.get("input")),
+                    "output": out,
+                    "error": bool(res and res.get("is_error")),
+                    "time": ts,
+                    "side": side,
+                })
+
+
+def event_text(kind, e):
+    """The matchable text of an event, for --start/--end."""
+    if kind == "notification":
+        return f"{e.get('label', '')}\n{e.get('text', '')}"
+    return e.get("text", "")
+
+
+def slice_events(stream, start, end):
+    """Trim the event stream to the range delimited by --start / --end.
+
+    Matching is case-insensitive on normalised whitespace, so a marker can be
+    copy-pasted out of rendered output without worrying about wrapping. The
+    marker matches an event that *contains* it; the range is inclusive.
+    """
+    def norm(t):
+        return " ".join((t or "").split()).lower()
+
+    items = list(stream)
+    lo, hi = 0, len(items)
+    if start:
+        want = norm(start)
+        # A marker copy-pasted from the top of a response should anchor to that
+        # response, not to an earlier passing mention of the same words.
+        texts = [norm(event_text(k, e)) for k, e in items]
+        lo = next((i for i, t in enumerate(texts) if t.startswith(want)),
+                  next((i for i, t in enumerate(texts) if want in t), None))
+        if lo is None:
+            sys.exit(f"cc-transcript: --start text not found: {start!r}")
+    if end:
+        want = norm(end)
+        tail = [norm(event_text(k, e)) for k, e in items[lo:]]
+        rel = next((i for i in range(len(tail) - 1, -1, -1) if tail[i].startswith(want)),
+                   next((i for i in range(len(tail) - 1, -1, -1) if want in tail[i]), None))
+        if rel is None:
+            sys.exit(f"cc-transcript: --end text not found at or after --start: {end!r}")
+        hi = lo + rel + 1
+    return items[lo:hi]
+
+
+def render_md(records, opts, title, path):
+    out = [f"# {title}", "", f"*Session `{path.stem}`*", ""]
+    for kind, e in slice_events(events(records, opts), opts.start, opts.end):
+        tag = " *(subagent)*" if e["side"] else ""
+        if kind == "user":
+            out += [f"## 👤 User{tag}", "", e["text"], ""]
+        elif kind == "assistant":
+            folds, preview, rest = fold_info(e["text"], opts.fold_lines, opts.fold_chars)
+            out += [f"### 🤖 Claude{tag}", ""]
+            if folds:
+                # A <summary> holding block markdown (headings, lists) breaks out of
+                # the element on GitHub, so the teaser is one flattened line and the
+                # full text lives inside.
+                teaser = " ".join(preview.split())
+                if len(teaser) > 160:
+                    teaser = teaser[:160].rstrip() + "…"
+                out += [f"<details><summary>{teaser}</summary>", "",
+                        (preview + ("\n" + rest if rest else "")), "", "</details>", ""]
+            else:
+                out += [preview, ""]
+        elif kind == "thinking":
+            out += ["<details><summary>💭 Thinking</summary>", "",
+                    "> " + e["text"].replace("\n", "\n> "), "", "</details>", ""]
+        elif kind == "tool":
+            head = ("❌ " if e["error"] else "🔧 ") + e["summary"]
+            out += [f"<details><summary>{head}</summary>", "", "```json",
+                    json.dumps(e["input"], indent=2, default=str), "```"]
+            if e["output"]:
+                out += ["", "```", e["output"], "```"]
+            out += ["", "</details>", ""]
+        elif kind == "slash":
+            out += [f"## 👤 User{tag}", "", f"`{e['text']}`", ""]
+        elif kind == "notification":
+            out += [f"<details><summary>🔔 {e['label']}</summary>", ""]
+            if e["text"]:
+                out += ["```", e["text"], "```", ""]
+            out += ["</details>", ""]
+        elif kind == "bash_in":
+            out += ["**`!` command**", "", "```bash", e["text"], "```", ""]
+        elif kind in ("cmd_out", "cmd_err"):
+            label = "command stderr" if kind == "cmd_err" else "command output"
+            out += [f"<details><summary>{label}</summary>", "", "```", e["text"], "```", "",
+                    "</details>", ""]
+        elif kind == "system":
+            out += ["<details><summary>⚙️ system message</summary>", "", "```", e["text"],
+                    "```", "", "</details>", ""]
+    return "\n".join(out)
+
+
+CSS = """
+:root { --bg:#fbfaf9; --fg:#1f1e1d; --muted:#6b6764; --line:#e4e0dc;
+        --user:#eef2f8; --userline:#4a72b0; --think:#f4f1ea; --tool:#f3f4f4; --err:#b3261e; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#191817; --fg:#e8e6e3; --muted:#9b9691; --line:#332f2d;
+          --user:#1e2733; --userline:#5b86c9; --think:#241f19; --tool:#212322; --err:#f2b8b5; }
+}
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+main { max-width:52rem; margin:0 auto; padding:2.5rem 1.25rem 6rem; }
+h1 { font-size:1.6rem; line-height:1.25; margin:0 0 .25rem; }
+.sub { color:var(--muted); font-size:.85rem; margin-bottom:2rem; }
+.msg { margin:1.5rem 0; }
+.who { font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:.4rem; }
+.user { background:var(--user); border-left:3px solid var(--userline); border-radius:0 6px 6px 0; padding:.85rem 1rem; }
+.user .body { white-space:pre-wrap; }
+.body { overflow-wrap:anywhere; }
+.side { opacity:.82; border-left:2px dashed var(--line); padding-left:.9rem; }
+details { margin:.6rem 0; border:1px solid var(--line); border-radius:6px; background:var(--tool); }
+details.think { background:var(--think); }
+summary { cursor:pointer; padding:.5rem .7rem; font-size:.85rem; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+          color:var(--muted); overflow-wrap:anywhere; }
+summary::marker { color:var(--muted); }
+details:not(.resp)[open] > summary { border-bottom:1px solid var(--line); }
+details .inner { padding:.5rem .7rem; }
+details.err summary { color:var(--err); }
+pre { margin:.4rem 0; padding:.6rem .7rem; background:var(--bg); border:1px solid var(--line); border-radius:4px;
+      overflow-x:auto; font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; }
+.think .inner { white-space:pre-wrap; font-size:.93rem; color:var(--muted); }
+details.resp { background:transparent; border:none; border-radius:0; margin:0; }
+details.resp > summary { list-style:none; padding:0; font-family:inherit; font-size:1rem;
+                         color:var(--fg); }
+details.resp > summary::-webkit-details-marker { display:none; }
+.peek { display:block; position:relative; overflow:hidden;
+        max-height:calc(var(--peek) * 1.65em);
+        -webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 3.1em),transparent);
+        mask-image:linear-gradient(180deg,#000 calc(100% - 3.1em),transparent); }
+.more { display:inline-block; margin-top:.3rem; font-size:.8rem; color:var(--muted);
+        border-bottom:1px dotted var(--line); }
+summary:hover .more { color:var(--fg); }
+.more::before { content:"▸ "; }
+.more::after { content:"show more"; }
+details.resp[open] > summary .more::after { content:"show less"; }
+details.resp[open] > summary { margin-bottom:0; }
+details.resp[open] > summary .peek { display:none; }
+details.resp[open] > summary .more::before { content:"▾ "; }
+details.resp[open] > summary .more { margin:0 0 .2rem; }
+details.note { background:transparent; border-style:dashed; }
+details.sys { background:transparent; border-style:dotted; opacity:.75; }
+pre.bashin { background:var(--tool); }
+.time { float:right; font-size:.72rem; color:var(--muted); font-weight:400; letter-spacing:0; text-transform:none; }
+"""
+
+
+def md_inline(s):
+    """Minimal markdown for assistant text: fences, inline code, bold, headings, links."""
+    parts = re.split(r"(```.*?```)", s, flags=re.S)
+    out = []
+    for i, part in enumerate(parts):
+        if i % 2:
+            body = part[3:-3]
+            first, _, rest = body.partition("\n")
+            if re.fullmatch(r"[\w+-]*", first.strip()):
+                body = rest
+            out.append(f"<pre>{html.escape(body.strip())}</pre>")
+            continue
+        t = html.escape(part)
+        # Code spans are extracted before the other rules run: a span like
+        # `containers/**` otherwise feeds its ** to the bold rule, which pairs it
+        # with a later ** and emits tags that interleave with the <code>.
+        spans = []
+
+        def stash(m):
+            spans.append(m.group(1))
+            return f"\x00{len(spans) - 1}\x00"
+
+        t = re.sub(r"`([^`\n]+)`", stash, t)
+        t = re.sub(r"\*\*([^*\n]+)\*\*", r"<strong>\1</strong>", t)
+        t = re.sub(r"\[([^\]]+)\]\((https?://[^)]+)\)", r'<a href="\2">\1</a>', t)
+        t = re.sub(r"^(#{1,6})\s+(.*)$",
+                   lambda m: f"<strong>{m.group(2)}</strong>", t, flags=re.M)
+        t = t.replace("\n", "<br>")
+        t = re.sub(r"\x00(\d+)\x00", lambda m: f"<code>{spans[int(m.group(1))]}</code>", t)
+        out.append(t)
+    return "".join(out)
+
+
+def render_html(records, opts, title, path):
+    esc = html.escape
+    o = [f"<!doctype html><html><head><meta charset=utf-8>",
+         '<meta name="viewport" content="width=device-width,initial-scale=1">',
+         f"<title>{esc(title)}</title><style>{CSS}</style></head><body><main>",
+         f"<h1>{esc(title)}</h1>",
+         f'<div class="sub">Session <code>{esc(path.stem)}</code></div>']
+    for kind, e in slice_events(events(records, opts), opts.start, opts.end):
+        side = " side" if e["side"] else ""
+        tm = f'<span class="time">{esc(e["time"])}</span>' if e["time"] else ""
+        if kind == "user":
+            o.append(f'<div class="msg{side}"><div class="who">User{tm}</div>'
+                     f'<div class="user"><div class="body">{esc(e["text"])}</div></div></div>')
+        elif kind == "assistant":
+            folds, preview, rest = fold_info(e["text"], opts.fold_lines, opts.fold_chars)
+            o.append(f'<div class="msg{side}"><div class="who">Claude{tm}</div>')
+            if folds:
+                lh = opts.fold_lines
+                o.append(f'<details class="resp"><summary><span class="peek" '
+                         f'style="--peek:{lh}">{md_inline(preview)}</span>'
+                         f'<span class="more"></span></summary>'
+                         f'<div class="body">{md_inline(preview)}'
+                         f'{md_inline(chr(10) + rest) if rest else ""}</div></details>')
+            else:
+                o.append(f'<div class="body">{md_inline(preview)}</div>')
+            o.append('</div>')
+        elif kind == "thinking":
+            o.append(f'<details class="think{side}"><summary>Thinking</summary>'
+                     f'<div class="inner">{esc(e["text"])}</div></details>')
+        elif kind == "tool":
+            cls = " err" if e["error"] else ""
+            inner = f"<pre>{esc(json.dumps(e['input'], indent=2, default=str))}</pre>"
+            if e["output"]:
+                inner += f"<pre>{esc(e['output'])}</pre>"
+            o.append(f'<details class="tool{cls}{side}"><summary>{esc(e["summary"])}</summary>'
+                     f'<div class="inner">{inner}</div></details>')
+        elif kind == "slash":
+            o.append(f'<div class="msg{side}"><div class="who">User{tm}</div>'
+                     f'<div class="user"><div class="body"><code>{esc(e["text"])}</code>'
+                     f'</div></div></div>')
+        elif kind == "notification":
+            body = f"<pre>{esc(e['text'])}</pre>" if e["text"] else ""
+            o.append(f'<details class="note{side}"><summary>🔔 {esc(e["label"])}</summary>'
+                     f'<div class="inner">{body}</div></details>')
+        elif kind == "bash_in":
+            o.append(f'<div class="msg{side}"><div class="who">! command{tm}</div>'
+                     f'<pre class="bashin">{esc(e["text"])}</pre></div>')
+        elif kind in ("cmd_out", "cmd_err"):
+            label = "command stderr" if kind == "cmd_err" else "command output"
+            cls2 = " err" if kind == "cmd_err" else ""
+            o.append(f'<details class="tool{cls2}{side}"><summary>{label}</summary>'
+                     f'<div class="inner"><pre>{esc(e["text"])}</pre></div></details>')
+        elif kind == "system":
+            o.append(f'<details class="sys{side}"><summary>system message</summary>'
+                     f'<div class="inner"><pre>{esc(e["text"])}</pre></div></details>')
+    o.append("</main></body></html>")
+    return "\n".join(o)
+
+
+def resolve(session, proj):
+    if session:
+        p = Path(session)
+        if p.is_file():
+            return p
+        for d in ([proj] if proj.is_dir() else []) + sorted(PROJECTS.iterdir()):
+            if not d.is_dir():
+                continue
+            cand = d / f"{session}.jsonl"
+            if cand.is_file():
+                return cand
+        sys.exit(f"cc-transcript: no transcript found for {session!r}")
+    found = transcripts(proj)
+    if not found:
+        sys.exit(f"cc-transcript: no transcripts in {proj}")
+    return found[0]
+
+
+def main():
+    ap = argparse.ArgumentParser(add_help=False)
+    ap.add_argument("session", nargs="?")
+    ap.add_argument("-f", "--format", choices=["md", "html"], default="md")
+    ap.add_argument("-o", "--out")
+    ap.add_argument("-l", "--list", action="store_true")
+    ap.add_argument("--project", default=".")
+    ap.add_argument("--all-projects", action="store_true")
+    ap.add_argument("--tool-output", type=int, default=2000)
+    ap.add_argument("--no-thinking", action="store_true")
+    ap.add_argument("--no-tools", action="store_true")
+    ap.add_argument("--no-sidechains", action="store_true")
+    ap.add_argument("--no-system", action="store_true")
+    ap.add_argument("--fold-lines", type=int, default=5)
+    ap.add_argument("--fold-chars", type=int, default=600)
+    ap.add_argument("--no-fold", action="store_true")
+    ap.add_argument("--start")
+    ap.add_argument("--end")
+    ap.add_argument("--meta", action="store_true")
+    ap.add_argument("-h", "--help", action="store_true")
+    argv = sys.argv[1:]
+    # A session path may begin with "-" (projects like /tmp map to "-tmp"), which
+    # argparse would read as a flag; anything after "--" is taken literally.
+    if "--" in argv:
+        i = argv.index("--")
+        rest = argv[i + 1:]
+        opts = ap.parse_args(argv[:i])
+        if rest:
+            opts.session = rest[0]
+    else:
+        opts = ap.parse_args(argv)
+    if opts.help:
+        print(__doc__)
+        return
+
+    if opts.no_fold:
+        opts.fold_lines = opts.fold_chars = float("inf")
+
+    proj = project_dir(Path(opts.project))
+
+    if opts.list:
+        dirs = sorted(PROJECTS.iterdir()) if opts.all_projects else [proj]
+        for d in dirs:
+            for p in transcripts(d):
+                recs = load(p)
+                mtime = datetime.fromtimestamp(p.stat().st_mtime).strftime("%Y-%m-%d %H:%M")
+                size = p.stat().st_size // 1024
+                label = f"{d.name}/" if opts.all_projects else ""
+                print(f"{mtime}  {size:>6}K  {label}{p.stem}  {title_of(recs)[:70]}")
+        return
+
+    path = resolve(opts.session, proj)
+    records = load(path)
+    title = title_of(records)
+    render = render_html if opts.format == "html" else render_md
+    text = render(records, opts, title, path)
+    if opts.out:
+        Path(opts.out).write_text(text)
+        print(f"wrote {opts.out} ({len(text) // 1024}K)", file=sys.stderr)
+    else:
+        print(text)
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except BrokenPipeError:
+        # Piping into head/less closes stdout early; exit quietly rather than
+        # letting the interpreter report the failed flush at shutdown.
+        os.dup2(os.open(os.devnull, os.O_WRONLY), sys.stdout.fileno())
+        sys.exit(0)
+    except KeyboardInterrupt:
+        sys.exit(130)
