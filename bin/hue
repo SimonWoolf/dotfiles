@@ -5,36 +5,36 @@ source ~/.apikeys
 
 HUE_BASE="https://${HUE_BRIDGE_IP}/api/${HUE_API_KEY}"
 
-# Light groups and individual lights
-declare -A HUE_ROOMS=(
-    [lr]="1 3 4 7"  # Living room: Windowsill, Main Ceiling, Desk Go, Desk Lamp
-    [sr]="2"        # Simon's room: Fairy Lights
-    [hall]="8 9"    # Hallway: Upstairs, Downstairs
-    [kitchen]="10"  # Kitchen: Main Light
-    [window]="1"    # Windowsill lightstrip
-    [ceil]="3"      # Main Ceiling
-    [go]="4"        # Desk Go
-    [desk]="7"      # Desk Lamp
-    [uphall]="8"    # Upstairs Hallway
-    [downhall]="9"  # Downstairs Hallway
+# Rooms and zones as configured on the bridge; membership is managed in the Hue
+# app, so lights added to a room there are picked up without changing this.
+declare -A HUE_GROUPS=(
+    [lr]=81       # Living Room
+    [sr]=82       # Simon's Bedroom
+    [hall]=86     # Hallway
+    [kitchen]=87  # Kitchen
+)
+
+declare -A HUE_LIGHTS=(
+    [window]=1  # Windowsill lightstrip
+    [ceil]=3    # Main Ceiling
+    [go]=4      # Desk Go
+    [desk]=7    # Desk Lamp
 )
 
 usage() {
-    echo "Usage: hue <room> <command> [brightness]"
+    echo "Usage: hue <target> <command> [brightness]"
     echo ""
     echo "Rooms:"
-    echo "  lr      - Living room (all four)"
-    echo "  sr      - Simon's room (Fairy Lights)"
-    echo "  hall    - Hallway (both)"
-    echo "  kitchen - Kitchen (Main Light)"
+    echo "  lr      - Living room"
+    echo "  sr      - Simon's room"
+    echo "  hall    - Hallway"
+    echo "  kitchen - Kitchen"
     echo ""
-    echo "Individual lights:"
-    echo "  window   - Windowsill lightstrip"
-    echo "  ceil     - Main Ceiling"
-    echo "  go       - Desk Go"
-    echo "  desk     - Desk Lamp"
-    echo "  uphall   - Upstairs Hallway"
-    echo "  downhall - Downstairs Hallway"
+    echo "Individual living room lights:"
+    echo "  window  - Windowsill lightstrip"
+    echo "  ceil    - Main Ceiling"
+    echo "  go      - Desk Go"
+    echo "  desk    - Desk Lamp"
     echo ""
     echo "Commands:"
     echo "  on            - Turn on"
@@ -55,15 +55,9 @@ usage() {
     exit 1
 }
 
-hue_cmd() {
-    local light_id="$1"
-    local payload="$2"
-    curl -sk -X PUT "${HUE_BASE}/lights/${light_id}/state" -d "$payload" >/dev/null
-}
-
 [[ $# -lt 2 ]] && usage
 
-ROOM="$1"
+TARGET="$1"
 CMD="$2"
 BRI="${3:-100}"
 
@@ -72,8 +66,14 @@ BRI_VAL=$(( (BRI * 253 / 100) + 1 ))
 [[ $BRI_VAL -gt 254 ]] && BRI_VAL=254
 [[ $BRI_VAL -lt 1 ]] && BRI_VAL=1
 
-LIGHTS="${HUE_ROOMS[$ROOM]}"
-[[ -z "$LIGHTS" ]] && echo "Unknown room: $ROOM" && usage
+if [[ -n "${HUE_GROUPS[$TARGET]:-}" ]]; then
+    ENDPOINT="groups/${HUE_GROUPS[$TARGET]}/action"
+elif [[ -n "${HUE_LIGHTS[$TARGET]:-}" ]]; then
+    ENDPOINT="lights/${HUE_LIGHTS[$TARGET]}/state"
+else
+    echo "Unknown room or light: $TARGET"
+    usage
+fi
 
 case "$CMD" in
     on)
@@ -121,9 +121,12 @@ case "$CMD" in
         ;;
 esac
 
-for light in $LIGHTS; do
-    hue_cmd "$light" "$PAYLOAD" &
-done
-wait
+RESPONSE=$(curl -sk -X PUT "${HUE_BASE}/${ENDPOINT}" -d "$PAYLOAD")
+
+# The bridge reports failures in a 200 body rather than the status code
+if [[ "$RESPONSE" == *'"error"'* ]]; then
+    echo "Bridge error: $RESPONSE" >&2
+    exit 1
+fi
 
 echo "Done"
