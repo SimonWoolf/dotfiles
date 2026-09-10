@@ -85,3 +85,5 @@
 	insteadOf = https://github.com/
 [pull]
 	ff-only = true
+[format]
+	pretty = fuller
