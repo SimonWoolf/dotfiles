@@ -19,7 +19,6 @@ vim.opt.smartcase = true
 vim.opt.number = true
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
-vim.opt.cindent = true
 vim.opt.laststatus = 2
 vim.opt.showmode = false
 
