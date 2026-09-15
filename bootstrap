@@ -60,10 +60,14 @@ system(private_bootstrap) if File.exist?(private_bootstrap)
 
 # xdg-utils deletes and recreates ~/.config/mimeapps.list when it writes to it, which will break symbolic links
 `cp ~/dev/dotfiles/dotdesktops/mimeapps.list ~/.config/mimeapps.list`
-# A release upgrade can replace this symlink with a regular file, so relink
-# whenever it is not currently a symlink rather than merely absent.
+# A release upgrade can replace these symlinks with regular files, so relink
+# whenever they are not currently symlinks rather than merely absent.
 if !File.symlink?('/etc/apt/sources.list.d/custom.sources')
   `sudo ln -fs #{HOME}/dev/dotfiles/apt-custom-sources.sources /etc/apt/sources.list.d/custom.sources`
+end
+Dir["#{HOME}/dev/dotfiles/apt-preferences/*"].each do |pref|
+  target = "/etc/apt/preferences.d/#{File.basename(pref)}"
+  `sudo ln -fs #{pref} #{target}` if !File.symlink?(target)
 end
 
 `mkdir -p ~/.local/share/wayland-sessions/`
