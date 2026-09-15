@@ -3,17 +3,31 @@ set -e
 
 echo "Installing APT repository GPG keys..."
 
+# gpg writes a keybox database, which apt cannot read, so export to a plain
+# keyring rather than moving the keyserver output into place directly.
 echo "Installing KeePassXC key..."
-gpg --keyserver keyserver.ubuntu.com --no-default-keyring --keyring gnupg-ring:/tmp/keepassxc-keyring.gpg --recv-keys 61922AB60068FCD6
-sudo mv /tmp/keepassxc-keyring.gpg /usr/share/keyrings/keepassxc-archive-keyring.gpg
+gpg --keyserver keyserver.ubuntu.com --no-default-keyring --keyring /tmp/kpxc.kbx --recv-keys 61922AB60068FCD6
+gpg --no-default-keyring --keyring /tmp/kpxc.kbx --export 61922AB60068FCD6 \
+  | sudo tee /usr/share/keyrings/keepassxc-archive-keyring.gpg > /dev/null
 sudo chmod 644 /usr/share/keyrings/keepassxc-archive-keyring.gpg
+rm -f /tmp/kpxc.kbx
 
 echo "Installing Signal key..."
 wget -O - https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
 
 echo "Installing Dropbox key..."
-gpg --keyserver keyserver.ubuntu.com --no-default-keyring --keyring gnupg-ring:/tmp/dropbox-keyring.gpg --recv-keys FC918B335044912E
-sudo mv /tmp/dropbox-keyring.gpg /usr/share/keyrings/dropbox-archive-keyring.gpg
+curl -fsSL https://linux.dropbox.com/fedora/rpm-public-key.asc \
+  | gpg --dearmor | sudo tee /usr/share/keyrings/dropbox-archive-keyring.gpg > /dev/null
 sudo chmod 644 /usr/share/keyrings/dropbox-archive-keyring.gpg
+
+echo "Installing Mullvad key..."
+curl -fsSL https://repository.mullvad.net/deb/mullvad-keyring.asc \
+  | sudo tee /usr/share/keyrings/mullvad-keyring.asc > /dev/null
+sudo chmod 644 /usr/share/keyrings/mullvad-keyring.asc
+
+echo "Installing PostgreSQL (pgdg) key..."
+curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc \
+  | gpg --dearmor | sudo tee /usr/share/keyrings/pgdg-archive-keyring.gpg > /dev/null
+sudo chmod 644 /usr/share/keyrings/pgdg-archive-keyring.gpg
 
 echo "All keys installed successfully"

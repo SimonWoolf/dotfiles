@@ -1,0 +1,82 @@
+# Dropbox is deliberately absent: the running client rewrites
+# /etc/apt/sources.list.d/dropbox.list (with its own key at
+# /etc/apt/keyrings/dropbox.asc) on startup, and a second definition here
+# makes apt fail with a Signed-By conflict.
+
+Types: deb deb-src
+URIs: http://ppa.launchpad.net/phoerious/keepassxc/ubuntu
+Suites: resolute
+Components: main
+Signed-By: /usr/share/keyrings/keepassxc-archive-keyring.gpg
+
+Types: deb
+URIs: https://updates.signal.org/desktop/apt
+Suites: xenial
+Components: main
+Architectures: amd64
+Signed-By: /usr/share/keyrings/signal-desktop-keyring.gpg
+
+Types: deb
+URIs: https://repository.mullvad.net/deb/stable
+Suites: stable
+Components: main
+Architectures: amd64
+Signed-By: /usr/share/keyrings/mullvad-keyring.asc
+
+Types: deb
+URIs: https://mise.jdx.dev/deb
+Suites: stable
+Components: main
+Architectures: amd64
+Signed-By: /etc/apt/keyrings/mise-archive-keyring.gpg
+
+# Daily builds; enable only when wanting a newer nvim than the archive has.
+Types: deb deb-src
+URIs: https://ppa.launchpadcontent.net/neovim-ppa/unstable/ubuntu
+Suites: resolute
+Components: main
+Enabled: no
+
+# KiCad 10.x. The archive carries 9.0.x, and KiCad project files are not
+# backward-compatible across major versions
+Types: deb
+URIs: https://ppa.launchpadcontent.net/kicad/kicad-10.0-releases/ubuntu/
+Suites: resolute
+Components: main
+Signed-By: -----BEGIN PGP PUBLIC KEY BLOCK-----
+ .
+ mQINBF8ER7cBEACXkTz5mUfH9JYNDLLPZqpXrkHSIKu8HDJX79CTKsABAyE4Fl3s
+ mERIIEQnwvGTuodey9IU5vH/FQowTzkXt6OeAx8R3pVueqsavrn3ddKMPovP9os/
+ hWFEzwVDojRxZBhXHfiGIK30VhbDxuhvnIkIqOaYCtI/qv4pAOYYJfkg5PopyZlA
+ P0u3TKXUI6mVUioWxraZYUuNyx1MPpY7plaqt8ft8RbHja2Rp6xtg89Vtyk/jFfy
+ HvHi0aRd54Zzf+37jg7+diWt1MD76ABka/X1f2xoz5ZZtZ7+Q3GUTfVBRl4PiMYd
+ CauOOnReVuYJs/XoagSFIzJ+m0nn2KPIYoXoY+3VbVLMxup/BPPMrgY8fLKxmtos
+ GTJIPqgeiYjGfOKObhWAv0POtNFdzWx9fAuVhlHi1jp0vi8jy/SWL9Qvg50u9Cqp
+ 8nVywWPen5CF3hO6vgta7Y6hG6aqQOLzkf3Xe+xbaAod6Nez+9ZhSAMc9VlhxujY
+ 0y3q7zniZjXxoQlUwSkBQLUW6sel2VhUGhb/ceET2ivOiZB/pVOzJDLk0MNA6lvu
+ pF9h4klKKvzpxHWkvm2fuLo0aAgfq2ZdWAWzwwui55G/nWJldFN2ruz7X8hFMRFN
+ nQipNNeuR+llhnmLPeG/wyqTV++B6YAltvfdvnDXWb4HaMxGyejNh2oH3QARAQAB
+ tBdMYXVuY2hwYWQgUFBBIGZvciBLaUNhZIkCOAQTAQIAIgUCXwRHtwIbAwYLCQgH
+ AwIGFQgCCQoLBBYCAwECHgECF4AACgkQJF1VAvrXqAVowA//RKk8J5wdwy8Rfa4O
+ qiQc05VJItpIyCtj48o1eCPJmdkCBwwx63tSIC7vg8CPKs7bB1E4hUGs7EHYYbmu
+ sLT24BecgHLxPmTC/r40B+pxwpePorTTDvukDFOU889srovEtm2lwfBSeewdheLz
+ IjNDCjsp9t6LMLt5m16pRzCJhTM+crumETA12g1XUvRJ3chCcjjGmHoYdOr5ybQC
+ Xq4FAEXW2A6BEEKQFRIaoVHs9AoGtpa5ZFNhLbc7u9JJr0THna7V01Te4LK+JIJI
+ sqo+31f5NpziRWZ5ByK6YmvEmShj/I5dieNEg9OM/Pt6+zzjWefyHtW244BtD9Y5
+ nIntG5nPo+1Vbgwv2ULfyfbHAK0x7drLD4VWnJ/iIEp4GKIEgaEQn4AzBmR29B9d
+ LMjL4YHbyKvlG4gEhK1f4d7AfhvDZmVchAom01lUkJI0hU5Mjzn6diUJ1d6iGOW1
+ 19mwdmthEMaEPbkDQaymeOnaqk6fumu7S3sOaCC1Vt5fLyeWc5PLTBgFJ7GlldNo
+ i5JhzTjMgolJkSfw0XaJq0fMu8SIKtsAhXL0LkfLWdcGiWpMbwyr5dXnPMvIYd75
+ 7bMcEhBr3aPEamO8AB5zZ/FfZWV4JXcRXNVyQefpl7SeagkDGu3uPhQFpyKIb/bp
+ kCAxlotbXJ0rAcMNAW9+wgGteRo=
+ =Oz8U
+ -----END PGP PUBLIC KEY BLOCK-----
+
+# All installed postgresql packages are pgdg builds (including EOL 9.3
+# clients the archive does not carry), so this cannot be dropped without
+# orphaning them. Key installed by install-apt-keys.sh.
+Types: deb
+URIs: http://apt.postgresql.org/pub/repos/apt
+Suites: resolute-pgdg
+Components: main
+Signed-By: /usr/share/keyrings/pgdg-archive-keyring.gpg

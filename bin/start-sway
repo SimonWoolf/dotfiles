@@ -1,0 +1,18 @@
+#!/bin/bash
+exec 1> >(tee "/tmp/sway-$(date +%s).log")
+exec 2>&1
+echo "Starting Sway..."
+env
+
+export XDG_CURRENT_DESKTOP=sway # xdg-desktop-portal
+export XDG_SESSION_DESKTOP=sway # systemd
+export XDG_SESSION_TYPE=wayland # xdg/systemd
+
+dbus-update-activation-environment XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_TYPE
+
+# without this, systemd starts xdg-desktop-portal without these environment variables,
+# and the xdg-desktop-portal does not start xdg-desktop-portal-wrl as expected
+# https://github.com/emersion/xdg-desktop-portal-wlr/issues/39#issuecomment-638752975
+systemctl --user import-environment XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_TYPE
+
+exec sway -d "$@"

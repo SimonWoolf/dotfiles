@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Sway (debug logging)
+Comment=Sway launched via start-sway, logging to /tmp/sway-<epoch>.log
+Exec=start-sway
+Type=Application
+DesktopNames=sway;wlroots

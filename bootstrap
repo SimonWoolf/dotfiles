@@ -57,9 +57,18 @@ system(private_bootstrap) if File.exist?(private_bootstrap)
 
 # xdg-utils deletes and recreates ~/.config/mimeapps.list when it writes to it, which will break symbolic links
 `cp ~/dev/dotfiles/dotdesktops/mimeapps.list ~/.config/mimeapps.list`
-if !File.exist?('/etc/apt/sources.list.d/custom.list')
-  `sudo ln -fs /home/simon/dev/dotfiles/apt-custom-sources.list /etc/apt/sources.list.d/custom.list`
+# A release upgrade can replace this symlink with a regular file, so relink
+# whenever it is not currently a symlink rather than merely absent.
+if !File.symlink?('/etc/apt/sources.list.d/custom.sources')
+  `sudo ln -fs #{HOME}/dev/dotfiles/apt-custom-sources.sources /etc/apt/sources.list.d/custom.sources`
 end
+
+`mkdir -p ~/.local/share/wayland-sessions/`
+# A user-level session file takes precedence over the sway package's own and,
+# unlike editing /usr/share/wayland-sessions/sway.desktop, survives upgrades.
+`ln -fs ~/dev/dotfiles/sway-debug.desktop ~/.local/share/wayland-sessions/sway-debug.desktop`
+`mkdir -p ~/.local/bin/`
+`ln -fs ~/dev/dotfiles/bin/start-sway ~/.local/bin/start-sway`
 
 # nvim backup/undo/swap dirs (paths set in vim-init.lua)
 `mkdir -p ~/.vim/nundodir/`
