@@ -2,6 +2,11 @@ exec --no-startup-id pactl set-default-sink alsa_output.usb-ACTIONS_Pebble_V3-00
 
 font pango:Meslo LG S for Powerline 12
 
+# Positions are pinned here because nothing else persists them: kanshi is
+# laptop-only and wdisplays applies at runtime without saving.
+output DP-1 position 0,0
+output DP-2 position 3840,360
+
 # set things to workspaces
 # external
 workspace 1 output DP-1
