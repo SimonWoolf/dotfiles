@@ -74,9 +74,10 @@ Signed-By: -----BEGIN PGP PUBLIC KEY BLOCK-----
 
 # All installed postgresql packages are pgdg builds (including EOL 9.3
 # clients the archive does not carry), so this cannot be dropped without
-# orphaning them. Key installed by install-apt-keys.sh.
+# orphaning them. The key comes from postgresql-client-common rather than a
+# hand-installed copy, so dpkg keeps it in place across release upgrades.
 Types: deb
 URIs: http://apt.postgresql.org/pub/repos/apt
 Suites: resolute-pgdg
 Components: main
-Signed-By: /usr/share/keyrings/pgdg-archive-keyring.gpg
+Signed-By: /usr/share/postgresql-common/pgdg/apt.postgresql.org.gpg

@@ -25,9 +25,4 @@ curl -fsSL https://repository.mullvad.net/deb/mullvad-keyring.asc \
   | sudo tee /usr/share/keyrings/mullvad-keyring.asc > /dev/null
 sudo chmod 644 /usr/share/keyrings/mullvad-keyring.asc
 
-echo "Installing PostgreSQL (pgdg) key..."
-curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc \
-  | gpg --dearmor | sudo tee /usr/share/keyrings/pgdg-archive-keyring.gpg > /dev/null
-sudo chmod 644 /usr/share/keyrings/pgdg-archive-keyring.gpg
-
 echo "All keys installed successfully"
