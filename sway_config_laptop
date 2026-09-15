@@ -37,7 +37,7 @@ input type:touchpad {
 }
 
 # Program runner (fuzzel - native wayland, no xwayland needed)
-bindsym Control+space exec fuzzel
+bindsym Control+space exec fuzzel --cache="$HOME/.local/state/fuzzel"
 # Window switcher
 bindsym $mod+space exec /home/simon/dev/dotfiles/bin/sway-window-switcher
 

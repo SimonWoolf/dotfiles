@@ -36,6 +36,9 @@ end
 `mkdir -p ~/.config/alacritty/`
 `mkdir -p ~/.config/dunst/`
 `mkdir -p ~/.config/fuzzel/`
+# fuzzel's popularity cache lives here rather than the default ~/.cache/fuzzel,
+# which gets cleared periodically (path set on the launcher's sway bindsym)
+`mkdir -p ~/.local/state/`
 `mkdir -p ~/.config/xkb/symbols/`
 `mkdir -p ~/.config/nvim/`
 `ln -fs ~/dev/dotfiles/vim-init.lua ~/.config/nvim/init.lua`
