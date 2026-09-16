@@ -109,6 +109,9 @@
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
     "battery": {
+        // Pin the battery, or auto-detect also watches the Wacom tablet's
+        // battery and aborts when the tablet re-enumerates on USB.
+        "bat": "BAT0",
         "states": {
             // "good": 95,
             "warning": 30,
