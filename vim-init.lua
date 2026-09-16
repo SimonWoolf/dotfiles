@@ -230,7 +230,15 @@ vim.keymap.set('i', '<C-Tab>', '<M-]>')
 vim.keymap.set('i', '<S-Tab>', '<M-Right>')
 
 -- lightline
-vim.g.lightline = { colorscheme = 'edge', enable = { tabline = false } }
+vim.g.lightline = {
+  colorscheme = 'edge',
+  enable = { tabline = false },
+  component = { cwd = '%{fnamemodify(getcwd(), ":~")}' },
+  active = {
+    left = { { 'mode', 'paste' }, { 'readonly', 'filename', 'modified' } },
+    right = { { 'lineinfo' }, { 'percent' }, { 'fileformat', 'fileencoding', 'filetype' }, { 'cwd' } }
+  }
+}
 
 -- misc plugin settings
 vim.g.EditorConfig_exclude_patterns = {'fugitive://.*'}
