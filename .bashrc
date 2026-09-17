@@ -205,7 +205,7 @@ if [ -f ~/dev/dotfiles/bluetooth-devices.sh ] ; then
     unset _bt_name _bt_mac _bt_card
 fi
 
-alias heahphone-battery="upower -i $(upower -e | grep headphones) |grep percentage"
+alias headphone-battery='upower -i "$(upower -e | grep headphones)" | grep percentage'
 alias free="free -h"
 
 #desktop-specific
