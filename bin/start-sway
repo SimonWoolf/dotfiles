@@ -15,4 +15,24 @@ dbus-update-activation-environment XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_S
 # https://github.com/emersion/xdg-desktop-portal-wlr/issues/39#issuecomment-638752975
 systemctl --user import-environment XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_TYPE
 
-exec sway -d "$@"
+# Hybrid graphics: if a proprietary-NVIDIA card sits alongside an integrated
+# GPU, keep the compositor on the integrated one so the NVIDIA card can
+# runtime-suspend to D3cold (worth ~20W idle on the X1E). Machines with a
+# single GPU are left alone -- sway picks it either way.
+if [ -d /proc/driver/nvidia ]; then
+    # sway refuses to start at all while the proprietary modules are loaded
+    sway_args=(--unsupported-gpu)
+
+    for card in /dev/dri/by-path/*-card; do
+        [ -e "$card" ] || continue
+        node=$(basename "$(readlink -f "$card")")
+        case "$(basename "$(readlink -f "/sys/class/drm/$node/device/driver")")" in
+            i915|xe|amdgpu)
+                export WLR_DRM_DEVICES="$(readlink -f "$card")"
+                break
+                ;;
+        esac
+    done
+fi
+
+exec sway -d "${sway_args[@]}" "$@"
