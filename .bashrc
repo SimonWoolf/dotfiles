@@ -189,28 +189,21 @@ alias sv="sudoedit"
 
 alias mostest="less"
 
-alias sony-connect="bluetoothctl connect 94:DB:56:A3:35:9D"
-alias sony-disconnect="bluetoothctl disconnect 94:DB:56:A3:35:9D"
-alias sony-hqaudio="pactl set-card-profile bluez_card.94_DB_56_A3_35_9D a2dp-sink"
-alias sony-headset="pactl set-card-profile bluez_card.94_DB_56_A3_35_9D handsfree-head-unit"
-alias air-connect="bluetoothctl connect 20:74:cf:3f:73:25"
-alias air-disconnect="bluetoothctl disconnect 20:74:cf:3f:73:25"
-alias air-hqaudio="pactl set-card-profile bluez_card.20_74_CF_3F_73_25 a2dp-sink"
-alias air-headset="pactl set-card-profile bluez_card.20_74_CF_3F_73_25 handsfree-head-unit"
-alias shoks-connect="bluetoothctl connect a8:f5:e1:5e:d9:63"
-alias shoks-disconnect="bluetoothctl disconnect a8:f5:e1:5e:d9:63"
-alias shoks-hqaudio="pactl set-card-profile bluez_card.A8_F5_E1_5E_D9_63 a2dp-sink"
-alias shoks-headset="pactl set-card-profile bluez_card.A8_F5_E1_5E_D9_63 handsfree-head-unit"
-alias anker-connect="bluetoothctl connect 9C:0C:35:AE:C6:B0"
-alias anker-disconnect="bluetoothctl disconnect 9C:0C:35:AE:C6:B0"
-alias anker-hqaudio="pactl set-card-profile bluez_card.9C_0C_35_AE_C6_B0 a2dp-sink"
-alias anker-headset="pactl set-card-profile bluez_card.9C_0C_35_AE_C6_B0 handsfree-head-unit"
-alias bose-connect="bluetoothctl connect 78:2B:64:CD:11:EE"
-alias bose-disconnect="bluetoothctl disconnect 78:2B:64:CD:11:EE"
-alias bose-hqaudio="pactl set-card-profile bluez_card.78_2B_64_CD_11_EE a2dp-sink"
-alias bose-headset="pactl set-card-profile bluez_card.78_2B_64_CD_11_EE headset-head-unit"
-alias ugreen-connect="bluetoothctl connect 00:02:5B:02:52:BE"
-alias ugreen-disconnect="bluetoothctl disconnect 00:02:5B:02:52:BE"
+# Bluetooth audio. Each device in the shared table gets <name>-connect,
+# <name>-disconnect, <name>-hqaudio (A2DP: stereo playback, no mic) and
+# <name>-headset (HFP: adds the mic, at much lower quality).
+if [ -f ~/dev/dotfiles/bluetooth-devices.sh ] ; then
+    source ~/dev/dotfiles/bluetooth-devices.sh
+    for _bt_name in "${!BT_AUDIO_DEVICES[@]}"; do
+        _bt_mac=${BT_AUDIO_DEVICES[$_bt_name]}
+        _bt_card=$(bt_card_name "$_bt_mac")
+        alias "$_bt_name-connect"="bluetoothctl connect $_bt_mac"
+        alias "$_bt_name-disconnect"="bluetoothctl disconnect $_bt_mac"
+        alias "$_bt_name-hqaudio"="pactl set-card-profile $_bt_card a2dp-sink"
+        alias "$_bt_name-headset"="pactl set-card-profile $_bt_card headset-head-unit"
+    done
+    unset _bt_name _bt_mac _bt_card
+fi
 
 alias heahphone-battery="upower -i $(upower -e | grep headphones) |grep percentage"
 alias free="free -h"
