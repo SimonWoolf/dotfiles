@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# Bounce a bluetooth headset's connection until it offers the HFP profile, ie
+# until the mic works and not just playback.
+#
+# Some headsets occasionally come up with A2DP only, and reconnecting is the
+# one thing that reliably shakes them out of it. If connecting instead fails
+# outright with "br-connection-key-missing" the bond itself is broken and no
+# amount of reconnecting will help — re-pair from scratch (see bose-reconnect).
+
+set -uo pipefail
+
+source "$(dirname "$(readlink -f "$0")")/../bluetooth-devices.sh"
+
+usage() {
+  echo "usage: $(basename "$0") <device|mac>" >&2
+  echo "known devices: ${!BT_AUDIO_DEVICES[*]}" >&2
+  exit 64
+}
+
+[ $# -eq 1 ] || usage
+target=$1
+mac=${BT_AUDIO_DEVICES[$target]:-$target}
+[[ $mac =~ ^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$ ]] || usage
+card=$(bt_card_name "$mac")
+
+hfp_available() {
+  pactl list cards 2>/dev/null |
+    awk -v want="\tName: $card" '/^\tName: /{ in_card = ($0 == want) } in_card' |
+    grep -qE '^[[:space:]]+headset-head-unit: .*available: yes'
+}
+
+if hfp_available; then
+  echo ">> HFP already available on $card"
+  exit 0
+fi
+
+for attempt in $(seq 1 5); do
+  echo ">> Attempt $attempt: reconnecting $target ($mac)..."
+  bluetoothctl disconnect "$mac" >/dev/null 2>&1
+  sleep 2
+  bluetoothctl connect "$mac" >/dev/null 2>&1
+
+  # The card takes a moment to appear and to publish its profile list.
+  for _ in $(seq 1 15); do
+    if hfp_available; then
+      echo ">> HFP available on $card"
+      exit 0
+    fi
+    sleep 1
+  done
+done
+
+echo "!! $target still isn't offering HFP. Is it connected to another device," >&2
+echo "   or does it need a full re-pair?" >&2
+exit 1
