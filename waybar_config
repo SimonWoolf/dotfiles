@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["custom/tt_status"],
-    "modules-right": ["network", "battery", "cpu", "memory", "temperature", "pulseaudio", "clock", "tray"],
+    "modules-right": ["custom/reboot", "network", "battery", "cpu", "memory", "temperature", "pulseaudio", "clock", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -37,6 +37,12 @@
         "exec": "[ -f /tmp/tt_waybar_status ] && cat /tmp/tt_waybar_status || echo '{\"text\":\"\"}'",
         "return-type": "json",
         "restart-interval": 1
+    },
+    "custom/reboot": {
+        // Plain-text output: first line is the label, second the tooltip.
+        // No output (file absent) hides the module.
+        "exec": "[ -f /var/run/reboot-required ] && printf '⟳ reboot\\nRequired by: %s\\n' \"$(sort -u /var/run/reboot-required.pkgs | paste -sd ' ')\"",
+        "interval": 300
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
