@@ -1,0 +1,99 @@
+#!/bin/bash
+# Choose which GPUs sway drives on a hybrid iGPU + NVIDIA laptop. start-sway
+# reads the choice, so switching takes effect at the next sway login.
+#
+#   sway-gpu igpu         integrated GPU only, so the NVIDIA card can suspend
+#   sway-gpu all          integrated + NVIDIA; needed for outputs wired only to
+#                         the NVIDIA card, such as the X1E's HDMI port
+#   sway-gpu              show the running and pending modes
+#   sway-gpu drm-devices  WLR_DRM_DEVICES for the pending mode (for start-sway)
+#   sway-gpu waybar       JSON for waybar's custom/gpu module
+set -e
+
+MODE_FILE="${XDG_STATE_HOME:-$HOME/.local/state}/sway-gpu-mode"
+
+card_driver() { basename "$(readlink -f "/sys/class/drm/$1/device/driver")"; }
+
+# Prints "<igpu node> <nvidia node>...", e.g. "card1 card0".
+find_cards() {
+    local igpu= nvidia=() card
+    for card in /sys/class/drm/card*; do
+        card=$(basename "$card")
+        [[ $card =~ ^card[0-9]+$ ]] || continue
+        case "$(card_driver "$card")" in
+            i915|xe|amdgpu) [ -n "$igpu" ] || igpu=$card ;;
+            nvidia) nvidia+=("$card") ;;
+        esac
+    done
+    echo "$igpu ${nvidia[*]}"
+}
+
+pending_mode() { cat "$MODE_FILE" 2>/dev/null || echo igpu; }
+
+running_mode() {
+    local pid devices card
+    pid=$(pgrep -xu "$UID" sway | head -1)
+    [ -n "$pid" ] || { echo none; return; }
+    devices=$(tr '\0' '\n' < "/proc/$pid/environ" | sed -n 's/^WLR_DRM_DEVICES=//p')
+    for card in $NVIDIA_CARDS; do
+        # Unset means wlroots opened every GPU.
+        if [ -z "$devices" ] || [[ :$devices: == *:/dev/dri/$card:* ]]; then
+            echo all; return
+        fi
+    done
+    echo igpu
+}
+
+drm_devices() {
+    [ -n "$IGPU" ] || return 0
+    # The iGPU goes first: wlroots renders on the first device, leaving the
+    # NVIDIA card to do scanout for its own connectors only.
+    local devices=/dev/dri/$IGPU card
+    if [ "$(pending_mode)" = all ]; then
+        for card in $NVIDIA_CARDS; do devices+=:/dev/dri/$card; done
+    fi
+    echo "$devices"
+}
+
+nvidia_power() {
+    local card
+    for card in $NVIDIA_CARDS; do
+        cat "/sys/class/drm/$card/device/power/runtime_status"
+    done | sort -u | paste -sd ,
+}
+
+waybar() {
+    [ -n "$NVIDIA_CARDS" ] || { echo '{"text": ""}'; return; }
+    local running pending power text class
+    running=$(running_mode)
+    pending=$(pending_mode)
+    power=$(nvidia_power)
+    if [ "$running" = all ]; then
+        text=NVIDIA class=nvidia
+    elif [ "$power" = active ]; then
+        text="dGPU awake" class=awake
+    fi
+    if [ "$running" != "$pending" ]; then
+        text="${text:+$text }→ $pending at relog" class=${class:-pending}
+    fi
+    printf '{"text": "%s", "class": "%s", "tooltip": "sway GPUs: %s (pending: %s)\\nNVIDIA power: %s"}\n' \
+        "$text" "$class" "$running" "$pending" "$power"
+}
+
+read -r IGPU NVIDIA_CARDS <<< "$(find_cards)"
+
+case "$1" in
+    igpu|all)
+        mkdir -p "$(dirname "$MODE_FILE")"
+        echo "$1" > "$MODE_FILE"
+        echo "sway will use '$1' from the next login (running: $(running_mode))"
+        ;;
+    drm-devices) drm_devices ;;
+    waybar) waybar ;;
+    "")
+        echo "running: $(running_mode)"
+        echo "pending: $(pending_mode)"
+        echo "NVIDIA power: $(nvidia_power)"
+        ;;
+    *) sed -n '2,/^set -e/{/^set -e/d;s/^# \{0,1\}//;p}' "$0" >&2; exit 1 ;;
+esac
