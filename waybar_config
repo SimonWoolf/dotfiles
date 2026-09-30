@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["custom/tt_status"],
-    "modules-right": ["custom/reboot", "network", "battery", "cpu", "memory", "temperature", "pulseaudio", "clock", "tray"],
+    "modules-right": ["custom/gpu", "custom/reboot", "network", "battery", "cpu", "memory", "temperature", "pulseaudio", "clock", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -43,6 +43,13 @@
         // No output (file absent) hides the module.
         "exec": "[ -f /var/run/reboot-required ] && printf '⟳ reboot\\nRequired by: %s\\n' \"$(sort -u /var/run/reboot-required.pkgs | paste -sd ' ')\"",
         "interval": 300
+    },
+    "custom/gpu": {
+        // Hidden unless the NVIDIA card is in use or awake, or a sway-gpu
+        // switch is waiting for the next login.
+        "exec": "~/dev/dotfiles/bin/sway-gpu waybar",
+        "return-type": "json",
+        "interval": 10
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"

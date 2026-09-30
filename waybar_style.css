@@ -259,6 +259,24 @@ label:focus {
     color: #ffffff;
 }
 
+#custom-gpu {
+    padding: 0 10px;
+    color: #ffffff;
+}
+
+#custom-gpu.nvidia {
+    background-color: #76b900;
+    color: #000000;
+}
+
+#custom-gpu.awake {
+    background-color: #f0932b;
+}
+
+#custom-gpu.pending {
+    background-color: #2980b9;
+}
+
 #custom-tt_status {
     padding: 0 10px;
     margin: 0 5px;
