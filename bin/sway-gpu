@@ -62,6 +62,27 @@ nvidia_power() {
     done | sort -u | paste -sd ,
 }
 
+# TLP sets PCIe runtime PM to "on" while on AC, so the NVIDIA card staying
+# awake there is expected and not worth flagging.
+on_ac() {
+    local supply
+    for supply in /sys/class/power_supply/*; do
+        [ "$(cat "$supply/type" 2>/dev/null)" = Mains ] || continue
+        [ "$(cat "$supply/online" 2>/dev/null)" = 1 ] && return 0
+    done
+    return 1
+}
+
+# "auto" means the kernel is free to suspend the card, so it staying active
+# means something is holding it -- the case actually worth a warning.
+nvidia_pm_auto() {
+    local card
+    for card in $NVIDIA_CARDS; do
+        [ "$(cat "/sys/class/drm/$card/device/power/control" 2>/dev/null)" = auto ] || return 1
+    done
+    return 0
+}
+
 waybar() {
     [ -n "$NVIDIA_CARDS" ] || { echo '{"text": ""}'; return; }
     local running pending power text class
@@ -70,14 +91,16 @@ waybar() {
     power=$(nvidia_power)
     if [ "$running" = all ]; then
         text=NVIDIA class=nvidia
-    elif [ "$power" = active ]; then
-        text="dGPU awake" class=awake
+    elif [ "$power" = active ] && ! on_ac && nvidia_pm_auto; then
+        # Awake on battery despite runtime PM being free to suspend it.
+        text="dGPU held awake" class=awake
     fi
     if [ "$running" != "$pending" ]; then
         text="${text:+$text }→ $pending at relog" class=${class:-pending}
     fi
-    printf '{"text": "%s", "class": "%s", "tooltip": "sway GPUs: %s (pending: %s)\\nNVIDIA power: %s"}\n' \
-        "$text" "$class" "$running" "$pending" "$power"
+    printf '{"text": "%s", "class": "%s", "tooltip": "sway GPUs: %s (pending: %s)\\nNVIDIA power: %s (runtime PM: %s, on %s)"}\n' \
+        "$text" "$class" "$running" "$pending" "$power" \
+        "$(nvidia_pm_auto && echo auto || echo on)" "$(on_ac && echo AC || echo battery)"
 }
 
 read -r IGPU NVIDIA_CARDS <<< "$(find_cards)"

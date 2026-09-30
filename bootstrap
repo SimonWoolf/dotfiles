@@ -93,4 +93,10 @@ else
   `mkdir -p ~/.config/kanshi/`
   `ln -fs ~/dev/dotfiles/kanshi_config ~/.config/kanshi/config`
   `ln -fs ~/dev/dotfiles/alacritty-laptop.toml ~/.config/alacritty/alacritty.toml`
+  # Copied rather than linked, as the initramfs needs the file itself.
+  nvidia_conf = '/etc/modprobe.d/nvidia-no-fbdev.conf'
+  if !system("cmp -s #{HOME}/dev/dotfiles/nvidia-no-fbdev.conf #{nvidia_conf}")
+    `sudo install -m644 #{HOME}/dev/dotfiles/nvidia-no-fbdev.conf #{nvidia_conf}`
+    `sudo update-initramfs -u`
+  end
 end
