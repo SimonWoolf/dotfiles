@@ -7,7 +7,7 @@
   autocrlf = input
   safecrlf = warn
   editor = nvim
-  ; pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = delta
   excludesfile = ~/.gitignore
 [credential]
   helper = cache --timeout=3600
@@ -52,7 +52,7 @@
   reset-to-upstream = !git reset --hard @{upstream}
 [merge]
   tool = kdiff3
-  conflictstyle = diff3
+  conflictStyle = zdiff3
 [git-up "rebase"]
   auto = false
 [color "branch"]
@@ -74,16 +74,23 @@
 [init]
   defaultBranch = main
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
 
 [includeIf "gitdir:~/dev/furc/"]
   path = ~/dev/furc/.gitconfig
 [url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
+  insteadOf = https://github.com/
 [pull]
-	ff-only = true
+  ff-only = true
 [format]
-	pretty = fuller
+  pretty = fuller
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true  # use n and N to move between diff sections
+  dark = true      # or light = true, or omit for auto-detection
