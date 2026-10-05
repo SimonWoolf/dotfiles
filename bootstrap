@@ -55,6 +55,20 @@ end
 `rm ~/.config/nvim-qt/nvim-qt.conf 2> /dev/null`
 `ln -fs ~/dev/dotfiles/nvim-qt.conf ~/.config/nvim-qt/nvim-qt.conf`
 
+# Profile directory names are random per machine, so find them via profiles.ini.
+# Firefox uses the XDG location for profiles created since 147.
+["#{HOME}/.mozilla/firefox", "#{HOME}/.config/mozilla/firefox"].each do |ff_dir|
+  ini = "#{ff_dir}/profiles.ini"
+  next if !File.exist?(ini)
+  File.read(ini).scan(/^Path=(.+)$/).flatten.each do |path|
+    profile = File.expand_path(path, ff_dir)
+    `mkdir -p "#{profile}/chrome"`
+    `ln -fs ~/dev/dotfiles/userChrome.css "#{profile}/chrome/userChrome.css"`
+    # user.js sets the pref that makes Firefox load userChrome.css at all
+    `ln -fs ~/dev/dotfiles/firefox-user.js "#{profile}/user.js"`
+  end
+end
+
 private_bootstrap = "#{HOME}/dev/dotfiles-private/bootstrap"
 system(private_bootstrap) if File.exist?(private_bootstrap)
 

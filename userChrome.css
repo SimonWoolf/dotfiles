@@ -1,26 +1,20 @@
-@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
-
-/* nb this worked before firefor 69 */
-/* @-moz-document url("chrome://browser/content/browser.xul") {*/
-#TabsToolbar {
-  visibility: collapse !important;
+/* Replace Nova's full-width container stroke with a faint tint of the
+   container colour across the whole tab. The tint is a background-image so it
+   layers over the normal/hover/selected background-color rather than
+   replacing it, keeping those states distinguishable. */
+.tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
+  display: none !important;
 }
-/* }*/
-/* from https://github.com/eoger/tabcenter-redux/wiki/Custom-CSS-tweaks#hide-the-horizontal-tab-strip-15 */
-/* #main-window:not([customizing]):not([tabsintitlebar="true"]) #TabsToolbar {*/
-/*   visibility: collapse !important;*/
-/* }*/
-/* #tabbrowser-tabs {*/
-/*   visibility: collapse !important;*/
-/* }*/
-/* #navigator-toolbox {*/
-/*   margin-top: 1px;*/
-/* }*/
 
-/* #firefox-view-button, #wrapper-firefox-view-button, #alltabs-button {*/
-/*   display: none !important;*/
-/* }*/
-
-/* #firefox-view-button, #wrapper-firefox-view-button, #tabbrowser-tabs {*/
-/*   border: 0px hidden transparent !important; padding-inline-start: 0 !important; margin-inline-start: 0 !important;*/
-/* }*/
+.tabbrowser-tab[usercontextid] > .tab-stack > .tab-background {
+  /* Take only the hue of the container colour and pin lightness close to the
+     surrounding chrome, so the tint shifts saturation rather than brightness.
+     min() on chroma keeps the grey container grey. */
+  --tint-chroma: 1;
+  --tint-alpha: 0.15;
+  --container-tint: light-dark(
+    oklch(from var(--identity-stroke-color) 0.93 min(c, var(--tint-chroma)) h / var(--tint-alpha)),
+    oklch(from var(--identity-stroke-color) 0.35 min(c, var(--tint-chroma)) h / var(--tint-alpha))
+  );
+  background-image: linear-gradient(var(--container-tint), var(--container-tint)) !important;
+}
