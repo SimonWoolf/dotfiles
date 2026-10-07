@@ -94,6 +94,7 @@
 [delta]
   navigate = true  # use n and N to move between diff sections
   dark = true      # or light = true, or omit for auto-detection
+  hunk-header-decoration-style = none
   # delta's default removed-line red (#3f0001) is nearly invisible with protanomaly;
   # brighter and shifted towards magenta so the blue channel carries it
   minus-style = syntax "#5a1e3c"
