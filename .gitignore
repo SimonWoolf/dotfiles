@@ -26,3 +26,4 @@ i3status_config
 .envrc
 .claude/settings.local.json
 .claude/napkin.md
+.claude/worktrees/
