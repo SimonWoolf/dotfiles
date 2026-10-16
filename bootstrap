@@ -90,6 +90,8 @@ end
 `ln -fs ~/dev/dotfiles/sway-debug.desktop ~/.local/share/wayland-sessions/sway-debug.desktop`
 `mkdir -p ~/.local/bin/`
 `ln -fs ~/dev/dotfiles/bin/start-sway ~/.local/bin/start-sway`
+# Replaces the launcher Logseq writes here; see the script for why.
+`ln -fs ~/dev/dotfiles/bin/logseq ~/.local/bin/logseq`
 
 # nvim backup/undo/swap dirs (paths set in vim-init.lua)
 `mkdir -p ~/.vim/nundodir/`

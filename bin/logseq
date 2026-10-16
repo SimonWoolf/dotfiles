@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+# Logseq CLI. Replaces the launcher Logseq writes here (it only rewrites files
+# containing its marker line), which can't work on this machine: it points at
+# the transient AppImage mount, and AppRun adds --no-sandbox (unprivileged
+# userns is blocked), which node mode rejects. So we run the CLI from an
+# extracted copy of the newest AppImage, re-extracting when that changes.
+set -eu
+
+appimage=$(ls -v "$HOME"/.local/share/appimages/Logseq-linux-x86_64-*.AppImage 2>/dev/null | tail -n1)
+[ -n "$appimage" ] || { echo "logseq: no Logseq AppImage in ~/.local/share/appimages" >&2; exit 1; }
+
+cache="${XDG_CACHE_HOME:-$HOME/.cache}/logseq-cli"
+dir="$cache/$(basename "$appimage" .AppImage)"
+
+if [ ! -x "$dir/logseq" ]; then
+	echo "logseq: extracting $(basename "$appimage")..." >&2
+	mkdir -p "$cache"
+	tmp=$(mktemp -d "$cache/.extract.XXXXXX")
+	(cd "$tmp" && "$appimage" --appimage-extract >/dev/null)
+	find "$cache" -mindepth 1 -maxdepth 1 ! -name "$(basename "$tmp")" -exec rm -rf {} +
+	mv "$tmp/squashfs-root" "$dir"
+	rmdir "$tmp"
+fi
+
+ELECTRON_RUN_AS_NODE=1 exec "$dir/logseq" "$dir/resources/app.asar/js/logseq-cli.js" "$@"
