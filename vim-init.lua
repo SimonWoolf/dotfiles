@@ -446,10 +446,10 @@ require("lazy").setup({
           },
         })
         vim.lsp.enable('gopls')
-        vim.keymap.set('n', '<C-[>', vim.lsp.buf.type_definition)
+        vim.keymap.set('n', '<C-S-]>', vim.lsp.buf.type_definition)
         vim.keymap.set('n', '<C-]>', vim.lsp.buf.definition)
         vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition) -- alternative to C-]
-        vim.keymap.set('n', '<leader>gtd', vim.lsp.buf.type_definition) -- alternative to C-[
+        vim.keymap.set('n', '<leader>gtd', vim.lsp.buf.type_definition) -- alternative to C-S-]
         vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references)
         vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation)
         vim.keymap.set('n', '<leader>gc', vim.lsp.buf.incoming_calls)
