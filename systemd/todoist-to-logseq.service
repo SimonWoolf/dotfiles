@@ -1,0 +1,6 @@
+[Unit]
+Description=Move Todoist inbox tasks into the Logseq journal
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/todoist-to-logseq

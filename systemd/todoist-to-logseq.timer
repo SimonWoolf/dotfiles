@@ -1,0 +1,9 @@
+[Unit]
+Description=Move Todoist inbox tasks into the Logseq journal every 10 minutes
+
+[Timer]
+OnCalendar=*:0/10
+AccuracySec=1s
+
+[Install]
+WantedBy=timers.target

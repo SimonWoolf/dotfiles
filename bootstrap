@@ -92,6 +92,29 @@ end
 `ln -fs ~/dev/dotfiles/bin/start-sway ~/.local/bin/start-sway`
 # Replaces the launcher Logseq writes here; see the script for why.
 `ln -fs ~/dev/dotfiles/bin/logseq ~/.local/bin/logseq`
+`ln -fs ~/dev/dotfiles/bin/todoist-to-logseq ~/.local/bin/todoist-to-logseq`
+
+# The config, with the Todoist token, is linked in by the private bootstrap.
+todoist_config = "#{HOME}/.config/todoist-to-logseq/config.json"
+if File.exist?(todoist_config)
+  `chmod 600 #{todoist_config}`
+  units = "#{HOME}/.config/systemd/user"
+  `mkdir -p #{units}/todoist-to-logseq.timer.d/`
+  `ln -fs ~/dev/dotfiles/systemd/todoist-to-logseq.service #{units}/`
+  `ln -fs ~/dev/dotfiles/systemd/todoist-to-logseq.timer #{units}/`
+  offset = "#{units}/todoist-to-logseq.timer.d/desktop-offset.conf"
+  if desktop?
+    `ln -fs ~/dev/dotfiles/systemd/todoist-to-logseq-desktop-offset.conf #{offset}`
+  else
+    `rm -f #{offset}`
+  end
+  `systemctl --user daemon-reload`
+  `systemctl --user enable todoist-to-logseq.timer`
+  # restart rather than start, so a changed schedule takes effect
+  `systemctl --user restart todoist-to-logseq.timer`
+else
+  puts "no #{todoist_config}, not enabling todoist-to-logseq"
+end
 
 # nvim backup/undo/swap dirs (paths set in vim-init.lua)
 `mkdir -p ~/.vim/nundodir/`
