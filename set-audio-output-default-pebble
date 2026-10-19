@@ -1,0 +1,5 @@
+#!/bin/sh
+# Uses node names rather than wpctl IDs, which change whenever a device reconnects.
+
+pactl set-default-sink alsa_output.usb-ACTIONS_Pebble_V3-00.analog-stereo
+pactl set-default-source alsa_input.usb-Majority_RS1_Majority_RS1_202005020-00.mono-fallback
