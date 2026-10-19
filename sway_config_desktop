@@ -21,8 +21,6 @@ workspace 8 output DP-2
 workspace 9 output DP-2
 workspace 10 output DP-2
 
-bindsym $mod+m exec "audioswitch"
-
 # night mode
 # on laptop, no point adjusting the brightness in xrandr, inefficient use of
 # battery - just adjust colour temp and do brightness with backlight adjustment
