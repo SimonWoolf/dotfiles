@@ -6,6 +6,9 @@ font pango:Meslo LG S for Powerline 12
 # laptop-only and wdisplays applies at runtime without saving.
 output DP-1 position 0,0
 output DP-2 position 3840,360
+# Living-room TV, only wanted occasionally
+output HDMI-A-1 disable
+bindsym $mod+Shift+t output HDMI-A-1 toggle
 
 # set things to workspaces
 # external
