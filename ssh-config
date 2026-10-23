@@ -3,8 +3,20 @@ UseRoaming no
 Host i-* mi-*
     ProxyCommand sh -c "aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
 
+Host github.com
+  User git
+  IdentityFile ~/.ssh/id_ed_github
+  IdentitiesOnly yes
+
 Host github-kadei
   HostName github.com
   User git
   IdentityFile ~/.ssh/id_ed_kadei
   IdentitiesOnly yes
+
+Host 192.168.1.* ssh.simonwoolf.net simonwoolf.net simon-linuxdesktop
+  IdentityFile ~/.ssh/id_ed_personal
+  IdentitiesOnly yes
+
+Host *
+  AddKeysToAgent yes
