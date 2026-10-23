@@ -1,0 +1,5 @@
+#!/bin/sh
+# Linked as /usr/local/bin/firefox, ahead of /usr/bin on PATH, so that every
+# way of starting Firefox (sway, fuzzel, xdg-open from other apps) puts it in
+# the memory-capped slice from systemd/app-graphical-firefox.slice.
+exec systemd-run --user --scope --quiet --collect --slice=app-graphical-firefox.slice -- /usr/bin/firefox "$@"

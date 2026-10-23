@@ -90,6 +90,13 @@ end
 `ln -fs ~/dev/dotfiles/sway-debug.desktop ~/.local/share/wayland-sessions/sway-debug.desktop`
 `mkdir -p ~/.local/bin/`
 `ln -fs ~/dev/dotfiles/bin/start-sway ~/.local/bin/start-sway`
+# /usr/local/bin rather than ~/.local/bin, as the latter isn't on sway's PATH
+if !File.symlink?('/usr/local/bin/firefox')
+  `sudo ln -fs #{HOME}/dev/dotfiles/bin/firefox /usr/local/bin/firefox`
+end
+`mkdir -p ~/.config/systemd/user/`
+`ln -fs ~/dev/dotfiles/systemd/app-graphical-firefox.slice ~/.config/systemd/user/`
+`systemctl --user daemon-reload`
 # Replaces the launcher Logseq writes here; see the script for why.
 `ln -fs ~/dev/dotfiles/bin/logseq ~/.local/bin/logseq`
 `ln -fs ~/dev/dotfiles/bin/todoist-to-logseq ~/.local/bin/todoist-to-logseq`

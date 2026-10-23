@@ -1,0 +1,6 @@
+[Unit]
+Description=Firefox, memory-capped so that a runaway tab gets OOM-killed instead of thrashing the whole machine
+
+[Slice]
+MemoryMax=66%
+MemorySwapMax=4G
