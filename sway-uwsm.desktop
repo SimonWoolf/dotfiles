@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Sway (uwsm)
+Comment=Sway run as a systemd user service by uwsm, with apps in their own units
+Exec=uwsm start -- sway.desktop
+TryExec=uwsm
+DesktopNames=sway;wlroots
+Type=Application

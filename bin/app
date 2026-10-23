@@ -1,0 +1,8 @@
+#!/bin/sh
+# Launches an app from sway. Under uwsm it goes into its own scope in
+# app-graphical.slice rather than the compositor's service, so systemd-oomd
+# can kill it without taking sway down too. Outside uwsm, just runs it.
+case "$(cat /proc/self/cgroup)" in
+    *wayland-wm@*) exec uwsm-app -- "$@" ;;
+esac
+exec "$@"

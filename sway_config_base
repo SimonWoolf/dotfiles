@@ -1,17 +1,17 @@
-exec --no-startup-id nm-applet &
-exec --no-startup-id tt_socket_wrapper &
-exec --no-startup-id dropbox start &
-exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc &
+exec --no-startup-id /home/simon/dev/dotfiles/bin/app nm-applet &
+exec --no-startup-id /home/simon/dev/dotfiles/bin/app tt_socket_wrapper &
+exec --no-startup-id /home/simon/dev/dotfiles/bin/app dropbox start &
+exec --no-startup-id /home/simon/dev/dotfiles/bin/app dunst -conf ~/.config/dunst/dunstrc &
 
 # allow screensharing to work
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP=sway
+exec /home/simon/dev/dotfiles/bin/sway-session-env
 
 set $mod Mod4
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-bindsym F12 exec alacritty
+bindsym F12 exec /home/simon/dev/dotfiles/bin/app alacritty
 
 # kill focused window
 bindsym $mod+q kill

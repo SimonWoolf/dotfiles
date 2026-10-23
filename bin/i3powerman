@@ -8,7 +8,11 @@ case "$1" in
         pgrep sway && swaylock -c 3f3f3f || xflock4
         ;;
     logout)
-        swaymsg exit
+        # under uwsm, stop the session units in order rather than yanking sway
+        case "$(cat /proc/self/cgroup)" in
+            *wayland-wm@*) uwsm stop ;;
+            *) swaymsg exit ;;
+        esac
         ;;
     suspend)
         xfconf-query --channel xsettings --property /Net/ThemeName --set Adwaita

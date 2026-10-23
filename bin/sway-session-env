@@ -1,0 +1,8 @@
+#!/bin/sh
+# Exports sway's WAYLAND_DISPLAY etc. to the systemd and D-Bus activation
+# environments, which screensharing portals need. Under uwsm, finalize does
+# that plus SWAYSOCK, which uwsm waits for before it considers sway started.
+case "$(cat /proc/self/cgroup)" in
+    *wayland-wm@*) exec uwsm finalize ;;
+esac
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP=sway
