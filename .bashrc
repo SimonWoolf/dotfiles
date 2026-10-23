@@ -5,6 +5,7 @@ export EDITOR=nvim
 export BROWSER=firefox
 # export AWS_PROFILE=ably
 export AWS_REGION=eu-west-2 # default to london when it doesn't matter
+export AWS_PROFILE=ably # default to ably unless explicitly unset
 
 export GOOGLE_APPLICATION_CREDENTIALS="/home/simon/google-credentials.json"
 
