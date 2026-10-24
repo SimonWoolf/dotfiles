@@ -106,9 +106,12 @@ if !system("cmp -s #{HOME}/dev/dotfiles/zram-generator.conf #{zram_conf}")
 end
 `mkdir -p ~/.local/bin/`
 `ln -fs ~/dev/dotfiles/bin/start-sway ~/.local/bin/start-sway`
-# /usr/local/bin rather than ~/.local/bin, as the latter isn't on sway's PATH
-if !File.symlink?('/usr/local/bin/firefox')
-  `sudo ln -fs #{HOME}/dev/dotfiles/bin/firefox /usr/local/bin/firefox`
+# /usr/local/bin rather than ~/.local/bin, as the latter isn't on the PATH GDM
+# gives sessions (so uwsm can't resolve sway.desktop's Exec) or sway's PATH
+%w[start-sway firefox].each do |bin|
+  if !File.symlink?("/usr/local/bin/#{bin}")
+    `sudo ln -fs #{HOME}/dev/dotfiles/bin/#{bin} /usr/local/bin/#{bin}`
+  end
 end
 `mkdir -p ~/.config/systemd/user/`
 `ln -fs ~/dev/dotfiles/systemd/app-graphical-firefox.slice ~/.config/systemd/user/`
