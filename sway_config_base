@@ -1,5 +1,5 @@
 exec --no-startup-id /home/simon/dev/dotfiles/bin/app nm-applet &
-exec --no-startup-id /home/simon/dev/dotfiles/bin/app tt_socket_wrapper &
+exec --no-startup-id /home/simon/dev/dotfiles/bin/app /home/simon/dev/dotfiles/bin/tt_socket_wrapper &
 exec --no-startup-id /home/simon/dev/dotfiles/bin/app dropbox start &
 exec --no-startup-id /home/simon/dev/dotfiles/bin/app dunst -conf ~/.config/dunst/dunstrc &
 
