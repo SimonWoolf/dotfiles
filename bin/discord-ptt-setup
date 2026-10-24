@@ -1,0 +1,14 @@
+#!/bin/sh
+# Discord runs under XWayland so can't see global keys on sway. Have sway turn
+# Right Alt into a synthetic XWayland key press that Discord's PTT hook can see.
+# Set Discord's PTT key to XF86Launch9 (or record it by pressing Right Alt with
+# Discord focused). Swallows AltGr until discord-ptt-teardown is run.
+
+set -e
+
+# XF86Launch9 rather than F13 etc: it has a keycode in XWayland's keymap, so
+# xdotool doesn't have to remap one on the fly.
+swaymsg -q -- bindcode --no-repeat 108 exec xdotool keydown XF86Launch9
+swaymsg -q -- bindcode --release 108 exec xdotool keyup XF86Launch9
+
+echo "Discord PTT bound to Right Alt"

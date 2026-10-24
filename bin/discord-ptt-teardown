@@ -1,0 +1,8 @@
+#!/bin/sh
+# Undo discord-ptt-setup.
+
+swaymsg -q -- unbindcode --no-repeat 108
+swaymsg -q -- unbindcode --release 108
+xdotool keyup XF86Launch9
+
+echo "Discord PTT unbound"
