@@ -2,7 +2,7 @@
 """Move tasks from a Todoist project into today's Logseq journal, tagged.
 
 Each task becomes a block (subtasks nested under it), and is deleted from
-Todoist only once it and all its subtasks are safely in the graph.
+Todoist only once it and all its subtasks have been uploaded to Logseq sync.
 """
 
 import datetime
@@ -11,6 +11,7 @@ import os
 import shutil
 import subprocess
 import sys
+import time
 import urllib.error
 import urllib.request
 
@@ -20,6 +21,7 @@ CONFIG_PATH = os.environ.get(
 )
 TODOIST_API = "https://api.todoist.com/api/v1/"
 JOURNAL_TITLE_FORMAT = "MMM do, yyyy"
+SYNC_TIMEOUT_SECS = 120
 
 
 def log(msg):
@@ -89,6 +91,30 @@ def graph_server_running(config):
     return any(s["graph"] == config["graph"] for s in servers)
 
 
+def wait_for_sync(config, what, done):
+    deadline = time.monotonic() + SYNC_TIMEOUT_SECS
+    while True:
+        status = logseq(config, "sync", "status")
+        if status.get("ws-state") == "open" and done(status):
+            return
+        if time.monotonic() > deadline:
+            raise RuntimeError(f"timed out waiting for sync to {what}: {status}")
+        time.sleep(1)
+
+
+def sync_caught_up(config):
+    if logseq(config, "sync", "status").get("ws-state") != "open":
+        # Uses the E2EE password the Logseq app saved in the system keyring.
+        logseq(config, "sync", "start")
+    # Blocks written while behind the server get rebased when sync catches up,
+    # which drops their tags.
+    wait_for_sync(
+        config,
+        "catch up",
+        lambda s: s["local-tx"] == s["remote-tx"] and s["pending-local"] == 0,
+    )
+
+
 def ordinal(n):
     if 11 <= n % 100 <= 13:
         return f"{n}th"
@@ -152,16 +178,20 @@ def main():
     server_was_running = graph_server_running(config)
     failed = False
     try:
+        sync_caught_up(config)
         page = journal_title(config, datetime.date.today())
+        moved = []
         for root in roots:
             try:
                 # A root is only deleted once its whole subtree is in the graph,
                 # since deleting it in Todoist deletes its subtasks too.
-                inserted = insert_task(config, root, children, page)
+                moved.append((root, insert_task(config, root, children, page)))
             except Exception as e:
                 failed = True
                 log(f"failed to add {root['content']!r}, leaving it in Todoist: {e}")
-                continue
+        if moved:
+            wait_for_sync(config, "upload", lambda s: s["pending-local"] == 0)
+        for root, inserted in moved:
             delete_task(config, root["id"])
             log(f"moved {root['content']!r} ({len(inserted)} block(s))")
     finally:
