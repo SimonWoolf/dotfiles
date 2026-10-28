@@ -30,6 +30,14 @@ Components: main
 Architectures: amd64
 Signed-By: /etc/apt/keyrings/mise-archive-keyring.gpg
 
+# The gh snap cannot create dotdirs in $HOME, so gh auth fails.
+Types: deb
+URIs: https://cli.github.com/packages
+Suites: stable
+Components: main
+Architectures: amd64
+Signed-By: /etc/apt/keyrings/githubcli-archive-keyring.gpg
+
 # Daily builds; enable only when wanting a newer nvim than the archive has.
 Types: deb deb-src
 URIs: https://ppa.launchpadcontent.net/neovim-ppa/unstable/ubuntu
